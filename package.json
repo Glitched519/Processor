@@ -1,0 +1,22 @@
+{
+  "name": "processor",
+  "version": "1.0.0",
+  "description": "A bot for Discord.",
+  "main": "processor.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Partha Sarker",
+  "license": "ISC",
+  "dependencies": {
+    "ansi-colors": "^4.1.1",
+    "discord.js": "^12.2.0",
+    "dotenv": "^8.2.0",
+    "eslint": "^7.1.0",
+    "mongoose": "^5.9.19",
+    "ms": "^2.1.2",
+    "table": "^5.4.6"
+  },
+  "devDependencies": {},
+  "keywords": []
+}
