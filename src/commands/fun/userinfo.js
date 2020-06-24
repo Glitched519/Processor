@@ -24,5 +24,5 @@ module.exports = {
           message.channel.send({ embed: infoEmbed });
     },
     aliases: [],
-    description: ''
+    description: 'Loads the info of a specific user'
 }
