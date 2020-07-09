@@ -8,5 +8,6 @@ const { registerCommands, registerEvents } = require('./utils/registry');
 	client.login(process.env.BOT_TOKEN);
 	client.commands = new Map();
 	await registerEvents(client, '../events');
-	await registerCommands(client, '../commands');	
+	await registerCommands(client, '../commands');
+	
 })();

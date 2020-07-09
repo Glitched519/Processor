@@ -2,27 +2,20 @@ module.exports = {
     run: async(client, message, args) => {
         let roleMap = [];
         const roles = message.member.roles.cache;
+        console.log(message.author);
+        roles.forEach(role => {
+            roleMap.push(role);
+        });
 
-        if (!args[0]) {
-            var user = message.guild.members.cache.get(message.author.id);
-        }
-        if (message.guild.members.cache.get(args[0])) {
-        var user = message.guild.members.cache.get(args[0]);
-        }
-        if (args[0].startsWith("<@") && args[0].endsWith(">")) {
-        var user = message.guild.members.cache.get(
-            message.mentions.users.first().id);
-        }
-
-          roles.forEach(roles => {
-            roleMap.push(roles);
-          });
-
-          let infoEmbed = {
-              description: `${roleMap}`
-          };
-          message.channel.send({ embed: infoEmbed });
+        let infoEmbed = {
+            title: `Info for ${message.author.username}` + `#` + `${message.author.discriminator}`,
+            description: `Roles: ${roleMap}`,
+            thumbnail: {
+                url: client.user.displayAvatarURL(),
+            },
+        };
+        message.channel.send({ embed: infoEmbed });
     },
-    aliases: [],
+    aliases: ['uinfo'],
     description: 'Loads the info of a specific user'
 }

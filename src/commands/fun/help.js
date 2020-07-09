@@ -1,5 +1,4 @@
 const PREFIX = process.env.PREFIX;
-
 let author = require('../fun/author');
 let invite = require('../fun/invite');
 let roll = require('../fun/roll');
@@ -14,6 +13,11 @@ let delrole = require('../roles/delrole');
 
 module.exports = {
     run: async(client, message, args) => {
+        let helpArgs = message.content
+            .toLowerCase()
+            .slice(PREFIX.length + 5)
+            .split(" ");
+        console.log(helpArgs);
         let helpEmbed = {
             color: '#66de21',
             title: 'Need some help?',
@@ -66,16 +70,16 @@ module.exports = {
             ],
             timestamp: new Date()
         };
-        if (args == "dm" || "DM") {
-            message.author.send({ embed: helpEmbed });
-            message.reply(':mailbox_with_mail: **I\'ve DMed you some help.**')
-  		    .then(msg => {
-			    msg.delete({timeout: 5000});
-            });
-        }
-        else {
+        // if (helpArgs === "dm" || "DM") {
+        //     message.author.send({ embed: helpEmbed });
+        //     message.reply(':mailbox_with_mail: **I\'ve DMed you some help.**')
+  		//     .then(msg => {
+		// 	    msg.delete({timeout: 5000});
+        //     });
+        // }
+        // else {
             message.channel.send({ embed: helpEmbed });
-        }
+       // }
         
     }, 
     aliases: [],

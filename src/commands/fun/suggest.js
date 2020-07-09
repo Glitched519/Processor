@@ -1,7 +1,6 @@
 module.exports = {
     run: async(client, message, args) => {
         const dev = client.users.cache.get('638064155965915187');
-        console.log(args);
         if(args == "$suggest") {
             message.delete();
             message.reply(':memo: **What do you want to suggest?**')
