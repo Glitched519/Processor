@@ -24,7 +24,7 @@ module.exports = {
                 break;
         }
         let rollEmbed = {
-            color: '#f7f7f7',
+            color: `RANDOM`,
             title: ':game_die: You rolled a ' + diceNum,
             timestamp: new Date()
         }

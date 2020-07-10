@@ -10,77 +10,88 @@ let mute = require('../mod/mute');
 let unmute = require('../mod/unmute');
 let addrole = require('../roles/addrole');
 let delrole = require('../roles/delrole');
+const binary = require('./math/binary');
+const base64 = require('./math/base64');
+const calculate = require('./math/calculate');
 
 module.exports = {
     run: async(client, message, args) => {
-        let helpArgs = message.content
-            .toLowerCase()
-            .slice(PREFIX.length + 5)
-            .split(" ");
-        console.log(helpArgs);
         let helpEmbed = {
-            color: '#66de21',
+            color: `RANDOM`,
             title: 'Need some help?',
             description: `Prefix is **${PREFIX}** as in **${PREFIX}help**.`,
             fields: [
                 {
+                    name: ':shield: Moderation',
+                    value: "Manages server members.",
+                },
+                {
+                    name: ':1234: Math',
+                    value: "Play with numbers.",
+                },
+            ]
+        }
+        let modEmbed = {
+            color: `RANDOM`,
+            title: 'Moderation Commands',
+            description: `Prefix is **${PREFIX}** as in **${PREFIX}help**.`,
+            fields: [
+                {
                     name: ':hammer_pick: **__user__ban**',
-                    value: `${userban.description}`,
+                    value: `${userban.description}.\nAliases: [${userban.aliases}]`,
                 },
                 {
                     name: ':boot: **__user__kick**',
-                    value: `${userkick.description}`,
-                },
-                {
-                    name: ':hammer_pick: **__id__ban**',
-                    value: `${idban.description}`,
-                },
-                {
-                    name: ':boot: **__id__kick**',
-                    value: `${idkick.description}`,
-                },
-                {
-                    name: ':crown: **author**',
-                    value: `${author.description}`,
-                },
-                {
-                    name: ':heart: **invite**',
-                    value: `${invite.description}`,
-                },
-                {
-                    name: ':game_die: **roll**',
-                    value: `${roll.description}`,
+                    value: `${userkick.description}.\nAliases: [${userkick.aliases}]`,
                 },
                 {
                     name: ':mute: **mute**',
-                    value: `${mute.description}`,
+                    value: `${mute.description}.`,
+                },
+                {
+                    name: ':hammer_pick: **__id__ban**',
+                    value: `${idban.description}.\nAliases: [${idban.aliases}]`,
+                },
+                {
+                    name: ':boot: **__id__kick**',
+                    value: `${idkick.description}.\nAliases: [${idkick.aliases}]`,
                 },
                 {
                     name: ':speaker: **unmute**',
-                    value: `${unmute.description}`,
-                },
-                {
-                    name: ':blue_circle: **addrole**',
-                    value: `${addrole.description}`,
-                },
-                {
-                    name: ':red_circle: **delrole**',
-                    value: `${delrole.description}`,
+                    value: `${unmute.description}.`,
                 },
             ],
             timestamp: new Date()
         };
-        // if (helpArgs === "dm" || "DM") {
-        //     message.author.send({ embed: helpEmbed });
-        //     message.reply(':mailbox_with_mail: **I\'ve DMed you some help.**')
-  		//     .then(msg => {
-		// 	    msg.delete({timeout: 5000});
-        //     });
-        // }
-        // else {
-            message.channel.send({ embed: helpEmbed });
-       // }
-        
+
+        let mathEmbed = {
+            color: `RANDOM`,
+            title: 'Math Commands',
+            description: `Prefix is **${PREFIX}** as in **${PREFIX}help**.`,
+            fields: [
+                {
+                    name: ':computer: **calculate**',
+                    value: `Evaluates an expression.\nAliases: [${calculate.aliases}]`,
+                },
+                {
+                    name: ':1234: **binary**',
+                    value: `Convert decimal to binary.\nAliases: [${binary.aliases}]`,
+                },
+                {
+                    name: ':1234: **base64**',
+                    value: `Convert decimal to base64.\nAliases: [${base64.aliases}]`,
+                },
+            ]
+        }
+        if (args == `${PREFIX}help`) {
+            message.channel.send({embed: helpEmbed});    
+        }
+        else if (args.startsWith('mod')) {
+            message.channel.send({embed: modEmbed});    
+        }
+        else if (args.startsWith('math')) {
+            message.channel.send({embed: mathEmbed});    
+        }
     }, 
     aliases: [],
     description: 'Shows the help menu'

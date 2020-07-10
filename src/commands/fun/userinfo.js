@@ -2,17 +2,18 @@ module.exports = {
     run: async(client, message, args) => {
         let roleMap = [];
         const roles = message.member.roles.cache;
-        console.log(message.author);
         roles.forEach(role => {
             roleMap.push(role);
         });
 
         let infoEmbed = {
-            title: `Info for ${message.author.username}` + `#` + `${message.author.discriminator}`,
-            description: `Roles: ${roleMap}`,
+            title:  `Profile of ${message.author.username}` + `#` + `${message.author.discriminator}`,
+            color: `RANDOM`,
+            description:`ID: ${message.author.id}\nRoles: ${roleMap}\nCreated at: ${message.author.createdAt}`,
             thumbnail: {
-                url: client.user.displayAvatarURL(),
+                url: message.author.displayAvatarURL(),
             },
+            timestamp: new Date()
         };
         message.channel.send({ embed: infoEmbed });
     },

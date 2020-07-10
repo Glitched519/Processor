@@ -21,7 +21,7 @@ module.exports = {
         let suggestionEmbed = {
             title: "New Suggestion",
             description: args,
-            color: '#e298ff',
+            color: `RANDOM`,
             timestamp: new Date()            
         }
         dev.send({ embed: suggestionEmbed });
@@ -29,7 +29,7 @@ module.exports = {
         let thankEmbed = {
             title: "Suggestion Submitted",
             description: "**Your suggestion is so amazing, I let the dev know about it!**",
-            color: '#e298ff',
+            color: `RANDOM`,
             timestamp: new Date()
         }
         message.reply({ embed: thankEmbed });
