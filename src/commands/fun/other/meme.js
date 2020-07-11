@@ -1,13 +1,15 @@
-const { api } = require("some-random-api");
+const fetch = require('node-fetch');
 
 module.exports = {
     run: async(client, message, args) => {
-        api.other.meme().then(res => {
+        fetch('https://meme-api.herokuapp.com/gimme')
+        .then(res => res.json())
+        .then(json => {
             let memeEmbed = {
-                title: res.caption,
+                title: json.title,
                 color: `RANDOM`,
                 image: {
-                    url: res.image
+                    url: json.url
                 },
                 timestamp: new Date()
             }
