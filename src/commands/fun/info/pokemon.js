@@ -16,6 +16,6 @@ module.exports = {
         message.channel.send(pokeEmbed);
 
     }, 
-    aliases: ['creator', 'dev', 'developer'],
+    aliases: ['poke'],
     description: 'Shows the creator of this awesome bot'
 }
