@@ -23,6 +23,7 @@
     "mongoose": "^5.9.19",
     "ms": "^2.1.2",
     "mysql2": "^2.1.0",
+    "node-fetch": "^2.6.0",
     "nodemon": "^2.0.4",
     "opusscript": "0.0.7",
     "some-random-api": "^2.0.0",

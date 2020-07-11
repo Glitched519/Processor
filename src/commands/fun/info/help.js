@@ -1,18 +1,13 @@
 const PREFIX = process.env.PREFIX;
-let author = require('../fun/author');
-let invite = require('../fun/invite');
-let roll = require('../fun/roll');
-let userban = require('../mod/userban');
-let userkick = require('../mod/userkick');
-let idban = require('../mod/idban');
-let idkick = require('../mod/idkick');
-let mute = require('../mod/mute');
-let unmute = require('../mod/unmute');
-let addrole = require('../roles/addrole');
-let delrole = require('../roles/delrole');
-const binary = require('./math/binary');
-const base64 = require('./math/base64');
-const calculate = require('./math/calculate');
+let userban = require('../../mod/userban');
+let userkick = require('../../mod/userkick');
+let idban = require('../../mod/idban');
+let idkick = require('../../mod/idkick');
+let mute = require('../../mod/mute');
+let unmute = require('../../mod/unmute');
+const binary = require('../math/binary');
+const base64 = require('../math/base64');
+const calculate = require('../math/calculate');
 
 module.exports = {
     run: async(client, message, args) => {
