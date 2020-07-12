@@ -2,9 +2,11 @@ const { api } = require("some-random-api");
 
 module.exports = {
     run: async(client, message, args) => {
+        let memberTag = args.split(" ")[0];
+
         api.animu.hug().then(res => {
             let hugEmbed = {
-                title: `${message.author.username} hugs someone!`,
+                description: `**${message.author.username} hugs ${memberTag}!**`,
                 color: `RANDOM`,
                 image: {
                     url: res.link
@@ -15,5 +17,5 @@ module.exports = {
         });
     },
     aliases: [],
-    description: 'Hugs a person'
+    description: 'Hugs a member'
 }

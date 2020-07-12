@@ -4,10 +4,10 @@ const YouTube = require("discord-youtube-api");
 module.exports = {
     run: async(client, message, args) => {
         const voiceChannel = message.member.voice.channel;
-        if(!voiceChannel) return message.channel.send(":x: **You need to be in a voice channel to play music.**");
+        if(!voiceChannel) return message.channel.send(":x: You need to be in a voice channel to play music.");
         const permissions = voiceChannel.permissionsFor(message.client.user); 
-            if(!permissions.has('CONNECT')) return message.channel.send(":x: **I don't have permissions to connect to the voice channel.**");
-            if(!permissions.has('SPEAK')) return message.channel.send(":x: **I don't have permissions to speak in the voice channel.**")
+            if(!permissions.has('CONNECT')) return message.channel.send(":x: I don't have permissions to connect to the voice channel.");
+            if(!permissions.has('SPEAK')) return message.channel.send(":x: I don't have permissions to speak in the voice channel.")
 
             try {
                 var connection = await voiceChannel.join()
@@ -26,4 +26,4 @@ module.exports = {
     }, 
     aliases: ['p'],
     description: 'Plays a song'
-}
+}   

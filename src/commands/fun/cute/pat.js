@@ -2,9 +2,12 @@ const { api } = require("some-random-api");
 
 module.exports = {
     run: async(client, message, args) => {
+        let memberTag = args.split(" ")[0];
+
         api.animu.pat().then(res => {
             let patEmbed = {
-                title: `${message.author.username} pats someone!`,
+                description: `**${message.author.username} pats ${memberTag}!**`,
+                description: `${memberTag}!`,
                 color: `RANDOM`,
                 image: {
                     url: res.link
@@ -15,5 +18,5 @@ module.exports = {
         });
     },
     aliases: [],
-    description: 'Pats a person'
+    description: 'Pats a member'
 }

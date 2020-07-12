@@ -2,9 +2,11 @@ const { api } = require("some-random-api");
 
 module.exports = {
     run: async(client, message, args) => {
+        let memberTag = args.split(" ")[0];
+
         api.animu.wink().then(res => {
             let winkEmbed = {
-                title: `${message.author.username} winks at someone!`,
+                description: `**${message.author.username} winks at ${memberTag}!**`,
                 color: `RANDOM`,
                 image: {
                     url: res.link
@@ -15,5 +17,5 @@ module.exports = {
         });
     },
     aliases: [],
-    description: 'Winks at a person'
+    description: 'Winks at a member'
 }
