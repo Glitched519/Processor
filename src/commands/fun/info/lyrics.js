@@ -1,8 +1,9 @@
 const { api } = require("some-random-api");
+const PREFIX = process.env.PREFIX;
 
 module.exports = {
     run: async(client, message, args) => {
-        if(args == "$lyrics") {
+        if(args ==  `${PREFIX}lyrics`) {
             message.delete();
             message.reply(":memo: **What song's lyrics do you want?**")
             .then(msg => {

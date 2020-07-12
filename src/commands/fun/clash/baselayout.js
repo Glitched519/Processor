@@ -1,3 +1,5 @@
+const PREFIX = process.env.PREFIX;
+
 module.exports = {
     run: async(client, message, args) => {
         let baseEmbed = {
@@ -9,7 +11,7 @@ module.exports = {
             },
             timestamp: new Date()
         }
-        if (args.startsWith("$base")) return;
+        if (args.startsWith(`${PREFIX}base`)) return;
         else if (args == "th5") {
             baseEmbed.title += args;
             baseEmbed.description += "(https://www.youtube.com/watch?v=sfmJKS8WYBc) | ";

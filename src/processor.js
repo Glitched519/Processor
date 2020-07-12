@@ -1,6 +1,6 @@
 require('dotenv').config();
 const discord = require('discord.js');
-const client = new discord.Client();
+const client = new discord.Client({partials: ['MESSAGE']});
 const { checkCommandModule, checkProperties } = require('./utils/validate');
 const { registerCommands, registerEvents } = require('./utils/registry');
 
@@ -9,5 +9,4 @@ const { registerCommands, registerEvents } = require('./utils/registry');
 	client.commands = new Map();
 	await registerEvents(client, '../events');
 	await registerCommands(client, '../commands');
-	
 })();

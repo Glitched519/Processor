@@ -7,12 +7,9 @@ module.exports = {
             thumbnail: {
                 url: client.user.displayAvatarURL(),
             },
-            image: {
-                url: 'https://i.imgur.com/wSTFkRM.png'
-            },
             timestamp: new Date()
         };
-        message.channel.send({ embed: authorEmbed });
+        message.channel.send({embed: authorEmbed});
         
     }, 
     aliases: ['creator', 'dev', 'developer'],

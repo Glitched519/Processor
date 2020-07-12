@@ -1,8 +1,9 @@
 const { api } = require('some-random-api');
+const PREFIX = process.env.PREFIX;
 
 module.exports = {
     run: async(client, message, args) => {
-        if (args == "$fact") {
+        if (args == `${PREFIX}fact`) {
             return message.channel.send("**:information_source: You can learn facts about these animals: dog :dog:, cat :cat:, bird :bird:, koala :koala:, panda :panda_face:, fox :fox:.**");
         }
         else if (args == "cat") {

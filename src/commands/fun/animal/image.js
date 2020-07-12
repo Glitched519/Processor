@@ -1,4 +1,5 @@
 const { api } = require('some-random-api');
+const PREFIX = process.env.PREFIX;
 
 module.exports = {
     run: async(client, message, args) => {
@@ -9,7 +10,7 @@ module.exports = {
                 url: '',
             }
         }
-        if (args == "$image") {
+        if (args == `${PREFIX}image`) {
             return message.channel.send("**:information_source: You can view images of these animals: dog :dog:, cat :cat:, bird :bird:, koala :koala:, panda :panda_face:, fox :fox:, raccoon :raccoon:.**");
         }
         else if (args == "cat") {
