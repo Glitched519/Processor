@@ -7,12 +7,13 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "lavalink": "java -jar Lavalink.jar",
     "dev": "nodemon ./src/processor.js",
-    "start": "nodemon ./src/processor.js"
+    "start": "node ./src/processor.js"
   },
   "author": "Partha Sarker",
   "license": "ISC",
   "dependencies": {
     "ansi-colors": "^4.1.1",
+    "cheerio": "^1.0.0-rc.3",
     "discord": "^0.8.2",
     "discord-youtube-api": "^0.1.0",
     "discord.js": "^12.2.0",
@@ -26,6 +27,7 @@
     "node-fetch": "^2.6.0",
     "nodemon": "^2.0.4",
     "opusscript": "0.0.7",
+    "request": "^2.88.2",
     "some-random-api": "^2.0.0",
     "table": "^5.4.6",
     "ytdl-core": "^3.1.2"

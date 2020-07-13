@@ -37,6 +37,6 @@ module.exports = {
             });
         }
     }, 
-    aliases: ['randomfact'],
+    aliases: ['fact', 'randomfact', 'animalfact'],
     description: 'Shows a random fact of the given animal'
 }

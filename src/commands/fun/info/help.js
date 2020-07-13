@@ -8,8 +8,8 @@ const unmute = require('../../mod/unmute');
 const binary = require('../math/binary');
 const base64 = require('../math/base64');
 const calculate = require('../math/calculate');
-const fact = require('../animal/fact');
-const image = require('../animal/image');
+const fact = require('../animal/animalfact');
+const image = require('../animal/animalimage');
 const baselayout = require('../clash/baselayout');
 const clashtips = require('../clash/clashtips');
 const searchclan = require('../clash/searchclan');
@@ -21,6 +21,7 @@ const author = require('./author');
 const avatar = require('./avatar');
 const definition = require('./definition');
 const github = require('./github');
+const googleimage = require('./googleimage');
 const invite = require('./invite');
 const lyrics = require('./lyrics');
 const ping = require('./ping');
@@ -45,10 +46,6 @@ module.exports = {
                     value: "Manages server members.",
                 },
                 {
-                    name: ':1234: Math  `math`',
-                    value: "Play with numbers.",
-                },
-                {
                     name: ':cat: Animal  `animal`',
                     value: "Learn about animals.",
                 },
@@ -59,6 +56,14 @@ module.exports = {
                 {
                     name: ':blue_heart: Cute  `cute`',
                     value: "Adore a member.",
+                },
+                {
+                    name: ':1234: Math  `math`',
+                    value: "Play with numbers.",
+                },     
+                {
+                    name: ':o: Other  `other`',
+                    value: "Play with other commands.",
                 },
             ]
         }
@@ -110,7 +115,7 @@ module.exports = {
                     value: `${binary.description}.\nAliases: [${binary.aliases}]`,
                 },
                 {
-                    name: ':computer: calculate `<expression`',
+                    name: ':computer: calculate `<expression>`',
                     value: `${calculate.description}.\nAliases: [${calculate.aliases}]`,
                 },
             ]
@@ -202,6 +207,10 @@ module.exports = {
                     value: `${github.description}.\nAliases: [${github.aliases}]`,
                 },
                 {
+                    name: ':mag: googleimage',
+                    value: `${googleimage.description}.\nAliases: [${googleimage.aliases}]`,
+                },
+                {
                     name: ':link: invite',
                     value: `${invite.description}.\nAliases: [${invite.aliases}]`,
                 },
@@ -281,3 +290,5 @@ module.exports = {
     aliases: [],
     description: 'Shows the help menu'
 }
+
+

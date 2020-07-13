@@ -7,6 +7,8 @@ module.exports = {
         .then(json => {
             let memeEmbed = {
                 title: json.title,
+                description: json.subreddit,
+                url: json.url,
                 color: `RANDOM`,
                 image: {
                     url: json.url
