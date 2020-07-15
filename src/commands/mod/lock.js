@@ -37,5 +37,5 @@ module.exports = {
       }
     },
     aliases: ['lockdown'],
-    description: 'Locks down a channel'
+    description: 'Locks down the server based on role'
 }

@@ -3,8 +3,11 @@ const userban = require('../../mod/userban');
 const userkick = require('../../mod/userkick');
 const idban = require('../../mod/idban');
 const idkick = require('../../mod/idkick');
+const lock = require('../../mod/lock');
 const mute = require('../../mod/mute');
+const purge = require('../../mod/purge');
 const unmute = require('../../mod/unmute');
+const warn = require('../../mod/warn');
 const binary = require('../math/binary');
 const base64 = require('../math/base64');
 const calculate = require('../math/calculate');
@@ -82,8 +85,16 @@ module.exports = {
                     value: `${userkick.description}.\nAliases: [${userkick.aliases}]`,
                 },
                 {
+                    name: ':lock: lock `<role ID> <boolean>`',
+                    value: `${lock.description}.`,
+                },
+                {
                     name: ':mute: mute `<@member> [reason]`',
                     value: `${mute.description}.`,
+                },
+                {
+                    name: ':broom: purge `<number>`',
+                    value: `${purge.description}.`,
                 },
                 {
                     name: ':hammer_pick: __id__ban `<@id> [reason]`',
@@ -96,6 +107,10 @@ module.exports = {
                 {
                     name: ':speaker: unmute `<@member> [reason]`',
                     value: `${unmute.description}.`,
+                },
+                {
+                    name: ':warning: warn `<@member> [reason]`',
+                    value: `${warn.description}.`,
                 },
             ],
         };
@@ -128,11 +143,11 @@ module.exports = {
             timestamp: new Date(),
             fields: [
                 {
-                    name: ':information_source: fact `<animal>`',
+                    name: ':information_source: animalfact `<animal>`',
                     value: `${fact.description}.\nAliases: [${fact.aliases}]`,
                 },
                 {
-                    name: ':frame_photo: image `<animal>`',
+                    name: ':frame_photo: animalimage `<animal>`',
                     value: `${image.description}.\nAliases: [${image.aliases}]`,
                 },
             ]

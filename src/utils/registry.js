@@ -2,6 +2,8 @@ const c = require('ansi-colors');
 const fs = require('fs').promises;
 const path = require('path');
 const { checkCommandModule, checkProperties } = require('./validate');
+const BaseCommand = require('./structures/BaseCommand');
+const BaseEvent = require('./structures/BaseEvent');
 const commandStatus = [
     [`${c.bold('Command')}`, `${c.bold('Status')}`, `${c.bold('Description')}`]
 ], eventStatus = [

@@ -1,6 +1,6 @@
 module.exports = {
     run: async(client, message, args) => {
-        let mutedRoleId = message.guild.roles.cache.get(args).toString();    
+        let mutedRoleId = args;    
         console.log("Muted role set to " + mutedRoleId);
     },
     aliases: [],

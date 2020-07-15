@@ -1,10 +1,11 @@
 const { createStream } = require('table');
+const StateManager = require('../../utils/StateManager');
 const tableConfig = require('../../utils/tableConfig');
 const { commandStatus, eventStatus } = require('../../utils/registry');
-const { ClientUser } = require('discord.js');
 
 module.exports = async(client) => {
     client.user.setActivity("Partha turn 18", {type: 'WATCHING'}).catch(console.error);
+    console.log(`${new Date()} \n${client.user.tag} has logged in!`);
 	// await loadTable(commandStatus, 50);
     // console.log("\n");
     // await loadTable(eventStatus, 50);
