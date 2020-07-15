@@ -4,7 +4,6 @@ const { commandStatus, eventStatus } = require('../../utils/registry');
 const { ClientUser } = require('discord.js');
 
 module.exports = async(client) => {
-    console.log(`${new Date()} \n${client.user.tag} has logged in!`);
     client.user.setActivity("Partha turn 18", {type: 'WATCHING'}).catch(console.error);
 	// await loadTable(commandStatus, 50);
     // console.log("\n");
