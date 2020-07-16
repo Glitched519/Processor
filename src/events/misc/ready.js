@@ -4,9 +4,9 @@ const tableConfig = require('../../utils/tableConfig');
 const { commandStatus, eventStatus } = require('../../utils/registry');
 
 module.exports = async(client) => {
-    client.user.setActivity("Partha turn 18", {type: 'WATCHING'}).catch(console.error);
-    console.log(`${new Date()} \n${client.user.tag} has logged in!`);
-	// await loadTable(commandStatus, 50);
+   client.user.setActivity("Twitch.tv/tappedout come enjoy it with me", {type: 'WATCHING'}).catch(console.error);
+     console.log(`${new Date()} \n${client.user.tag} has logged in!`);
+	// await loadTable(commandStatus, 50);  
     // console.log("\n");
     // await loadTable(eventStatus, 50);
 	// let stream = createStream(tableConfig);

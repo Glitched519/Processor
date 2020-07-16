@@ -1,24 +1,21 @@
-// let levelup = require('levelup');
-// let leveljs = require('level-js');
+const { exists } = require('../../../utils/database');
 
-const Discord = require('discord.js');
-const db = require('quick.db');
-
-module.exports.run = async (bot, message, args) => {
-    if(!message.content.startsWith('!'))return;  
-
-    let messagefetch = db.fetch(`messages_${message.guild.id}_${message.author.id}`)
-    let levelfetch = db.fetch(`level_${message.guild.id}_${message.author.id}`)
-
-    if(messagefetch == null) messagefetch = '0';
-    if(levelfetch == null) levelfetch = '0';
-
-    const embed = new Discord.RichEmbed()
-    .setDescription(`${message.author}, You Are Level: \`${levelfetch}\` & Have Sent: \`${messagefetch}\` Messages`)
-
-    message.channel.send(embed)
-
+module.exports = {
+    run: async(client, message, args) => { 
+        const guildId = message.guild.id;
+        const memberId = message.member.id;
+        const BASE = 5;
+        const result = (await exists(guildId, memberId))[0];
+        const { experiencePoints, currentLevel } = result[0];
+        let levelEmbed = {
+            title: message.author.username + "'s Level",
+            color: `RANDOM`,
+            description: `**XP:** ${experiencePoints}/${Math.floor((BASE * currentLevel) * (Math.pow(Math.E, currentLevel)))}
+            **Level:** ${currentLevel}`,
+            timestamp: new Date()
+        }
+        message.channel.send({embed: levelEmbed});
+    }, 
+    aliases: ['rank'],
+    description: 'Shows member level/rank'
 }
-module.exports.help = {
-    name: "level"
-} 

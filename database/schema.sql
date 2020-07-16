@@ -10,3 +10,11 @@ CREATE TABLE GuildConfigurable (
     cmdPrefix VARCHAR(10) DEFAULT '$',
     modLogId VARCHAR(100)
 );
+
+CREATE TABLE GuildMemberExperience (
+    guildId VARCHAR(100) NOT NULL,
+    memberId VARCHAR(100) NOT NULL,
+    currentLevel SMALLINT NOT NULL DEFAULT 1,
+    experiencePoints INT NOT NULL DEFAULT 1,
+    PRIMARY KEY(guildId, memberId)
+);

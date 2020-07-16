@@ -24,3 +24,4 @@ client.on('guildCreate', async (guild) => {
 	await registerEvents(client, '../events');
 	await registerCommands(client, '../commands');
 })();
+
