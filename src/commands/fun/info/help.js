@@ -29,8 +29,9 @@ const invite = require('./invite');
 const lyrics = require('./lyrics');
 const ping = require('./ping');
 const pokemon = require('./pokemon');
-const userinfo = require('./userinfo');
+const stats = require('./stats');
 const echo = require('../other/echo');
+const level = require('../other/level');
 const meme = require('../other/meme');
 const roll = require('../other/roll');
 const suggest = require('../other/suggest');
@@ -242,8 +243,8 @@ module.exports = {
                     value: `${pokemon.description}.\nAliases: [${pokemon.aliases}]`,
                 },
                 {
-                    name: ':information_source: userinfo `[@member]`',
-                    value: `${userinfo.description}.\nAliases: [${userinfo.aliases}]`,
+                    name: ':information_source: stats `[@member]`',
+                    value: `${stats.description}.\nAliases: [${stats.aliases}]`,
                 },
             ]
         }
@@ -257,6 +258,10 @@ module.exports = {
                 {
                     name: ':sound: echo `<message>`',
                     value: `${echo.description}.\nAliases: [${echo.aliases}]`,
+                },
+                {
+                    name: ':1234: level',
+                    value: `${level.description}.\nAliases: [${level.aliases}]`,
                 },
                 {
                     name: ':rofl: meme',

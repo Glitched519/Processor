@@ -1,37 +1,27 @@
 module.exports = {
     run: async(client, message, args) => {
-        function getUserFromMention(mention) {
-            if (!mention) return;
-        
-            if (mention.startsWith('<@') && mention.endsWith('>')) {
-                mention = mention.slice(2, -1);
-        
-                if (mention.startsWith('!')) {
-                    mention = mention.slice(1);
-                }
-                return client.users.cache.get(mention);
-            }
-        }        
-        let avatarEmbed = {
-            color: `RANDOM`,
-            image: {
-                url: message.author.displayAvatarURL()
-            },
-            timestamp: new Date()
-        };
-        if (args) {
-            const user = getUserFromMention(args);
-            if (!user) {
-                return message.channel.send({embed: avatarEmbed})
-            }
+        const member = message.mentions.members.size === 1 ? 
+                message.mentions.members.first() : 
+                message.guild.members.cache.get(args);     
+        if (member) {
             let userAvatarEmbed = {
                 color: `RANDOM`,
                 image: {
-                    url: user.displayAvatarURL()
+                    url: member.user.displayAvatarURL()
                 },
                 timestamp: new Date()
             };
             return message.channel.send({embed: userAvatarEmbed});
+        }
+        else {
+            let avatarEmbed = {
+                color: `RANDOM`,
+                image: {
+                    url: message.author.displayAvatarURL()
+                },
+                timestamp: new Date()
+            };
+            return message.channel.send({embed: avatarEmbed});
         }
     }, 
     aliases: ['pic', 'pfp'],
