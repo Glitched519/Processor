@@ -21,6 +21,7 @@
     "erela.js": "^1.1.8",
     "eslint": "^7.1.0",
     "ffmpeg": "0.0.4",
+    "googleapis": "^54.1.0",
     "mongoose": "^5.9.19",
     "ms": "^2.1.2",
     "mysql2": "^2.1.0",
@@ -30,6 +31,7 @@
     "request": "^2.88.2",
     "some-random-api": "^2.0.0",
     "table": "^5.4.6",
+    "youtube-search": "^1.1.4",
     "ytdl-core": "^3.1.2"
   },
   "devDependencies": {},

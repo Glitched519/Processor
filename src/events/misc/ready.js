@@ -4,7 +4,7 @@ const tableConfig = require('../../utils/tableConfig');
 const { commandStatus, eventStatus } = require('../../utils/registry');
 
 module.exports = async(client) => {
-   client.user.setActivity("Twitch.tv/tappedout come enjoy it with me", {type: 'WATCHING'}).catch(console.error);
+ client.user.setActivity("BEDWARS WITH SCEPLOP", {type: 'PLAYING'}).catch(console.error);
      console.log(`${new Date()} \n${client.user.tag} has logged in!`);
 	// await loadTable(commandStatus, 50);  
     // console.log("\n");

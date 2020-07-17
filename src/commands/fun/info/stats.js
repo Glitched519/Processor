@@ -1,5 +1,3 @@
-const { MessageEmbed } = require('discord.js');
-
 module.exports = {
     run: async(client, message, args) => {
         const statArgs = args.split(" ");
@@ -11,15 +9,33 @@ module.exports = {
                 message.mentions.members.first() : 
                 message.guild.members.cache.get(args);
             if(member) {
-                const statEmbed = new MessageEmbed()
-                .setAuthor(`${member.user.tag} (${member.user.id})`, member.user.displayAvatarURL()) 
-                .setThumbnail(member.user.avatarURL())
-                .addField('Created On', member.user.createdAt.toLocaleString())
-                .addField('Joined On', member.joinedAt.toLocaleString())
-                .addField('Voice Channel', member.voice.channel ? member.voice.channel.name + ` (${member.voice.channel.id})`: 'None')
-                .addField('Presence', member.presence.status)       
-                .setDescription(`**Roles:** ${member.roles.cache.map(role => role.toString())}`);
-            message.channel.send(statEmbed);
+                const statEmbed = {
+                    title: `${member.user.tag} (${member.user.id})`,               
+                    description: `**Roles:** ${member.roles.cache.map(role => role.toString())}`,
+                    color: `RANDOM`,
+                    thumbnail: {
+                        url: member.user.displayAvatarURL(),
+                    }, 
+                    fields : [
+                        {
+                            name: 'Created On',
+                            value: member.user.createdAt.toLocaleString(),
+                        },
+                        {
+                            name: 'Joined On',
+                            value: member.joinedAt.toLocaleString(),
+                        },
+                        {
+                            name: 'Voice Channel',
+                            value: member.voice.channel ? member.voice.channel.name + ` (${member.voice.channel.id})`: 'None',
+                        },
+                        {
+                            name: 'Presence',
+                            value: member.joinedAt.toLocaleString(),
+                        },
+                    ]
+                }
+            message.channel.send({embed: statEmbed});
             }
             else {
                 message.channel.send(`No member with ID ${args}`);
@@ -27,19 +43,55 @@ module.exports = {
         }
         else {
             const { guild } = message;
-            const statEmbed = new MessageEmbed()
-                .setAuthor(`${guild.name} (${guild.id})`, guild.iconURL()) 
-                .setThumbnail(guild.iconURL())
-                .addField('Created On', guild.createdAt.toLocaleString()) 
-                .addField('Server Owner', guild.owner.user.tag)  
-                .addField('Total Members', guild.memberCount, true) 
-                .addField('Total Real Members', guild.members.cache.filter(member => !member.user.bot).size, true) 
-                .addField('Total Bots', guild.members.cache.filter(member => member.user.bot).size, true)
-                .addField('Total Channels', guild.channels.cache.size, true)
-                .addField('Total Text Channels', guild.channels.cache.filter(ch => ch.type === 'text').size ,true)
-                .addField('Total Voice Channels', guild.channels.cache.filter(ch => ch.type === 'voice').size, true)
-                .setDescription(`**Roles:** ${guild.roles.cache.map(role => role.toString())}`);
-            message.channel.send(statEmbed);
+            const statEmbed = {
+                title: `${guild.name} (${guild.id})`,
+                description: `**Roles:** ${guild.roles.cache.map(role => role.toString()).slice(10)}`,
+                color: `RANDOM`,
+                thumbnail: {
+                    url: guild.iconURL()
+                },
+                fields : [
+                    {
+                        name: 'Created On',
+                        value: guild.createdAt.toLocaleString(),
+                    },
+                    {
+                        name: 'Server Owner',
+                        value: guild.owner.user.tag,
+                    },
+                    {
+                        name: 'Total Members',
+                        value: guild.memberCount,
+                        inline: true,
+                    },
+                    {
+                        name: 'Total Real Members',
+                        value: guild.members.cache.filter(member => !member.user.bot).size,
+                        inline: true,
+                    },
+                    {
+                        name: 'Total Bots',
+                        value: guild.members.cache.filter(member => member.user.bot).size,
+                        inline: true,
+                    },
+                    {
+                        name: 'Total Channels',
+                        value: guild.channels.cache.size,
+                        inline: true,
+                    },
+                    {
+                        name: 'Total Text Channels',
+                        value: guild.channels.cache.filter(ch => ch.type === 'text').size,
+                        inline: true,
+                    },
+                    {
+                        name: 'Total Voice Channels',
+                        value: guild.channels.cache.filter(ch => ch.type === 'voice').size,
+                        inline: true,
+                    },
+                ]
+            }
+            message.channel.send({embed: statEmbed});
         }
     }, 
     aliases: [],
