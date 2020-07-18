@@ -35,62 +35,51 @@ module.exports = {
                 })
         }
 
+        let songEmbed = {
+            title: "Now Playing ",
+            description: '',
+            color: `RANDOM`,
+            // fields: [
+            //     {
+            //         name: 'Publish Date',
+            //         value: result.publishedAt,
+            //         inline: true,
+            //     },
+            //     {
+            //         name: 'Channel',
+            //         value: result.channelTitle,
+            //         inline: true,
+            //     },
+            // ],
+            timestamp: new Date()
+        }
+
         try {
             var connection = await voiceChannel.join()
         } catch (err) {
             console.log(`There was an error connecting to the voice channel: ${err}`);
             return message.channel.send(`There was an error connecting to the voice channel: ${err}`);
         }
-        
-       // if (!queue.length) {
+
             if(results) {
                 let youtubeResults = results.results;
                 let titles = youtubeResults.map(result => {
                     result.title + "\n" + result.link;
-                    let info = ytdl.getInfo(result.link);
-                    info
-                    console.log(info);
                     queue.push(result.link);
                     console.log(result.link);
                     console.log(queue);
-                    const dispatcher = connection.play(ytdl(queue[songIndex]));
-                    let songEmbed = {
-                        title: "Now Playing " + result.title,
-                        description: result.link,
-                        color: `RANDOM`,
-                        fields: [
-                            {
-                                name: 'Publish Date',
-                                value: result.publishedAt,
-                                inline: true,
-                            },
-                            {
-                                name: 'Channel',
-                                value: result.channelTitle,
-                                inline: true,
-                            },
-                        ],
-                        timestamp: new Date()
-                    }
+                    songEmbed.title += result.title;
+                    songEmbed.description = result.link;
                     message.channel.send({
                         embed: songEmbed
                     });
+                    const dispatcher = connection.play(ytdl(queue[songIndex]))
+                    .on('finish', () => {
+                        if (songIndex + 1 < queue.length) {
+                            playNextSong();
+                        }
+                    })
                 });
-          //  }
-            
-        //} 
-        //else {
-            // message.channel.send({
-            //     embed: songEmbed
-            // });
-            // connection.play(ytdl(queue[songIndex]))
-            //     .on('finish', () => {
-            //         playNextSong();
-            //     })
-            //     .on('error', err => {
-            //         dispatcher.setVolumeLogarithmic(5 / 5)
-            //     })
-           // }
         }
 
     },

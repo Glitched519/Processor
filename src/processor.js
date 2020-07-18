@@ -4,7 +4,6 @@ const { google } = require('googleapis');
 const client = new discord.Client({partials: ['MESSAGE']});
 const { checkCommandModule, checkProperties } = require('./utils/validate');
 const { registerCommands, registerEvents, registerMusicEvents } = require('./utils/registry');
-const { ErelaClient } = require('erela.js');
 
 client.on('guildCreate', async (guild) => {
 	try {
@@ -22,16 +21,8 @@ client.on('guildCreate', async (guild) => {
 
 (async () => {
 	await client.login(process.env.BOT_TOKEN);
-	client.music = new ErelaClient(client, [{
-			host: 'localhost',
-			port: 7000,
-			password: 'testing'
-		}
-	]);
-	client.music.
-	client.musicPlayers = new Map();
+
 	client.commands = new Map();
-	await registerMusicEvents(client.music, '../musicevents');
 	await registerEvents(client, '../events');
 	await registerCommands(client, '../commands');
 })();

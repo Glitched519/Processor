@@ -1,4 +1,3 @@
-const StateManager = require("../utils/StateManager");
 const { exists, insertGuildMember, updateGuildMemberEXP } = require('../utils/database');
 const { generateEXP, checkExperience } = require("../utils/random"); 
 const PREFIX = process.env.PREFIX;
@@ -18,7 +17,6 @@ module.exports = async(client, message) => {
 		}
 		else {
 			await insertGuildMember(guildId, memberId)
-				.then(() => console.log('Inserted into DB.'))
 				.catch((err) => console.log(err));
 		}
 		return;

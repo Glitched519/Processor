@@ -19,6 +19,6 @@ module.exports = {
             .catch(error => message.channel.send(`:x: Failed to delete messages because of: ${error}`));
         }
     },
-    aliases: ['clear', 'clean', 'delete'],
+    aliases: ['clear', 'clean', 'delete', 'del'],
     description: 'Deletes a certain amount of messages'
 }

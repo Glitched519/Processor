@@ -30,6 +30,10 @@ module.exports = {
                             value: member.voice.channel ? member.voice.channel.name + ` (${member.voice.channel.id})`: 'None',
                         },
                         {
+                            name: 'Nickname',
+                            value: member.displayName,
+                        },
+                        {
                             name: 'Presence',
                             value: member.joinedAt.toLocaleString(),
                         },
@@ -92,6 +96,7 @@ module.exports = {
                 ]
             }
             message.channel.send({embed: statEmbed});
+            message.react("💛");
         }
     }, 
     aliases: [],

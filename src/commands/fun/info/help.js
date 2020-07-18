@@ -283,7 +283,7 @@ module.exports = {
         }
 
         if (args == `${PREFIX}help`) {
-            message.channel.send({embed: helpEmbed});    
+            message.channel.send({embed: helpEmbed});
         }
         else if (args.startsWith('mod')) {
             message.channel.send({embed: modEmbed});    
