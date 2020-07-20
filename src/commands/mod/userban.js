@@ -2,8 +2,8 @@ const PREFIX = process.env.PREFIX;
 
 module.exports = {
     run: async(client, message, args) => {
-        let words = args.split();
         let reason = args.slice(23);
+        let memberTag = args.split(" ")[0];
 
             if (!message.member.hasPermission('BAN_MEMBERS')) {
                 message.channel.send(":x: You don't have permission to ban a member.");
@@ -21,8 +21,14 @@ module.exports = {
             .catch(error => message.reply(`Sorry ${message.author} I couldn't ban because of: ${error}`));
             message.guild.members.ban(member);
 
-            message.channel.send(`:hammer_pick: ${member.user.tag} has been banned from the server. \nReason: ${reason}`);
+            let banEmbed = {
+                title: ":hammer_pick: Member Banned :hammer_pick: ",
+                description: "**Member: **" + member.user.tag + "\n**Reason: **" + reason,
+                color: "#fc1c03",
+                timestamp: new Date()
+            }
+            message.channel.send({embed: banEmbed});
         },
-    aliases: ['uban', 'banuser', 'userban'],
+    aliases: ['ban', 'uban', 'banuser', 'userban'],
     description: 'Bans a user via __tag__'
 }

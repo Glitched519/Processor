@@ -6,8 +6,11 @@ const idkick = require('../../mod/idkick');
 const lock = require('../../mod/lock');
 const mute = require('../../mod/mute');
 const purge = require('../../mod/purge');
+const status = require('../../mod/status');
 const unmute = require('../../mod/unmute');
 const warn = require('../../mod/warn');
+const play = require('../../music/play');
+const stop = require('../../music/stop');
 const binary = require('../math/binary');
 const base64 = require('../math/base64');
 const calculate = require('../math/calculate');
@@ -64,7 +67,15 @@ module.exports = {
                 {
                     name: ':1234: Math  `math`',
                     value: "Play with numbers.",
-                },     
+                },  
+                {
+                    name: ':information_source: Info  `info`',
+                    value: "Get information about a user or the server.",
+                }, 
+                {
+                    name: ':musical_note: Music  `music`',
+                    value: "Play music.",
+                },   
                 {
                     name: ':o: Other  `other`',
                     value: "Play with other commands.",
@@ -108,6 +119,10 @@ module.exports = {
                 {
                     name: ':speaker: unmute `<@member> [reason]`',
                     value: `${unmute.description}.`,
+                },
+                {
+                    name: ':information_source: status `<status>`',
+                    value: `${status.description}.`,
                 },
                 {
                     name: ':warning: warn `<@member> [reason]`',
@@ -249,6 +264,23 @@ module.exports = {
             ]
         }
 
+        let musicEmbed = {
+            color: `RANDOM`,
+            title: 'Music Commands',
+            description: `Prefix is **${PREFIX}** as in **${PREFIX}help**.`,
+            timestamp: new Date(),
+            fields: [
+                {
+                    name: ':play_pause: play `<song>`',
+                    value: `${play.description}.\nAliases: [${play.aliases}]`,
+                },
+                {
+                    name: ':stop_button: stop',
+                    value: `${stop.description}.`,
+                },
+            ]
+        }
+
         let otherEmbed = {
             color: `RANDOM`,
             title: 'Other Commands',
@@ -282,29 +314,34 @@ module.exports = {
             ]
         }
 
-        if (args == `${PREFIX}help`) {
-            message.channel.send({embed: helpEmbed});
-        }
-        else if (args.startsWith('mod')) {
-            message.channel.send({embed: modEmbed});    
-        }
-        else if (args.startsWith('math')) {
-            message.channel.send({embed: mathEmbed});    
-        }
-        else if (args.startsWith('animal')) {
-            message.channel.send({embed: animalEmbed});    
-        }
-        else if (args.startsWith('clash')) {
-            message.channel.send({embed: clashEmbed});    
-        }
-        else if (args.startsWith('cute')) {
-            message.channel.send({embed: cuteEmbed});    
-        }
-        else if (args.startsWith('info')) {
-            message.channel.send({embed: infoEmbed});    
-        }
-        else if (args.startsWith('other')) {
-            message.channel.send({embed: otherEmbed});    
+        switch (args) {
+            case `${PREFIX}help`:
+                message.channel.send({embed: helpEmbed});
+                break;
+            case 'mod':
+                message.channel.send({embed: modEmbed});    
+                break;
+            case 'math':
+                message.channel.send({embed: mathEmbed});    
+                break;
+            case 'animal':
+                message.channel.send({embed: animalEmbed});    
+                break;
+            case 'clash':
+                message.channel.send({embed: clashEmbed});    
+                break;
+            case 'cute':
+                message.channel.send({embed: cuteEmbed});    
+                break;
+            case 'info':
+                message.channel.send({embed: infoEmbed});    
+                break;
+            case 'music':
+                message.channel.send({embed: musicEmbed});    
+                break;
+            case 'other':
+                message.channel.send({embed: otherEmbed});    
+                break;
         }
     }, 
     aliases: [],

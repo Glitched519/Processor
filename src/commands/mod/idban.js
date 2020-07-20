@@ -12,7 +12,13 @@ module.exports = {
                 if(bannedMember) {
                     if(!reason) reason = "No reason provided";
                     if (!bannedMember.tag) return message.channel.send(":x: Member not found.");
-                    message.channel.send(`:hammer_pick: Member has been banned by ${message.author.tag}\nReason: ${reason}`);
+                    let banEmbed = {
+                        title: ":hammer_pick: Member Banned :hammer_pick: ",
+                        description: "**Member ID: **" + memberId + "\n**Reason: **" + reason,
+                        color: "#fc1c03",
+                        timestamp: new Date()
+                    }
+                    message.channel.send({embed: banEmbed});
                 }
             }
             catch (err) {
@@ -20,6 +26,6 @@ module.exports = {
                 }
             }
     },
-    aliases: ['ban', 'banid', 'idban'],
+    aliases: ['hackban', 'iban', 'banid', 'idban'],
     description: 'Bans a user via __ID__'
 }

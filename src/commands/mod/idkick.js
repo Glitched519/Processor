@@ -14,7 +14,13 @@ module.exports = {
                     await member.kick(reason);
                     if(!reason) reason = "No reason provided";
                     if (!memberId) return message.channel.send(":x: Member not found.");
-                    message.channel.send(`:boot: Member has been kick by ${message.author.tag}\nReason: ${reason}`);
+                    let kickEmbed = {
+                        title: ":boot: Member Kicked :boot: ",
+                        description: "**Member ID: **" + memberId + "\n**Reason: **" + reason,
+                        color: "#fc6203",
+                        timestamp: new Date()
+                    }
+                    message.channel.send({embed: kickEmbed});
                 }
                 catch(err) {
                     console.log(err);
@@ -22,6 +28,6 @@ module.exports = {
             }
         }
     }, 
-    aliases: [ 'ikick', 'kick', 'kickid', 'idkick'],
+    aliases: ['hackkick', 'ikick', 'kickid', 'idkick'],
     description: 'Kicks a user via __ID__'
 }

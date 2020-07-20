@@ -6,18 +6,13 @@ module.exports = {
 
         let reason = args.slice(23);
         let memberTag = args.split(" ")[0];
-        let memberId = memberTag.slice(3, -1);
-        let member = client.users.cache.get(memberId);
 
         let warnEmbed = {
-            title: "You've Been Warned",
+            title: ":warning: Member Warned :warning:",
             color: `#c4f942`,
-            description: `You received a warning in ${message.guild.name}.\nReason: ${reason}`,
-            timestamp: new Date()
+            description: `**Member:** ${memberTag}\n**Reason: **${reason}`
         }
-
-        message.channel.send(`${memberTag} has been warned by ${message.author.tag}\nReason: ${reason}`);
-        member.send({embed: warnEmbed});
+        message.channel.send({embed: warnEmbed});
     },
     aliases: ['warn'],
     description: 'Warns a user'
