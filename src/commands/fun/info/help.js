@@ -6,6 +6,7 @@ const idkick = require('../../mod/idkick');
 const lock = require('../../mod/lock');
 const mute = require('../../mod/mute');
 const purge = require('../../mod/purge');
+const slowmode = require('../../mod/slowmode');
 const status = require('../../mod/status');
 const unmute = require('../../mod/unmute');
 const warn = require('../../mod/warn');
@@ -107,6 +108,10 @@ module.exports = {
                 {
                     name: ':broom: purge `<number>`',
                     value: `${purge.description}.`,
+                },
+                {
+                    name: ':clock10: slowmode `[number]`',
+                    value: `${slowmode.description}.`,
                 },
                 {
                     name: ':hammer_pick: __id__ban `<@id> [reason]`',

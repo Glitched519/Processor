@@ -2,7 +2,19 @@ const { exists, insertGuildMember, updateGuildMemberEXP } = require('../utils/da
 const { generateEXP, checkExperience } = require("../utils/random"); 
 const PREFIX = process.env.PREFIX;
 
-module.exports = async(client, message) => {
+module.exports = async(client, message) => {	
+	if (message.content.includes("<@&735270562544222290>")) {
+		message.reply("you are about to ping all staff in the server. **Unless it's an emergency**, you will be punished for pinging this role. Reply with `call` **IN CAPS within 15 seconds** if you want to do this.");
+		const filter = m => m.content.includes('CALL');
+		message.channel.awaitMessages(filter, { max: 1, time: 15000, errors: ['time'] })
+		.then(collected => {
+			message.reply(`you have chosen to <@&701441802087170138>. Staff will come to address your issue urgently.`);
+		})
+		.catch(collected => {
+			message.reply("time's up! Your staff call was declined.");
+		});
+
+	}
     if(message.author.bot) return;
 	if(!message.content.startsWith(PREFIX)) {
 		const guildId = message.guild.id;

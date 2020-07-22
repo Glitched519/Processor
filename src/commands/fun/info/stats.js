@@ -35,7 +35,7 @@ module.exports = {
                         },
                         {
                             name: 'Presence',
-                            value: member.joinedAt.toLocaleString(),
+                            value: member.presence.status,
                         },
                     ]
                 }
@@ -96,7 +96,6 @@ module.exports = {
                 ]
             }
             message.channel.send({embed: statEmbed});
-            message.react("💛");
         }
     }, 
     aliases: [],
