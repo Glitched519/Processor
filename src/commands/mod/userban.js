@@ -15,9 +15,9 @@ module.exports = {
             if(!member.bannable) 
             return message.reply(":x: I cannot ban this user! Do they have a higher role? Do I have ban permissions?");
 
-            if(!reason) reason = "No reason provided";
+            if(!reason) reason = "No reason provided.";
             
-            await member.ban(reason)
+            await member.ban({days: 7, reason: reason})
             .catch(error => message.reply(`Sorry ${message.author} I couldn't ban because of: ${error}`));
             message.guild.members.ban(member);
 

@@ -19,6 +19,11 @@ client.on('guildCreate', async (guild) => {
 	}
 });
 
+client.on('guildMemberRemove', member => {
+	const leaveChannel = member.guild.channels.cache.find(channel => channel.name.includes('goodbye'));
+	leaveChannel.send(`${member} just left ${member.guild.name}. Bye!`);
+});
+
 (async () => {
 	await client.login(process.env.BOT_TOKEN);
 

@@ -2,7 +2,7 @@ module.exports = {
     run: async(client, message, args) => {
         let reason = args.slice(19);
         let memberId = args.split(" ")[0];
-
+        console.log(memberId + "\n" + reason)
         if (!message.member.hasPermission('BAN_MEMBERS')) {
             message.channel.send(":x: You don't have permission to ban a member.");
         }
@@ -10,7 +10,7 @@ module.exports = {
             try {
             let bannedMember = await message.guild.members.ban(memberId);
                 if(bannedMember) {
-                    if(!reason) reason = "No reason provided";
+                    if(!reason) reason = "No reason provided.";
                     if (!bannedMember.tag) return message.channel.send(":x: Member not found.");
                     let banEmbed = {
                         title: ":hammer_pick: Member Banned :hammer_pick: ",
