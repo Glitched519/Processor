@@ -3,6 +3,13 @@ const { generateEXP, checkExperience } = require("../utils/random");
 const PREFIX = process.env.PREFIX;
 
 module.exports = async(client, message) => {	
+
+	const badWords = ['fuck', 'shit'];
+	const bannedWords = ['blowjob', 'incest', 'bona', 'boner', 
+	'condom', 'cum', 'cunt', 'dildo', 'erection', 'faggot',
+	'masturbate', 'nigg', 'nigeria', 'penis', 'pussy', 'slut',
+	'vagina', 'wank', 'whore'];
+
 	if (message.content.includes("<@&735270562544222290>")) {
 		message.reply("you are about to ping all staff in the server. **Unless it's an emergency**, you will be punished for pinging this role. Reply with `call` **IN CAPS within 15 seconds** if you want to do this.");
 		const filter = m => m.content.includes('CALL');
@@ -13,8 +20,22 @@ module.exports = async(client, message) => {
 		.catch(collected => {
 			message.reply("time's up! Your staff call was declined.");
 		});
-
 	}
+	for (let i = 0; i < badWords.length; i++) {        
+		if (message.content.toLowerCase().includes(badWords[i])) {
+				message.reply(`please watch your language even if swearing is allowed in ${message.guild.name}. Do not direct it at someone else.`)
+				.then(msg => {
+					msg.delete({timeout: 10000});
+				});
+			}
+		}
+	for (let i = 0; i < bannedWords.length; i++) {        
+		if (message.content.toLowerCase().includes(bannedWords[i])) {
+			message.delete();
+				message.reply(`you are not allowed to say that word anywhere in ${message.guild.name}.`)
+
+			}
+		}  
     if(message.author.bot) return;
 	if(!message.content.startsWith(PREFIX)) {
 		const guildId = message.guild.id;
