@@ -8,14 +8,20 @@ module.exports = {
         let muteArgs = message.content.substring(PREFIX.length).split(" ");
         let time = muteArgs[2];
         if(!message.member.hasPermission(['KICK_MEMBERS', 'BAN_MEMBERS'])) {
-            message.channel.send(":x: **You don't have permission to mute a member.**");
+            message.channel.send(":x: **You don't have permission to mute a member.**")
+            .then(msg => {
+                msg.delete({timeout: 4000});
+            });
         }
         else {
-            let memberId = muteArgs[1];//message.content.substring(message.content.indexOf(' ') + 1);
+            let memberId = muteArgs[1];
             let member = message.guild.members.cache.get(memberId);
             if(member) {
                 if(member.hasPermission(['KICK_MEMBERS', 'BAN_MEMBERS']) && !message.member.hasPermission('ADMINISTRATOR')) {
-                    message.channel.send(":x: **You cannot mute that user.**");
+                    message.channel.send(":x: **You cannot mute that user.**")
+                    .then(msg => {
+                        msg.delete({timeout: 4000});
+                    });
                 }
                 else {
                     let mutedRole = message.guild.roles.cache.get(MUTED_ROLE);
@@ -26,10 +32,10 @@ module.exports = {
                         } 
                         else {
                             member.roles.add(mutedRole);
-                            message.channel.send(`:mute: User muted for ${ms(ms(time))}.`);
+                            message.channel.send(`:mute: **User muted for ${ms(ms(time))}.**`);
                             setTimeout(function() {
                                 member.roles.remove(mutedRole);
-                                message.channel.send(":speaker: User unmuted.");
+                                message.channel.send(":speaker: **User unmuted.**");
                             }, ms(time));
                         }
                         

@@ -12,23 +12,32 @@ module.exports = {
             let role = cache.find(role => role.name.toLowerCase() === roleName.toLowerCase());
             if(role) {
                 if (message.member.roles.cache.has(role.id)) {
-                    message.channel.send(':white_check_mark: You already have this role!');
+                    message.channel.send(':white_check_mark: **You already have this role!**')
+                    .then(msg => {
+                        msg.delete({timeout: 4000});
+                    });
                     return;
                 }
                 if (checkPermissionRole(role)) {
-                    message.channel.send(':x: You cannot add yourself to this role.');
+                    message.channel.send(':x: **You cannot add yourself to this role.**')
+                    .then(msg => {
+                        msg.delete({timeout: 4000});
+                    });
                 }
                 else{
                     message.member.roles.add(role)
-                        .then(member => message.channel.send(':white_check_mark: You were added to this role!'))
+                        .then(member => message.channel.send(':white_check_mark: **You were added to this role!**'))
                         .catch(err => {
                             console.log(err);
-                            message(':question: Something went wrong...');
+                            message(':question: **Something went wrong...**');
                         });
                 }
             }
             else {
-                message.channel.send(':x: Role not found.');
+                message.channel.send(':x: **Role not found.**')
+                .then(msg => {
+                    msg.delete({timeout: 4000});
+                });
             }
         });
     },

@@ -1,6 +1,12 @@
 module.exports = {
     run: async(client, message, args) => {
-        message.channel.send("**Here's all my stuff:** https://github.com/Glitched519/Processor");
+        let codeEmbed = {
+            color: `RANDOM`,
+            title: "Here's All My Stuff!",
+            description: ':arrow_right: [GitHub Link!](https://github.com/Glitched519/Processor) :arrow_left:',
+            timestamp: new Date()
+        }
+        message.channel.send({embed: codeEmbed});
         
     }, 
     aliases: ['code', 'source'],

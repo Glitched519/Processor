@@ -1,9 +1,7 @@
 require('dotenv').config();
 const discord = require('discord.js');
-const { google } = require('googleapis');
 const client = new discord.Client({partials: ['MESSAGE']});
-const { checkCommandModule, checkProperties } = require('./utils/validate');
-const { registerCommands, registerEvents, registerMusicEvents } = require('./utils/registry');
+const { registerCommands, registerEvents } = require('./utils/registry');
 
 client.on('guildCreate', async (guild) => {
 	try {
@@ -17,11 +15,6 @@ client.on('guildCreate', async (guild) => {
 	catch(err) {
 		console.log(err);
 	}
-});
-
-client.on('guildMemberRemove', member => {
-	const leaveChannel = member.guild.channels.cache.find(channel => channel.name.includes('goodbye'));
-	leaveChannel.send(`${member} just left ${member.guild.name}. Bye!`);
 });
 
 (async () => {

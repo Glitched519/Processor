@@ -16,7 +16,7 @@ module.exports = {
             });
 
             message.channel.bulkDelete(deleteCount)
-            .catch(error => message.channel.send(`:x: Failed to delete messages because of: ${error}`));
+            .catch(error => message.channel.send(`:x: **Failed to delete messages because of: ${error}**`))
         }
     },
     aliases: ['clear', 'clean', 'delete', 'del'],

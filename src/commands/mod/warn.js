@@ -2,8 +2,12 @@
 
 module.exports = {
     run: async(client, message, args) => {
-        if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.channel.send(":x: **You don't have permission to warn a member.**");
-
+        if(!message.member.hasPermission('MANAGE_MESSAGES')) {
+            message.channel.send(":x: **You don't have permission to warn a member.**")
+            .then(msg => {
+                msg.delete({timeout: 4000});
+            });
+        }
         let reason = args.slice(23);
         let memberTag = args.split(" ")[0];
 

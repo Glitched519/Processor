@@ -5,14 +5,20 @@ module.exports = {
             if (!message.member.hasPermission(['KICK_MEMBERS', 'BAN_MEMBERS'])) return;
             if (message.member.roles.cache.has(patrolRole)) {
                 message.member.roles.remove(patrolRole);
-                message.channel.send(`${message.author.tag} is no longer on patrol.`);   
+                message.reply(`you are no longer on patrol.`);   
             }
             else {
-                message.channel.send(`:x: You are already off patrol.`);   
+                message.reply(`:x: **You are already off patrol.**`)
+                .then(msg => {
+                    msg.delete({timeout: 4000});
+                });   
             }
         }
         else {
-            return message.channel.send(":x: This server does not support patrolling.");
+            return message.channel.send(":x: **This server does not support patrolling.**")
+            .then(msg => {
+                msg.delete({timeout: 4000});
+            });
         }
     },
     aliases: ['off', 'offline'],

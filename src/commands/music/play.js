@@ -13,10 +13,28 @@ module.exports = {
     run: async (client, message, args) => {
         let results = await search(args, opts).catch(err => console.log(err));
         const voiceChannel = message.member.voice.channel;
-        if (!voiceChannel) return message.channel.send(":x: Join a voice channel to play music.");
+        if (!voiceChannel) {
+            message.channel.send(":x: **Join a voice channel to play music.**")
+            .then(msg => {
+                msg.delete({timeout: 4000});
+            });
+            return;
+        }
         const permissions = voiceChannel.permissionsFor(message.client.user);
-        if (!permissions.has('CONNECT')) return message.channel.send(":x: I don't have permissions to connect to the voice channel.");
-        if (!permissions.has('SPEAK')) return message.channel.send(":x: I don't have permissions to speak in the voice channel.")
+        if (!permissions.has('CONNECT')) {
+            message.channel.send(":x: **I don't have permissions to connect to the voice channel.**")
+            .then(msg => {
+                msg.delete({timeout: 4000});
+            });
+            return;
+        }
+        if (!permissions.has('SPEAK')) {
+            message.channel.send(":x: **I don't have permissions to speak in the voice channel.**")
+            .then(msg => {
+                msg.delete({timeout: 4000});
+            });
+            return;
+        }
 
         function playNextSong() {
             songIndex++;
@@ -39,18 +57,6 @@ module.exports = {
             title: "Now Playing ",
             description: '',
             color: `RANDOM`,
-            // fields: [
-            //     {
-            //         name: 'Publish Date',
-            //         value: result.publishedAt,
-            //         inline: true,
-            //     },
-            //     {
-            //         name: 'Channel',
-            //         value: result.channelTitle,
-            //         inline: true,
-            //     },
-            // ],
             timestamp: new Date()
         }
 
@@ -58,7 +64,7 @@ module.exports = {
             var connection = await voiceChannel.join()
         } catch (err) {
             console.log(`There was an error connecting to the voice channel: ${err}`);
-            return message.channel.send(`There was an error connecting to the voice channel: ${err}`);
+            return message.channel.send(`**There was an error connecting to the voice channel: ${err}**`);
         }
 
             if(results) {

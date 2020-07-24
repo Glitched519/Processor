@@ -4,7 +4,10 @@ module.exports = {
         let memberId = args.split(" ")[0];
 
         if(!message.member.hasPermission('KICK_MEMBERS')) {
-            message.channel.send(":x: You don't have permission to kick a member.");
+            message.channel.send(":x: **You don't have permission to kick a member.**")
+            .then(msg => {
+                msg.delete({timeout: 4000});
+            });
         }
         else {
             
@@ -13,7 +16,10 @@ module.exports = {
                 try {
                     await member.kick(reason);
                     if(!reason) reason = "No reason provided";
-                    if (!memberId) return message.channel.send(":x: Member not found.");
+                    if (!memberId) return message.channel.send(":x: **Member not found.**")
+                    .then(msg => {
+                        msg.delete({timeout: 4000});
+                    });
                     let kickEmbed = {
                         title: ":boot: Member Kicked :boot: ",
                         description: "**Member ID: **" + memberId + "\n**Reason: **" + reason,

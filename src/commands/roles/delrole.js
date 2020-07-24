@@ -8,15 +8,18 @@ module.exports = {
             if(role) {
                 if(message.member.roles.cache.has(role.id)) {
                     message.member.roles.remove(role)
-                        .then(member => message.channel.send(":white_check_mark: You were removed from this role!"))
+                        .then(member => message.channel.send(":white_check_mark: **You were removed from this role!**"))
                         .catch(err => {
                             console.log(err);
-                            message.channel.send(":zzz: Something went wrong...");
+                            message.channel.send(":zzz: **Something went wrong...**");
                         });
                 }
             }
             else {
-                message.channel.send(":no_entry_sign: Role not found!");
+                message.channel.send(":x: **Role not found!**")
+                .then(msg => {
+                    msg.delete({timeout: 4000});
+                });
             }
         });
     },

@@ -1,10 +1,12 @@
+const PREFIX = process.env.PREFIX;
+
 module.exports = {
     run: async(client, message, args) => {
         const statArgs = args.split(" ");
         if(statArgs.length >= 2) {
             message.channel.send("Incorrect usage: $stats | $stats <user_id> | $stats @mention ")
         }
-        else if(statArgs.length === 1 && args !== "$stats") {
+        else if(statArgs.length === 1 && args !== `${PREFIX}stats`) {
             const member = message.mentions.members.size === 1 ? 
                 message.mentions.members.first() : 
                 message.guild.members.cache.get(args);
