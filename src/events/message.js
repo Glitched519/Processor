@@ -3,7 +3,6 @@ const { generateEXP, checkExperience } = require("../utils/random");
 const PREFIX = process.env.PREFIX;
 
 module.exports = async(client, message) => {	
-
 	const badWords = ['fuck', 'shit'];
 	const bannedWords = ['blowjob', 'incest', 'bona', 'boner', 
 	'condom', 'cum', 'cunt', 'dildo', 'erection', 'faggot',
@@ -32,10 +31,9 @@ module.exports = async(client, message) => {
 	for (let i = 0; i < bannedWords.length; i++) {        
 		if (message.content.toLowerCase().includes(bannedWords[i])) {
 			message.delete();
-				message.reply(`you are not allowed to say that word anywhere in ${message.guild.name}.`)
-
-			}
-		}  
+			message.reply(`you are not allowed to say that word anywhere in ${message.guild.name}.`)
+		}
+	}  
     if(message.author.bot) return;
 	if(!message.content.startsWith(PREFIX)) {
 		const guildId = message.guild.id;

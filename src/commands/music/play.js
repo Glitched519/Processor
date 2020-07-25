@@ -7,19 +7,13 @@ const opts = {
     type: 'video'
 };
 
-let queue = [];
+let servers = [];
 let songIndex = 0;
 module.exports = {
     run: async (client, message, args) => {
         let results = await search(args, opts).catch(err => console.log(err));
         const voiceChannel = message.member.voice.channel;
-        if (!voiceChannel) {
-            message.channel.send(":x: **Join a voice channel to play music.**")
-            .then(msg => {
-                msg.delete({timeout: 4000});
-            });
-            return;
-        }
+
         const permissions = voiceChannel.permissionsFor(message.client.user);
         if (!permissions.has('CONNECT')) {
             message.channel.send(":x: **I don't have permissions to connect to the voice channel.**")
@@ -36,21 +30,31 @@ module.exports = {
             return;
         }
 
-        function playNextSong() {
-            songIndex++;
-            console.log(songIndex);
+        if(!servers[message.guild.id]) servers[message.guild.id] = {
+            queue: []
+        }
+
+        var server = servers[message.guild.id];
+
+        server.queue.push(args);
+
+        function playNextSong() { 
+            let server = servers[message.guild.id];
             message.channel.send({
                 embed: songEmbed
             });
-            connection.play(ytdl(queue[songIndex]))
-                .on('finish', () => {
-                    if (songIndex + 1 < queue.length) {
-                        playNextSong();
-                    }
-                })
-                .on('error', err => {
-                    dispatcher.setVolumeLogarithmic(5 / 5)
-                })
+            server.dispatcher = connection.play(ytdl(server.queue[songIndex], {filter: "audioonly"}));
+            server.queue.shift();
+
+            server.dispatcher.on('finish', () => {
+                if (songIndex + 1 < server.queue.length) {
+                    playNextSong();
+                }
+                else {
+                    connection.disconnect();
+                }
+                songIndex++;
+            })
         }
 
         let songEmbed = {
@@ -67,27 +71,24 @@ module.exports = {
             return message.channel.send(`**There was an error connecting to the voice channel: ${err}**`);
         }
 
-            if(results) {
-                let youtubeResults = results.results;
-                let titles = youtubeResults.map(result => {
-                    result.title + "\n" + result.link;
-                    queue.push(result.link);
-                    console.log(result.link);
-                    console.log(queue);
-                    songEmbed.title += result.title;
-                    songEmbed.description = result.link;
-                    message.channel.send({
-                        embed: songEmbed
-                    });
-                    const dispatcher = connection.play(ytdl(queue[songIndex]))
-                    .on('finish', () => {
-                        if (songIndex + 1 < queue.length) {
-                            playNextSong();
-                        }
-                    })
-                });
+        if(results) {
+            let youtubeResults = results.results;
+            let titles = youtubeResults.map(result => {
+                result.title + "\n" + result.link;
+                server.queue.push(result.link);
+                server.queue.shift();
+                songEmbed.title += result.title;
+                songEmbed.description = result.link;
+                const dispatcher = connection.play(ytdl(server.queue[songIndex]))
+                .on('finish', () => {
+                    if (songIndex + 1 < queue.length) {
+                        playNextSong();
+                    }
+                })
+            });
         }
 
+        playNextSong();      
     },
     aliases: ['p'],
     description: 'Plays a song'

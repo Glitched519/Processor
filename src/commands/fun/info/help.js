@@ -33,6 +33,7 @@ const invite = require('./invite');
 const lyrics = require('./lyrics');
 const ping = require('./ping');
 const pokemon = require('./pokemon');
+const poll = require('../info/poll');
 const stats = require('./stats');
 const echo = require('../other/echo');
 const level = require('../other/level');
@@ -261,6 +262,10 @@ module.exports = {
                 {
                     name: ':dog2: pokemon `<pokemon>`',
                     value: `${pokemon.description}.\nAliases: [${pokemon.aliases}]`,
+                },
+                {
+                    name: ':information_source: poll `<question>`',
+                    value: `${poll.description}.\nAliases: [${poll.aliases}]`,
                 },
                 {
                     name: ':information_source: stats `[@member]`',
