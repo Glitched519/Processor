@@ -36,6 +36,7 @@ const pokemon = require('./pokemon');
 const poll = require('../info/poll');
 const stats = require('./stats');
 const echo = require('../other/echo');
+const joke = require('../../fun/other/joke');
 const level = require('../other/level');
 const meme = require('../other/meme');
 const roll = require('../other/roll');
@@ -300,6 +301,10 @@ module.exports = {
                 {
                     name: ':sound: echo `<message>`',
                     value: `${echo.description}.\nAliases: [${echo.aliases}]`,
+                },
+                {
+                    name: ':rofl: joke',
+                    value: `${joke.description}.\nAliases: [${joke.aliases}]`,
                 },
                 {
                     name: ':1234: level',
