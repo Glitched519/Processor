@@ -5,6 +5,7 @@ module.exports = {
         message.delete();
         if(message.content == `${PREFIX}poll`) return;
         let pollEmbed = {
+            color: `RANDOM`,
             title: `${message.author.username} asks...`,
             description: args,
             timestamp: new Date()

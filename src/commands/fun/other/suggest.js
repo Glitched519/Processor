@@ -1,39 +1,20 @@
+const PREFIX = process.env.PREFIX;
+
 module.exports = {
     run: async(client, message, args) => {
-        const dev = client.users.cache.get('638064155965915187');
-        if(args == "$suggest") {
-            message.delete();
-            message.reply(':memo: **What do you want to suggest?**')
-            .then(msg => {
-			    msg.delete({timeout: 4000});
-            });
-        return;
-        } 
-        else if (args.length < 20) {
-            message.delete();
-            message.reply(':memo: **Please give a better suggestion.**')
-            .then(msg => {
-                msg.delete({timeout: 4000});
-            });
-            return;
-        }
-        
-        let suggestionEmbed = {
-            title: "New Suggestion",
+        message.delete();
+        if(message.content == `${PREFIX}suggest`) return;
+        let suggestEmbed = {
+            color: `RANDOM`,
+            title: `${message.author.username} suggests...`,
             description: args,
-            color: `RANDOM`,
-            timestamp: new Date()            
-        }
-        dev.send({ embed: suggestionEmbed });
-
-        let thankEmbed = {
-            title: "Suggestion Submitted",
-            description: "**Your suggestion is so amazing, I let the dev know about it!**",
-            color: `RANDOM`,
             timestamp: new Date()
         }
-        message.reply({ embed: thankEmbed });
+        message.channel.send({embed: suggestEmbed}).then(embedMessage => {
+            embedMessage.react("✅")
+            embedMessage.react("❌")
+        });
     },
-    aliases: ['recommend', 'idea'],
-    description: 'DMs a user-suggested idea to the bot dev'
+    aliases: [''],
+    description: 'Sends a suggestion with two options to react to'
 }

@@ -4,7 +4,7 @@ const discord = require('discord.js');
 const opts = {
     maxResults: 1,
     key: process.env.YOUTUBE_TOKEN,
-    type: 'video'
+    type: 'audio'
 };
 
 let servers = [];
@@ -13,21 +13,25 @@ module.exports = {
     run: async (client, message, args) => {
         let results = await search(args, opts).catch(err => console.log(err));
         const voiceChannel = message.member.voice.channel;
-
-        const permissions = voiceChannel.permissionsFor(message.client.user);
-        if (!permissions.has('CONNECT')) {
-            message.channel.send(":x: **I don't have permissions to connect to the voice channel.**")
-            .then(msg => {
-                msg.delete({timeout: 4000});
-            });
-            return;
+        try {
+            const permissions = voiceChannel.permissionsFor(message.client.user);
+            if (!permissions.has('CONNECT')) {
+                message.channel.send(":x: **I don't have permissions to connect to the voice channel.**")
+                .then(msg => {
+                    msg.delete({timeout: 4000});
+                });
+                return;
+            }
+            if (!permissions.has('SPEAK')) {
+                message.channel.send(":x: **I don't have permissions to speak in the voice channel.**")
+                .then(msg => {
+                    msg.delete({timeout: 4000});
+                });
+                return;
+            }
         }
-        if (!permissions.has('SPEAK')) {
-            message.channel.send(":x: **I don't have permissions to speak in the voice channel.**")
-            .then(msg => {
-                msg.delete({timeout: 4000});
-            });
-            return;
+        catch (err) {
+            message.channel.send(':x: **I may not have proper permissions set to connect or play music in a channel.**')
         }
 
         if(!servers[message.guild.id]) servers[message.guild.id] = {
@@ -40,9 +44,7 @@ module.exports = {
 
         function playNextSong() { 
             let server = servers[message.guild.id];
-            message.channel.send({
-                embed: songEmbed
-            });
+            
             server.dispatcher = connection.play(ytdl(server.queue[songIndex], {filter: "audioonly"}));
             server.queue.shift();
 
@@ -58,10 +60,23 @@ module.exports = {
         }
 
         let songEmbed = {
-            title: "Now Playing ",
-            description: '',
+            author: "Now Playing ",
+            title: '',
+            url: '',
             color: `RANDOM`,
-            timestamp: new Date()
+            timestamp: new Date(),
+            fields : [
+                {
+                    name: 'Published Date',
+                    value: '',
+                    inline: true
+                },
+                {
+                    name: 'Owner',
+                    value: '',
+                    inline: true
+                }
+            ]
         }
 
         try {
@@ -77,9 +92,15 @@ module.exports = {
                 result.title + "\n" + result.link;
                 server.queue.push(result.link);
                 server.queue.shift();
-                songEmbed.title += result.title;
-                songEmbed.description = result.link;
-                const dispatcher = connection.play(ytdl(server.queue[songIndex]))
+                message.channel.send(`:musical_note: **Now Playing ${result.title} :musical_note:**`)
+                const dispatcher = connection.play(ytdl(server.queue[songIndex])
+                .on('info', (info) => {
+                    songEmbed.title = info.videoDetails.title;
+                    songEmbed.url = info.videoDetails.video_url;
+                    songEmbed.fields[0].value = info.videoDetails.publishDate;
+                    songEmbed.fields[1].value = info.videoDetails.ownerChannelName;
+                    message.channel.send({embed: songEmbed});
+                }))
                 .on('finish', () => {
                     if (songIndex + 1 < queue.length) {
                         playNextSong();

@@ -1,6 +1,7 @@
 const { exists, insertGuildMember, updateGuildMemberEXP } = require('../utils/database');
 const { generateEXP, checkExperience } = require("../utils/random"); 
 const PREFIX = process.env.PREFIX;
+const ms = require('ms');
 
 module.exports = async(client, message) => {	
 	const badWords = ['fuck', 'shit'];
@@ -34,6 +35,17 @@ module.exports = async(client, message) => {
 			message.reply(`you are not allowed to say that word anywhere in ${message.guild.name}.`)
 		}
 	}  
+	if (message.channel.id == '678326702065319968') {
+		if (message.content == '!d bump') {
+			message.channel.send(`**${message.author.username}**, you bumped! I'll ping you when you can bump again!`);
+				setTimeout(function() {
+					client.channels.cache.get('678326702065319968').send(`<@!${message.author.id}>, you can bump now!`);
+					return;
+				}, ms('2h'));
+				return;
+			}
+		}
+
     if(message.author.bot) return;
 	if(!message.content.startsWith(PREFIX)) {
 		const guildId = message.guild.id;
