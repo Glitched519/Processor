@@ -1,7 +1,15 @@
+const StateManager = require('../../utils/StateManager');
+const PREFIX = process.env.PREFIX;
+
 module.exports = {
     run: async(client, message, args) => {
-        let mutedRoleId = args;    
-        console.log("Muted role set to " + mutedRoleId);
+        if (args == `${PREFIX}setmutedrole`) return;
+
+        return StateManager.connection.query(
+            `INSERT INTO GuildMutedRole VALUES (
+                '${message.guild.id}', '${args}'
+            )`
+        );    
     },
     aliases: [],
     description: 'Shows the creator of this awesome bot'

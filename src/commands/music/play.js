@@ -1,6 +1,5 @@
 const ytdl = require('ytdl-core');
 const search = require('youtube-search');
-const discord = require('discord.js');
 const opts = {
     maxResults: 1,
     key: process.env.YOUTUBE_TOKEN,
@@ -33,10 +32,9 @@ module.exports = {
         catch (err) {
             message.channel.send(':x: **I may not have proper permissions set to connect or play music in a channel.**')
         }
-
-        if(!servers[message.guild.id]) servers[message.guild.id] = {
-            queue: []
-        }
+            if(!servers[message.guild.id]) servers[message.guild.id] = {
+                queue: []
+            }
 
         var server = servers[message.guild.id];
 
@@ -67,12 +65,32 @@ module.exports = {
             timestamp: new Date(),
             fields : [
                 {
-                    name: 'Published Date',
+                    name: 'Publish Date',
                     value: '',
                     inline: true
                 },
                 {
                     name: 'Owner',
+                    value: '',
+                    inline: true
+                },
+                {
+                    name: 'Total Views',
+                    value: '',
+                    inline: true
+                },
+                {
+                    name: 'Duration',
+                    value: '',
+                    inline: true
+                },
+                {
+                    name: ':thumbsup: Likes',
+                    value: '',
+                    inline: true
+                },
+                {
+                    name: ':thumbsdown: Dislikes',
                     value: '',
                     inline: true
                 }
@@ -99,6 +117,15 @@ module.exports = {
                     songEmbed.url = info.videoDetails.video_url;
                     songEmbed.fields[0].value = info.videoDetails.publishDate;
                     songEmbed.fields[1].value = info.videoDetails.ownerChannelName;
+                    songEmbed.fields[2].value = info.videoDetails.viewCount;
+                    if ((info.videoDetails.lengthSeconds % 60) < 10) {
+                        songEmbed.fields[3].value = `${Math.floor(info.videoDetails.lengthSeconds / 60)}:0${info.videoDetails.lengthSeconds % 60}`;
+                    }
+                    else {
+                        songEmbed.fields[3].value = `${Math.floor(info.videoDetails.lengthSeconds / 60)}:${info.videoDetails.lengthSeconds % 60}`;
+                    }
+                    songEmbed.fields[4].value = info.videoDetails.likes;
+                    songEmbed.fields[5].value = info.videoDetails.dislikes;
                     message.channel.send({embed: songEmbed});
                 }))
                 .on('finish', () => {

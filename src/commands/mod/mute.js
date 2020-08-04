@@ -1,11 +1,13 @@
+const StateManager = require('../../utils/StateManager');
+
 const ms = require('ms');
-const mrId = require('./setmutedrole');
 const PREFIX = process.env.PREFIX;
-const MUTED_ROLE = process.env.MUTED_ROLE;
 
 module.exports = {
     run: async(client, message, args) => {
-        let muteArgs = message.content.substring(PREFIX.length).split(" ");
+        StateManager.connection.query(`SELECT mutedRole FROM GuildMutedRole WHERE guildId = ${message.guild.id}`, function (err, result, fields) {
+            if (err) throw err;
+            let muteArgs = message.content.substring(PREFIX.length).split(" ");
         let time = muteArgs[2];
         if(!message.member.hasPermission(['KICK_MEMBERS', 'BAN_MEMBERS'])) {
             message.channel.send(":x: **You don't have permission to mute a member.**")
@@ -24,7 +26,7 @@ module.exports = {
                     });
                 }
                 else {
-                    let mutedRole = message.guild.roles.cache.get(MUTED_ROLE);
+                    let mutedRole = message.guild.roles.cache.get(result[0].mutedRole);
                     if (mutedRole) {
                         if (!time) {
                             member.roles.add(mutedRole);    
@@ -34,8 +36,10 @@ module.exports = {
                             member.roles.add(mutedRole);
                             message.channel.send(`:mute: **User muted for ${ms(ms(time))}.**`);
                             setTimeout(function() {
-                                member.roles.remove(mutedRole);
-                                message.channel.send(":speaker: **User unmuted.**");
+                                if (member.roles.cache.has(result[0].mutedRole)) {
+                                    member.roles.remove(mutedRole);
+                                    message.channel.send(":speaker: **User unmuted.**");     
+                                }                       
                             }, ms(time));
                         }
                         
@@ -49,6 +53,8 @@ module.exports = {
                 message.channel.send(':ghost: Member not found.');
             }
         }
+          });
+        
     },
     aliases: [],
     description: 'Mutes a user'

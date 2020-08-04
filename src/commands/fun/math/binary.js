@@ -1,11 +1,10 @@
-const { api } = require("some-random-api");
+const PREFIX = process.env.PREFIX;
 
 module.exports = {
     run: async(client, message, args) => {
-        api.other.binaryEncode(args).then(res => {        
-            message.channel.send('`'+res.binary+'`');
-        });
+        if (args.startsWith(`${PREFIX}bin`)) return;
+        message.channel.send('`' + Number(args).toString(2).toUpperCase() + '`');
     }, 
-    aliases: ['bin', 'b'],
+    aliases: ['bin'],
     description: 'Converts number to binary'
 }

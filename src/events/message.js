@@ -21,22 +21,25 @@ module.exports = async(client, message) => {
 			message.reply("time's up! Your staff call was declined.");
 		});
 	}
-	for (let i = 0; i < badWords.length; i++) {        
-		if (message.content.toLowerCase().includes(badWords[i])) {
-				message.reply(`please watch your language even if swearing is allowed in ${message.guild.name}. Do not direct it at someone else.`)
-				.then(msg => {
-					msg.delete({timeout: 10000});
-				});
+	if (message.guild.id == '728524826720862229') {}
+	else {
+		for (let i = 0; i < badWords.length; i++) {        
+			if (message.content.toLowerCase().includes(badWords[i])) {
+					message.reply(`please watch your language even if swearing is allowed in ${message.guild.name}. Do not direct it at someone else.`)
+					.then(msg => {
+						msg.delete({timeout: 10000});
+					});
+				}
 			}
-		}
-	for (let i = 0; i < bannedWords.length; i++) {        
-		if (message.content.toLowerCase().includes(bannedWords[i])) {
-			message.delete();
-			message.reply(`you are not allowed to say that word anywhere in ${message.guild.name}.`)
-		}
-	}  
+		for (let i = 0; i < bannedWords.length; i++) {        
+			if (message.content.toLowerCase().includes(bannedWords[i])) {
+				message.delete();
+				message.reply(`you are not allowed to say that word anywhere in ${message.guild.name}.`)
+			}
+		}  
+	}
 	if (message.channel.id == '678326702065319968') {
-		if (message.content == '!d bump') {
+		if (message.content.toLowerCase() == '!d bump') {
 			message.channel.send(`**${message.author.username}**, you bumped! I'll ping you when you can bump again!`);
 				setTimeout(function() {
 					client.channels.cache.get('678326702065319968').send(`<@!${message.author.id}>, you can bump now!`);

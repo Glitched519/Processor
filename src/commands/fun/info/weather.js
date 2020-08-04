@@ -20,7 +20,7 @@ module.exports = {
                     },
                     fields: [
                         {
-                            name: 'Current Temperature',
+                            name: 'Temperature',
                             value: `${result[0].current.temperature}°C`,
                             inline: true
                         },

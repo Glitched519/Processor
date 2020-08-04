@@ -3,7 +3,6 @@ const userban = require('../../mod/userban');
 const userkick = require('../../mod/userkick');
 const idban = require('../../mod/idban');
 const idkick = require('../../mod/idkick');
-const lock = require('../../mod/lock');
 const mute = require('../../mod/mute');
 const purge = require('../../mod/purge');
 const slowmode = require('../../mod/slowmode');
@@ -13,8 +12,10 @@ const warn = require('../../mod/warn');
 const play = require('../../music/play');
 const stop = require('../../music/stop');
 const binary = require('../math/binary');
+const base32 = require('../math/base32');
 const base64 = require('../math/base64');
 const calculate = require('../math/calculate');
+const hexadecimal = require('../math/hexadecimal')
 const fact = require('../animal/animalfact');
 const image = require('../animal/animalimage');
 const baselayout = require('../clash/baselayout');
@@ -27,6 +28,7 @@ const wink = require('../cute/wink');
 const author = require('./author');
 const avatar = require('./avatar');
 const definition = require('./definition');
+const giphygif = require('./giphygif');
 const github = require('./github');
 const googleimage = require('./googleimage');
 const invite = require('./invite');
@@ -35,10 +37,14 @@ const ping = require('./ping');
 const pokemon = require('./pokemon');
 const poll = require('../info/poll');
 const stats = require('./stats');
+const chucknorrisjoke = require('../other/chucknorrisjoke');
+const dadjoke = require('../other/dadjoke');
 const echo = require('../other/echo');
+const hack = require('../other/hack');
 const joke = require('../../fun/other/joke');
 const level = require('../other/level');
 const meme = require('../other/meme');
+const quote = require('../other/quote');
 const roll = require('../other/roll');
 const suggest = require('../other/suggest');
 const wikipedia = require('../other/wikipedia');
@@ -100,10 +106,6 @@ module.exports = {
                     value: `${userkick.description}.\nAliases: [${userkick.aliases}]`,
                 },
                 {
-                    name: ':lock: lock `<role ID> <boolean>`',
-                    value: `${lock.description}.`,
-                },
-                {
                     name: ':mute: mute `<@member> [reason]`',
                     value: `${mute.description}.`,
                 },
@@ -145,6 +147,10 @@ module.exports = {
             timestamp: new Date(),
             fields: [
                 {
+                    name: ':1234: base32 `<number>`',
+                    value: `${base32.description}.\nAliases: [${base32.aliases}]`,
+                },
+                {
                     name: ':1234: base64 `<number>`',
                     value: `${base64.description}.\nAliases: [${base64.aliases}]`,
                 },
@@ -155,6 +161,10 @@ module.exports = {
                 {
                     name: ':computer: calculate `<expression>`',
                     value: `${calculate.description}.\nAliases: [${calculate.aliases}]`,
+                },
+                {
+                    name: ':capital_abcd: hexadecimal `<number>`',
+                    value: `${hexadecimal.description}.\nAliases: [${hexadecimal.aliases}]`,
                 },
             ]
         }
@@ -241,11 +251,15 @@ module.exports = {
                     value: `${definition.description}.\nAliases: [${definition.aliases}]`,
                 }, 
                 {
+                    name: ':frame_photo: giphygif `<search>`',
+                    value: `${giphygif.description}.\nAliases: [${giphygif.aliases}]`,
+                }, 
+                {
                     name: ':link: github',
                     value: `${github.description}.\nAliases: [${github.aliases}]`,
                 },
                 {
-                    name: ':mag: googleimage',
+                    name: ':mag: googleimage `<search>`',
                     value: `${googleimage.description}.\nAliases: [${googleimage.aliases}]`,
                 },
                 {
@@ -270,7 +284,7 @@ module.exports = {
                 },
                 {
                     name: ':information_source: stats `[@member]`',
-                    value: `${stats.description}.\nAliases: [${stats.aliases}]`,
+                    value: `${stats.description}.`,
                 },
             ]
         }
@@ -299,12 +313,24 @@ module.exports = {
             timestamp: new Date(),
             fields: [
                 {
+                    name: ':man_running: chucknorrisjoke',
+                    value: `${chucknorrisjoke.description}.\nAliases: [${chucknorrisjoke.aliases}]`,
+                }, 
+                {
+                    name: ':man_curly_haired_tone3: dadjoke',
+                    value: `${dadjoke.description}.\nAliases: [${dadjoke.aliases}]`,
+                }, 
+                {
                     name: ':sound: echo `<message>`',
                     value: `${echo.description}.\nAliases: [${echo.aliases}]`,
                 },
                 {
+                    name: ':computer: hack `<@member>`',
+                    value: `${hack.description}.`,
+                }, 
+                {
                     name: ':rofl: joke',
-                    value: `${joke.description}.\nAliases: [${joke.aliases}]`,
+                    value: `${joke.description}.`,
                 },
                 {
                     name: ':1234: level',
@@ -315,12 +341,16 @@ module.exports = {
                     value: `${meme.description}.\nAliases: [${meme.aliases}]`,
                 },
                 {
+                    name: ':bookmark: quote',
+                    value: `${quote.description}.`,
+                }, 
+                {
                     name: ':game_die: roll',
                     value: `${roll.description}.\nAliases: [${roll.aliases}]`,
                 }, 
                 {
                     name: ':information_source: suggest `<suggestion>`',
-                    value: `${suggest.description}.\nAliases: [${suggest.aliases}]`,
+                    value: `${suggest.description}.`,
                 },
                 {
                     name: ':information_source: wikipedia `<wiki>`',
