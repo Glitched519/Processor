@@ -4,7 +4,7 @@ const PREFIX = process.env.PREFIX;
 const ms = require('ms');
 
 module.exports = async(client, message) => {	
-	const badWords = ['fuck', 'shit'];
+	const badWords = ['fuck', 'shit', 'dick', 'bitch', 'cock'];
 	const bannedWords = ['blowjob', 'incest', 'bona', 'boner', 
 	'condom', 'cum', 'cunt', 'dildo', 'erection', 'faggot',
 	'masturbate', 'nigg', 'nigeria', 'penis', 'pussy', 'slut',
@@ -48,6 +48,8 @@ module.exports = async(client, message) => {
 				return;
 			}
 		}
+
+	if (message.author.id == '228556559288893440') return;
 
     if(message.author.bot) return;
 	if(!message.content.startsWith(PREFIX)) {

@@ -1,4 +1,11 @@
 module.exports = async(client) => {
-    console.log(`${new Date()} \n${client.user.tag} has logged in!`);
+    console.clear();
+    console.log(`${new Date()}  
+ _____                                        
+|  __ \\                                       
+| |__) | __ ___   ___ ___  ___ ___  ___  _ __ 
+|  ___/ '__/ _ \\ / __/ _ \\/ __/ __|/ _ \\| '__|
+| |   | | | (_) | (_ | __/\\__ \\__ \\ (_) | |   
+|_|   |_|  \\___/ \\___\\___||___/___/\\___/|_|   `);
 }
 
