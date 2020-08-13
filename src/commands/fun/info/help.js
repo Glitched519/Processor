@@ -280,7 +280,7 @@ module.exports = {
                 },
                 {
                     name: ':information_source: poll `<question>`',
-                    value: `${poll.description}.\nAliases: [${poll.aliases}]`,
+                    value: `${poll.description}.`,
                 },
                 {
                     name: ':information_source: stats `[@member]`',

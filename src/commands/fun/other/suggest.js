@@ -10,10 +10,21 @@ module.exports = {
             description: args,
             timestamp: new Date()
         }
-        message.channel.send({embed: suggestEmbed}).then(embedMessage => {
-            embedMessage.react("✅")
-            embedMessage.react("❌")
-        });
+        message.delete();
+        if (message.guild.id === '662734925707083778') {
+            message.channel.send({embed: suggestEmbed}).then(embedMessage => {
+                const yesEmoji = message.guild.emojis.cache.find(emoji => emoji.name === 'yep');
+                const noEmoji = message.guild.emojis.cache.find(emoji => emoji.name === 'nope');
+                embedMessage.react(yesEmoji);
+                embedMessage.react(noEmoji);
+            });
+        }
+        else {
+            message.channel.send({embed: suggestEmbed}).then(embedMessage => {
+                embedMessage.react('✅');
+                embedMessage.react('❌');
+            });
+        }
     },
     aliases: [''],
     description: 'Sends a suggestion with two options to react to'
