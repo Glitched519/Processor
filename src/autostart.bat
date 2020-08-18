@@ -1,0 +1,6 @@
+@echo off
+echo Starting Processor...
+:main
+node processor.js
+echo Restarting Processor...
+goto main
