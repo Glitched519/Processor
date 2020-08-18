@@ -5,8 +5,8 @@ const ms = require('ms');
 
 module.exports = async(client, message) => {	
 	const badWords = ['fuck', 'shit', 'dick', 'bitch', 'cock'];
-	const bannedWords = ['blowjob', 'incest', 'bona', 'boner', 
-	'condom', 'cum', 'cunt', 'dildo', 'erection', 'faggot',
+	const bannedWords = [' ass ', 'asshole', 'blowjob', 'incest', 'bona', 'boner', 
+	'condom', ' cum ', 'cunt', 'dildo', 'erection', 'faggot',
 	'masturbate', 'nigg', 'nigeria', 'penis', 'pussy', 'slut',
 	'vagina', 'wank', 'whore'];
 
@@ -21,6 +21,16 @@ module.exports = async(client, message) => {
 			message.reply("time's up! Your staff call was declined.");
 		});
 	}
+
+	if (message.channel.id == '732272530198626374' && message.author.id == '690829074465292329') {
+		message.channel.send('<@&737595731099123773>, a new fact just appeared!');
+	}
+	
+	if (message.content == '<@!689678745782714464>') {
+		message.reply(`hi! My prefix is **${PREFIX}**. You can summon my help page using **${PREFIX}help**.`)
+	}
+
+	
 	if (message.guild.id == '728524826720862229') {}
 	else {
 		for (let i = 0; i < badWords.length; i++) {        

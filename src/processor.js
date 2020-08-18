@@ -2,6 +2,8 @@ require('dotenv').config();
 const discord = require('discord.js');
 const client = new discord.Client({partials: ['MESSAGE']});
 const { registerCommands, registerEvents } = require('./utils/registry');
+const message = require('./events/message');
+
 
 client.on('guildCreate', async (guild) => {
 	try {

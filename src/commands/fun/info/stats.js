@@ -48,10 +48,14 @@ module.exports = {
             }
         }
         else {
+            const roleMap = [];
             const { guild } = message;
+            for (let i = 20; i > 0; i--) {
+                roleMap.push(guild.roles.cache.map(role => role.toString())[i])
+            }
             const statEmbed = {
                 title: `${guild.name} (${guild.id})`,
-                description: `**Roles:** ${guild.roles.cache.map(role => role.toString()).slice(10)}`,
+                description: `**Top 20 Roles:** ${roleMap}`,
                 color: `RANDOM`,
                 thumbnail: {
                     url: guild.iconURL()
