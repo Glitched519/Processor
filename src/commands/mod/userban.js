@@ -2,7 +2,7 @@ const PREFIX = process.env.PREFIX;
 
 module.exports = {
     run: async(client, message, args) => {
-        let reason = args.slice(23);
+        let reason = args.slice(22);
         let memberTag = args.split(" ")[0];
 
             if (!message.member.hasPermission('BAN_MEMBERS')) {

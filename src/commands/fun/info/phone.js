@@ -3,7 +3,11 @@ const fetch = require('node-fetch');
 
 module.exports = {
     run: async(client, message, args) => {
-
+        fetch('https://www.gsmarena.com/nokia-phones-1.php')
+        .then(res => res.json())
+        .then(json => {
+            console.log(json);
+        });
         message.channel.send(`:clock1: **Wait a few seconds...**`);
         fetch('http://localhost:8888/gsmarena/brands')
         .then(res => res.json())

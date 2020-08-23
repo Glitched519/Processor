@@ -8,6 +8,7 @@ module.exports = {
             return;
         } 
         message.member.voice.channel.leave();
+        message.channel.send("**Disconnected.**")
         return undefined;
     }, 
     aliases: [],

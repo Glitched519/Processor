@@ -7,7 +7,7 @@ module.exports = async(client, message) => {
 	const badWords = ['fuck', 'shit', 'dick', 'bitch', 'cock'];
 	const bannedWords = [' ass ', 'asshole', 'blowjob', 'incest', 'bona', 'boner', 
 	'condom', ' cum ', 'cunt', 'dildo', 'erection', 'faggot',
-	'masturbate', 'nigg', 'nigeria', 'penis', 'pussy', 'slut',
+	'masturbate', 'nigg', 'nigeria', 'penis','pp ', 'pussy', 'slut',
 	'vagina', 'wank', 'whore'];
 
 	if (message.content.includes("<@&735270562544222290>")) {
@@ -30,7 +30,6 @@ module.exports = async(client, message) => {
 		message.reply(`hi! My prefix is **${PREFIX}**. You can summon my help page using **${PREFIX}help**.`)
 	}
 
-	
 	if (message.guild.id == '728524826720862229') {}
 	else {
 		for (let i = 0; i < badWords.length; i++) {        
@@ -57,9 +56,7 @@ module.exports = async(client, message) => {
 				}, ms('2h'));
 				return;
 			}
-		}
-
-	if (message.author.id == '228556559288893440') return;
+		}	
 
     if(message.author.bot) return;
 	if(!message.content.startsWith(PREFIX)) {

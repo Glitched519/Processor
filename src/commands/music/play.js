@@ -117,7 +117,7 @@ module.exports = {
                     result.title + "\n" + result.link;
                     server.queue.push(result.link);
                     server.queue.shift();
-                    message.channel.send(`:musical_note: **Now Playing ${result.title} :musical_note:**`)
+                    message.channel.send(':mag_right: **Searching for ** ' + '`' + args + '`')
                     const dispatcher = connection.play(ytdl(server.queue[songIndex])
                     .on('info', (info) => {
                         songEmbed.title = info.videoDetails.title;
@@ -125,12 +125,9 @@ module.exports = {
                         songEmbed.fields[0].value = info.videoDetails.publishDate;
                         songEmbed.fields[1].value = info.videoDetails.ownerChannelName;
                         songEmbed.fields[2].value = info.videoDetails.viewCount;
-                        if ((info.videoDetails.lengthSeconds % 60) < 10) {
-                            songEmbed.fields[3].value = `${Math.floor(info.videoDetails.lengthSeconds / 60)}:0${info.videoDetails.lengthSeconds % 60}`;
-                        }
-                        else {
-                            songEmbed.fields[3].value = `${Math.floor(info.videoDetails.lengthSeconds / 60)}:${info.videoDetails.lengthSeconds % 60}`;
-                        }
+                        (info.videoDetails.lengthSeconds % 60) < 10 ? 
+                        songEmbed.fields[3].value = `${Math.floor(info.videoDetails.lengthSeconds / 60)}:0${info.videoDetails.lengthSeconds % 60}` :
+                        songEmbed.fields[3].value = `${Math.floor(info.videoDetails.lengthSeconds / 60)}:${info.videoDetails.lengthSeconds % 60}`;
                         songEmbed.fields[4].value = info.videoDetails.likes;
                         songEmbed.fields[5].value = info.videoDetails.dislikes;
                         message.channel.send({embed: songEmbed});
