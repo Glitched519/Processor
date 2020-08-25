@@ -7,13 +7,13 @@ module.exports = async(client, message) => {
 	const badWords = ['fuck', 'shit', 'dick', 'bitch', 'cock'];
 	const bannedWords = [' ass ', 'asshole', 'blowjob', 'incest', 'bona', 'boner', 
 	'condom', ' cum ', 'cunt', 'dildo', 'erection', 'faggot',
-	'masturbate', 'nigg', 'nigeria', 'penis','pp ', 'pussy', 'slut',
+	'masturbate', 'nigg', 'nigeria', 'penis', 'pussy', 'slut',
 	'vagina', 'wank', 'whore'];
 
 	if (message.content.includes("<@&735270562544222290>")) {
-		message.reply("you are about to ping all staff in the server. **Unless it's an emergency**, you will be punished for pinging this role. Reply with `call` **IN CAPS within 15 seconds** if you want to do this.");
+		message.reply("you are about to ping all staff in the server. **Unless it's an emergency**, you will be punished for pinging this role. Reply with `call` **IN CAPS within 10 seconds** if you want to do this.");
 		const filter = m => m.content.includes('CALL');
-		message.channel.awaitMessages(filter, { max: 1, time: 15000, errors: ['time'] })
+		message.channel.awaitMessages(filter, { max: 1, time: 10000, errors: ['time'] })
 		.then(collected => {
 			message.reply(`you have chosen to <@&701441802087170138>. Staff will come to address your issue urgently.`);
 		})
@@ -23,18 +23,19 @@ module.exports = async(client, message) => {
 	}
 
 	if (message.channel.id == '732272530198626374' && message.author.id == '690829074465292329') {
-		message.channel.send('<@&737595731099123773>, a new fact just appeared!');
+		return message.channel.send('<@&737595731099123773>, a new fact just appeared!');
 	}
 	
 	if (message.content == '<@!689678745782714464>') {
-		message.reply(`hi! My prefix is **${PREFIX}**. You can summon my help page using **${PREFIX}help**.`)
+		return message.reply(`hi! My prefix is **${PREFIX}**. You can summon my help page using **${PREFIX}help**.`)
 	}
 
 	if (message.guild.id == '728524826720862229') {}
 	else {
 		for (let i = 0; i < badWords.length; i++) {        
 			if (message.content.toLowerCase().includes(badWords[i])) {
-					message.reply(`please watch your language even if swearing is allowed in ${message.guild.name}. Do not direct it at someone else.`)
+				if (message.author.bot) return;
+				message.reply(`please watch your language even if swearing is allowed in ${message.guild.name}. Do not direct it at someone else.`)
 					.then(msg => {
 						msg.delete({timeout: 10000});
 					});
@@ -43,7 +44,8 @@ module.exports = async(client, message) => {
 		for (let i = 0; i < bannedWords.length; i++) {        
 			if (message.content.toLowerCase().includes(bannedWords[i])) {
 				message.delete();
-				message.reply(`you are not allowed to say that word anywhere in ${message.guild.name}.`)
+				if (message.author.bot) return;
+				return message.reply(`you are not allowed to say that word anywhere in ${message.guild.name}.`)
 			}
 		}  
 	}
