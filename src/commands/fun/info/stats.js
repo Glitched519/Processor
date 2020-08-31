@@ -7,9 +7,7 @@ module.exports = {
             message.channel.send("Incorrect usage: $stats | $stats <user_id> | $stats @mention ")
         }
         else if(statArgs.length === 1 && args !== `${PREFIX}stats`) {
-            const member = message.mentions.members.size === 1 ? 
-                message.mentions.members.first() : 
-                message.guild.members.cache.get(args);
+            const member = message.mentions.members.first() || message.guild.members.cache.get(args);   
             if(member) {
                 const statEmbed = {
                     title: `${member.user.tag} (${member.user.id})`,               

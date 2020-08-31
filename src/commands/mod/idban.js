@@ -2,9 +2,8 @@ module.exports = {
     run: async(client, message, args) => {
         let reason = args.slice(19);
         let memberId = args.split(" ")[0];
-        console.log(memberId + "\n" + reason)
         if (!message.member.hasPermission('BAN_MEMBERS')) {
-            message.channel.send(":x: You don't have permission to ban a member.**")
+            return message.channel.send(":x: **You don't have permission to ban a member.**")
             .then(msg => {
                 msg.delete({timeout: 4000});
             });
@@ -30,7 +29,10 @@ module.exports = {
                 }
             }
             catch (err) {
-                console.log(err);
+                return message.reply(":x: **I cannot ban this user! Do they have a higher role? Do I have ban permissions?**")
+                .then(msg => {
+                    msg.delete({timeout: 4000});
+                });
                 }
             }
     },

@@ -1,15 +1,12 @@
 const { exists, insertGuildMember, updateGuildMemberEXP } = require('../utils/database');
 const { generateEXP, checkExperience } = require("../utils/random"); 
-const PREFIX = process.env.PREFIX;
 const ms = require('ms');
+const fs = require('fs');
+const PREFIX = process.env.PREFIX;
+let array = [];
 
 module.exports = async(client, message) => {	
-	const badWords = ['fuck', 'shit', 'dick', 'bitch', 'cock'];
-	const bannedWords = [' ass ', 'asshole', 'blowjob', 'incest', 'bona', 'boner', 
-	'condom', ' cum ', 'cunt', 'dildo', 'erection', 'faggot',
-	'masturbate', 'nigg', 'nigeria', 'penis', 'pussy', 'slut',
-	'vagina', 'wank', 'whore'];
-
+	if (message.author.bot) return;
 	if (message.content.includes("<@&735270562544222290>")) {
 		message.reply("you are about to ping all staff in the server. **Unless it's an emergency**, you will be punished for pinging this role. Reply with `call` **IN CAPS within 10 seconds** if you want to do this.");
 		const filter = m => m.content.includes('CALL');
@@ -29,26 +26,15 @@ module.exports = async(client, message) => {
 	if (message.content == '<@!689678745782714464>') {
 		return message.reply(`hi! My prefix is **${PREFIX}**. You can summon my help page using **${PREFIX}help**.`)
 	}
+	let bannedWords = fs.readFileSync('./events/bannedwords.txt').toString().split("\r\n");
+	for (let i = 0; i < bannedWords.length; i++) { 
+		let msg = message.content.toLowerCase();      
+		if (msg.includes(bannedWords[i])) {
+			message.delete();
+			return message.reply(`you are not allowed to say that word anywhere in ${message.guild.name}.`)
+		}
+	}  
 
-	if (message.guild.id == '728524826720862229') {}
-	else {
-		for (let i = 0; i < badWords.length; i++) {        
-			if (message.content.toLowerCase().includes(badWords[i])) {
-				if (message.author.bot) return;
-				message.reply(`please watch your language even if swearing is allowed in ${message.guild.name}. Do not direct it at someone else.`)
-					.then(msg => {
-						msg.delete({timeout: 10000});
-					});
-				}
-			}
-		for (let i = 0; i < bannedWords.length; i++) {        
-			if (message.content.toLowerCase().includes(bannedWords[i])) {
-				message.delete();
-				if (message.author.bot) return;
-				return message.reply(`you are not allowed to say that word anywhere in ${message.guild.name}.`)
-			}
-		}  
-	}
 	if (message.channel.id == '678326702065319968') {
 		if (message.content.toLowerCase() == '!d bump') {
 			message.channel.send(`**${message.author.username}**, you bumped! I'll ping you when you can bump again!`);
@@ -89,7 +75,7 @@ module.exports = async(client, message) => {
   		.then(msg => {
 			msg.delete({timeout: 4000});
 			setTimeout(function() {
-				msg.edit(':information_source: **Try running `$help` for all commands.**');
+				msg.edit(':information_source: **Try running ' + `**${PREFIX}**` + ' for all commands.**');
 			  }, 1500)
 		}).catch(console.error);
 	}

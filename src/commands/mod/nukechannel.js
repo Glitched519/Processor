@@ -2,7 +2,10 @@ const { default: fetch } = require("node-fetch");
 
 module.exports = {
     run: async(client, message, args) => {
-        if (!message.member.hasPermission('MANAGE_CHANNELS')) return message.channel.send(":x: **You cannot nuke this channel.**");
+        if (!message.member.hasPermission('MANAGE_CHANNELS')) 
+            return message.channel.send(":x: **You cannot nuke this channel.**").then(msg => {
+            msg.delete({timeout: 4000});
+        });
         try {
             let params = args.split(" ");
             let channel = params[0];

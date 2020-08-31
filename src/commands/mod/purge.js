@@ -1,7 +1,7 @@
 module.exports = {
     run: async(client, message, args) => {
         if(!message.member.hasPermission(['KICK_MEMBERS', 'BAN_MEMBERS'])) {
-            message.channel.send(":x: **You don't have permission to clear messages.**")
+            return message.channel.send(":x: **You don't have permission to clear messages.**")
             .then(msg => {
                 msg.delete({timeout: 4000});
             });

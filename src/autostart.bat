@@ -1,6 +1,6 @@
 @echo off
 echo Starting Processor...
 :main
-nodemon processor.js
+node processor.js
 echo Restarting Processor...
 goto main

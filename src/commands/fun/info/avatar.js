@@ -1,8 +1,6 @@
 module.exports = {
     run: async(client, message, args) => {
-        const member = message.mentions.members.size === 1 ? 
-                message.mentions.members.first() : 
-                message.guild.members.cache.get(args);     
+        const member = message.mentions.members.first() || message.guild.members.cache.get(args);     
         if (member) {
             let userAvatarEmbed = {
                 color: `RANDOM`,

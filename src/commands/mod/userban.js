@@ -6,7 +6,7 @@ module.exports = {
         let memberTag = args.split(" ")[0];
 
             if (!message.member.hasPermission('BAN_MEMBERS')) {
-                message.channel.send(":x: **You don't have permission to ban a member.**")
+                return message.channel.send(":x: **You don't have permission to ban a member.**")
                 .then(msg => {
                     msg.delete({timeout: 4000});
                 });

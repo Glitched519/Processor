@@ -2,6 +2,6 @@
 echo Starting Processor...
 while true
 do
-nodemon processor.js
+node processor.js
 echo Restarting Processor...
 done

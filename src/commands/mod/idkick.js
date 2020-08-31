@@ -4,7 +4,7 @@ module.exports = {
         let memberId = args.split(" ")[0];
 
         if(!message.member.hasPermission('KICK_MEMBERS')) {
-            message.channel.send(":x: **You don't have permission to kick a member.**")
+            return message.channel.send(":x: **You don't have permission to kick a member.**")
             .then(msg => {
                 msg.delete({timeout: 4000});
             });
@@ -29,7 +29,10 @@ module.exports = {
                     message.channel.send({embed: kickEmbed});
                 }
                 catch(err) {
-                    console.log(err);
+                    return message.reply(":x: **I cannot kick this user! Do they have a higher role? Do I have kick permissions?**")
+                    .then(msg => {
+                        msg.delete({timeout: 4000});
+                    });
                 }
             }
         }
