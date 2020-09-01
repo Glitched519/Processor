@@ -58,35 +58,35 @@ module.exports = {
             timestamp: new Date(),
             fields: [
                 {
-                    name: ':shield: Moderation  `mod`',
+                    name: ':shield: Moderation',
                     value: "Manages server members.",
                 },
                 {
-                    name: ':cat: Animal  `animal`',
+                    name: ':cat: Animal',
                     value: "Learn about animals.",
                 },
                 {
-                    name: ':crossed_swords: Clash  `clash`',
+                    name: ':crossed_swords: Clash',
                     value: "Look up Clash of Clans related things.",
                 },
                 {
-                    name: ':blue_heart: Cute  `cute`',
+                    name: ':blue_heart: Cute',
                     value: "Adore a member.",
                 },
                 {
-                    name: ':1234: Math  `math`',
+                    name: ':1234: Math',
                     value: "Play with numbers.",
                 },  
                 {
-                    name: ':information_source: Info  `info`',
+                    name: ':information_source: Info',
                     value: "Get information about a user or the server.",
                 }, 
                 {
-                    name: ':musical_note: Music  `music`',
+                    name: ':musical_note: Music',
                     value: "Play music.",
                 },   
                 {
-                    name: ':o: Other  `other`',
+                    name: ':o: Other',
                     value: "Play with other commands.",
                 },
             ]
@@ -359,35 +359,513 @@ module.exports = {
             ]
         }
 
-        switch (args) {
-            case `${PREFIX}help`:
-                message.channel.send({embed: helpEmbed});
-                break;
-            case 'mod':
-                message.channel.send({embed: modEmbed});    
-                break;
-            case 'math':
-                message.channel.send({embed: mathEmbed});    
-                break;
-            case 'animal':
-                message.channel.send({embed: animalEmbed});    
-                break;
-            case 'clash':
-                message.channel.send({embed: clashEmbed});    
-                break;
-            case 'cute':
-                message.channel.send({embed: cuteEmbed});    
-                break;
-            case 'info':
-                message.channel.send({embed: infoEmbed});    
-                break;
-            case 'music':
-                message.channel.send({embed: musicEmbed});    
-                break;
-            case 'other':
-                message.channel.send({embed: otherEmbed});    
-                break;
+        function help(msg) {
+            msg.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error));
+            msg.edit({embed: helpEmbed});
+            msg.react('❌')
+            .then(() => msg.react('🛡'))
+            .then(() => msg.react('🐱'))
+            .then(() => msg.react('⚔'))
+            .then(() => msg.react('💙'))
+            .then(() => msg.react('🔢'))
+            .then(() => msg.react('ℹ'))
+            .then(() => msg.react('🎵'))
+            .then(() => msg.react('⭕'))
+            .then(() => msg.react('❌'));
+
+            const filter = (reaction, user) => {
+                return ['❌', '🛡', '🐱', '⚔', '💙', '🔢', 'ℹ', '🎵', '⭕'].includes(reaction.emoji.name) && user.id === message.author.id;
+            };
+
+            msg.awaitReactions(filter, { max: 1, time: 300000, errors: ['time']})
+            .then(collected => {
+                const reaction = collected.first();
+
+                switch (reaction.emoji.name) {
+                    case '❌':
+                        msg.delete();
+                        break;
+                    case '🛡':
+                        mod(msg);
+                        break;
+                    case '🐱':
+                        animal(msg);
+                        break;
+                    case '⚔':
+                        clash(msg);
+                        break;
+                    case '💙':
+                        cute(msg);
+                        break;
+                    case '🔢':
+                        math(msg);
+                        break;
+                    case 'ℹ':
+                        info(msg);
+                        break;
+                    case '🎵':
+                        music(msg);
+                        break;
+                    case '⭕':
+                        other(msg);
+                        break;
+                }
+            })
+            .catch(collected => {
+                msg.delete();
+            });
         }
+
+        function mod(msg) {
+            msg.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error));
+            msg.edit({embed: modEmbed});
+            msg.react('🔼')
+            .then(() => msg.react('❌'))
+            .then(() => msg.react('🐱'))
+            .then(() => msg.react('⚔'))
+            .then(() => msg.react('💙'))
+            .then(() => msg.react('🔢'))
+            .then(() => msg.react('ℹ'))
+            .then(() => msg.react('🎵'))
+            .then(() => msg.react('⭕'));
+
+            const filter = (reaction, user) => {
+                return ['🔼', '❌', '🐱', '⚔', '💙', '🔢', 'ℹ', '🎵', '⭕'].includes(reaction.emoji.name) && user.id === message.author.id;
+            };
+
+            msg.awaitReactions(filter, { max: 1, time: 300000, errors: ['time']})
+            .then(collected => {
+                const reaction = collected.first();
+
+                switch (reaction.emoji.name) {
+                    case '🔼':
+                        help(msg);
+                        break;
+                    case '❌':
+                        msg.delete();
+                        break;
+                    case '🐱':
+                        animal(msg);
+                        break;
+                    case '⚔':
+                        clash(msg);
+                        break;
+                    case '💙':
+                        cute(msg);
+                        break;
+                    case '🔢':
+                        math(msg);
+                        break;
+                    case 'ℹ':
+                        info(msg);
+                        break;
+                    case '🎵':
+                        music(msg);
+                        break;
+                    case '⭕':
+                        other(msg);
+                        break;
+                }
+            })
+            .catch(collected => {
+                msg.delete();
+            });
+        }
+
+        function animal(msg) {
+            msg.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error));
+            msg.edit({embed: animalEmbed});
+            msg.react('🔼')
+            .then(() => msg.react('🛡'))
+            .then(() => msg.react('⚔'))
+            .then(() => msg.react('💙'))
+            .then(() => msg.react('🔢'))
+            .then(() => msg.react('ℹ'))
+            .then(() => msg.react('🎵'))
+            .then(() => msg.react('⭕'))
+            .then(() => msg.react('❌'));
+
+            const filter = (reaction, user) => {
+                return ['🔼', '❌', '🛡', '⚔', '💙', '🔢', 'ℹ', '🎵', '⭕'].includes(reaction.emoji.name) && user.id === message.author.id;
+            };
+
+            msg.awaitReactions(filter, { max: 1, time: 300000, errors: ['time']})
+            .then(collected => {
+                const reaction = collected.first();
+
+                switch (reaction.emoji.name) {
+                    case '🔼':
+                        help(msg);
+                        break;
+                    case '❌':
+                        msg.delete();
+                        break;
+                    case '🛡':
+                        mod(msg);
+                        break;
+                    case '⚔':
+                        clash(msg);
+                        break;
+                    case '💙':
+                        cute(msg);
+                        break;
+                    case '🔢':
+                        math(msg);
+                        break;
+                    case 'ℹ':
+                        info(msg);
+                        break;
+                    case '🎵':
+                        music(msg);
+                        break;
+                    case '⭕':
+                        other(msg);
+                        break;
+                }
+            })
+            .catch(collected => {
+                msg.delete();
+            });
+        }
+
+        function clash(msg) {
+            msg.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error));
+            msg.edit({embed: clashEmbed});
+            msg.react('🔼')
+            .then(() => msg.react('❌'))
+            .then(() => msg.react('🛡'))
+            .then(() => msg.react('🐱'))
+            .then(() => msg.react('💙'))
+            .then(() => msg.react('🔢'))
+            .then(() => msg.react('ℹ'))
+            .then(() => msg.react('🎵'))
+            .then(() => msg.react('⭕'));
+
+            const filter = (reaction, user) => {
+                return ['🔼', '❌', '🛡', '🐱', '💙', '🔢', 'ℹ', '🎵', '⭕'].includes(reaction.emoji.name) && user.id === message.author.id;
+            };
+
+            msg.awaitReactions(filter, { max: 1, time: 300000, errors: ['time']})
+            .then(collected => {
+                const reaction = collected.first();
+
+                switch (reaction.emoji.name) {
+                    case '🔼':
+                        help(msg);
+                        break;
+                    case '❌':
+                        msg.delete();
+                        break;
+                    case '🛡':
+                        mod(msg);
+                        break;
+                    case '🐱':
+                        animal(msg);
+                    case '💙':
+                        cute(msg);
+                        break;
+                    case '🔢':
+                        math(msg);
+                        break;
+                    case 'ℹ':
+                        info(msg);
+                        break;
+                    case '🎵':
+                        music(msg);
+                        break;
+                    case '⭕':
+                        other(msg);
+                        break;
+                }
+            })
+            .catch(collected => {
+                msg.delete();
+            });
+        }
+
+        function cute(msg) {
+            msg.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error));
+            msg.edit({embed: cuteEmbed});
+            msg.react('🔼')
+            .then(() => msg.react('❌'))
+            .then(() => msg.react('🛡'))
+            .then(() => msg.react('🐱'))
+            .then(() => msg.react('⚔'))
+            .then(() => msg.react('🔢'))
+            .then(() => msg.react('ℹ'))
+            .then(() => msg.react('🎵'))
+            .then(() => msg.react('⭕'));
+
+            const filter = (reaction, user) => {
+                return ['🔼', '❌', '🛡', '🐱', '⚔', '🔢', 'ℹ', '🎵', '⭕'].includes(reaction.emoji.name) && user.id === message.author.id;
+            };
+
+            msg.awaitReactions(filter, { max: 1, time: 300000, errors: ['time']})
+            .then(collected => {
+                const reaction = collected.first();
+
+                switch (reaction.emoji.name) {
+                    case '🔼':
+                        help(msg);
+                        break;
+                    case '❌':
+                        msg.delete();
+                        break;
+                    case '🛡':
+                        mod(msg);
+                        break;
+                    case '🐱':
+                        animal(msg);
+                        break;
+                    case '⚔':
+                        clash(msg);
+                        break;
+                    case '🔢':
+                        math(msg);
+                        break;
+                    case 'ℹ':
+                        info(msg);
+                        break;
+                    case '🎵':
+                        music(msg);
+                        break;
+                    case '⭕':
+                        other(msg);
+                        break;
+                }
+            })
+            .catch(collected => {
+                msg.delete();
+            });
+        }
+
+        function math(msg) {
+            msg.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error));
+            msg.edit({embed: mathEmbed});
+            msg.react('🔼')
+            .then(() => msg.react('❌'))
+            .then(() => msg.react('🛡'))
+            .then(() => msg.react('🐱'))
+            .then(() => msg.react('⚔'))
+            .then(() => msg.react('💙'))
+            .then(() => msg.react('ℹ'))
+            .then(() => msg.react('🎵'))
+            .then(() => msg.react('⭕'));
+
+            const filter = (reaction, user) => {
+                return ['🔼', '❌', '🛡', '🐱', '⚔', '💙', 'ℹ', '🎵', '⭕'].includes(reaction.emoji.name) && user.id === message.author.id;
+            };
+
+            msg.awaitReactions(filter, { max: 1, time: 300000, errors: ['time']})
+            .then(collected => {
+                const reaction = collected.first();
+
+                switch (reaction.emoji.name) {
+                    case '🔼':
+                        help(msg);
+                        break;
+                    case '❌':
+                        msg.delete();
+                        break;
+                    case '🛡':
+                        mod(msg);
+                        break;
+                    case '🐱':
+                        animal(msg);
+                        break;
+                    case '⚔':
+                        clash(msg);
+                        break;
+                    case '💙':
+                        cute(msg);
+                        break;
+                    case 'ℹ':
+                        info(msg);
+                        break;
+                    case '🎵':
+                        music(msg);
+                        break;
+                    case '⭕':
+                        other(msg);
+                        break;
+                }
+            })
+            .catch(collected => {
+                msg.delete();
+            });
+        }
+
+        function info(msg) {
+            msg.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error));
+            msg.edit({embed: infoEmbed});
+            msg.react('🔼')
+            .then(() => msg.react('❌'))
+            .then(() => msg.react('🛡'))
+            .then(() => msg.react('🐱'))
+            .then(() => msg.react('⚔'))
+            .then(() => msg.react('💙'))
+            .then(() => msg.react('🔢'))
+            .then(() => msg.react('🎵'))
+            .then(() => msg.react('⭕'));
+
+            const filter = (reaction, user) => {
+                return ['🔼', '❌', '🛡', '🐱', '⚔', '💙', '🔢', '🎵', '⭕'].includes(reaction.emoji.name) && user.id === message.author.id;
+            };
+
+            msg.awaitReactions(filter, { max: 1, time: 300000, errors: ['time']})
+            .then(collected => {
+                const reaction = collected.first();
+
+                switch (reaction.emoji.name) {
+                    case '🔼':
+                        help(msg);
+                        break;
+                    case '❌':
+                        msg.delete();
+                        break;
+                    case '🛡':
+                        mod(msg);
+                        break;
+                    case '🐱':
+                        animal(msg);
+                        break;
+                    case '⚔':
+                        clash(msg);
+                        break;
+                    case '💙':
+                        cute(msg);
+                        break;
+                    case '🔢':
+                        math(msg);
+                        break;
+                    case '🎵':
+                        music(msg);
+                        break;
+                    case '⭕':
+                        other(msg);
+                        break;
+                }
+            })
+            .catch(collected => {
+                msg.delete();
+            });
+        }
+
+        function music(msg) {
+            msg.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error));
+            msg.edit({embed: musicEmbed});
+            msg.react('🔼')
+            .then(() => msg.react('❌'))
+            .then(() => msg.react('🛡'))
+            .then(() => msg.react('🐱'))
+            .then(() => msg.react('⚔'))
+            .then(() => msg.react('💙'))
+            .then(() => msg.react('🔢'))
+            .then(() => msg.react('ℹ'))
+            .then(() => msg.react('⭕'));
+
+            const filter = (reaction, user) => {
+                return ['🔼', '❌', '🛡', '🐱', '⚔', '💙', '🔢', 'ℹ', '⭕'].includes(reaction.emoji.name) && user.id === message.author.id;
+            };
+
+            msg.awaitReactions(filter, { max: 1, time: 300000, errors: ['time']})
+            .then(collected => {
+                const reaction = collected.first();
+
+                switch (reaction.emoji.name) {
+                    case '🔼':
+                        help(msg);
+                        break;
+                    case '❌':
+                        msg.delete();
+                        break;
+                    case '🛡':
+                        mod(msg);
+                        break;
+                    case '🐱':
+                        animal(msg);
+                        break;
+                    case '⚔':
+                        clash(msg);
+                        break;
+                    case '💙':
+                        cute(msg);
+                        break;
+                    case '🔢':
+                        math(msg);
+                        break;
+                    case 'ℹ':
+                        info(msg);
+                        break;
+                    case '⭕':
+                        other(msg);
+                        break;
+                }
+            })
+            .catch(collected => {
+                msg.delete();
+            });
+        }
+
+        function other(msg) {
+            msg.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error));
+            msg.edit({embed: otherEmbed});
+            msg.react('🔼')
+            .then(() => msg.react('❌'))
+            .then(() => msg.react('🛡'))
+            .then(() => msg.react('🐱'))
+            .then(() => msg.react('⚔'))
+            .then(() => msg.react('💙'))
+            .then(() => msg.react('🔢'))
+            .then(() => msg.react('ℹ'))
+            .then(() => msg.react('🎵'));
+
+            const filter = (reaction, user) => {
+                return ['🔼', '❌', '🛡', '🐱', '⚔', '💙', '🔢', 'ℹ', '🎵'].includes(reaction.emoji.name) && user.id === message.author.id;
+            };
+
+            msg.awaitReactions(filter, { max: 1, time: 300000, errors: ['time']})
+            .then(collected => {
+                const reaction = collected.first();
+
+                switch (reaction.emoji.name) {
+                    case '🔼':
+                        help(msg);
+                        break;
+                    case '❌':
+                        msg.delete();
+                        break;
+                    case '🛡':
+                        mod(msg);
+                        break;
+                    case '🐱':
+                        animal(msg);
+                        break;
+                    case '⚔':
+                        clash(msg);
+                        break;
+                    case '💙':
+                        cute(msg);
+                        break;
+                    case '🔢':
+                        math(msg);
+                        break;
+                    case 'ℹ':
+                        info(msg);
+                        break;
+                    case '🎵':
+                        music(msg);
+                        break;
+                }
+            })
+            .catch(collected => {
+                msg.delete();
+            });
+        }
+
+        message.channel.send({embed: helpEmbed}).then((msg) => {
+            help(msg);
+        });
     }, 
     aliases: [],
     description: 'Shows the help menu'

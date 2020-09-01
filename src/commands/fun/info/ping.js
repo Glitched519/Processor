@@ -1,10 +1,7 @@
 module.exports = {
     run: async(client, message, args) => {
             let pingEmbed = {
-                color: `RANDOM`,
-                title: "Ping?",
-                description: `**Latency:** ?\n**API Latency:** ?`,
-                timestamp: new Date()
+                
             }
             const msg = await message.channel.send({embed: pingEmbed}); 
             msg.edit(
