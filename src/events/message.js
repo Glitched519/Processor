@@ -6,6 +6,7 @@ const PREFIX = process.env.PREFIX;
 let array = [];
 
 module.exports = async(client, message) => {	
+client.user.setActivity(`${client.users.cache.size} members`, {type: 'WATCHING'}).catch(console.error);
 	if (message.author.bot) return;
 	if (message.content.includes("<@&735270562544222290>")) {
 		message.reply("you are about to ping all staff in the server. **Unless it's an emergency**, you will be punished for pinging this role. Reply with `call` **IN CAPS within 10 seconds** if you want to do this.");

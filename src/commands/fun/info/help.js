@@ -6,7 +6,6 @@ const idkick = require('../../mod/idkick');
 const mute = require('../../mod/mute');
 const purge = require('../../mod/purge');
 const slowmode = require('../../mod/slowmode');
-const status = require('../../mod/status');
 const unmute = require('../../mod/unmute');
 const warn = require('../../mod/warn');
 const play = require('../../music/play');
@@ -128,10 +127,6 @@ module.exports = {
                 {
                     name: ':speaker: unmute `<@member> [reason]`',
                     value: `${unmute.description}.`,
-                },
-                {
-                    name: ':information_source: status `<status>`',
-                    value: `${status.description}.`,
                 },
                 {
                     name: ':warning: warn `<@member> [reason]`',
