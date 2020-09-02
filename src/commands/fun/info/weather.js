@@ -39,18 +39,18 @@ module.exports = {
                             value: '------------------',
                         },
                         {
-                            name: `${result[0].forecast[0].day}`,
-                            value: `**${result[0].forecast[0].skytextday}**\nLow:  ${result[0].forecast[0].low}\nHigh:  ${result[0].forecast[0].high}`,
-                            inline: true
-                        },
-                        {
-                            name: `${result[0].forecast[1].day}`,
-                            value: `**${result[0].forecast[1].skytextday}**\nLow:  ${result[0].forecast[1].low}\nHigh:  ${result[0].forecast[1].high}`,
-                            inline: true
-                        },
-                        {
                             name: `${result[0].forecast[2].day}`,
                             value: `**${result[0].forecast[2].skytextday}**\nLow:  ${result[0].forecast[2].low}\nHigh:  ${result[0].forecast[2].high}`,
+                            inline: true
+                        },
+                        {
+                            name: `${result[0].forecast[3].day}`,
+                            value: `**${result[0].forecast[3].skytextday}**\nLow:  ${result[0].forecast[3].low}\nHigh:  ${result[0].forecast[3].high}`,
+                            inline: true
+                        },
+                        {
+                            name: `${result[0].forecast[4].day}`,
+                            value: `**${result[0].forecast[4].skytextday}**\nLow:  ${result[0].forecast[4].low}\nHigh:  ${result[0].forecast[4].high}`,
                             inline: true
                         },
                     ],

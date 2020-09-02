@@ -20,7 +20,7 @@ client.user.setActivity(`${client.users.cache.size} members`, {type: 'WATCHING'}
 		});
 	}
 
-	if (message.channel.id == '732272530198626374' && message.author.id == '690829074465292329') {
+	if (message.author.id == '690829074465292329') {
 		return message.channel.send('<@&737595731099123773>, a new fact just appeared!');
 	}
 	
