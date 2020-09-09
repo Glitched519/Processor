@@ -3,11 +3,9 @@ const { generateEXP, checkExperience } = require("../utils/random");
 const ms = require('ms');
 const fs = require('fs');
 const PREFIX = process.env.PREFIX;
-let array = [];
 
 module.exports = async(client, message) => {	
-client.user.setActivity(`${client.users.cache.size} members`, {type: 'WATCHING'}).catch(console.error);
-	if (message.author.bot) return;
+	client.user.setActivity(`${client.users.cache.size} members`, {type: 'WATCHING'}).catch(console.error);
 	if (message.content.includes("<@&735270562544222290>")) {
 		message.reply("you are about to ping all staff in the server. **Unless it's an emergency**, you will be punished for pinging this role. Reply with `call` **IN CAPS within 10 seconds** if you want to do this.");
 		const filter = m => m.content.includes('CALL');
@@ -20,9 +18,7 @@ client.user.setActivity(`${client.users.cache.size} members`, {type: 'WATCHING'}
 		});
 	}
 
-	if (message.author.id == '690829074465292329') {
-		return message.channel.send('<@&737595731099123773>, a new fact just appeared!');
-	}
+	if (message.author.bot) return;
 	
 	if (message.content == '<@!689678745782714464>') {
 		return message.reply(`hi! My prefix is **${PREFIX}**. You can summon my help page using **${PREFIX}help**.`)
@@ -76,7 +72,7 @@ client.user.setActivity(`${client.users.cache.size} members`, {type: 'WATCHING'}
   		.then(msg => {
 			msg.delete({timeout: 4000});
 			setTimeout(function() {
-				msg.edit(':information_source: **Try running ' + `**${PREFIX}**` + ' for all commands.**');
+				msg.edit(':information_source: **Try running ' + `**${PREFIX}help**` + ' for all commands.**');
 			  }, 1500)
 		}).catch(console.error);
 	}

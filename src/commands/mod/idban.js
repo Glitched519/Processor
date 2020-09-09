@@ -1,6 +1,6 @@
 module.exports = {
     run: async(client, message, args) => {
-        let reason = args.slice(19);
+        let reason = args.slice(18);
         let memberId = args.split(" ")[0];
         if (!message.member.hasPermission('BAN_MEMBERS')) {
             return message.channel.send(":x: **You don't have permission to ban a member.**")

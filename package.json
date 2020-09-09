@@ -13,6 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "ansi-colors": "^4.1.1",
+    "bl": "^4.0.3",
     "cheerio": "^1.0.0-rc.3",
     "discord": "^0.8.2",
     "discord-youtube-api": "^0.1.0",

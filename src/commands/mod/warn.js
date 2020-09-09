@@ -8,7 +8,7 @@ module.exports = {
                 msg.delete({timeout: 4000});
             });
         }
-        let reason = args.slice(23);
+        let reason = args.slice(22);
         let memberTag = args.split(" ")[0];
 
         let warnEmbed = {

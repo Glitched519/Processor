@@ -150,7 +150,7 @@ module.exports = {
             "Win 3 Versus Battles a day to get a big loot bonus.",
             "Having trouble winning Versus Battles? Watch replays and try to improve your defense!"];
         const randomTipIndex = Math.floor(Math.random() * tips.length);
-        var index = parseInt(args);
+        let index = parseInt(args);
         if (index >= 1 && index <= tips.length) {
             let tipEmbed = {
                 color: `RANDOM`,
