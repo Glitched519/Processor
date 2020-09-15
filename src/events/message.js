@@ -24,13 +24,28 @@ module.exports = async(client, message) => {
 		return message.reply(`hi! My prefix is **${PREFIX}**. You can summon my help page using **${PREFIX}help**.`)
 	}
 	let bannedWords = fs.readFileSync('./events/bannedwords.txt').toString().split("\r\n");
-	for (let i = 0; i < bannedWords.length; i++) { 
-		let msg = message.content.toLowerCase();      
-		if (msg.includes(bannedWords[i])) {
+	let bannedPhrases = fs.readFileSync('./events/bannedphrases.txt').toString().split("\r\n");
+	let msg = message.content.toLowerCase();
+	let wordsOnlyMsg = msg.replace(/[.?!#$%^&*,-_+=]/g, ' ');
+	let words = wordsOnlyMsg.split(/\s+/);
+	for (let i = 0; i < bannedWords.length; i++) { 	
+		if (words.includes(bannedWords[i])) {
 			message.delete();
 			return message.reply(`you are not allowed to say that word anywhere in ${message.guild.name}.`)
-		}
-	}  
+			.then(msg => {
+                msg.delete({timeout: 10000});
+            });
+		}	
+	}
+	for (let i = 0; i < bannedPhrases.length; i++) { 	
+		if (msg.includes(bannedPhrases[i])) {
+			message.delete();
+			return message.reply(`you are not allowed to say that phrase anywhere in ${message.guild.name}.`)
+			.then(msg => {
+                msg.delete({timeout: 10000});
+            });
+		}	
+	}   
 
 	if (message.channel.id == '678326702065319968') {
 		if (message.content.toLowerCase() == '!d bump') {
