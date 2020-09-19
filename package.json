@@ -27,6 +27,7 @@
     "ms": "^2.1.2",
     "mysql2": "^2.1.0",
     "node-fetch": "^2.6.0",
+    "node-forge": "^0.10.0",
     "nodemon": "^2.0.4",
     "opusscript": "0.0.7",
     "request": "^2.88.2",
