@@ -314,7 +314,7 @@ module.exports = {
         let SYSLXEmbed = {
             color: `RANDOM`,
             title: 'SYSLX Menu Commands',
-            url: "https://discord.gg/zrMMayP",
+            url: "https://invite.gg/syslx",
             color: `RANDOM`,
             thumbnail: {
                 url: "https://syslx-menu.com/styles/syslxlogo.png"

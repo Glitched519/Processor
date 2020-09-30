@@ -26,7 +26,7 @@ module.exports = {
         if (index >= 1 && index <= faqTitle.length) {
             let faqEmbed = {
                 title: faqTitle[index-1],
-                url: "https://discord.gg/zrMMayP",
+                url: "https://invite.gg/syslx",
                 color: `RANDOM`,
                 thumbnail: {
                     url: "https://syslx-menu.com/styles/syslxlogo.png"

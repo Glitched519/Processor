@@ -2,7 +2,7 @@ module.exports = {
     run: async(client, message, args) => {
         let usageEmbed = {
                 title: "How to Use SYSLX",
-                url: "https://discord.gg/zrMMayP",
+                url: "https://invite.gg/syslx",
                 color: `RANDOM`,
                 thumbnail: {
                     url: "https://syslx-menu.com/styles/syslxlogo.png"
