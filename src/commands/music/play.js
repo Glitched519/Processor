@@ -1,6 +1,8 @@
 const ytdl = require('ytdl-core');
 const search = require('youtube-search');
 const PREFIX = process.env.PREFIX;
+const fs = require('fs');
+
 const opts = {
     maxResults: 1,
     key: process.env.YOUTUBE_TOKEN,
