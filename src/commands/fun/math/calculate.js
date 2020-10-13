@@ -2,10 +2,13 @@ const ms = require("ms");
 
 module.exports = {
     run: async(client, message, args) => {
-        let msg = args.toLowerCase();
-        if (msg.includes("token")) return;
-        return message.channel.send('`'+eval(args)+'`');
+        // if (message.content.match(message.content)) {
+        //     return message.channel.send('`'+eval(args)+'`');
+        // }
+        // else {
+        //     return message.channel.send("None");
+        // }
     },  
-    aliases: ['eval', 'calc', 'e', 'c'],
-    description: 'Evaluates an expression'
+    aliases: ['calc', 'c'],
+    description: 'Calculates an expression'
 }

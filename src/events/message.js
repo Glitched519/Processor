@@ -30,20 +30,20 @@ module.exports = async(client, message) => {
 	let words = wordsOnlyMsg.split(/\s+/);
 	for (let i = 0; i < bannedWords.length; i++) { 	
 		if (words.includes(bannedWords[i])) {
-			message.delete();
-			return message.reply(`you are not allowed to say that word anywhere in ${message.guild.name}.`)
-			.then(msg => {
-                msg.delete({timeout: 10000});
-            });
+			//message.delete();
+			// return message.reply(`you are not allowed to say that word anywhere in ${message.guild.name}.`)
+			// .then(msg => {
+            //     msg.delete({timeout: 10000});
+            // });
 		}	
 	}
 	for (let i = 0; i < bannedPhrases.length; i++) { 	
 		if (msg.includes(bannedPhrases[i])) {
-			message.delete();
-			return message.reply(`you are not allowed to say that phrase anywhere in ${message.guild.name}.`)
-			.then(msg => {
-                msg.delete({timeout: 10000});
-            });
+			// message.delete();
+			// return message.reply(`you are not allowed to say that phrase anywhere in ${message.guild.name}.`)
+			// .then(msg => {
+            //     msg.delete({timeout: 10000});
+            // });
 		}	
 	}   
 
@@ -83,12 +83,12 @@ module.exports = async(client, message) => {
 		client.commands.get(cmdName)(client, message, argsToParse);
 	}
 	else {
-        message.reply(':x: **Please enter a valid command.**')
-  		.then(msg => {
-			msg.delete({timeout: 4000});
-			setTimeout(function() {
-				msg.edit(':information_source: **Try running ' + `**${PREFIX}help**` + ' for all commands.**');
-			  }, 1500)
-		}).catch(console.error);
+        // message.reply(':x: **Please enter a valid command.**')
+  		// .then(msg => {
+		// 	msg.delete({timeout: 4000});
+		// 	setTimeout(function() {
+		// 		msg.edit(':information_source: **Try running ' + `**${PREFIX}help**` + ' for all commands.**');
+		// 	  }, 1500)
+		// }).catch(console.error);
 	}
 }

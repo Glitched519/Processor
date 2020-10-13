@@ -3,10 +3,8 @@ const userban = require('../../mod/userban');
 const userkick = require('../../mod/userkick');
 const idban = require('../../mod/idban');
 const idkick = require('../../mod/idkick');
-const mute = require('../../mod/mute');
 const purge = require('../../mod/purge');
 const slowmode = require('../../mod/slowmode');
-const unmute = require('../../mod/unmute');
 const warn = require('../../mod/warn');
 const play = require('../../music/play');
 const stop = require('../../music/stop');
@@ -47,12 +45,12 @@ const quote = require('../other/quote');
 const roll = require('../other/roll');
 const suggest = require('../other/suggest');
 const wikipedia = require('../other/wikipedia');
-const donate = require('../../SYSLX menu/donate');
-const faq = require('../../SYSLX menu/faq');
-const menus = require('../../SYSLX menu/menus');
-const rule = require('../../SYSLX menu/rule');
-const tos = require('../../SYSLX menu/tos');
-const usage = require('../../SYSLX menu/usage');
+const donate = require('../../extra/donate');
+const faq = require('../../extra/faq');
+const menus = require('../../extra/menus');
+const rule = require('../../extra/rule');
+const tos = require('../../extra/tos');
+const usage = require('../../extra/usage');
 
 module.exports = {
     run: async(client, message, args) => {
@@ -90,10 +88,10 @@ module.exports = {
                     name: ':musical_note: Music',
                     value: "Play music.",
                 },   
-                {
-                    name: ':newspaper: SYSLX `syslx`',
-                    value: "[GTA V Mod Menu.](https://discord.gg/zrMMayP)",
-                }, 
+                // {
+                //     name: ':newspaper: SYSLX `syslx`',
+                //     value: "[GTA V Mod Menu.](https://discord.gg/zrMMayP)",
+                // }, 
                 {
                     name: ':o: Other',
                     value: "Play with other commands.",
@@ -115,10 +113,6 @@ module.exports = {
                     value: `${userkick.description}.\nAliases: [${userkick.aliases}]`,
                 },
                 {
-                    name: ':mute: mute `<@member> [reason]`',
-                    value: `${mute.description}.`,
-                },
-                {
                     name: ':broom: purge `<number>`',
                     value: `${purge.description}.`,
                 },
@@ -133,10 +127,6 @@ module.exports = {
                 {
                     name: ':boot: __id__kick `<@id> [reason]`',
                     value: `${idkick.description}.\nAliases: [${idkick.aliases}]`,
-                },
-                {
-                    name: ':speaker: unmute `<@member> [reason]`',
-                    value: `${unmute.description}.`,
                 },
                 {
                     name: ':warning: warn `<@member> [reason]`',
@@ -163,10 +153,10 @@ module.exports = {
                     name: ':1234: binary `<number>`',
                     value: `${binary.description}.\nAliases: [${binary.aliases}]`,
                 },
-                {
-                    name: ':computer: calculate `<expression>`',
-                    value: `${calculate.description}.\nAliases: [${calculate.aliases}]`,
-                },
+                // {
+                //     name: ':computer: calculate `<expression>`',
+                //     value: `${calculate.description}.\nAliases: [${calculate.aliases}]`,
+                // },
                 {
                     name: ':capital_abcd: hexadecimal `<number>`',
                     value: `${hexadecimal.description}.\nAliases: [${hexadecimal.aliases}]`,
@@ -311,43 +301,43 @@ module.exports = {
             ]
         }
 
-        let SYSLXEmbed = {
-            color: `RANDOM`,
-            title: 'SYSLX Menu Commands',
-            url: "https://invite.gg/syslx",
-            color: `RANDOM`,
-            thumbnail: {
-                url: "https://syslx-menu.com/styles/syslxlogo.png"
-            },
-            description: `Prefix is **${PREFIX}** as in **${PREFIX}help**.`,
-            timestamp: new Date(),
-            fields: [
-                {
-                    name: ':moneybag: donate',
-                    value: `${donate.description}.\nAliases: [${donate.aliases}]`,
-                },
-                {
-                    name: ':grey_question: faq',
-                    value: `${faq.description}.`,
-                },
-                {
-                    name: ':newspaper: menus',
-                    value: `${menus.description}.\nAliases: [${menus.aliases}]`,
-                },
-                {
-                    name: ':shield: rule',
-                    value: `${rule.description}.`,
-                },
-                {
-                    name: ':shield: tos',
-                    value: `${tos.description}.`,
-                },
-                {
-                    name: ':newspaper: usage',
-                    value: `${usage.description}.\nAliases: [${usage.aliases}]`,
-                }
-            ]
-        }
+        // let SYSLXEmbed = {
+        //     color: `RANDOM`,
+        //     title: 'SYSLX Menu Commands',
+        //     url: "https://invite.gg/syslx",
+        //     color: `RANDOM`,
+        //     thumbnail: {
+        //         url: "https://syslx-menu.com/styles/syslxlogo.png"
+        //     },
+        //     description: `Prefix is **${PREFIX}** as in **${PREFIX}help**.`,
+        //     timestamp: new Date(),
+        //     fields: [
+        //         {
+        //             name: ':moneybag: donate',
+        //             value: `${donate.description}.\nAliases: [${donate.aliases}]`,
+        //         },
+        //         {
+        //             name: ':grey_question: faq',
+        //             value: `${faq.description}.`,
+        //         },
+        //         {
+        //             name: ':newspaper: menus',
+        //             value: `${menus.description}.\nAliases: [${menus.aliases}]`,
+        //         },
+        //         {
+        //             name: ':shield: rule',
+        //             value: `${rule.description}.`,
+        //         },
+        //         {
+        //             name: ':shield: tos',
+        //             value: `${tos.description}.`,
+        //         },
+        //         {
+        //             name: ':newspaper: usage',
+        //             value: `${usage.description}.\nAliases: [${usage.aliases}]`,
+        //         }
+        //     ]
+        // }
 
         let otherEmbed = {
             color: `RANDOM`,
@@ -906,9 +896,9 @@ module.exports = {
             });
         }
 
-        if (args == "syslx") {
-            return message.channel.send({embed: SYSLXEmbed});
-        }
+        // if (args == "syslx") {
+        //     return message.channel.send({embed: SYSLXEmbed});
+        // }
 
         message.channel.send({embed: helpEmbed}).then((msg) => {
             help(msg);
