@@ -1,4 +1,4 @@
-module.exports = async(client) => {
+module.exports = async (client) => {
     console.clear();
     console.log(`${new Date()}  
  _____                                        

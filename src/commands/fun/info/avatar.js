@@ -1,6 +1,6 @@
 module.exports = {
-    run: async(client, message, args) => {
-        const member = message.mentions.members.first() || message.guild.members.cache.get(args);     
+    run: async (client, message, args) => {
+        const member = message.mentions.members.first() || message.guild.members.cache.get(args);
         if (member) {
             let userAvatarEmbed = {
                 color: `RANDOM`,
@@ -9,7 +9,7 @@ module.exports = {
                 },
                 timestamp: new Date()
             };
-            return message.channel.send({embed: userAvatarEmbed});
+            return message.channel.send({ embed: userAvatarEmbed });
         }
         else {
             let avatarEmbed = {
@@ -19,9 +19,9 @@ module.exports = {
                 },
                 timestamp: new Date()
             };
-            return message.channel.send({embed: avatarEmbed});
+            return message.channel.send({ embed: avatarEmbed });
         }
-    }, 
+    },
     aliases: ['pic', 'pfp'],
     description: 'Shows the user profile pic'
 }

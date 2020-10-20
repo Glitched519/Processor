@@ -17,23 +17,44 @@ let tos = [
 ]
 
 module.exports = {
-    run: async(client, message, args) => {
+    run: async (client, message, args) => {
         let index = parseInt(args);
         if (args == `${PREFIX}tos`) {
             return message.channel.send(":grey_question: **Which TOS rule are you looking for?**")
-            .then(msg => {
-                msg.delete({timeout: 4000});
-            });
+                .then(msg => {
+                    msg.delete({
+                        timeout: 4000
+                    });
+                });
         }
         if (index >= 1 && index <= tos.length) {
-            message.channel.send(`**${index})** ${tos[index-1]}`);
-        }
-        else {
-            message.channel.send(":x: **TOS rule not found.**")
-            .then(msg => {
-                msg.delete({timeout: 4000});
+            message.channel.send(`**${index})** ${tos[index - 1]}`);
+        } else if (args == 'all') {
+            allTos = "";
+            for (let i = 0; i < tos.length; i++) {
+                allTos += `**${i + 1})** ${tos[i]}\n`;
+            }
+            let tosEmbed = {
+                title: "SYSLX TOS",
+                url: "https://invite.gg/syslx",
+                color: `#2a1da0`,
+                thumbnail: {
+                    url: "https://syslx-menu.com/styles/syslxlogo.png"
+                },
+                description: allTos,
+                timestamp: new Date()
+            }
+            message.channel.send({
+                embed: tosEmbed
             });
-        }       
+        } else {
+            message.channel.send(":x: **TOS rule not found.**")
+                .then(msg => {
+                    msg.delete({
+                        timeout: 4000
+                    });
+                });
+        }
     },
     aliases: [],
     description: 'Shows a specific TOS rule of SYSLX'

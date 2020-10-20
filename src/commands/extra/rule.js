@@ -24,23 +24,26 @@ const rules = [
 ]
 
 module.exports = {
-    run: async(client, message, args) => {
+    run: async (client, message, args) => {
         let index = parseInt(args);
         if (args == `${PREFIX}rule`) {
             return message.channel.send(":grey_question: **Which rule are you looking for?**")
-            .then(msg => {
-                msg.delete({timeout: 4000});
-            });
+                .then(msg => {
+                    msg.delete({
+                        timeout: 4000
+                    });
+                });
         }
         if (index >= 1 && index <= rules.length) {
-            message.channel.send(`**${index})** ${rules[index-1]}`);
-        }
-        else {
+            message.channel.send(`**${index})** ${rules[index - 1]}`);
+        } else {
             message.channel.send(":x: **Rule not found.**")
-            .then(msg => {
-                msg.delete({timeout: 4000});
-            });
-        }       
+                .then(msg => {
+                    msg.delete({
+                        timeout: 4000
+                    });
+                });
+        }
     },
     aliases: [],
     description: 'Shows a specific rule of SYSLX discord'

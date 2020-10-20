@@ -15,33 +15,56 @@ const faqDesc = [
 ]
 
 module.exports = {
-    run: async(client, message, args) => {
+    run: async (client, message, args) => {
         let index = parseInt(args);
         if (args == `${PREFIX}faq`) {
             return message.channel.send(":grey_question: **Which FAQ are you looking for?**")
-            .then(msg => {
-                msg.delete({timeout: 4000});
-            });
+                .then(msg => {
+                    msg.delete({
+                        timeout: 4000
+                    });
+                });
         }
         if (index >= 1 && index <= faqTitle.length) {
             let faqEmbed = {
-                title: faqTitle[index-1],
+                title: faqTitle[index - 1],
                 url: "https://invite.gg/syslx",
-                color: `RANDOM`,
+                color: `#2a1da0`,
                 thumbnail: {
                     url: "https://syslx-menu.com/styles/syslxlogo.png"
                 },
-                description: faqDesc[index-1],
+                description: faqDesc[index - 1],
                 timestamp: new Date()
             }
-            message.channel.send({embed: faqEmbed});
-        }
-        else {
-            message.channel.send(":x: **FAQ not found.**")
-            .then(msg => {
-                msg.delete({timeout: 4000});
+            message.channel.send({
+                embed: faqEmbed
             });
-        }  
+        } else if (args == 'all') {
+            allFAQ = "";
+            for (let i = 0; i < faqDesc.length; i++) {
+                allFAQ += `**${i + 1})** ${faqTitle[i]}\n`;
+            }
+            let FAQEmbed = {
+                title: "SYSLX FAQ",
+                url: "https://invite.gg/syslx",
+                color: `#2a1da0`,
+                thumbnail: {
+                    url: "https://syslx-menu.com/styles/syslxlogo.png"
+                },
+                description: allFAQ,
+                timestamp: new Date()
+            }
+            message.channel.send({
+                embed: FAQEmbed
+            });
+        } else {
+            message.channel.send(":x: **FAQ not found.**")
+                .then(msg => {
+                    msg.delete({
+                        timeout: 4000
+                    });
+                });
+        }
     },
     aliases: [],
     description: 'Shows an FAQ'

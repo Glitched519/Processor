@@ -46,7 +46,6 @@ const phoneBrands = (req, res, next) => {
 
 // Get brand phone list
 const phoneBrand = (req, res, next) => {
-    console.log(req.params)
     request({
         url: URI + '/' + req.params.id,
         headers: {
@@ -173,7 +172,6 @@ const phoneDetail = (req, res, next) => {
 
 // search for phone
 const phoneSearch = (req, res, next) => {
-    console.log(req.params)
     request({
         url: URI + '/results.php3?sQuickSearch=yes&sName=' + req.params.phone,
         headers: {
@@ -211,7 +209,6 @@ const phoneSearch = (req, res, next) => {
 
 // Get all reviews
 const phoneReviews = (req, res, next) => {
-    console.log(req.params)
     request({
         url: URI + '/reviews.php3',
         headers: {
@@ -327,7 +324,7 @@ server.listen(8888, function () {
 });
 
 module.exports = {
-    phoneBrands, 
+    phoneBrands,
     phoneBrand,
     phoneDetail,
     phoneSearch,

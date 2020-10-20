@@ -1,5 +1,5 @@
 module.exports = {
-    run: async(client, message, args) => {
+    run: async (client, message, args) => {
         let authorEmbed = {
             color: `RANDOM`,
             title: `Hi, I'm ${client.user.tag}`,
@@ -9,9 +9,9 @@ module.exports = {
             },
             timestamp: new Date()
         };
-        message.channel.send({embed: authorEmbed});
-        
-    }, 
+        message.channel.send({ embed: authorEmbed });
+
+    },
     aliases: ['creator', 'dev', 'developer'],
     description: 'Shows the creator of this awesome bot'
 }

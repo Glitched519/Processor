@@ -1,5 +1,5 @@
 module.exports = {
-    run: async(client, message, args) => {
+    run: async (client, message, args) => {
         const tips = ["Upgrade your cannons to improve your defense against intruders.",
             "Taking a break from Clash of Clans? Buy a Shield to protect your trophies!",
             "Improve your army! Build the Laboratory and upgrade your troops.",
@@ -148,22 +148,24 @@ module.exports = {
             "Earn more Stars to win a Versus Battle! Destruction percentage is the tiebreaker.",
             "Win more Trophies to increase your Versus Battle rewards!",
             "Win 3 Versus Battles a day to get a big loot bonus.",
-            "Having trouble winning Versus Battles? Watch replays and try to improve your defense!"];
+            "Having trouble winning Versus Battles? Watch replays and try to improve your defense!"
+        ];
         const randomTipIndex = Math.floor(Math.random() * tips.length);
         let index = parseInt(args);
         if (index >= 1 && index <= tips.length) {
             let tipEmbed = {
                 color: `RANDOM`,
                 title: 'Clash of Clans Tip #' + (index),
-                description: tips[index-1],
+                description: tips[index - 1],
                 thumbnail: {
                     url: 'https://vignette.wikia.nocookie.net/clashofclans/images/6/61/Villager_info.png/revision/latest/scale-to-width-down/340?cb=20200622145823',
                 },
                 timestamp: new Date()
             };
-            message.channel.send({ embed: tipEmbed });
-        }
-        else {
+            message.channel.send({
+                embed: tipEmbed
+            });
+        } else {
             let tipEmbed = {
                 color: `RANDOM`,
                 title: 'Clash of Clans Tip #' + (randomTipIndex + 1),
@@ -173,9 +175,11 @@ module.exports = {
                 },
                 timestamp: new Date()
             };
-            message.channel.send({ embed: tipEmbed });
+            message.channel.send({
+                embed: tipEmbed
+            });
         }
-    }, 
+    },
     aliases: ['tip', 'clashtip', 'tips', 'clashtips'],
     description: 'Shows tips based on interval given'
 }

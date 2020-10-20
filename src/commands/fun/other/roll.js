@@ -1,5 +1,5 @@
 module.exports = {
-    run: async(client, message, args) => {
+    run: async (client, message, args) => {
         const rollDice = Math.floor(Math.random() * 6) + 1;
         let nums = [':one:', ':two:', ':three:', ':four:', ':five:', ':six:'];
         let diceNum = '';
@@ -29,7 +29,7 @@ module.exports = {
             timestamp: new Date()
         }
         message.channel.send({ embed: rollEmbed });
-    }, 
+    },
     aliases: ['dice', 'rolldice'],
     description: 'Rolls a dice from 1 to 6'
 }

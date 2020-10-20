@@ -2,14 +2,14 @@ const weather = require('weather-js');
 const PREFIX = process.env.PREFIX;
 
 module.exports = {
-    run: async(client, message, args) => {
-        weather.find({search: args, degreeType: "C"}, function(err, result) {
-            if(err) console.log(err);
-            if(args == `${PREFIX}weather`) {
+    run: async (client, message, args) => {
+        weather.find({ search: args, degreeType: "C" }, function (err, result) {
+            if (err) console.log(err);
+            if (args == `${PREFIX}weather`) {
                 message.channel.send(":x: **You need to give a location.**")
-                .then(msg => {
-                    msg.delete({timeout: 4000});
-                });
+                    .then(msg => {
+                        msg.delete({ timeout: 4000 });
+                    });
             }
             try {
                 let weatherEmbed = {
@@ -56,16 +56,16 @@ module.exports = {
                     ],
                     timestamp: new Date()
                 }
-                message.channel.send({embed: weatherEmbed});
+                message.channel.send({ embed: weatherEmbed });
             } catch (err) {
                 message.channel.send(":x: **That isn't a valid location.**")
-                .then(msg => {
-                    msg.delete({timeout: 4000});
-                });
+                    .then(msg => {
+                        msg.delete({ timeout: 4000 });
+                    });
             }
-          });
+        });
 
-    }, 
+    },
     aliases: [],
     description: 'Finds weather in an area'
 }

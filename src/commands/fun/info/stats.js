@@ -1,22 +1,22 @@
 const PREFIX = process.env.PREFIX;
 
 module.exports = {
-    run: async(client, message, args) => {
+    run: async (client, message, args) => {
         const statArgs = args.split(" ");
-        if(statArgs.length >= 2) {
+        if (statArgs.length >= 2) {
             message.channel.send("Incorrect usage: $stats | $stats <user_id> | $stats @mention ")
         }
-        else if(statArgs.length === 1 && args !== `${PREFIX}stats`) {
-            const member = message.mentions.members.first() || message.guild.members.cache.get(args);   
-            if(member) {
+        else if (statArgs.length === 1 && args !== `${PREFIX}stats`) {
+            const member = message.mentions.members.first() || message.guild.members.cache.get(args);
+            if (member) {
                 const statEmbed = {
-                    title: `${member.user.tag} (${member.user.id})`,               
+                    title: `${member.user.tag} (${member.user.id})`,
                     description: `**Roles:** ${member.roles.cache.map(role => role.toString())}`,
                     color: `RANDOM`,
                     thumbnail: {
                         url: member.user.displayAvatarURL(),
-                    }, 
-                    fields : [
+                    },
+                    fields: [
                         {
                             name: 'Created On',
                             value: member.user.createdAt.toLocaleString(),
@@ -27,7 +27,7 @@ module.exports = {
                         },
                         {
                             name: 'Voice Channel',
-                            value: member.voice.channel ? member.voice.channel.name + ` (${member.voice.channel.id})`: 'None',
+                            value: member.voice.channel ? member.voice.channel.name + ` (${member.voice.channel.id})` : 'None',
                         },
                         {
                             name: 'Nickname',
@@ -39,7 +39,7 @@ module.exports = {
                         },
                     ]
                 }
-            message.channel.send({embed: statEmbed});
+                message.channel.send({ embed: statEmbed });
             }
             else {
                 message.channel.send(`No member with ID ${args}`);
@@ -58,7 +58,7 @@ module.exports = {
                 thumbnail: {
                     url: guild.iconURL()
                 },
-                fields : [
+                fields: [
                     {
                         name: 'Created On',
                         value: guild.createdAt.toLocaleString(),
@@ -99,9 +99,9 @@ module.exports = {
                     },
                 ]
             }
-            message.channel.send({embed: statEmbed});
+            message.channel.send({ embed: statEmbed });
         }
-    }, 
+    },
     aliases: [],
     description: 'Shows the stats of the server or a member'
 }

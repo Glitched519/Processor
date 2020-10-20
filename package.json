@@ -33,6 +33,7 @@
     "request": "^2.88.2",
     "restify": "^8.5.1",
     "restify-cors-middleware": "^1.1.1",
+    "simple-youtube-api": "^5.2.1",
     "some-random-api": "^2.0.0",
     "table": "^5.4.6",
     "weather-js": "^2.0.0",
