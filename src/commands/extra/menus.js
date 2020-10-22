@@ -19,4 +19,4 @@ module.exports = {
     },
     aliases: ['free'],
     description: 'Free mod menus link by syslgame'
-}
+}   

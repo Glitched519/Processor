@@ -1,13 +1,15 @@
-const ms = require("ms");
+const { create, all } = require('mathjs');
+const math = create(all);
 
 module.exports = {
     run: async (client, message, args) => {
-        // if (message.content.match(message.content)) {
-        //     return message.channel.send('`'+eval(args)+'`');
-        // }
-        // else {
-        //     return message.channel.send("None");
-        // }
+        try {
+            message.channel.send('`' + math.evaluate(args) + '`');
+        }
+        catch (err) {
+            message.channel.send(`:x: **${err}**`);
+        }
+
     },
     aliases: ['calc', 'c'],
     description: 'Calculates an expression'

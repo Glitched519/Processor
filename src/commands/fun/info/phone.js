@@ -95,6 +95,6 @@ module.exports = {
                 }
             });
     },
-    aliases: [''],
+    aliases: [],
     description: 'Looks up the specs of a phone',
 }

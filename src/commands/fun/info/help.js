@@ -150,10 +150,10 @@ module.exports = {
                     name: ':1234: binary `<number>`',
                     value: `${binary.description}.\nAliases: [${binary.aliases}]`,
                 },
-                // {
-                //     name: ':computer: calculate `<expression>`',
-                //     value: `${calculate.description}.\nAliases: [${calculate.aliases}]`,
-                // },
+                {
+                    name: ':computer: calculate `<expression>`',
+                    value: `${calculate.description}.\nAliases: [${calculate.aliases}]`,
+                },
                 {
                     name: ':capital_abcd: hexadecimal `<number>`',
                     value: `${hexadecimal.description}.\nAliases: [${hexadecimal.aliases}]`,
@@ -288,13 +288,37 @@ module.exports = {
             timestamp: new Date(),
             fields: [
                 {
-                    name: ':play_pause: play `<song>`',
-                    value: `${play.description}.\nAliases: [${play.aliases}]`,
+                    name: ':arrow_forward: play `<song>`',
+                    value: `Plays a song via search term or URL from YouTube.\nAliases: [p]`,
                 },
                 {
                     name: ':stop_button: stop',
-                    value: `${stop.description}.`,
+                    value: `Stops the current song playing. Clears the queue.`,
                 },
+                {
+                    name: ':track_next: skip',
+                    value: `Skips to the next song.`,
+                },
+                {
+                    name: ':loud_sound: volume',
+                    value: `Change the volume.\n Aliases: [vol]`,
+                },
+                {
+                    name: ':card_box: queue',
+                    value: `Shows the song queue, and the song now playing.\nAliases: [q]`
+                },
+                {
+                    name: ':pause_button: pause',
+                    value: `Pauses the current song.`
+                },
+                {
+                    name: ':arrow_forward: resume',
+                    value: `Resumes the current song if paused.`
+                },
+                {
+                    name: ':repeat_one: loop',
+                    value: `Loops the current song.`
+                }
             ]
         }
 

@@ -3,7 +3,6 @@ const fs = require('fs');
 
 module.exports = {
     run: async (client, message, args) => {
-        if (message.content == PREFIX) return;
         message.delete();
         let bannedWords = fs.readFileSync('./events/bannedwords.txt').toString().split("\r\n");
         let bannedPhrases = fs.readFileSync('./events/bannedphrases.txt').toString().split("\r\n");
@@ -21,7 +20,6 @@ module.exports = {
                 if (msg.includes(bannedPhrases[j])) return;
             }
         }
-
         if (message.content == `${PREFIX}suggest`) return;
         let suggestEmbed = {
             color: `RANDOM`,
@@ -45,6 +43,6 @@ module.exports = {
             });
         }
     },
-    aliases: [''],
+    aliases: [],
     description: 'Sends a suggestion with two options to react to'
 }
