@@ -259,10 +259,6 @@ module.exports = {
                     value: `${invite.description}.\nAliases: [${invite.aliases}]`,
                 },
                 {
-                    name: ':musical_note: lyrics `<song>`',
-                    value: `${lyrics.description}.\nAliases: [${lyrics.aliases}]`,
-                },
-                {
                     name: ':exclamation: ping',
                     value: `${ping.description}.\nAliases: [${ping.aliases}]`,
                 },
@@ -318,7 +314,11 @@ module.exports = {
                 {
                     name: ':repeat_one: loop',
                     value: `Loops the current song.`
-                }
+                },
+                {
+                    name: ':musical_note: lyrics `<song>`',
+                    value: `${lyrics.description}.\nAliases: [${lyrics.aliases}]`,
+                },
             ]
         }
 

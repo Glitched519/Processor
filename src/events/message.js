@@ -10,6 +10,7 @@ const queue = new Map();
 
 module.exports = async (client, message) => {
 	client.user.setActivity(`${client.users.cache.size} members`, { type: 'WATCHING' }).catch(console.error);
+	if (message.author.bot) return;
 	if (message.content.includes("<@&735270562544222290>")) {
 		message.reply("you are about to ping all staff in the server. **Unless it's an emergency**, you will be punished for pinging this role. Reply with `call` **IN CAPS within 10 seconds** if you want to do this.");
 		const filter = m => m.content.includes('CALL');
@@ -48,16 +49,24 @@ module.exports = async (client, message) => {
 			// });
 		}
 	}
-
 	// MUSIC COMMANDS
 	const args = message.content.substring(PREFIX.length).split(" ");
 	const searchString = args.slice(1)
 	const url = args[1] ? args[1].replace(/<(.+)>/g, '$1') : '';
 	const serverQueue = queue.get(message.guild.id);
+	const voiceChannel = message.member.voice.channel;
 	
 		if (message.content.startsWith(`${PREFIX}play `) || message.content.startsWith(`${PREFIX}p `)) {
+			if (!message.channel.nsfw) {
+				for (let i = 0; i < bannedWords.length; i++) {
+					if (message.content.includes(bannedWords[i])) return message.channel.send("This song contains NSFW lyrics. Please visit an NSFW channel to play this song.");
+				}
 
-			const voiceChannel = message.member.voice.channel;
+				for (let j = 0; j < bannedPhrases.length; j++) {
+					if (message.content.includes(bannedPhrases[j])) return message.channel.send("This song contains NSFW lyrics. Please visit an NSFW channel to play this song.");
+				}
+			}
+
 			if (!voiceChannel) return message.channel.send(":x: **You need to be in a voice channel to play music.**")
 			const permissions = voiceChannel.permissionsFor(message.client.user);
 			if (!permissions.has('CONNECT')) return message.channel.send(":x: **I don't have the connect permission to connect to the voice channel.**")
@@ -113,22 +122,29 @@ module.exports = async (client, message) => {
 			return undefined;
 		}
 		else if (message.content.startsWith(`${PREFIX}stop`)) {
-			if (!message.member.voice.channel) return message.channel.send(":x: **You need to be in a voice channel to stop this music.**");
+			if (!voiceChannel) return message.channel.send(":x: **You need to be in a voice channel to stop this music.**");
 			if (!serverQueue) return message.channel.send("There is nothing playing.");
-			serverQueue.songs = []
-			serverQueue.connection.dispatcher.end();
+			serverQueue.songs = [];
+			try {
+				serverQueue.connection.dispatcher.end();
+			}
+			catch (err) {
+				return message.channel.send("There is nothing playing.");
+			}
+			voiceChannel.leave();
 			message.channel.send(":stop_button: **Stopped.**");
+			
 			return undefined;
 		}
 		else if (message.content.startsWith(`${PREFIX}skip`)) {
-			if (!message.member.voice.channel) return message.channel.send(":x: **You need to be in a voice channel to skip songs.**");
+			if (!voiceChannel) return message.channel.send(":x: **You need to be in a voice channel to skip songs.**");
 			if (!serverQueue) return message.channel.send("There is nothing playing.");
 			serverQueue.connection.dispatcher.end();
 			message.channel.send(":track_next: **Skipped.**");
 			return undefined;
 		}
 		else if (message.content.startsWith(`${PREFIX}volume `) || message.content.startsWith(`${PREFIX}vol `)) {
-			if (!message.member.voice.channel) return message.channel.send(":x: **You need to be in a voice channel to change the volume.**");
+			if (!voiceChannel) return message.channel.send(":x: **You need to be in a voice channel to change the volume.**");
 			if (!serverQueue) return message.channel.send("There is nothing playing.");
 			if (!args[1]) return message.channel.send(`The volume is: **${serverQueue.volume}**`);
 			if (isNaN(args[1])) return message.channel.send(":x: **Invalid amount.**");
@@ -139,6 +155,7 @@ module.exports = async (client, message) => {
 			return undefined;
 		}
 		else if (message.content.startsWith(`${PREFIX}queue`) || message.content.startsWith(`${PREFIX}q`)) {
+			if (!voiceChannel) return message.channel.send(":x: **You need to be in a voice channel to view the queue.**");
 			if (!serverQueue) return message.channel.send("There is nothing playing.");
 			let queueEmbed = {
 				title: "Song Queue",
@@ -151,7 +168,7 @@ module.exports = async (client, message) => {
 			return undefined;
 		}
 		else if (message.content.startsWith(`${PREFIX}pause`)) {
-			if (!message.member.voice.channel) return message.channel.send(":x: **You need to be in a voice channel to pause songs.**");
+			if (!voiceChannel) return message.channel.send(":x: **You need to be in a voice channel to pause songs.**");
 			if (!serverQueue) return message.channel.send("There is nothing playing.");
 			if (!serverQueue.playing) return message.channel.send("The music is already paused.");
 			serverQueue.playing = false;
@@ -160,7 +177,7 @@ module.exports = async (client, message) => {
 			return undefined;
 		}
 		else if (message.content.startsWith(`${PREFIX}resume`)) {
-			if (!message.member.voice.channel) return message.channel.send(":x: **You need to be in a voice channel to resume songs.**");
+			if (!voiceChannel) return message.channel.send(":x: **You need to be in a voice channel to resume songs.**");
 			if (!serverQueue) return message.channel.send("There is nothing playing.");
 			if (serverQueue.playing) return message.channel.send("The music is already playing.");
 			serverQueue.playing = true;
@@ -168,7 +185,7 @@ module.exports = async (client, message) => {
 			message.channel.send(":arrow_forward: **Resumed.**");
 		}
 		else if (message.content.startsWith(`${PREFIX}loop`)) {
-			if (!message.member.voice.channel) return message.channel.send(":x: **You need to be in a voice channel to loop songs.**");
+			if (!voiceChannel) return message.channel.send(":x: **You need to be in a voice channel to loop songs.**");
 			if (!serverQueue) return message.channel.send("There is nothing playing.");
 
 			serverQueue.loop = !serverQueue.loop;
@@ -179,6 +196,8 @@ module.exports = async (client, message) => {
 		async function play(guild, song) {
 			const info = await ytdl.getInfo(song.url);
 			const serverQueue = queue.get(guild.id);
+
+			guild.voice.setSelfDeaf(true);
 
 			if (!song) {
 				serverQueue.voiceChannel.leave();
@@ -193,6 +212,7 @@ module.exports = async (client, message) => {
 			}))
 				.on('finish', () => {
 					if (!serverQueue.loop) serverQueue.songs.shift();
+					if (serverQueue.songs.length == 0) return voiceChannel.leave();
 					play(guild, serverQueue.songs[0]);
 				})
 				.on('error', error => {
@@ -256,9 +276,10 @@ module.exports = async (client, message) => {
 				songEmbed.fields[3].value = `${Math.floor(info.videoDetails.lengthSeconds / 60)}:${info.videoDetails.lengthSeconds % 60}`;
 			songEmbed.fields[4].value = info.videoDetails.likes;
 			songEmbed.fields[5].value = info.videoDetails.dislikes;
-			serverQueue.textChannel.send(`:arrow_forward: **Now Playing**`, {
+			if(!serverQueue.loop) serverQueue.textChannel.send(`:arrow_forward: **Now Playing**`, {
 				embed: songEmbed
 			});
+			if (serverQueue.songs.length == 0) return voiceChannel.leave();
 		}
 
 	let cmdName = message.content.substring(message.content.indexOf(PREFIX) + 1).split(new RegExp(/\s+/)).shift();
