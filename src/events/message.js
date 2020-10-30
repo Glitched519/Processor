@@ -71,7 +71,7 @@ module.exports = async (client, message) => {
 			const permissions = voiceChannel.permissionsFor(message.client.user);
 			if (!permissions.has('CONNECT')) return message.channel.send(":x: **I don't have the connect permission to connect to the voice channel.**")
 			if (!permissions.has('SPEAK')) return message.channel.send(":x: **I don't have the speak permission to speak in the voice channel.**")
-
+			voiceChannel.join();
 			try {
 				var video = await youtube.getVideoByID(url);
 			}
@@ -197,9 +197,9 @@ module.exports = async (client, message) => {
 			const info = await ytdl.getInfo(song.url);
 			const serverQueue = queue.get(guild.id);
 
-			guild.voice.setSelfDeaf(true);
+			//guild.voice.setSelfDeaf(true);
 
-			if (!song) {
+			if (!song) {	
 				serverQueue.voiceChannel.leave();
 				queue.delete(guild.id);
 				return;
@@ -212,7 +212,7 @@ module.exports = async (client, message) => {
 			}))
 				.on('finish', () => {
 					if (!serverQueue.loop) serverQueue.songs.shift();
-					if (serverQueue.songs.length == 0) return voiceChannel.leave();
+					//if (serverQueue.songs.length == 0) return voiceChannel.leave();
 					play(guild, serverQueue.songs[0]);
 				})
 				.on('error', error => {
@@ -253,16 +253,6 @@ module.exports = async (client, message) => {
 					value: '',
 					inline: true
 				},
-				{
-					name: ':thumbsup: Likes',
-					value: '',
-					inline: true
-				},
-				{
-					name: ':thumbsdown: Dislikes',
-					value: '',
-					inline: true
-				}
 				]
 			}
 			songEmbed.title = song.title;
@@ -274,8 +264,6 @@ module.exports = async (client, message) => {
 			(info.videoDetails.lengthSeconds % 60) < 10 ?
 				songEmbed.fields[3].value = `${Math.floor(info.videoDetails.lengthSeconds / 60)}:0${info.videoDetails.lengthSeconds % 60}` :
 				songEmbed.fields[3].value = `${Math.floor(info.videoDetails.lengthSeconds / 60)}:${info.videoDetails.lengthSeconds % 60}`;
-			songEmbed.fields[4].value = info.videoDetails.likes;
-			songEmbed.fields[5].value = info.videoDetails.dislikes;
 			if(!serverQueue.loop) serverQueue.textChannel.send(`:arrow_forward: **Now Playing**`, {
 				embed: songEmbed
 			});
