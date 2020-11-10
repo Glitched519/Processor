@@ -193,11 +193,11 @@ module.exports = {
                     value: `${clashtips.description}.\nAliases: [${clashtips.aliases}]`,
                 },
                 {
-                    name: ':mag: searchclan `<tag>`',
+                    name: ':mag: searchclan `<#tag>`',
                     value: `${searchclan.description}.\nAliases: [${searchclan.aliases}]`,
                 },
                 {
-                    name: ':mag: searchplayer `<tag>`',
+                    name: ':mag: searchplayer `<#tag>`',
                     value: `${searchplayer.description}.\nAliases: [${searchplayer.aliases}]`,
                 },
             ]

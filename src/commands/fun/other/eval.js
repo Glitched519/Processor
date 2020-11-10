@@ -4,8 +4,11 @@ const { inspect } = require('util');
 module.exports = {
     run: async (client, message, args) => {
         if (message.author.id !== '638064155965915187') return message.channel.send(":x: **Only the bot owner (<@!638064155965915187>) can run this command.**")
+            .then(msg => {
+                msg.delete({ timeout: 4000 });
+            });
 
-        if (args.startsWith(`${PREFIX}e`)) return message.channel.send(":x: **Specify something to eval.**");
+        if (args.startsWith(`${PREFIX}e `)) return message.channel.send(":x: **Specify something to eval.**");
 
         try {
             const evaled = eval(args);
@@ -24,12 +27,12 @@ module.exports = {
                     },
                     {
                         name: 'Type Of',
-                        value: `\`\`\`${typeof(evaled)}\`\`\``
+                        value: `\`\`\`${typeof (evaled)}\`\`\``
                     }
                 ],
                 timestamp: new Date()
             }
-            message.channel.send({embed: evalEmbed});
+            message.channel.send({ embed: evalEmbed });
         }
         catch (err) {
             let errEmbed = {
@@ -38,7 +41,7 @@ module.exports = {
                 description: `${err}`,
                 timestamp: new Date()
             }
-            message.channel.send({embed: errEmbed});
+            message.channel.send({ embed: errEmbed });
         }
     },
     aliases: ['e'],

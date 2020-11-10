@@ -23,9 +23,12 @@ module.exports = {
 
         if (args.includes('#')) {
             args = args.slice(1);
-            if (args.length != 7) return message.channel.send("Invalid player tag.");
+            if (args.length > 8 || args.length < 7) return message.channel.send("Invalid player tag. Tag ID must be 7 or 8 characters in length. Ex: `#RRY9Q2V` or `#280LYG8G9`.");
+            message.channel.send("https://www.clashofstats.com/players/" + args.toUpperCase());
         }
-        message.channel.send("https://www.clashofstats.com/players/" + args.toUpperCase());
+        else {
+
+        }
 
     },
     aliases: ['player', 'findplayer', 'playerfind'],
