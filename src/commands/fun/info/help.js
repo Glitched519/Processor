@@ -51,6 +51,53 @@ const usage = require('../../extra/usage');
 
 module.exports = {
     run: async (client, message, args) => {
+        let closedEmbed = {
+            title: 'Help Closed'
+        }
+        let helpFallbackEmbed = {
+            color: `RANDOM`,
+            title: 'Need some help?',
+            description: `Prefix is **${PREFIX}** as in **${PREFIX}help**.\n<required> [optional]\n${PREFIX}help [topic]`,
+            timestamp: new Date(),
+            fields: [
+                {
+                    name: ':shield: Moderation  `mod`',
+                    value: "Manages server members.",
+                },
+                {
+                    name: ':cat: Animal  `animal`',
+                    value: "Learn about animals.",
+                },
+                {
+                    name: ':crossed_swords: Clash  `clash`',
+                    value: "Look up Clash of Clans related things.",
+                },
+                {
+                    name: ':blue_heart: Cute  `cute`',
+                    value: "Adore a member.",
+                },
+                {
+                    name: ':1234: Math  `math`',
+                    value: "Play with numbers.",
+                },
+                {
+                    name: ':information_source: Info  `info`',
+                    value: "Get information about a user or the server.",
+                },
+                {
+                    name: ':musical_note: Music  `music`',
+                    value: "Play music.",
+                },
+                // {
+                //     name: ':newspaper: SYSLX `syslx`',
+                //     value: "[GTA V Mod Menu.](https://discord.gg/zrMMayP)",
+                // }, 
+                {
+                    name: ':o: Other  `other`',
+                    value: "Play with other commands.",
+                },
+            ]
+        }
         let helpEmbed = {
             color: `RANDOM`,
             title: 'Need some help?',
@@ -421,7 +468,6 @@ module.exports = {
                 .then(() => msg.react('ℹ'))
                 .then(() => msg.react('🎵'))
                 .then(() => msg.react('⭕'))
-                .then(() => msg.react('❌'));
 
             const filter = (reaction, user) => {
                 return ['❌', '🛡', '🐱', '⚔', '💙', '🔢', 'ℹ', '🎵', '⭕'].includes(reaction.emoji.name) && user.id === message.author.id;
@@ -433,8 +479,10 @@ module.exports = {
 
                     switch (reaction.emoji.name) {
                         case '❌':
-                            msg.delete();
-                            break;
+                            return msg.edit({embed: closedEmbed})
+                            .then(msg => {
+                                msg.delete({ timeout: 7000 });
+                            });
                         case '🛡':
                             mod(msg);
                             break;
@@ -492,8 +540,10 @@ module.exports = {
                             help(msg);
                             break;
                         case '❌':
-                            msg.delete();
-                            break;
+                            return msg.edit({embed: closedEmbed})
+                            .then(msg => {
+                                msg.delete({ timeout: 7000 });
+                            });
                         case '🐱':
                             animal(msg);
                             break;
@@ -548,8 +598,10 @@ module.exports = {
                             help(msg);
                             break;
                         case '❌':
-                            msg.delete();
-                            break;
+                            return msg.edit({embed: closedEmbed})
+                            .then(msg => {
+                                msg.delete({ timeout: 7000 });
+                            });
                         case '🛡':
                             mod(msg);
                             break;
@@ -604,8 +656,10 @@ module.exports = {
                             help(msg);
                             break;
                         case '❌':
-                            msg.delete();
-                            break;
+                            return msg.edit({embed: closedEmbed})
+                            .then(msg => {
+                                msg.delete({ timeout: 7000 });
+                            });
                         case '🛡':
                             mod(msg);
                             break;
@@ -659,8 +713,10 @@ module.exports = {
                             help(msg);
                             break;
                         case '❌':
-                            msg.delete();
-                            break;
+                            return msg.edit({embed: closedEmbed})
+                            .then(msg => {
+                                msg.delete({ timeout: 7000 });
+                            });
                         case '🛡':
                             mod(msg);
                             break;
@@ -715,8 +771,10 @@ module.exports = {
                             help(msg);
                             break;
                         case '❌':
-                            msg.delete();
-                            break;
+                            return msg.edit({embed: closedEmbed})
+                            .then(msg => {
+                                msg.delete({ timeout: 7000 });
+                            });
                         case '🛡':
                             mod(msg);
                             break;
@@ -771,8 +829,10 @@ module.exports = {
                             help(msg);
                             break;
                         case '❌':
-                            msg.delete();
-                            break;
+                            return msg.edit({embed: closedEmbed})
+                            .then(msg => {
+                                msg.delete({ timeout: 7000 });
+                            });
                         case '🛡':
                             mod(msg);
                             break;
@@ -827,8 +887,10 @@ module.exports = {
                             help(msg);
                             break;
                         case '❌':
-                            msg.delete();
-                            break;
+                            return msg.edit({embed: closedEmbed})
+                            .then(msg => {
+                                msg.delete({ timeout: 7000 });
+                            });
                         case '🛡':
                             mod(msg);
                             break;
@@ -883,8 +945,10 @@ module.exports = {
                             help(msg);
                             break;
                         case '❌':
-                            msg.delete();
-                            break;
+                            return msg.edit({embed: closedEmbed})
+                            .then(msg => {
+                                msg.delete({ timeout: 7000 });
+                            });
                         case '🛡':
                             mod(msg);
                             break;
@@ -912,11 +976,38 @@ module.exports = {
                     msg.delete();
                 });
         }
-
+        if (args == "mod") {
+            return message.channel.send({ embed: modEmbed });
+        }
+        if (args == "animal") {
+            return message.channel.send({ embed: animalEmbed });
+        }
+        if (args == "clash") {
+            return message.channel.send({ embed: clashEmbed });
+        }
+        if (args == "cute") {
+            return message.channel.send({ embed: cuteEmbed });
+        }
+        if (args == "math") {
+            return message.channel.send({ embed: mathEmbed });
+        }
+        if (args == "info") {
+            return message.channel.send({ embed: infoEmbed });
+        }
+        if (args == "music") {
+            return message.channel.send({ embed: musicEmbed });
+        }
+        if (args == "other") {
+            return message.channel.send({ embed: otherEmbed });
+        }
         if (args == "syslx") {
             return message.channel.send({ embed: SYSLXEmbed });
         }
 
+        if (!message.guild.me.hasPermission(["READ_MESSAGE_HISTORY", "ADD_REACTIONS", "MANAGE_MESSAGES"])) {
+            message.channel.send(":grey_question: If you wish to use reactions to navigate the help menu, please make make the following permissions are enabled:\n**Read Messages\nAdd Reactions\nRead Message History**");
+            return message.channel.send({embed: helpFallbackEmbed});
+        }
         message.channel.send({ embed: helpEmbed }).then((msg) => {
             help(msg);
         });
