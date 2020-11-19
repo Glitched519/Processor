@@ -19,15 +19,9 @@ module.exports = {
 
         if (memberTag == `<@!${message.author.id}>`) {
             return message.channel.send(":grey_question: **Wait, why would you warn yourself?**")
-                .then(msg => {
-                    msg.delete({ timeout: 4000 });
-                });
         }
         else if (memberTag == `<@!689678745782714464>`) {
             return message.channel.send(":grey_question: **I don't think I can warn myself?**")
-                .then(msg => {
-                    msg.delete({ timeout: 4000 });
-                });
         }
 
         else if (!reason) {

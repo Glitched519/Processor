@@ -1,6 +1,7 @@
 module.exports = async (client) => {
     console.clear();
-    console.log(`${new Date()}  
+    console.log("\x1b[36m", `${new Date()}`);
+    console.log('\x1b[35m', `  
  _____                                        
 |  __ \\                                       
 | |__) | __ ___   ___ ___  ___ ___  ___  _ __ 
@@ -8,4 +9,3 @@ module.exports = async (client) => {
 | |   | | | (_) | (_ | __/\\__ \\__ \\ (_) | |   
 |_|   |_|  \\___/ \\___\\___||___/___/\\___/|_|   `);
 }
-

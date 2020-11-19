@@ -1,7 +1,10 @@
 module.exports = {
     run: async (client, message, args) => {
+        if (!message.guild.me.hasPermission("MANAGE_MESSAGES")) {
+            return message.channel.send(":x: **I need the `Manage Messages` permission to delete messages.**")
+        }
         if (!message.member.hasPermission(['MANAGE_MESSAGES'])) {
-            return message.channel.send(":x: **You need the `Manage Messages` permission to clear messages.**")
+            return message.channel.send(":x: **You need the `Manage Messages` permission to delete messages.**")
                 .then(msg => {
                     msg.delete({ timeout: 4000 });
                 });

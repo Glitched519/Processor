@@ -69,8 +69,8 @@ module.exports = async (client, message) => {
 
 		if (!voiceChannel) return message.channel.send(":x: **You need to be in a voice channel to play music.**")
 		const permissions = voiceChannel.permissionsFor(message.client.user);
-		if (!permissions.has('CONNECT')) return message.channel.send(":x: **I don't have the connect permission to connect to the voice channel.**")
-		if (!permissions.has('SPEAK')) return message.channel.send(":x: **I don't have the speak permission to speak in the voice channel.**")
+		if (!permissions.has('CONNECT')) return message.channel.send(":x: **I need the `Connect` permission to connect to the voice channel.**")
+		if (!permissions.has('SPEAK')) return message.channel.send(":x: **I need the `Speak` permission to speak in the voice channel.**")
 		voiceChannel.join();
 		try {
 			var video = await youtube.getVideoByID(url);
@@ -234,20 +234,14 @@ module.exports = async (client, message) => {
 	}
 
 	async function play(guild, song) {
-		const serverQueue = queue.get(guild.id);
+		const serverQueue = queue.get(guild.id)
 		const info = await ytdl.getInfo(song.url)
 		.catch(err => {
 			serverQueue.songs = [];
-			return message.channel.send(`:x: **Error playing audio: ${err}.**`);
-		})
+			return message.channel.send(`:x: **${err}. Please try again.**`);
+		});	
 
 		//guild.voice.setDeaf(true);
-
-		if (!song) {
-			serverQueue.voiceChannel.leave();
-			queue.delete(guild.id);
-			return;
-		}
 
 		const dispatcher = serverQueue.connection.play(ytdl(song.url, {
 			filter: 'audioonly',
@@ -256,8 +250,7 @@ module.exports = async (client, message) => {
 		}))
 			.on('finish', () => {
 				if (!serverQueue.loop) serverQueue.songs.shift();
-				if (serverQueue.songs.length == 0) return;
-				play(guild, serverQueue.songs[0]);
+				if (serverQueue.songs.length != 0) play(guild, serverQueue.songs[0]);
 			})
 			.on('error', error => {
 				message.channel.send(":x: **Sorry, an unknown error occurred. Please try again.**")
@@ -266,7 +259,7 @@ module.exports = async (client, message) => {
 							timeout: 10000
 						});
 					});
-			})
+			});
 
 		dispatcher.setVolumeLogarithmic(serverQueue.volume / 100);
 		let songEmbed = {
@@ -320,5 +313,8 @@ module.exports = async (client, message) => {
 
 	if (client.commands.get(cmdName.toLowerCase()) && message.content.startsWith(`${PREFIX}`)) {
 		client.commands.get(cmdName.toLowerCase())(client, message, argsToParse);
+		if (!message.guild.me.hasPermission("EMBED_LINKS")) {
+			message.channel.send(":grey_question: The majority of my commands use embeds. Please enable the **Embed Links** permission for me.");
+		}
 	}
 }

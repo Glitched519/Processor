@@ -2,9 +2,14 @@ module.exports = {
     run: async (client, message, args) => {
         let reason = args.slice(18);
         let memberId = args.split(" ")[0];
-
+        if (!message.guild.me.hasPermission('KICK_MEMBERS')) {
+            return message.channel.send(":x: **I need the `Kick Members` permission to kick a member.**")
+                .then(msg => {
+                    msg.delete({ timeout: 4000 });
+                });
+        }
         if (!message.member.hasPermission('KICK_MEMBERS')) {
-            return message.channel.send(":x: **You don't have permission to kick a member.**")
+            return message.channel.send(":x: **You need the `Kick Members` permission to kick a member.**")
                 .then(msg => {
                     msg.delete({ timeout: 4000 });
                 });

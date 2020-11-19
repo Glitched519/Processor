@@ -1,6 +1,12 @@
 module.exports = {
     run: async (client, message, args) => {
         let firstMember = args.split(' ');
+        if (!message.guild.me.hasPermission(['MANAGE_NICKNAMES'])) {
+            return message.channel.send(":x: **I need the `Manage Nicknames` permission to change a member's nickname.**")
+                .then(msg => {
+                    msg.delete({ timeout: 4000 });
+                });
+            }
         if (!message.member.hasPermission(['MANAGE_NICKNAMES'])) {
             return message.channel.send(":x: **You need the `Manage Nicknames` permission to change a member's nickname.**")
                 .then(msg => {

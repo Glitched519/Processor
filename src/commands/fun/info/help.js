@@ -48,6 +48,7 @@ const menus = require('../../extra/menus');
 const rule = require('../../extra/rule');
 const tos = require('../../extra/tos');
 const usage = require('../../extra/usage');
+const permissions = require('../../mod/permissions');
 
 module.exports = {
     run: async (client, message, args) => {
@@ -148,6 +149,10 @@ module.exports = {
             description: `Prefix is **${PREFIX}** as in **${PREFIX}help**.`,
             timestamp: new Date(),
             fields: [
+                {
+                    name: ':shield: permissions',
+                    value: `${permissions.description}.\nAliases: [${permissions.aliases}]`,
+                },
                 {
                     name: ':hammer_pick: __user__ban `<@member> [reason]`',
                     value: `${userban.description}.\nAliases: [${userban.aliases}]`,

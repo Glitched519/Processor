@@ -4,7 +4,12 @@ const fs = require('fs');
 module.exports = {
     run: async (client, message, args) => {
         message.delete()
-        if (!message.member.hasPermission('MANAGE_CHANNELS')) return message.channel.send(":x: **You need the `Manage Channels` permission change the topic of this channel.**");
+        if (!message.member.hasPermission('MANAGE_CHANNELS')) {
+            return message.channel.send(":x: **You need the `Manage Channels` permission change the topic of this channel.**")
+            .then(msg => {
+                msg.delete({ timeout: 4000 });
+            });
+        }
 
         let bannedWords = fs.readFileSync('./events/bannedwords.txt').toString().split("\r\n");
         let bannedPhrases = fs.readFileSync('./events/bannedphrases.txt').toString().split("\r\n");

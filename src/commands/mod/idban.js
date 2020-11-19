@@ -4,14 +4,14 @@ module.exports = {
     run: async (client, message, args) => {
         let reason = args.slice(18);
         let memberId = args.split(" ")[0];
-        if (args == 'hackban' || 'iban' || 'idban' || 'banid' || 'hackban') {
-            return message.channel.send(":x: **You need to specify a member's ID.**")
+        if (!message.guild.me.hasPermission('BAN_MEMBERS')) {
+            return message.channel.send(":x: **I need the `Ban Members` permission to ban a member.**")
                 .then(msg => {
                     msg.delete({ timeout: 4000 });
                 });
         }
         if (!message.member.hasPermission('BAN_MEMBERS')) {
-            return message.channel.send(":x: **You don't have permission to ban a member.**")
+            return message.channel.send(":x: **You need the `Ban Members` permission to ban a member.**")
                 .then(msg => {
                     msg.delete({ timeout: 4000 });
                 });
