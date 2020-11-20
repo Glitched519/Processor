@@ -17,9 +17,8 @@ module.exports = {
                     .then(msg => {
                         msg.delete({ timeout: 4000 });
                     });
-
             message.channel.bulkDelete(deleteCount)
-                .catch(error => message.channel.send(`:x: **Failed to delete messages: ${error}**`))
+                .catch(error => message.channel.send(`:x: **Failed to delete messages: ${error}**`));
         }
     },
     aliases: ['clear', 'clean', 'delete', 'del'],
