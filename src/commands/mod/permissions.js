@@ -6,25 +6,25 @@ module.exports = {
             return message.channel.send(":x: **You need the `Manage Messages` permission to view my permissions.**")
         }
         const permissions = [
-            "Administrator", 
-            "Send Messages", 
+            "Administrator",
+            "Send Messages",
             "Manage Messages",
-            "Manage Roles", 
-            "Manage Channels", 
+            "Manage Roles",
+            "Manage Channels",
             "Manage Webhooks",
-            "Read Message History", 
+            "Read Message History",
             "Change Nickname",
-            "Manage Nicknames", 
-            "Kick Members", 
+            "Manage Nicknames",
+            "Kick Members",
             "Ban Members",
-            "Embed Links", 
-            "Attach Files", 
-            "Add Reactions", 
-            "Connect", 
+            "Embed Links",
+            "Attach Files",
+            "Add Reactions",
+            "Connect",
             "Speak",
-            "Mute Members", 
-            "Deafen Members", 
-            "Move Members", 
+            "Mute Members",
+            "Deafen Members",
+            "Move Members",
             "Priority Speaker",
         ]
         permissions.sort();
@@ -36,13 +36,13 @@ module.exports = {
             .setThumbnail(`https://cdn.discordapp.com/avatars/${client.user.id}/${client.user.avatar}`)
             .setDescription('Note: Not all permissions listed are required for the bot to fully function.')
             .setColor(`RANDOM`)
-            permissions.forEach(perm => {
-                let permName = perm.toUpperCase().replaceAll(" ", "_");
-                permEmbed.addField(perm, me.hasPermission(permName) ? yes : no, true);
-            });
-    
+        permissions.forEach(perm => {
+            let permName = perm.toUpperCase().replace(/ /g, "_");
+            permEmbed.addField(perm, me.hasPermission(permName) ? yes : no, true);
+        });
+
         if (me.hasPermission('EMBED_LINKS')) message.channel.send(permEmbed);
-        
+
     },
     aliases: ['perm', 'perms'],
     description: 'Checks the permissions the bot has in the server'

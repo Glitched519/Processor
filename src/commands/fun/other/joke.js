@@ -5,7 +5,7 @@ module.exports = {
         fetch('https://official-joke-api.appspot.com/random_joke')
             .then(res => res.json())
             .then(json => {
-                message.channel.send(`${json.setup}\n||${json.punchline}||`)
+                message.channel.send(`${json.setup}\n||${json.punchline}||`);
             });
     },
     aliases: [],

@@ -11,13 +11,12 @@ module.exports = {
                 let memeEmbed = {
                     title: json.title,
                     url: json.postLink,
-                    description: `[${json.author}](https://www.reddit.com/u/${json.author})`,
                     color: `RANDOM`,
                     image: {
                         url: json.url
                     },
                     footer: {
-                        text: `👍 ${json.ups} | ${json.subreddit}`
+                        text: `👍 ${json.ups} | from r/${json.subreddit} | by u/${json.author}`
                     }
                 }
                 return message.channel.send({ embed: memeEmbed });

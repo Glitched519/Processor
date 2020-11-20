@@ -3,12 +3,9 @@ const { inspect } = require('util');
 
 module.exports = {
     run: async (client, message, args) => {
-        if (message.author.id !== '638064155965915187') return message.channel.send(":x: **Only the bot owner (<@!638064155965915187>) can run this command.**")
-            .then(msg => {
-                msg.delete({ timeout: 4000 });
-            });
+        if (message.author.id !== '638064155965915187') return;
 
-        if (args.startsWith(`${PREFIX}e `)) return message.channel.send(":x: **Specify something to eval.**");
+        if (args.startsWith(`${PREFIX}e`)) return message.channel.send(":x: **Specify something to eval.**");
 
         try {
             const evaled = eval(args);
@@ -16,21 +13,7 @@ module.exports = {
             let evalEmbed = {
                 title: 'Evaluated',
                 color: `RANDOM`,
-                fields: [
-                    {
-                        name: 'To Eval',
-                        value: `\`\`\`js\n${args}\`\`\``
-                    },
-                    {
-                        name: 'Evaled',
-                        value: `\`\`\`js\n${inspect(evaled, { depth: 0 })}\`\`\``
-                    },
-                    {
-                        name: 'Type Of',
-                        value: `\`\`\`${typeof (evaled)}\`\`\``
-                    }
-                ],
-                timestamp: new Date()
+                description: `\`\`\`js\n${inspect(evaled, { depth: 0 })}\`\`\``,
             }
             message.channel.send({ embed: evalEmbed });
         }
@@ -38,8 +21,7 @@ module.exports = {
             let errEmbed = {
                 title: 'Error',
                 color: '#f08324',
-                description: `${err}`,
-                timestamp: new Date()
+                description: `\`\`\`js\n${err}\`\`\``,
             }
             message.channel.send({ embed: errEmbed });
         }

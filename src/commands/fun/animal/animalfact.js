@@ -1,6 +1,4 @@
-const {
-    api
-} = require('some-random-api');
+const { api } = require('some-random-api');
 const PREFIX = process.env.PREFIX;
 
 module.exports = {
@@ -10,26 +8,38 @@ module.exports = {
         } else if (args == "cat") {
             api.facts.cat().then(res => {
                 return message.channel.send(res.fact);
+            }).catch (err => {
+                message.channel.send(":x: Something went wrong with the API. Please try again later.");
             });
         } else if (args == "dog") {
             api.facts.dog().then(res => {
                 return message.channel.send(res.fact);
+            }).catch (err => {
+                message.channel.send(":x: Something went wrong with the API. Please try again later.");
             });
         } else if (args == "koala") {
             api.facts.koala().then(res => {
                 return message.channel.send(res.fact);
+            }).catch (err => {
+                message.channel.send(":x: Something went wrong with the API. Please try again later.");
             });
         } else if (args == "panda") {
             api.facts.panda().then(res => {
                 return message.channel.send(res.fact);
+            }).catch (err => {
+                message.channel.send(":x: Something went wrong with the API. Please try again later.");
             });
         } else if (args == "bird") {
             api.facts.bird().then(res => {
                 return message.channel.send(res.fact);
+            }).catch (err => {
+                message.channel.send(":x: Something went wrong with the API. Please try again later.");
             });
         } else if (args == "fox") {
             api.facts.fox().then(res => {
                 return message.channel.send(res.fact);
+            }).catch (err => {
+                message.channel.send(":x: Something went wrong with the API. Please try again later.");
             });
         }
     },

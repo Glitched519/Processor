@@ -3,8 +3,7 @@ const fs = require('fs')
 
 module.exports = {
     run: async (client, message, args) => {
-
-        message.delete();
+        if (message.guild.me.hasPermission('MANAGE_MESSAGES')) message.delete();
         let bannedWords = fs.readFileSync('./events/bannedwords.txt').toString().split("\r\n");
         let bannedPhrases = fs.readFileSync('./events/bannedphrases.txt').toString().split("\r\n");
         let msg = message.content.toLowerCase();

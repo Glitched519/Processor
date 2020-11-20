@@ -3,7 +3,6 @@ const PREFIX = process.env.PREFIX;
 
 module.exports = {
     run: async (client, message, args) => {
-
         api.animu.wink().then(res => {
             let winkEmbed = {
                 description: `**<@!${message.author.id}> winks ${args}! :wink:**`,
@@ -15,6 +14,8 @@ module.exports = {
             }
             if (args == `${PREFIX}wink`) winkEmbed.description = `**<@!${message.author.id}> winks at himself?**`;
             return message.channel.send({ embed: winkEmbed });
+        }).catch(err => {
+            message.channel.send(":x: Unfortunately, something went wrong with the API, and you could not wink at your love :cry:");
         });
     },
     aliases: [],

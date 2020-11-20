@@ -14,7 +14,7 @@ module.exports = {
             try {
                 let weatherEmbed = {
                     color: `RANDOM`,
-                    title: `Weather in ${result[0].location.name}`,
+                    title: `${result[0].current.skytext} in ${result[0].location.name}`,
                     thumbnail: {
                         url: result[0].current.imageUrl,
                     },
@@ -30,7 +30,7 @@ module.exports = {
                             inline: true
                         },
                         {
-                            name: `${result[0].current.skytext}`,
+                            name: 'Wind Speed',
                             value: `${result[0].current.winddisplay}`,
                             inline: true
                         },

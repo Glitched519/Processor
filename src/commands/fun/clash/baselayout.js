@@ -11,7 +11,7 @@ module.exports = {
             },
             timestamp: new Date()
         }
-        if (args.startsWith(`${PREFIX}base`)) return;
+        if (args.startsWith(`${PREFIX}base`)) return message.channel.send('You need to mention townhall (th) or builder hall (bh) level. Ex: `th10` or `bh7`.');
         else if (args == "th5") {
             baseEmbed.title += args;
             baseEmbed.description += "(https://www.youtube.com/watch?v=sfmJKS8WYBc) | ";
@@ -83,9 +83,8 @@ module.exports = {
             baseEmbed.description += "[Copy Link](https://link.clashofclans.com/en?action=OpenLayout&id=TH9%3ABB%3AAAAAQAAAAAFLv0vIOWetDU5AyhxpmZXN)";
             baseEmbed.image.url = "https://cocwiki.net/wp-content/uploads/2019/06/bh9-builder-hall-9-layout.jpg";
         } else {
-            message.channel.send("Invalid town hall or builder hall level.");
+            return message.channel.send("Invalid town hall or builder hall level. Ex: `th10` or `bh7`.");
         }
-
         message.channel.send({
             embed: baseEmbed
         });

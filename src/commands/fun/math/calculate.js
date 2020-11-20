@@ -7,7 +7,7 @@ module.exports = {
             message.channel.send('`' + math.evaluate(args) + '`');
         }
         catch (err) {
-            message.channel.send(`:x: **${err}**`);
+            message.channel.send(`\`\`\`js\n${err}\`\`\``);
         }
 
     },

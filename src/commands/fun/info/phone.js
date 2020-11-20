@@ -3,12 +3,12 @@ const fetch = require('node-fetch');
 
 module.exports = {
     run: async (client, message, args) => {
-        message.channel.send(`:clock1: **Please wait... If it takes too long, check your spelling and try again.**`);
+        message.channel.send(`:clock1: **Please wait... If it takes too long, check your spelling and try again.**\n Not sure what phone to search? Try OnePlus 8.`);
         fetch(`http://localhost:8888/gsmarena/search/phone/${args}`)
             .then(res => res.json())
             .then(json => {
                 for (let i = 0; i < json.length; i++) {
-                    if (json[i].name == args) {
+                    if (json[i].name.toLowerCase() == args.toLowerCase()) {
                         fetch(`http://localhost:8888/gsmarena/phone/${json[0].url}`)
                             .then(res2 => res2.json())
                             .then(json2 => {

@@ -22,6 +22,6 @@ module.exports = {
             return message.channel.send({ embed: avatarEmbed });
         }
     },
-    aliases: ['pic', 'pfp'],
+    aliases: ['pic', 'pfp', 'av'],
     description: 'Shows the user profile pic'
 }

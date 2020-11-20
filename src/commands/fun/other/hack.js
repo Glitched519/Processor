@@ -15,27 +15,27 @@ module.exports = {
         `${args} has been hacked and will get viruses on his computer forever!`, `${args}'s Fortnite dances have been uploaded to his boss's network!`,
         `${args} has to pay $${ip1} to get his data back.`, `Oh look, ${args} just lost all his money!`];
         let chance = Math.random();
+        if (args == `<@!689678745782714464>`) {
+            return message.reply("good luck with that!")
+        }
         if (args == `${PREFIX}hack`) {
-            message.reply("who do you want to hack?");
-            return;
+            return message.reply("who do you want to hack?");
         }
         if (chance >= 0.6) {
-            message.channel.send('Hacking ' + args + '...')
-                .then(msg => {
-                    setTimeout(function () {
-                        msg.edit(hacks[Math.floor(Math.random() * hacks.length)]);
-                    }, randomDelay)
-                }).catch(console.error);
-            return;
+            return message.channel.send('Hacking ' + args + '...')
+            .then(msg => {
+                setTimeout(function () {
+                    msg.edit(hacks[Math.floor(Math.random() * hacks.length)]);
+                }, randomDelay)
+            }).catch(console.error);
         }
         else {
-            message.channel.send('Hacking ' + args + '...')
-                .then(msg => {
-                    setTimeout(function () {
-                        msg.edit(fails[Math.floor(Math.random() * fails.length)]);
-                    }, randomDelay)
-                }).catch(console.error);
-            return;
+            return message.channel.send('Hacking ' + args + '...')
+            .then(msg => {
+                setTimeout(function () {
+                    msg.edit(fails[Math.floor(Math.random() * fails.length)]);
+                }, randomDelay)
+            }).catch(console.error);
         }
     },
     aliases: [],

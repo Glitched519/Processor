@@ -11,11 +11,11 @@ module.exports = {
         // Checks if parameter is an nsfw term. Blocks command in non-nsfw channels.
         if (!message.channel.nsfw) {
             for (let i = 0; i < bannedWords.length; i++) {
-                if (words.includes(bannedWords[i])) return message.delete();
+                if (words.includes(bannedWords[i])) return;
             }
 
             for (let j = 0; j < bannedPhrases.length; j++) {
-                if (msg.includes(bannedPhrases[j])) return message.delete();
+                if (msg.includes(bannedPhrases[j])) return;
             }
         }
 

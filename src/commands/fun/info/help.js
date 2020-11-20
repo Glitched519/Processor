@@ -53,7 +53,8 @@ const permissions = require('../../mod/permissions');
 module.exports = {
     run: async (client, message, args) => {
         let closedEmbed = {
-            title: 'Help Closed'
+            title: 'Help Closed',
+            description: 'Deleting this message in a few seconds...'
         }
         let helpFallbackEmbed = {
             color: `RANDOM`,

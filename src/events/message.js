@@ -212,7 +212,7 @@ module.exports = async (client, message) => {
 		if (!voiceChannel) return message.channel.send(":x: **You need to be in a voice channel to resume songs.**");
 		if (!serverQueue) return message.channel.send("There is nothing playing.");
 		if (serverQueue.playing) return message.channel.send("The music is already playing.");
-		serverQueue.playing = true;		
+		serverQueue.playing = true;
 		try {
 			serverQueue.connection.dispatcher.resume();
 		}
@@ -236,10 +236,10 @@ module.exports = async (client, message) => {
 	async function play(guild, song) {
 		const serverQueue = queue.get(guild.id)
 		const info = await ytdl.getInfo(song.url)
-		.catch(err => {
-			serverQueue.songs = [];
-			return message.channel.send(`:x: **${err}. Please try again.**`);
-		});	
+			.catch(err => {
+				serverQueue.songs = [];
+				return message.channel.send(`:x: **${err}. Please try again.**`);
+			});
 
 		//guild.voice.setDeaf(true);
 
@@ -312,9 +312,9 @@ module.exports = async (client, message) => {
 	let argsToParse = message.content.substring(message.content.indexOf(' ') + 1);
 
 	if (client.commands.get(cmdName.toLowerCase()) && message.content.startsWith(`${PREFIX}`)) {
-		client.commands.get(cmdName.toLowerCase())(client, message, argsToParse);
 		if (!message.guild.me.hasPermission("EMBED_LINKS")) {
-			message.channel.send(":grey_question: The majority of my commands use embeds. Please enable the **Embed Links** permission for me.");
+			return message.channel.send(":grey_question: The majority of my commands use embeds. Please enable the **Embed Links** permission for me.");
 		}
+		client.commands.get(cmdName.toLowerCase())(client, message, argsToParse);
 	}
 }

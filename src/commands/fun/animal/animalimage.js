@@ -1,6 +1,4 @@
-const {
-    api
-} = require('some-random-api');
+const { api } = require('some-random-api');
 const PREFIX = process.env.PREFIX;
 
 module.exports = {
@@ -22,6 +20,8 @@ module.exports = {
                     return message.channel.send({
                         embed: imgEmbed
                     });
+                }).catch (err => {
+                    message.channel.send(":x: Something went wrong with the API. Please try again later.");
                 });
                 break;
             case "dog":
@@ -30,6 +30,8 @@ module.exports = {
                     return message.channel.send({
                         embed: imgEmbed
                     });
+                }).catch (err => {
+                    message.channel.send(":x: Something went wrong with the API. Please try again later.");
                 });
                 break;
             case "koala":
@@ -38,6 +40,8 @@ module.exports = {
                     return message.channel.send({
                         embed: imgEmbed
                     });
+                }).catch (err => {
+                    message.channel.send(":x: Something went wrong with the API. Please try again later.");
                 });
                 break;
             case "panda":
@@ -46,6 +50,8 @@ module.exports = {
                     return message.channel.send({
                         embed: imgEmbed
                     });
+                }).catch (err => {
+                    message.channel.send(":x: Something went wrong with the API. Please try again later.");
                 });
                 break;
             case "bird":
@@ -54,6 +60,8 @@ module.exports = {
                     return message.channel.send({
                         embed: imgEmbed
                     });
+                }).catch (err => {
+                    message.channel.send(":x: Something went wrong with the API. Please try again later.");
                 });
                 break;
             case "fox":
@@ -62,6 +70,8 @@ module.exports = {
                     return message.channel.send({
                         embed: imgEmbed
                     });
+                }).catch (err => {
+                    message.channel.send(":x: Something went wrong with the API. Please try again later.");
                 });
                 break;
             case "raccoon":
@@ -70,6 +80,8 @@ module.exports = {
                     return message.channel.send({
                         embed: imgEmbed
                     });
+                }).catch (err => {
+                    message.channel.send(":x: Something went wrong with the API. Please try again later.");
                 });
                 break;
         }

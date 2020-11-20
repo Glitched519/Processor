@@ -5,6 +5,7 @@ module.exports = {
     run: async (client, message, args) => {
         const pokemon = args;
         const pokeData = await getPokemon(pokemon);
+        if (!pokeData) return message.channel.send(":x: **That isn't a valid pokemon.**");
         const { sprites, stats, weight, name, id, base_experience, abilities, types } = pokeData;
         const pokeEmbed = new Discord.MessageEmbed()
             .setThumbnail(`${sprites.front_default}`)

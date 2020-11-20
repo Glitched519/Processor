@@ -7,7 +7,7 @@ module.exports = {
                 message.channel.send(json.value);
             });
     },
-    aliases: ['chuck', 'chuckjoke', 'norrisjoke', 'cjoke', 'njoke'],
+    aliases: ['chuck', 'chuckjoke', 'norrisjoke', 'cjoke'],
     description: 'Shows a random Chuck Norris joke'
 }
 

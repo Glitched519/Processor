@@ -4,7 +4,7 @@ const fs = require('fs');
 module.exports = {
     run: async (client, message, args) => {
         if (message.content == PREFIX) return;
-        message.delete();
+        if (message.guild.me.hasPermission('MANAGE_MESSAGES')) message.delete();
         if (message.content == `${PREFIX}poll`) return;
         let bannedWords = fs.readFileSync('./events/bannedwords.txt').toString().split("\r\n");
         let bannedPhrases = fs.readFileSync('./events/bannedphrases.txt').toString().split("\r\n");
