@@ -15,9 +15,12 @@ module.exports = {
         }
         const newNickname = args.substring(args.indexOf(' ') + 1);
         if (args.endsWith(">")) {
-            return message.channel.send(":grey_question: **What nickname do you want to give this member?");
+            return message.channel.send(":grey_question: **You need to specify a nickname to give to this member.**");
         }
         const member = message.mentions.members.first() || message.guild.members.cache.get(firstMember[0]);
+        if (!firstMember[1]) {
+            return message.channel.send(":grey_question: **You need to specify a nickname to give to this member.**");
+        }
         if (!member) {
             return message.channel.send(":x: **You need to specify an existing member.**")
                 .then(msg => {
@@ -25,7 +28,10 @@ module.exports = {
                 });
         }
 
-        member.setNickname(newNickname);
+        member.setNickname(newNickname)
+        .catch(err => {
+            message.channel.send(":x: **Cannot change nickname. The member has a higher role than me.**");
+        })
     },
     aliases: ['nick', 'name'],
     description: 'Changes the nickname of a user'
