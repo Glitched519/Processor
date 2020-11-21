@@ -25,8 +25,8 @@ module.exports = {
                     });
             }
             else {
-                message.channel.setRateLimitPerUser(args, "");
-                message.channel.send("Slowmode set to **" + args + ' seconds.**')
+                message.channel.setRateLimitPerUser(parseInt(args), "");
+                message.channel.send("Slowmode set to **" + parseInt(args) + ' seconds**.')
             }
         }
     },

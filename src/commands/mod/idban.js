@@ -37,7 +37,7 @@ module.exports = {
                 }
             }
             catch (err) {
-                return message.reply(":x: **Not possible to kick this member.**")
+                return message.reply(":x: **Not possible to ban this member.**")
                     .then(msg => {
                         msg.delete({ timeout: 4000 });
                     });

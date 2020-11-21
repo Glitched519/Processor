@@ -11,7 +11,7 @@ module.exports = {
             "Oof! That didn't work.", "Wait, what am I hacking again?", "Oh no, I forgot how to hack!",
             `I don't think I can hack ${args}`, `${args} is unhackable`, `${args} got the biggest antivirus ever.`,
             "I blew the hack! Now the FBI is looking for me."];
-        let hacks = [`Found ${args}'s IP address: ${ip1}.${ip2}.${ip3}.${ip4}`, `${args}'s private data has been sold to the government.`,
+        let hacks = [`Found ${args}'s IP address: ${ip1}.${ip2}.${ip3}.${ip4} ||Jk||`, `${args}'s private data has been sold to the government.`,
         `${args} has been hacked and will get viruses on his computer forever!`, `${args}'s Fortnite dances have been uploaded to his boss's network!`,
         `${args} has to pay $${ip1} to get his data back.`, `Oh look, ${args} just lost all his money!`];
         let chance = Math.random();
@@ -21,7 +21,7 @@ module.exports = {
         if (args == `${PREFIX}hack`) {
             return message.reply("who do you want to hack?");
         }
-        if (chance >= 0.6) {
+        if (chance >= 0.4) {
             return message.channel.send('Hacking ' + args + '...')
             .then(msg => {
                 setTimeout(function () {

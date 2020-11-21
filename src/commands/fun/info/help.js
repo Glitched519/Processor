@@ -60,7 +60,6 @@ module.exports = {
             color: `RANDOM`,
             title: 'Need some help?',
             description: `Prefix is **${PREFIX}** as in **${PREFIX}help**.\n<required> [optional]\n${PREFIX}help [topic]`,
-            timestamp: new Date(),
             fields: [
                 {
                     name: ':shield: Moderation  `mod`',
@@ -104,7 +103,6 @@ module.exports = {
             color: `RANDOM`,
             title: 'Need some help?',
             description: `Prefix is **${PREFIX}** as in **${PREFIX}help**.\n<required> [optional]\n${PREFIX}help [topic]`,
-            timestamp: new Date(),
             fields: [
                 {
                     name: ':shield: Moderation',
@@ -148,7 +146,6 @@ module.exports = {
             color: `RANDOM`,
             title: 'Moderation Commands',
             description: `Prefix is **${PREFIX}** as in **${PREFIX}help**.`,
-            timestamp: new Date(),
             fields: [
                 {
                     name: ':shield: permissions',
@@ -189,7 +186,6 @@ module.exports = {
             color: `RANDOM`,
             title: 'Math Commands',
             description: `Prefix is **${PREFIX}** as in **${PREFIX}help**.`,
-            timestamp: new Date(),
             fields: [
                 {
                     name: ':1234: base32 `<number>`',
@@ -218,7 +214,6 @@ module.exports = {
             color: `RANDOM`,
             title: 'Animal Commands',
             description: `Prefix is **${PREFIX}** as in **${PREFIX}help**.`,
-            timestamp: new Date(),
             fields: [
                 {
                     name: ':information_source: animalfact `<animal>`',
@@ -235,7 +230,6 @@ module.exports = {
             color: `RANDOM`,
             title: 'Clash of Clans Commands',
             description: `Prefix is **${PREFIX}** as in **${PREFIX}help**.`,
-            timestamp: new Date(),
             fields: [
                 {
                     name: ':green_square: baselayout `<th/bh level>`',
@@ -260,7 +254,6 @@ module.exports = {
             color: `RANDOM`,
             title: 'Cute Commands',
             description: `Prefix is **${PREFIX}** as in **${PREFIX}help**.`,
-            timestamp: new Date(),
             fields: [
                 {
                     name: ':hugging: hug `<@member>`',
@@ -281,7 +274,6 @@ module.exports = {
             color: `RANDOM`,
             title: 'Info Commands',
             description: `Prefix is **${PREFIX}** as in **${PREFIX}help**.`,
-            timestamp: new Date(),
             fields: [
                 {
                     name: ':man_construction_worker: author',
@@ -334,7 +326,6 @@ module.exports = {
             color: `RANDOM`,
             title: 'Music Commands',
             description: `Prefix is **${PREFIX}** as in **${PREFIX}help**.`,
-            timestamp: new Date(),
             fields: [
                 {
                     name: ':arrow_forward: play `<song>`',
@@ -384,7 +375,6 @@ module.exports = {
                 url: "https://syslx-menu.com/styles/syslxlogo.png"
             },
             description: `Prefix is **${PREFIX}** as in **${PREFIX}help**.`,
-            timestamp: new Date(),
             fields: [
                 {
                     name: ':moneybag: donate',
@@ -417,7 +407,6 @@ module.exports = {
             color: `RANDOM`,
             title: 'Other Commands',
             description: `Prefix is **${PREFIX}** as in **${PREFIX}help**.`,
-            timestamp: new Date(),
             fields: [
                 {
                     name: ':man_running: chucknorrisjoke',
