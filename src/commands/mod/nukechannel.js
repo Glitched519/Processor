@@ -24,11 +24,12 @@ module.exports = {
                     fetchedChannel.clone();
                     fetchedChannel.delete();
                     fetchedChannel.setTopic(fetchedTopic)
-                    .catch(err => {});
-                    message.channel.send(`:fire: **${channel} nuked!**`);
+                    .catch(err => {
+                        return;
+                    });
                 })
                 .catch(collected => {
-                    message.channel.send(`:x: **${channel}** will not be deleted.`);
+                    return message.channel.send(`:x: **${channel}** will not be deleted.`);
                 });
 
         }

@@ -59,7 +59,7 @@ module.exports = {
         let helpFallbackEmbed = {
             color: `RANDOM`,
             title: 'Need some help?',
-            description: `Prefix is **${PREFIX}** as in **${PREFIX}help**.\n<required> [optional]\n${PREFIX}help [topic]`,
+            description: `Prefix is **${PREFIX}** as in **${PREFIX}help**.\n<required> [optional]`,
             fields: [
                 {
                     name: ':shield: Moderation  `mod`',
@@ -1000,7 +1000,7 @@ module.exports = {
         }
 
         if (!message.guild.me.hasPermission(["READ_MESSAGE_HISTORY", "ADD_REACTIONS", "MANAGE_MESSAGES"])) {
-            message.channel.send(":grey_question: If you wish to use reactions to navigate the help menu, please make make the following permissions are enabled:\n**Read Messages\nAdd Reactions\nRead Message History**");
+            message.channel.send(`:grey_question: If you wish to use reactions to navigate the help menu, please make make the following permissions are enabled:\n**Read Messages\nAdd Reactions\nRead Message History**\nUsage: ${PREFIX}help \`[topic]\``);
             return message.channel.send({embed: helpFallbackEmbed});
         }
         message.channel.send({ embed: helpEmbed }).then((msg) => {
