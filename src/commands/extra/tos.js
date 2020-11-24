@@ -1,4 +1,5 @@
-const PREFIX = process.env.PREFIX;
+const config = require('../../config.json');
+const PREFIX = config["bot-prefix"];
 
 let tos = [
     "No reversing or cracking our menu or showing intent to do so.",

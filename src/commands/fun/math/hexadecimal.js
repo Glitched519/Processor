@@ -1,4 +1,5 @@
-const PREFIX = process.env.PREFIX;
+const config = require('../../../config.json');
+const PREFIX = config["bot-prefix"];
 
 module.exports = {
     run: async (client, message, args) => {

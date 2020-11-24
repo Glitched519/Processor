@@ -1,4 +1,4 @@
-const Discord = require("discord.js");
+const { MessageEmbed } = require("discord.js");
 
 module.exports = {
     run: async (client, message, args) => {
@@ -31,7 +31,7 @@ module.exports = {
         const me = message.guild.me;
         const yes = ':white_check_mark:';
         const no = ':x:';
-        const permEmbed = new Discord.MessageEmbed()
+        const permEmbed = new MessageEmbed()
             .setTitle(`${client.user.tag}'s Permissions`)
             .setThumbnail(`https://cdn.discordapp.com/avatars/${client.user.id}/${client.user.avatar}`)
             .setDescription('Note: Not all permissions listed are required for the bot to fully function.')

@@ -1,4 +1,5 @@
-const PREFIX = process.env.PREFIX;
+const config = require('../../config.json');
+const PREFIX = config["bot-prefix"];
 
 const rules = [
     "No recording or anything that violates the privacy rules(except for livestreams, but you must set [live] in your name & you have to ask permission to the people in your channel). (Recording is allowed when everyone agrees.)",

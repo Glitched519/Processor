@@ -1,4 +1,5 @@
-const PREFIX = process.env.PREFIX;
+const config = require('../../config.json');
+const PREFIX = config["bot-prefix"];
 
 const faqTitle = [
     "How to download the SYSLX menu?",

@@ -13,8 +13,7 @@ module.exports = {
                 });
         }
         try {
-            let params = args.split(" ");
-            let channel = params[0];
+            let channel = args;
             const fetchedChannel = message.guild.channels.cache.find(r => r.name === channel);
             let fetchedTopic = fetchedChannel.topic;
             const filter = m => m.content.includes(channel);

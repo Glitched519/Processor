@@ -1,15 +1,16 @@
+const config = require('../config.json');
 const fs = require('fs');
 const ytdl = require('ytdl-core');
 const YouTube = require('simple-youtube-api');
 const { Util } = require('discord.js');
-const PREFIX = process.env.PREFIX;
+const PREFIX = config["bot-prefix"];
 
-const youtube = new YouTube(process.env.YOUTUBE_TOKEN)
+const youtube = new YouTube(config["youtube-token"])
 
 const queue = new Map();
 
 module.exports = async (client, message) => {
-	//client.user.setActivity(`${client.users.cache.size} members`, { type: 'WATCHING' }).catch(console.error);
+	client.user.setActivity(`${client.users.cache.size} members`, { type: 'WATCHING' }).catch(console.error);
 	if (message.author.bot) return;
 	if (message.content.includes("<@&735270562544222290>")) {
 		message.reply("you are about to ping all staff in the server. **Unless it's an emergency**, you will be punished for pinging this role. Reply with `call` **IN CAPS within 10 seconds** if you want to do this.");
