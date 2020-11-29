@@ -10,19 +10,8 @@ const youtube = new YouTube(config["youtube-token"])
 const queue = new Map();
 
 module.exports = async (client, message) => {
-	client.user.setActivity(`${client.users.cache.size} members`, { type: 'WATCHING' }).catch(console.error);
+	//client.user.setActivity(`${client.users.cache.size} members`, { type: 'WATCHING' }).catch(console.error);
 	if (message.author.bot) return;
-	if (message.content.includes("<@&735270562544222290>")) {
-		message.reply("you are about to ping all staff in the server. **Unless it's an emergency**, you will be punished for pinging this role. Reply with `call` **IN CAPS within 10 seconds** if you want to do this.");
-		const filter = m => m.content.includes('CALL');
-		message.channel.awaitMessages(filter, { max: 1, time: 10000, errors: ['time'] })
-			.then(collected => {
-				message.reply(`you have chosen to <@&701441802087170138>. Staff will come to address your issue urgently.`);
-			})
-			.catch(collected => {
-				message.reply("time's up! Your staff call was declined.");
-			});
-	}
 
 	if (message.content == '<@!689678745782714464>') {
 		return message.reply(`hi! My prefix is **${PREFIX}**. You can summon my help page using **${PREFIX}help**.`)

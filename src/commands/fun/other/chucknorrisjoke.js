@@ -1,4 +1,5 @@
 const fetch = require('node-fetch');
+
 module.exports = {
     run: async (client, message, args) => {
         fetch('https://api.chucknorris.io/jokes/random')

@@ -1,4 +1,5 @@
 const fetch = require('node-fetch');
+
 module.exports = {
     run: async (client, message, args) => {
         fetch('https://icanhazdadjoke.com/slack')

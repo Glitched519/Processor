@@ -1,22 +1,68 @@
-const Discord = require('discord.js');
-const { getPokemon } = require('../../../utils/getpokemon');
+const { api } = require('some-random-api');
 
 module.exports = {
     run: async (client, message, args) => {
-        const pokemon = args;
-        const pokeData = await getPokemon(pokemon);
-        if (!pokeData) return message.channel.send(":x: **That isn't a valid pokemon.**");
-        const { sprites, stats, weight, name, id, base_experience, abilities, types } = pokeData;
-        const pokeEmbed = new Discord.MessageEmbed()
-            .setThumbnail(`${sprites.front_default}`)
-            .setTitle(`${name} #${id}`);
-        stats.forEach(stat => pokeEmbed.addField(stat.stat.name, stat.base_stat, true));
-        types.forEach(type => pokeEmbed.addField('Type', type.type.name, true));
-        pokeEmbed.addField('Weight', weight);
-        pokeEmbed.addField('Base Experience', base_experience);
-        message.channel.send(pokeEmbed);
-
+        api.pokemon.pokedex(args).then(res => {
+            let pokemonEmbed = {
+                title: `${res.name} (${res.id})`,
+                description: res.description,
+                color: `RANDOM`,
+                thumbnail: {
+                    url: res.sprites.animated
+                },
+                fields: [
+                    {
+                        name: `HP`,
+                        value: res.stats[0],
+                        inline: true
+                    },
+                    {
+                        name: `Attack`,
+                        value: res.stats[1],
+                        inline: true
+                    },
+                    {
+                        name: `Defense`,
+                        value: res.stats[2],
+                        inline: true
+                    },
+                    {
+                        name: `Special Attack`,
+                        value: res.stats[3],
+                        inline: true
+                    },
+                    {
+                        name: `Special Defense`,
+                        value: res.stats[4],
+                        inline: true
+                    },
+                    {
+                        name: `Speed`,
+                        value: res.stats[5],
+                        inline: true
+                    },
+                    {
+                        name: `Height`,
+                        value: res.height,
+                        inline: true
+                    },
+                    {
+                        name: `Weight`,
+                        value: res.weight,
+                        inline: true
+                    },
+                    {
+                        name: `Type`,
+                        value: res.type,
+                        inline: true
+                    },
+                ]
+            }
+            message.channel.send({embed: pokemonEmbed});
+        }).catch(err => {
+            return message.reply(":x: **That isn't a valid pokemon.**")
+        })
     },
     aliases: ['poke'],
-    description: 'Shows the creator of this awesome bot'
+    description: 'Looks up the stats of a pokemon'
 }

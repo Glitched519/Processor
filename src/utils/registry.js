@@ -1,4 +1,3 @@
-const c = require('ansi-colors');
 const fs = require('fs').promises;
 const path = require('path');
 const { checkCommandModule, checkProperties } = require('./validate');
