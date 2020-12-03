@@ -10,7 +10,6 @@ const youtube = new YouTube(config["youtube-token"])
 const queue = new Map();
 
 module.exports = async (client, message) => {
-	//client.user.setActivity(`${client.users.cache.size} members`, { type: 'WATCHING' }).catch(console.error);
 	if (message.author.bot) return;
 
 	if (message.content == '<@!689678745782714464>') {

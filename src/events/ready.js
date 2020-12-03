@@ -1,4 +1,6 @@
+const os = require('os');
 module.exports = async (client) => {
+    client.user.setActivity(`on ${os.version()} @${Number.parseFloat(os.cpus()[0].speed / 1000).toPrecision(2)} GHz`, { type: 'PLAYING' }).catch(console.error);
     console.log("\x1b[36m", `${new Date()}`);
     console.log('\x1b[35m', `  
  _____                                        
