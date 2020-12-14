@@ -1,4 +1,5 @@
-const PREFIX = process.env.PREFIX;
+const config = require('../../../config.json');
+const PREFIX = config["bot-prefix"];
 const userban = require('../../mod/userban');
 const userkick = require('../../mod/userkick');
 const idban = require('../../mod/idban');
@@ -128,10 +129,10 @@ module.exports = {
                     name: ':information_source: Info',
                     value: "Get information about a user or the server.",
                 },
-                {
-                    name: ':musical_note: Music',
-                    value: "Play music.",
-                },
+                // {
+                //     name: ':musical_note: Music',
+                //     value: "Play music.",
+                // },
                 // {
                 //     name: ':newspaper: SYSLX `syslx`',
                 //     value: "[GTA V Mod Menu.](https://discord.gg/zrMMayP)",
@@ -324,8 +325,8 @@ module.exports = {
 
         let musicEmbed = {
             color: `RANDOM`,
-            title: 'Music Commands',
-            description: `Prefix is **${PREFIX}** as in **${PREFIX}help**.`,
+            title: 'Music Commands [SUSPENDED]',
+            description: `Commands won't work until issue is fixed.`,
             fields: [
                 {
                     name: ':arrow_forward: play `<song>`',
@@ -461,7 +462,7 @@ module.exports = {
                 .then(() => msg.react('💙'))
                 .then(() => msg.react('🔢'))
                 .then(() => msg.react('ℹ'))
-                .then(() => msg.react('🎵'))
+                ////.then(() => msg.react('🎵')
                 .then(() => msg.react('⭕'))
 
             const filter = (reaction, user) => {
@@ -519,7 +520,7 @@ module.exports = {
                 .then(() => msg.react('💙'))
                 .then(() => msg.react('🔢'))
                 .then(() => msg.react('ℹ'))
-                .then(() => msg.react('🎵'))
+                //.then(() => msg.react('🎵')
                 .then(() => msg.react('⭕'));
 
             const filter = (reaction, user) => {
@@ -576,7 +577,7 @@ module.exports = {
                 .then(() => msg.react('💙'))
                 .then(() => msg.react('🔢'))
                 .then(() => msg.react('ℹ'))
-                .then(() => msg.react('🎵'))
+                //.then(() => msg.react('🎵')
                 .then(() => msg.react('⭕'))
                 .then(() => msg.react('❌'));
 
@@ -635,7 +636,7 @@ module.exports = {
                 .then(() => msg.react('💙'))
                 .then(() => msg.react('🔢'))
                 .then(() => msg.react('ℹ'))
-                .then(() => msg.react('🎵'))
+                //.then(() => msg.react('🎵')
                 .then(() => msg.react('⭕'));
 
             const filter = (reaction, user) => {
@@ -692,7 +693,7 @@ module.exports = {
                 .then(() => msg.react('⚔'))
                 .then(() => msg.react('🔢'))
                 .then(() => msg.react('ℹ'))
-                .then(() => msg.react('🎵'))
+                //.then(() => msg.react('🎵')
                 .then(() => msg.react('⭕'));
 
             const filter = (reaction, user) => {
@@ -750,7 +751,7 @@ module.exports = {
                 .then(() => msg.react('⚔'))
                 .then(() => msg.react('💙'))
                 .then(() => msg.react('ℹ'))
-                .then(() => msg.react('🎵'))
+                //.then(() => msg.react('🎵')
                 .then(() => msg.react('⭕'));
 
             const filter = (reaction, user) => {
@@ -808,7 +809,7 @@ module.exports = {
                 .then(() => msg.react('⚔'))
                 .then(() => msg.react('💙'))
                 .then(() => msg.react('🔢'))
-                .then(() => msg.react('🎵'))
+                //.then(() => msg.react('🎵')
                 .then(() => msg.react('⭕'));
 
             const filter = (reaction, user) => {
@@ -925,7 +926,7 @@ module.exports = {
                 .then(() => msg.react('💙'))
                 .then(() => msg.react('🔢'))
                 .then(() => msg.react('ℹ'))
-                .then(() => msg.react('🎵'));
+                //.then(() => msg.react('🎵');
 
             const filter = (reaction, user) => {
                 return ['🔼', '❌', '🛡', '🐱', '⚔', '💙', '🔢', 'ℹ', '🎵'].includes(reaction.emoji.name) && user.id === message.author.id;
@@ -989,9 +990,9 @@ module.exports = {
         if (args == "info") {
             return message.channel.send({ embed: infoEmbed });
         }
-        if (args == "music") {
-            return message.channel.send({ embed: musicEmbed });
-        }
+        // if (args == "music") {
+        //     return message.channel.send({ embed: musicEmbed });
+        // }
         if (args == "other") {
             return message.channel.send({ embed: otherEmbed });
         }

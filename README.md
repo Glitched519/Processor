@@ -10,7 +10,6 @@ The prefix for this bot is `$`. Type `$help` to list all the categories of comma
 Processor comes with several fun features that you and your members will appreciate. Here are the most common:
 * `meme` Shows a random picture of a meme from Reddit.
 * `img [thing]` Shows a random picture of the thing specified, if given.
-* `play <music url or result>` Plays the song.
 * `stats [@member]` Shows the stats of the member, otherwise it shows stats of the server.
 
 

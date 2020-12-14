@@ -1,4 +1,5 @@
-const PREFIX = process.env.PREFIX;
+const config = require('../../../config.json');
+const PREFIX = config["bot-prefix"];
 
 module.exports = {
     run: async (client, message, args) => {
@@ -9,6 +10,7 @@ module.exports = {
         else if (statArgs.length === 1 && args !== `${PREFIX}stats`) {
             const member = message.mentions.members.first() || message.guild.members.cache.get(args);
             if (member) {
+                const roleMap = [];
                 const statEmbed = {
                     title: `${member.user.tag} (${member.user.id})`,
                     description: `**Roles:** ${member.roles.cache.map(role => role.toString())}`,
@@ -48,9 +50,10 @@ module.exports = {
         else {
             const roleMap = [];
             const { guild } = message;
-            for (let i = 20; i > 0; i--) {
+            for (let i = 0; i < 20; i++) {
                 roleMap.push(guild.roles.cache.map(role => role.toString())[i])
             }
+            roleMap.shift();
             const statEmbed = {
                 title: `${guild.name} (${guild.id})`,
                 description: `**Top 20 Roles:** ${roleMap}`,

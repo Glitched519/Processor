@@ -11,10 +11,10 @@
   "author": "Partha Sarker",
   "license": "ISC",
   "dependencies": {
+    "@top-gg/sdk": "^3.0.2",
     "bl": "^4.0.3",
     "cheerio": "^1.0.0-rc.3",
     "dbl": "^0.1.12",
-    "dblapi.js": "^2.4.1",
     "discord": "^0.8.2",
     "discord-youtube-api": "^0.1.0",
     "discord.js": "^12.5.0",

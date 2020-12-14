@@ -1,14 +1,13 @@
 const config = require('./config.json');
 const discord = require('discord.js');
 const client = new discord.Client({ partials: ['MESSAGE'] });
-const DBL = require("dblapi.js");
-const express = require('express');
-const http = require('http');
-
+const Topgg = require("@top-gg/sdk");
+const express = require('express')
 const app = express();
-const server = http.createServer(app);
-const dbl = new DBL(config["dbl-token"], { webhookPort: 5000, webhookAuth: "ProcessorDaBest", webhookServer: server }, client);
+const api = new Topgg.Api(config["topgg-token"]);
+const webhook = new Topgg.Webhook(config["topgg-auth"]);
 const { registerCommands, registerEvents } = require('./utils/registry');
+
 
 (async () => {
 	await client.login(config["bot-token"]);
@@ -16,29 +15,18 @@ const { registerCommands, registerEvents } = require('./utils/registry');
 	await registerEvents(client, '../events');
 	await registerCommands(client, '../commands');
 
-	// dbl.on('posted', () => {
-	// 	console.log('Server count posted!');
-	// })
+	setInterval(() => {
+		api.postStats({
+			serverCount: client.guilds.cache.size,
+			//shardId: client.shard.ids[0], // if you're sharding
+			//shardCount: client.options.shardCount
+		})
+	}, 1800000) // post every 30 minutes
 
-	dbl.on('error', e => {
-		console.log(`Oops! ${e}`);
-	})
+	app.post('/dblwebhook', webhook.middleware(), (req, res) => {
+		req.vote // your vote object
+	}) // attach the middleware
 
-	dbl.webhook.on('ready', hook => {
-		console.log(`Webhook running at http://${hook.hostname}:${hook.port}${hook.path}`);
-	});
-
-	dbl.webhook.on('vote', vote => {
-		console.log(`User with ID ${vote.user} just voted!`);
-	});
-
-	app.get('/dblwebhook', (req, res) => {
-		console.log(req);
-		console.log(res);
-	});
-
-	server.listen(5000, () => {
-		console.log('Listening at http://localhost:5000.');
-	});
+	app.listen(3000)
 })();
 
