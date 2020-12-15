@@ -1,4 +1,4 @@
-const token = process.env.GIPHY_TOKEN;
+const config = require('../../../config.json');
 const fetch = require('node-fetch');
 const fs = require('fs');
 
@@ -22,8 +22,8 @@ module.exports = {
             }
         }
 
-        let randomIndex = Math.floor(Math.random() * 10);
-        let url = `https://api.giphy.com/v1/gifs/search?api_key=${token}&limit=10&q=${args}`
+        let randomIndex = Math.floor(Math.random() * 20);
+        let url = `https://api.giphy.com/v1/gifs/search?api_key=${config['giphy-token']}&limit=20&q=${args}`
         fetch(url)
             .then(res => res.json())
             .then(json => {
