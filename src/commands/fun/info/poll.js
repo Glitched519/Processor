@@ -1,5 +1,6 @@
 const PREFIX = process.env.PREFIX;
 const fs = require('fs');
+const emojis = require('../../../emojis.json');
 
 module.exports = {
     run: async (client, message, args) => {
@@ -30,20 +31,10 @@ module.exports = {
             timestamp: new Date()
         }
         message.delete();
-        if (message.guild.id === '662734925707083778') {
-            message.channel.send({ embed: pollEmbed }).then(embedMessage => {
-                const yesEmoji = message.guild.emojis.cache.find(emoji => emoji.name === 'yep');
-                const noEmoji = message.guild.emojis.cache.find(emoji => emoji.name === 'nope');
-                embedMessage.react(yesEmoji);
-                embedMessage.react(noEmoji);
-            });
-        }
-        else {
-            message.channel.send({ embed: pollEmbed }).then(embedMessage => {
-                embedMessage.react('✅');
-                embedMessage.react('❌');
-            });
-        }
+        message.channel.send({ embed: pollEmbed }).then(embedMessage => {
+            embedMessage.react(emojis.yes);
+            embedMessage.react(emojis.no);
+        });
     },
     aliases: [],
     description: 'Sends a poll with two options to react to'

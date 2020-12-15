@@ -1,7 +1,9 @@
+const emojis = require('../../../emojis.json');
+
 module.exports = {
     run: async (client, message, args) => {
         let pingEmbed = {
-
+            title: `${emojis.loading}`
         }
         const msg = await message.channel.send({ embed: pingEmbed });
         msg.edit(
@@ -12,8 +14,7 @@ module.exports = {
                 timestamp: new Date()
             }
         );
-        msg.delete();
-        await message.channel.send({ embed: pingEmbed });
+        await msg.edit({ embed: pingEmbed });
     },
     aliases: ['alive'],
     description: 'Shows the ping'

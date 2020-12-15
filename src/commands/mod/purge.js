@@ -13,7 +13,7 @@ module.exports = {
             const deleteCount = parseInt(args);
 
             if (!deleteCount || deleteCount < 2 || deleteCount > 100)
-                return message.channel.send(":x: **You can only clear between 2 and 100 messages.**")
+                return message.reply(":x: **You can only clear between 2 and 100 messages.**")
                     .then(msg => {
                         msg.delete({ timeout: 4000 });
                     });

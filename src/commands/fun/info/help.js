@@ -452,9 +452,10 @@ module.exports = {
             ]
         }
 
-        function help(msg) {
-            msg.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error));
-            msg.edit({ embed: helpEmbed });
+        async function help(msg) {
+            if (msg.embeds[0].title !== "Need some help?") {
+                msg.edit({ embed: helpEmbed });
+            }
             msg.react('❌')
                 .then(() => msg.react('🛡'))
                 .then(() => msg.react('🐱'))
@@ -464,7 +465,6 @@ module.exports = {
                 .then(() => msg.react('ℹ'))
                 ////.then(() => msg.react('🎵')
                 .then(() => msg.react('⭕'))
-
             const filter = (reaction, user) => {
                 return ['❌', '🛡', '🐱', '⚔', '💙', '🔢', 'ℹ', '🎵', '⭕'].includes(reaction.emoji.name) && user.id === message.author.id;
             };
@@ -511,7 +511,6 @@ module.exports = {
         }
 
         function mod(msg) {
-            msg.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error));
             msg.edit({ embed: modEmbed });
             msg.react('🔼')
                 .then(() => msg.react('❌'))
@@ -569,7 +568,6 @@ module.exports = {
         }
 
         function animal(msg) {
-            msg.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error));
             msg.edit({ embed: animalEmbed });
             msg.react('🔼')
                 .then(() => msg.react('🛡'))
@@ -627,7 +625,6 @@ module.exports = {
         }
 
         function clash(msg) {
-            msg.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error));
             msg.edit({ embed: clashEmbed });
             msg.react('🔼')
                 .then(() => msg.react('❌'))
@@ -684,7 +681,6 @@ module.exports = {
         }
 
         function cute(msg) {
-            msg.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error));
             msg.edit({ embed: cuteEmbed });
             msg.react('🔼')
                 .then(() => msg.react('❌'))
@@ -742,7 +738,6 @@ module.exports = {
         }
 
         function math(msg) {
-            msg.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error));
             msg.edit({ embed: mathEmbed });
             msg.react('🔼')
                 .then(() => msg.react('❌'))
@@ -800,7 +795,6 @@ module.exports = {
         }
 
         function info(msg) {
-            msg.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error));
             msg.edit({ embed: infoEmbed });
             msg.react('🔼')
                 .then(() => msg.react('❌'))
@@ -858,7 +852,6 @@ module.exports = {
         }
 
         function music(msg) {
-            msg.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error));
             msg.edit({ embed: musicEmbed });
             msg.react('🔼')
                 .then(() => msg.react('❌'))
@@ -916,7 +909,6 @@ module.exports = {
         }
 
         function other(msg) {
-            msg.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error));
             msg.edit({ embed: otherEmbed });
             msg.react('🔼')
                 .then(() => msg.react('❌'))

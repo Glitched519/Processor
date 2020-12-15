@@ -1,9 +1,10 @@
 const getphone = require('../../../utils/getphone');
 const fetch = require('node-fetch');
+const emojis = require('../../../emojis.json');
 
 module.exports = {
     run: async (client, message, args) => {
-        message.channel.send(`:clock1: **Please wait... If it takes too long, check your spelling and try again.**\n Not sure what phone to search? Try OnePlus 8.`);
+        message.channel.send(`**Please wait... If it takes too long, check your spelling and try again.${emojis.loading}**\nNot sure what phone to search? Try OnePlus 8.`);
         fetch(`http://localhost:8888/gsmarena/search/phone/${args}`)
             .then(res => res.json())
             .then(json => {
