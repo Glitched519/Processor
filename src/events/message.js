@@ -12,6 +12,8 @@ const queue = new Map();
 module.exports = async (client, message) => {
 	if (message.author.bot) return;
 
+	if (message.channel.type === 'news') message.crosspost();
+
 	if (message.content == '<@!689678745782714464>') {
 		return message.reply(`hi! My prefix is **${PREFIX}**. You can summon my help page using **${PREFIX}help**.`)
 	}
