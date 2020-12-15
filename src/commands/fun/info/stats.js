@@ -16,7 +16,7 @@ module.exports = {
                     description: `**Roles:** ${member.roles.cache.map(role => role.toString())}`,
                     color: `RANDOM`,
                     thumbnail: {
-                        url: member.user.displayAvatarURL(),
+                        url: `https://cdn.discordapp.com/avatars/${message.author.id}/${message.author.avatar}.gif`
                     },
                     fields: [
                         {

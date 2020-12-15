@@ -15,7 +15,7 @@ module.exports = {
             let avatarEmbed = {
                 color: `RANDOM`,
                 image: {
-                    url: message.author.displayAvatarURL()
+                    url: `https://cdn.discordapp.com/avatars/${message.author.id}/${message.author.avatar}.gif`
                 },
                 timestamp: new Date()
             };
