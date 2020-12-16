@@ -5,9 +5,8 @@ module.exports = {
             let userAvatarEmbed = {
                 color: `RANDOM`,
                 image: {
-                    url: member.user.displayAvatarURL()
+                    url: `https://cdn.discordapp.com/avatars/${member.user.id}/${member.user.avatar}.gif`
                 },
-                timestamp: new Date()
             };
             return message.channel.send({ embed: userAvatarEmbed });
         }
@@ -17,7 +16,6 @@ module.exports = {
                 image: {
                     url: `https://cdn.discordapp.com/avatars/${message.author.id}/${message.author.avatar}.gif`
                 },
-                timestamp: new Date()
             };
             return message.channel.send({ embed: avatarEmbed });
         }
