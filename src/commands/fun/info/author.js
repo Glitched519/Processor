@@ -3,7 +3,7 @@ module.exports = {
         let authorEmbed = {
             color: `RANDOM`,
             title: `Hi, I'm ${client.user.tag}`,
-            description: 'I am currently being developed by <@!638064155965915187> :blue_heart:',
+            description: 'I am currently being developed by <@!638064155965915187> and <@!749985510889619576> :blue_heart:',
             thumbnail: {
                 url: client.user.displayAvatarURL(),
             },
