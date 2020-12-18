@@ -296,8 +296,10 @@ module.exports = async (client, message) => {
 	// 	});
 	// 	if (serverQueue.songs.length == 0) return voiceChannel.leave();
 	// }
-	let cmdName = message.content.substring(message.content.indexOf(PREFIX) + 1).split(new RegExp(/\s+/)).shift();
-	let argsToParse = message.content.substring(message.content.indexOf(' ') + 1);
+	let cmdName = message.content.substring(message.content.indexOf(PREFIX) + PREFIX.length).split(new RegExp(/\s+/)).shift();
+	let argsToParse = message.content.substring(message.content.indexOf(' ') + PREFIX.length);
+	console.log(cmdName)
+	console.log(argsToParse);
 
 	if (client.commands.get(cmdName.toLowerCase()) && message.content.startsWith(`${PREFIX}`)) {
 		if (!message.guild.me.hasPermission("EMBED_LINKS")) {
