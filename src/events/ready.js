@@ -9,7 +9,6 @@ module.exports = async (client) => {
             `${client.users.cache.size} members`,
             `${client.guilds.cache.size} servers`,
             `Isopropyl#3066 and Frash#4113`,
-
         ]
         const status = statuses[Math.floor(Math.random() * statuses.length)];
         client.user.setActivity(status, { type: 'WATCHING' }).catch(console.error);

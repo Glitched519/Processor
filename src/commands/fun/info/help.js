@@ -53,10 +53,6 @@ const permissions = require('../../mod/permissions');
 
 module.exports = {
     run: async (client, message, args) => {
-        let closedEmbed = {
-            title: 'Help Closed',
-            description: 'Deleting this message in a few seconds...'
-        }
         let helpFallbackEmbed = {
             color: `RANDOM`,
             title: 'Need some help?',
@@ -456,29 +452,26 @@ module.exports = {
             if (msg.embeds[0].title !== "Need some help?") {
                 msg.edit({ embed: helpEmbed });
             }
-            msg.react('❌')
-                .then(() => msg.react('🛡'))
+            msg.react('🛡')
                 .then(() => msg.react('🐱'))
                 .then(() => msg.react('⚔'))
                 .then(() => msg.react('💙'))
                 .then(() => msg.react('🔢'))
                 .then(() => msg.react('ℹ'))
-                ////.then(() => msg.react('🎵')
                 .then(() => msg.react('⭕'))
+                ////.then(() => msg.react('🎵')
+                .then(() => msg.react('❌'))
             const filter = (reaction, user) => {
                 return ['❌', '🛡', '🐱', '⚔', '💙', '🔢', 'ℹ', '🎵', '⭕'].includes(reaction.emoji.name) && user.id === message.author.id;
             };
 
-            msg.awaitReactions(filter, { max: 1, time: 300000, errors: ['time'] })
+            msg.awaitReactions(filter, { max: 1, time: 600000, errors: ['time'] })
                 .then(collected => {
                     const reaction = collected.first();
 
                     switch (reaction.emoji.name) {
                         case '❌':
-                            return msg.edit({embed: closedEmbed})
-                            .then(msg => {
-                                msg.delete({ timeout: 7000 });
-                            });
+                            return msg.delete();
                         case '🛡':
                             mod(msg);
                             break;
@@ -513,20 +506,20 @@ module.exports = {
         function mod(msg) {
             msg.edit({ embed: modEmbed });
             msg.react('🔼')
-                .then(() => msg.react('❌'))
                 .then(() => msg.react('🐱'))
                 .then(() => msg.react('⚔'))
                 .then(() => msg.react('💙'))
                 .then(() => msg.react('🔢'))
                 .then(() => msg.react('ℹ'))
                 //.then(() => msg.react('🎵')
-                .then(() => msg.react('⭕'));
+                .then(() => msg.react('⭕'))
+                .then(() => msg.react('❌'))
 
             const filter = (reaction, user) => {
                 return ['🔼', '❌', '🐱', '⚔', '💙', '🔢', 'ℹ', '🎵', '⭕'].includes(reaction.emoji.name) && user.id === message.author.id;
             };
 
-            msg.awaitReactions(filter, { max: 1, time: 300000, errors: ['time'] })
+            msg.awaitReactions(filter, { max: 1, time: 600000, errors: ['time'] })
                 .then(collected => {
                     const reaction = collected.first();
 
@@ -535,10 +528,7 @@ module.exports = {
                             help(msg);
                             break;
                         case '❌':
-                            return msg.edit({embed: closedEmbed})
-                            .then(msg => {
-                                msg.delete({ timeout: 7000 });
-                            });
+                            return msg.delete();
                         case '🐱':
                             animal(msg);
                             break;
@@ -583,7 +573,7 @@ module.exports = {
                 return ['🔼', '❌', '🛡', '⚔', '💙', '🔢', 'ℹ', '🎵', '⭕'].includes(reaction.emoji.name) && user.id === message.author.id;
             };
 
-            msg.awaitReactions(filter, { max: 1, time: 300000, errors: ['time'] })
+            msg.awaitReactions(filter, { max: 1, time: 600000, errors: ['time'] })
                 .then(collected => {
                     const reaction = collected.first();
 
@@ -592,10 +582,7 @@ module.exports = {
                             help(msg);
                             break;
                         case '❌':
-                            return msg.edit({embed: closedEmbed})
-                            .then(msg => {
-                                msg.delete({ timeout: 7000 });
-                            });
+                            return msg.delete();
                         case '🛡':
                             mod(msg);
                             break;
@@ -627,20 +614,20 @@ module.exports = {
         function clash(msg) {
             msg.edit({ embed: clashEmbed });
             msg.react('🔼')
-                .then(() => msg.react('❌'))
                 .then(() => msg.react('🛡'))
                 .then(() => msg.react('🐱'))
                 .then(() => msg.react('💙'))
                 .then(() => msg.react('🔢'))
                 .then(() => msg.react('ℹ'))
                 //.then(() => msg.react('🎵')
-                .then(() => msg.react('⭕'));
+                .then(() => msg.react('⭕'))
+                .then(() => msg.react('❌'))
 
             const filter = (reaction, user) => {
                 return ['🔼', '❌', '🛡', '🐱', '💙', '🔢', 'ℹ', '🎵', '⭕'].includes(reaction.emoji.name) && user.id === message.author.id;
             };
 
-            msg.awaitReactions(filter, { max: 1, time: 300000, errors: ['time'] })
+            msg.awaitReactions(filter, { max: 1, time: 600000, errors: ['time'] })
                 .then(collected => {
                     const reaction = collected.first();
 
@@ -649,10 +636,7 @@ module.exports = {
                             help(msg);
                             break;
                         case '❌':
-                            return msg.edit({embed: closedEmbed})
-                            .then(msg => {
-                                msg.delete({ timeout: 7000 });
-                            });
+                            return msg.delete();
                         case '🛡':
                             mod(msg);
                             break;
@@ -683,20 +667,20 @@ module.exports = {
         function cute(msg) {
             msg.edit({ embed: cuteEmbed });
             msg.react('🔼')
-                .then(() => msg.react('❌'))
                 .then(() => msg.react('🛡'))
                 .then(() => msg.react('🐱'))
                 .then(() => msg.react('⚔'))
                 .then(() => msg.react('🔢'))
                 .then(() => msg.react('ℹ'))
                 //.then(() => msg.react('🎵')
-                .then(() => msg.react('⭕'));
+                .then(() => msg.react('⭕'))
+                .then(() => msg.react('❌'))
 
             const filter = (reaction, user) => {
                 return ['🔼', '❌', '🛡', '🐱', '⚔', '🔢', 'ℹ', '🎵', '⭕'].includes(reaction.emoji.name) && user.id === message.author.id;
             };
 
-            msg.awaitReactions(filter, { max: 1, time: 300000, errors: ['time'] })
+            msg.awaitReactions(filter, { max: 1, time: 600000, errors: ['time'] })
                 .then(collected => {
                     const reaction = collected.first();
 
@@ -705,10 +689,7 @@ module.exports = {
                             help(msg);
                             break;
                         case '❌':
-                            return msg.edit({embed: closedEmbed})
-                            .then(msg => {
-                                msg.delete({ timeout: 7000 });
-                            });
+                            return msg.delete();
                         case '🛡':
                             mod(msg);
                             break;
@@ -740,20 +721,20 @@ module.exports = {
         function math(msg) {
             msg.edit({ embed: mathEmbed });
             msg.react('🔼')
-                .then(() => msg.react('❌'))
                 .then(() => msg.react('🛡'))
                 .then(() => msg.react('🐱'))
                 .then(() => msg.react('⚔'))
                 .then(() => msg.react('💙'))
                 .then(() => msg.react('ℹ'))
                 //.then(() => msg.react('🎵')
-                .then(() => msg.react('⭕'));
+                .then(() => msg.react('⭕'))
+                .then(() => msg.react('❌'))
 
             const filter = (reaction, user) => {
                 return ['🔼', '❌', '🛡', '🐱', '⚔', '💙', 'ℹ', '🎵', '⭕'].includes(reaction.emoji.name) && user.id === message.author.id;
             };
 
-            msg.awaitReactions(filter, { max: 1, time: 300000, errors: ['time'] })
+            msg.awaitReactions(filter, { max: 1, time: 600000, errors: ['time'] })
                 .then(collected => {
                     const reaction = collected.first();
 
@@ -762,10 +743,7 @@ module.exports = {
                             help(msg);
                             break;
                         case '❌':
-                            return msg.edit({embed: closedEmbed})
-                            .then(msg => {
-                                msg.delete({ timeout: 7000 });
-                            });
+                            return msg.delete();
                         case '🛡':
                             mod(msg);
                             break;
@@ -797,20 +775,20 @@ module.exports = {
         function info(msg) {
             msg.edit({ embed: infoEmbed });
             msg.react('🔼')
-                .then(() => msg.react('❌'))
                 .then(() => msg.react('🛡'))
                 .then(() => msg.react('🐱'))
                 .then(() => msg.react('⚔'))
                 .then(() => msg.react('💙'))
                 .then(() => msg.react('🔢'))
                 //.then(() => msg.react('🎵')
-                .then(() => msg.react('⭕'));
+                .then(() => msg.react('⭕'))
+                .then(() => msg.react('❌'))
 
             const filter = (reaction, user) => {
                 return ['🔼', '❌', '🛡', '🐱', '⚔', '💙', '🔢', '🎵', '⭕'].includes(reaction.emoji.name) && user.id === message.author.id;
             };
 
-            msg.awaitReactions(filter, { max: 1, time: 300000, errors: ['time'] })
+            msg.awaitReactions(filter, { max: 1, time: 600000, errors: ['time'] })
                 .then(collected => {
                     const reaction = collected.first();
 
@@ -819,10 +797,7 @@ module.exports = {
                             help(msg);
                             break;
                         case '❌':
-                            return msg.edit({embed: closedEmbed})
-                            .then(msg => {
-                                msg.delete({ timeout: 7000 });
-                            });
+                            return msg.delete();
                         case '🛡':
                             mod(msg);
                             break;
@@ -854,20 +829,20 @@ module.exports = {
         function music(msg) {
             msg.edit({ embed: musicEmbed });
             msg.react('🔼')
-                .then(() => msg.react('❌'))
                 .then(() => msg.react('🛡'))
                 .then(() => msg.react('🐱'))
                 .then(() => msg.react('⚔'))
                 .then(() => msg.react('💙'))
                 .then(() => msg.react('🔢'))
                 .then(() => msg.react('ℹ'))
-                .then(() => msg.react('⭕'));
+                .then(() => msg.react('⭕'))
+                .then(() => msg.react('❌'))
 
             const filter = (reaction, user) => {
                 return ['🔼', '❌', '🛡', '🐱', '⚔', '💙', '🔢', 'ℹ', '⭕'].includes(reaction.emoji.name) && user.id === message.author.id;
             };
 
-            msg.awaitReactions(filter, { max: 1, time: 300000, errors: ['time'] })
+            msg.awaitReactions(filter, { max: 1, time: 600000, errors: ['time'] })
                 .then(collected => {
                     const reaction = collected.first();
 
@@ -876,10 +851,7 @@ module.exports = {
                             help(msg);
                             break;
                         case '❌':
-                            return msg.edit({embed: closedEmbed})
-                            .then(msg => {
-                                msg.delete({ timeout: 7000 });
-                            });
+                            return msg.delete();
                         case '🛡':
                             mod(msg);
                             break;
@@ -924,7 +896,7 @@ module.exports = {
                 return ['🔼', '❌', '🛡', '🐱', '⚔', '💙', '🔢', 'ℹ', '🎵'].includes(reaction.emoji.name) && user.id === message.author.id;
             };
 
-            msg.awaitReactions(filter, { max: 1, time: 300000, errors: ['time'] })
+            msg.awaitReactions(filter, { max: 1, time: 600000, errors: ['time'] })
                 .then(collected => {
                     const reaction = collected.first();
 
@@ -933,10 +905,7 @@ module.exports = {
                             help(msg);
                             break;
                         case '❌':
-                            return msg.edit({embed: closedEmbed})
-                            .then(msg => {
-                                msg.delete({ timeout: 7000 });
-                            });
+                            return msg.delete();
                         case '🛡':
                             mod(msg);
                             break;
