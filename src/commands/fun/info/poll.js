@@ -1,12 +1,12 @@
-const PREFIX = process.env.PREFIX;
+const config = require('../../../config.json');
+const PREFIX = config['bot-prefix'];
 const fs = require('fs');
 const emojis = require('../../../emojis.json');
 
 module.exports = {
     run: async (client, message, args) => {
-        if (message.content == PREFIX) return;
         if (message.guild.me.hasPermission('MANAGE_MESSAGES')) message.delete();
-        if (message.content == `${PREFIX}poll`) return;
+        if (args === `${PREFIX}poll`) return;
         let bannedWords = fs.readFileSync('./events/bannedwords.txt').toString().split("\r\n");
         let bannedPhrases = fs.readFileSync('./events/bannedphrases.txt').toString().split("\r\n");
         let msg = message.content.toLowerCase();

@@ -24,6 +24,7 @@ module.exports = {
         if (args == `${PREFIX}echo`) return;
         if (args == `${PREFIX}say`) return;
         if (args.includes("@everyone")) return;
+        if (args.includes("@here")) return;
         message.channel.send(args);
     },
     aliases: ['say'],

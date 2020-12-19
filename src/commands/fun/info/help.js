@@ -992,8 +992,8 @@ module.exports = {
             return message.channel.send({ embed: SYSLXEmbed });
         }
 
-        if (!message.guild.me.hasPermission(["READ_MESSAGE_HISTORY", "ADD_REACTIONS", "MANAGE_MESSAGES"])) {
-            message.channel.send(`:grey_question: If you wish to use reactions to navigate the help menu, please make make the following permissions are enabled:\n**Read Messages\nAdd Reactions\nRead Message History**\nUsage: ${PREFIX}help \`[topic]\``);
+        if (!message.guild.me.hasPermission(["READ_MESSAGE_HISTORY", "ADD_REACTIONS"])) {
+            message.channel.send(`:grey_question: If you wish to use reactions to navigate the help menu, please make make the following permissions are enabled:\n**Read Messages\nAdd Reactions**\nUsage: ${PREFIX}help \`[topic]\``);
             return message.channel.send({embed: helpFallbackEmbed});
         }
         message.channel.send({ embed: helpEmbed }).then((msg) => {

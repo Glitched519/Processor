@@ -1,13 +1,13 @@
 const config = require('../config.json');
 const fs = require('fs');
-const ytdl = require('ytdl-core');
-const YouTube = require('simple-youtube-api');
-const { Util } = require('discord.js');
+// const ytdl = require('ytdl-core');
+// const YouTube = require('simple-youtube-api');
+// const { Util } = require('discord.js');
 const PREFIX = config["bot-prefix"];
 
-const youtube = new YouTube(config["youtube-token"])
+//const youtube = new YouTube(config["youtube-token"])
 
-const queue = new Map();
+// const queue = new Map();
 
 module.exports = async (client, message) => {
 	if (message.author.bot) return;
@@ -297,9 +297,7 @@ module.exports = async (client, message) => {
 	// 	if (serverQueue.songs.length == 0) return voiceChannel.leave();
 	// }
 	let cmdName = message.content.substring(message.content.indexOf(PREFIX) + PREFIX.length).split(new RegExp(/\s+/)).shift();
-	let argsToParse = message.content.substring(message.content.indexOf(' ') + PREFIX.length);
-	console.log(cmdName)
-	console.log(argsToParse);
+	let argsToParse = message.content.substring(message.content.indexOf(' ') + 1);
 
 	if (client.commands.get(cmdName.toLowerCase()) && message.content.startsWith(`${PREFIX}`)) {
 		if (!message.guild.me.hasPermission("EMBED_LINKS")) {
