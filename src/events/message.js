@@ -5,8 +5,7 @@ const fs = require('fs');
 // const { Util } = require('discord.js');
 const PREFIX = config["bot-prefix"];
 
-//const youtube = new YouTube(config["youtube-token"])
-
+//const youtube = new YouTube(config["youtube-token"]);
 // const queue = new Map();
 
 module.exports = async (client, message) => {
