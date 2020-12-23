@@ -8,7 +8,6 @@ const api = new Topgg.Api(config["topgg-token"]);
 const webhook = new Topgg.Webhook(config["topgg-auth"]);
 const { registerCommands, registerEvents } = require('./utils/registry');
 
-
 (async () => {
 	await client.login(config["bot-token"]);
 	client.commands = new Map();
@@ -29,4 +28,3 @@ const { registerCommands, registerEvents } = require('./utils/registry');
 
 	app.listen(3000)
 })();
-

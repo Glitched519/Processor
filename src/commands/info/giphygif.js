@@ -1,12 +1,10 @@
-const config = require('../../../config.json');
-const PREFIX = config['bot-prefix'];
+const config = require('../../config.json');
+const fetch = require('node-fetch');
 const fs = require('fs');
-const emojis = require('../../../emojis.json');
 
 module.exports = {
     run: async (client, message, args) => {
-        if (message.guild.me.hasPermission('MANAGE_MESSAGES')) message.delete();
-        if (args === `${PREFIX}poll`) return;
+
         let bannedWords = fs.readFileSync('./events/bannedwords.txt').toString().split("\r\n");
         let bannedPhrases = fs.readFileSync('./events/bannedphrases.txt').toString().split("\r\n");
         let msg = message.content.toLowerCase();
@@ -24,18 +22,20 @@ module.exports = {
             }
         }
 
-        let pollEmbed = {
-            color: `RANDOM`,
-            title: `${message.author.username} asks...`,
-            description: args,
-            timestamp: new Date()
-        }
-        message.delete();
-        message.channel.send({ embed: pollEmbed }).then(embedMessage => {
-            embedMessage.react(emojis.yes);
-            embedMessage.react(emojis.no);
-        });
+        let randomIndex = Math.floor(Math.random() * 20);
+        let url = `https://api.giphy.com/v1/gifs/search?api_key=${config['giphy-token']}&limit=20&q=${args}`
+        fetch(url)
+            .then(res => res.json())
+            .then(json => {
+                let gifEmbed = {
+                    image: {
+                        url: json.data[randomIndex].images.original.url
+                    },
+                    timestamp: new Date()
+                }
+                message.channel.send({ embed: gifEmbed });
+            });
     },
-    aliases: [],
-    description: 'Sends a poll with two options to react to'
+    aliases: ['gif', 'giphy'],
+    description: 'Shows a random GIF with given search item'
 }

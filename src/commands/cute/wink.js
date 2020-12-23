@@ -1,5 +1,5 @@
 const { api } = require("some-random-api");
-const config = require('../../../config.json');
+const config = require('../../config.json');
 const PREFIX = config["bot-prefix"];
 
 module.exports = {

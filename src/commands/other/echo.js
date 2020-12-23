@@ -1,4 +1,4 @@
-const config = require('../../../config.json');
+const config = require('../../config.json');
 const PREFIX = config["bot-prefix"];
 const fs = require('fs')
 

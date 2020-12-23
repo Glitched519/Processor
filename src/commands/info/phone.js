@@ -1,6 +1,6 @@
-const getphone = require('../../../utils/getphone');
+const getphone = require('../../utils/getphone');
 const fetch = require('node-fetch');
-const emojis = require('../../../emojis.json');
+const emojis = require('../../emojis.json');
 
 module.exports = {
     run: async (client, message, args) => {
