@@ -1,3 +1,4 @@
+const { MessageEmbed } = require('discord.js');
 const BaseCommand = require('../../utils/structures/BaseCommand');
 
 module.exports = class Guild extends BaseCommand {

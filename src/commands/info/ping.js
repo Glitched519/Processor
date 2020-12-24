@@ -14,8 +14,8 @@ module.exports = class Ping extends BaseCommand {
     msg.edit(
       pingEmbed = {
         color: `RANDOM`,
-        title: "Pong!",
-        description: `**Latency:** ${msg.createdTimestamp - message.createdTimestamp}ms\n**API Latency:** ${Math.round(message.client.ws.ping)}ms`,
+        title: ":ping_pong: Pong!",
+        description: `${emojis.bot} **Bot Latency:** ${msg.createdTimestamp - message.createdTimestamp}ms\n${emojis.api} **API Latency:** ${Math.round(message.client.ws.ping)}ms`,
         timestamp: new Date()
       }
     );

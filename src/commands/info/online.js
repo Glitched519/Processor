@@ -1,4 +1,5 @@
 const BaseCommand = require('../../utils/structures/BaseCommand');
+const emojis = require('../../emojis.json');
 
 module.exports = class Online extends BaseCommand {
   constructor() {
@@ -7,6 +8,6 @@ module.exports = class Online extends BaseCommand {
 
   run(client, message, args) {
     var onlineCount = message.guild.members.cache.filter(m => m.presence.status === 'online').size;
-    message.channel.send(`There are currently **${onlineCount}** members online in ${message.guild.name}.`);
+    message.channel.send(`${emojis.online} There are currently **${onlineCount}** members online in ${message.guild.name}.`);
   }
 }
