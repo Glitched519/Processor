@@ -1,49 +1,51 @@
-const config = require('../../config.json');
-const PREFIX = config["bot-prefix"];
+const BaseCommand = require('../../utils/structures/BaseCommand');
 
-module.exports = {
-    run: async (client, message, args) => {
-        let reason = args.slice(22);
-        let memberTag = args.split(" ")[0];
-        if (!message.guild.me.hasPermission('BAN_MEMBERS')) {
-            return message.channel.send(":x: **I need the `Ban Members` permission to ban a member.**")
-                .then(msg => {
-                    msg.delete({ timeout: 4000 });
-                });
-        }
-        if (!message.member.hasPermission('BAN_MEMBERS')) {
-            return message.channel.send(":x: **You need the `Ban Members` permission to ban a member.**")
-                .then(msg => {
-                    msg.delete({ timeout: 4000 });
-                });
-        }
+module.exports = class Userban extends BaseCommand {
+  constructor() {
+    super('userban', 'mod', ['ban', 'uban', 'banuser', 'userban']);
+  }
 
-        let member = message.mentions.members.first();
-        if (!member)
-            return message.reply(":x: **Please mention a valid member of this server.**")
-                .then(msg => {
-                    msg.delete({ timeout: 4000 });
-                });
-        if (!member.bannable)
-            return message.reply(":x: **Not possible to ban this member.**")
-                .then(msg => {
-                    msg.delete({ timeout: 4000 });
-                });
+  async run(client, message, args) {
+    let memberTag = args.shift();
+    let reason = args.join(' ');
 
-        if (!reason) reason = "No reason provided.";
+    if (!message.guild.me.hasPermission('BAN_MEMBERS')) {
+      return message.channel.send(":x: **I need the `Ban Members` permission to ban a member.**")
+        .then(msg => {
+          msg.delete({ timeout: 4000 });
+        });
+    }
+    if (!message.member.hasPermission('BAN_MEMBERS')) {
+      return message.channel.send(":x: **You need the `Ban Members` permission to ban a member.**")
+        .then(msg => {
+          msg.delete({ timeout: 4000 });
+        });
+    }
 
-        await member.ban({ days: 7, reason: reason })
-            .catch(error => message.reply(`**Sorry ${message.author}. I couldn't ban because of: ${error}**`));
-        message.guild.members.ban(member);
+    let member = message.mentions.members.first();
+    if (!member)
+      return message.reply(":x: **Please mention a valid member of this server.**")
+        .then(msg => {
+          msg.delete({ timeout: 4000 });
+        });
+    if (!member.bannable)
+      return message.reply(":x: **Not possible to ban this member.**")
+        .then(msg => {
+          msg.delete({ timeout: 4000 });
+        });
 
-        let banEmbed = {
-            title: ":hammer_pick: Member Banned :hammer_pick: ",
-            description: "**Member: **" + member.user.tag + "\n**Reason: **" + reason,
-            color: "#fc1c03",
-            timestamp: new Date()
-        }
-        message.channel.send({ embed: banEmbed });
-    },
-    aliases: ['ban', 'uban', 'banuser', 'userban'],
-    description: 'Bans a user via __tag__'
+    if (reason == '') reason = "No reason provided.";
+
+    await member.ban({ days: 7, reason: reason })
+      .catch(error => message.reply(`**Sorry ${message.author}. I couldn't ban because of: ${error}**`));
+    message.guild.members.ban(member);
+
+    let banEmbed = {
+      title: ":hammer_pick: Member Banned :hammer_pick: ",
+      description: `**Member: **<@!${member.user.id}>\n**Reason: **${reason}`,
+      color: "#fc1c03",
+      timestamp: new Date()
+    }
+    message.channel.send({ embed: banEmbed });
+  }
 }

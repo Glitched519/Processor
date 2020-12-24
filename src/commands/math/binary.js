@@ -1,11 +1,11 @@
-const config = require('../../config.json');
-const PREFIX = config["bot-prefix"];
+const BaseCommand = require('../../utils/structures/BaseCommand');
 
-module.exports = {
-    run: async (client, message, args) => {
-        if (args.startsWith(`${PREFIX}bin`)) return;
-        message.channel.send('`' + Number(args).toString(2).toUpperCase() + '`');
-    },
-    aliases: ['bin'],
-    description: 'Converts number to binary'
+module.exports = class Binary extends BaseCommand {
+  constructor() {
+    super('binary', 'math', ['bin']);
+  }
+
+  run(client, message, args) {
+    message.channel.send('`' + Number(args[0]).toString(2).toUpperCase() + '`');
+  }
 }

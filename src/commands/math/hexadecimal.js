@@ -1,11 +1,11 @@
-const config = require('../../config.json');
-const PREFIX = config["bot-prefix"];
+const BaseCommand = require('../../utils/structures/BaseCommand');
 
-module.exports = {
-    run: async (client, message, args) => {
-        if (args.startsWith(`${PREFIX}hex`)) return;
-        message.channel.send('`' + Number(args).toString(16).toUpperCase() + '`');
-    },
-    aliases: ['hex', 'base16', 'b16'],
-    description: 'Converts number to hexadecimal'
+module.exports = class Hexadecimal extends BaseCommand {
+  constructor() {
+    super('hexadecimal', 'math', ['hex', 'base16', 'b16']);
+  }
+
+  run(client, message, args) {
+    message.channel.send('`' + Number(args[0]).toString(16).toUpperCase() + '`');
+  }
 }

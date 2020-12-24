@@ -2,40 +2,42 @@ const config = require('../../config.json');
 const PREFIX = config['bot-prefix'];
 const fs = require('fs');
 const emojis = require('../../emojis.json');
+const BaseCommand = require('../../utils/structures/BaseCommand');
 
-module.exports = {
-    run: async (client, message, args) => {
-        if (message.guild.me.hasPermission('MANAGE_MESSAGES')) message.delete();
-        if (args === `${PREFIX}poll`) return;
-        let bannedWords = fs.readFileSync('./events/bannedwords.txt').toString().split("\r\n");
-        let bannedPhrases = fs.readFileSync('./events/bannedphrases.txt').toString().split("\r\n");
-        let msg = message.content.toLowerCase();
-        let wordsOnlyMsg = msg.replace(/[.?!#$%^&*,-_+=]/g, ' ');
-        let words = wordsOnlyMsg.split(/\s+/);
+module.exports = class Poll extends BaseCommand {
+  constructor() {
+    super('poll', 'info', []);
+  }
 
-        // Checks if parameter is an nsfw term. Blocks command in non-nsfw channels.
-        if (!message.channel.nsfw) {
-            for (let i = 0; i < bannedWords.length; i++) {
-                if (words.includes(bannedWords[i])) return;
-            }
+  run(client, message, args) {
+    if (args.length == 0) return;
+    if (message.guild.me.hasPermission('MANAGE_MESSAGES')) message.delete();
+    let bannedWords = fs.readFileSync('./events/bannedwords.txt').toString().split("\r\n");
+    let bannedPhrases = fs.readFileSync('./events/bannedphrases.txt').toString().split("\r\n");
+    let msg = message.content.toLowerCase();
+    let wordsOnlyMsg = msg.replace(/[.?!#$%^&*,-_+=]/g, ' ');
+    let words = wordsOnlyMsg.split(/\s+/);
 
-            for (let j = 0; j < bannedPhrases.length; j++) {
-                if (msg.includes(bannedPhrases[j])) return;
-            }
-        }
+    // Checks if parameter is an nsfw term. Blocks command in non-nsfw channels.
+    if (!message.channel.nsfw) {
+      for (let i = 0; i < bannedWords.length; i++) {
+        if (words.includes(bannedWords[i])) return;
+      }
 
-        let pollEmbed = {
-            color: `RANDOM`,
-            title: `${message.author.username} asks...`,
-            description: args,
-            timestamp: new Date()
-        }
-        message.delete();
-        message.channel.send({ embed: pollEmbed }).then(embedMessage => {
-            embedMessage.react(emojis.yes);
-            embedMessage.react(emojis.no);
-        });
-    },
-    aliases: [],
-    description: 'Sends a poll with two options to react to'
+      for (let j = 0; j < bannedPhrases.length; j++) {
+        if (msg.includes(bannedPhrases[j])) return;
+      }
+    }
+
+    let pollEmbed = {
+      color: `RANDOM`,
+      title: `${message.author.username} asks...`,
+      description: args.join(' '),
+      timestamp: new Date()
+    }
+    message.channel.send({ embed: pollEmbed }).then(embedMessage => {
+      embedMessage.react(emojis.yes);
+      embedMessage.react(emojis.no);
+    });
+  }
 }

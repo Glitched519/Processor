@@ -1,11 +1,11 @@
-const config = require('../../config.json');
-const PREFIX = config["bot-prefix"];
+const BaseCommand = require('../../utils/structures/BaseCommand');
 
-module.exports = {
-    run: async (client, message, args) => {
-        if (args.startsWith(`${PREFIX}b32`)) return;
-        message.channel.send('`' + Number(args).toString(32).toUpperCase() + '`');
-    },
-    aliases: ['b32'],
-    description: 'Converts number to base32'
+module.exports = class Base32 extends BaseCommand {
+  constructor() {
+    super('base32', 'math', ['b32']);
+  }
+
+  run(client, message, args) {
+    message.channel.send('`' + Number(args[0]).toString(32).toUpperCase() + '`');
+  }
 }

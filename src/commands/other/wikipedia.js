@@ -1,12 +1,17 @@
 const fs = require('fs');
+const BaseCommand = require('../../utils/structures/BaseCommand');
 
-module.exports = {
-    run: async (client, message, args) => {
+module.exports = class Wikipedia extends BaseCommand {
+  constructor() {
+    super('wikipedia', 'other', ['wiki']);
+  }
 
-        let bannedWords = fs.readFileSync('./events/bannedwords.txt').toString().split("\r\n");
+  run(client, message, args) {
+    if (args.length == 0) return;
+    let bannedWords = fs.readFileSync('./events/bannedwords.txt').toString().split("\r\n");
         let bannedPhrases = fs.readFileSync('./events/bannedphrases.txt').toString().split("\r\n");
         let msg = message.content.toLowerCase();
-        let words = args.replace(/\s+/g, "_");
+        let words = args.join("_");
 
         // Checks if parameter is an nsfw term. Blocks command in non-nsfw channels.
         if (!message.channel.nsfw) {
@@ -20,7 +25,5 @@ module.exports = {
         }
 
         message.channel.send("https://en.wikipedia.org/wiki/" + words);
-    },
-    aliases: ['wiki'],
-    description: 'Loads a Wikipedia page of the given topic'
+  }
 }

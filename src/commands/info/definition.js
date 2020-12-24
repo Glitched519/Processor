@@ -1,10 +1,12 @@
-const PREFIX = process.env.PREFIX;
-const fs = require('fs');
+const BaseCommand = require('../../utils/structures/BaseCommand');
 
-module.exports = {
-    run: async (client, message, args) => {
+module.exports = class Definition extends BaseCommand {
+  constructor() {
+    super('definition', 'info', ['def', 'define']);
+  }
 
-        let bannedWords = fs.readFileSync('./events/bannedwords.txt').toString().split("\r\n");
+  run(client, message, args) {
+    let bannedWords = fs.readFileSync('./events/bannedwords.txt').toString().split("\r\n");
         let bannedPhrases = fs.readFileSync('./events/bannedphrases.txt').toString().split("\r\n");
         let msg = message.content.toLowerCase();
         let wordsOnlyMsg = msg.replace(/[.?!#$%^&*,-_+=]/g, ' ');
@@ -21,9 +23,6 @@ module.exports = {
             }
         }
 
-        if (args.startsWith(`${PREFIX}def`)) return;
-        message.channel.send("https://www.vocabulary.com/dictionary/" + args);
-    },
-    aliases: ['def', 'define'],
-    description: 'Shows the definition of a word'
+        message.channel.send("https://www.vocabulary.com/dictionary/" + args[0]);
+  }
 }

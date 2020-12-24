@@ -1,12 +1,13 @@
-const config = require('../../config.json');
-const PREFIX = config["bot-prefix"];
+const BaseCommand = require('../../utils/structures/BaseCommand');
 
-module.exports = {
-    run: async (client, message, args) => {
-        args = args.replace(/ /g, "%20");
-        message.channel.send(`https://some-random-api.ml/canvas/youtube-comment?avatar=https://cdn.discordapp.com/avatars/${message.member.user.id}/${message.member.user.avatar}&comment=${args}&username=${message.author.username}`);
-    },
-    aliases: [],
-    description: 'Generates a fake YouTube comment'
+module.exports = class Comment extends BaseCommand {
+  constructor() {
+    super('comment', 'other', []);
+  }
+
+  run(client, message, args) {
+    let sentence = args.join(' ');
+    sentence = sentence.replace(/ /g, "%20");
+    message.channel.send(`https://some-random-api.ml/canvas/youtube-comment?avatar=https://cdn.discordapp.com/avatars/${message.member.user.id}/${message.member.user.avatar}&comment=${sentence}&username=${message.author.username}`);
+  }
 }
-
