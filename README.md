@@ -4,7 +4,7 @@
 To add Processor to your discord server, you can click [this invite link.](https://discord.com/oauth2/authorize?client_id=689678745782714464&scope=bot&permissions=2134338815) You must have the **Manage Server** permission to invite this bot to your desired server.
 
 ## Getting Started
-The prefix for this bot is `pr.`. Type `pr.help` to list all the categories of commands. If you want a specific category of those commands, type `pr.help <categoryName>` for all the commands within the category. You will need to set up the correct permissions for the bot. For your convenience, you may give this bot `Administrator` privileges as its resolves all permission confilict with the bot.
+The prefix for this bot is `pr.`. Type `pr.help` to list all the categories of commands. If you want a specific category of those commands, type `pr.help <categoryName>` for all the commands within the category. You will need to set up the correct permissions for the bot. For your convenience, you may give this bot `Administrator` privileges as its resolves all permission conflicts with the bot.
 
 ## Top Features 
 Processor comes with several fun features that you and your members will appreciate. Here are the most common:
