@@ -120,6 +120,10 @@ let infoDef = {
         aliases: ['pic', 'pfp', 'av'],
         description: 'Shows the user profile pic'
     },
+    covid19: {
+        aliases: ['covid', 'cov'],
+        description: 'Shows covid stats of world or a specific country'
+    },
     definition: {
         aliases: ['def', 'define'],
         description: 'Shows the definition of a word'

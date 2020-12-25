@@ -29,6 +29,7 @@
     "node-fetch": "^2.6.1",
     "node-forge": "^0.10.0",
     "nodemon": "^2.0.4",
+    "novelcovid": "^3.0.0",
     "opusscript": "0.0.7",
     "request": "^2.88.2",
     "restify": "^8.5.1",

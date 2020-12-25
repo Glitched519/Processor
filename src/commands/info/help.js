@@ -240,6 +240,10 @@ module.exports = class Help extends BaseCommand {
           value: `${infoDef.avatar.description}.\nAliases: [${infoDef.avatar.aliases}]`,
         },
         {
+          name: ':mask: covid19 `[country]`',
+          value: `${infoDef.covid19.description}.\nAliases: [${infoDef.covid19.aliases}]`,
+        },
+        {
           name: ':book: definition `<word>`',
           value: `${infoDef.definition.description}.\nAliases: [${infoDef.definition.aliases}]`,
         },
