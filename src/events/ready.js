@@ -8,6 +8,7 @@ module.exports = class ready extends BaseEvent {
     super('ready');
   }
   async run (client) {
+    client.options.restTimeOffset = 150;
     client.api.applications(client.user.id).guilds('687138260014858260').commands.post({
       data: {
           name: "hello",

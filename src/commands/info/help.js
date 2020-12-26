@@ -394,7 +394,7 @@ module.exports = class Help extends BaseCommand {
       ]
     }
 
-    async function help(msg) {
+    function help(msg) {
       if (msg.embeds[0].title !== "Need some help?") {
         msg.edit({ embed: helpEmbed });
       }
@@ -406,7 +406,7 @@ module.exports = class Help extends BaseCommand {
         .then(() => msg.react('ℹ'))
         .then(() => msg.react('⭕'))
         ////.then(() => msg.react('🎵')
-        .then(() => msg.react('❌'))
+        .then(() => msg.react('❌'))  
       const filter = (reaction, user) => {
         return ['❌', '🛡', '🐱', '⚔', '💙', '🔢', 'ℹ', '🎵', '⭕'].includes(reaction.emoji.name) && user.id === message.author.id;
       };

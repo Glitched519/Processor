@@ -8,6 +8,7 @@ const app = express();
 const api = new Topgg.Api(config["topgg-token"]);
 const webhook = new Topgg.Webhook(config["topgg-auth"]);
 const client = new Client();
+//const options = new ClientOptions();
 
 (async () => {
   client.commands = new Map();
