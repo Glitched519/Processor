@@ -14,8 +14,8 @@ module.exports = class Author extends BaseCommand {
                 .setTitle('COVID-19 Stats (Worldwide)')
                 .setColor("RED")
                 .addFields(
-                    { name: 'Cases', value: covidStats.cases.toLocaleString(), inline: true },    
-                    { name: 'Deaths', value: covidStats.deaths.toLocaleString(), inline: true },    
+                    { name: 'Cases', value: covidStats.cases.toLocaleString(), inline: true },
+                    { name: 'Deaths', value: covidStats.deaths.toLocaleString(), inline: true },
                     { name: 'Recovered', value: covidStats.recovered.toLocaleString(), inline: true },
                     { name: 'Cases Today', value: covidStats.todayCases.toLocaleString(), inline: true },
                     { name: 'Deaths Today', value: covidStats.todayDeaths.toLocaleString(), inline: true },
@@ -36,8 +36,8 @@ module.exports = class Author extends BaseCommand {
                 .setTitle(`COVID-19 Stats (${args[0]})`)
                 .setColor("RED")
                 .addFields(
-                    { name: 'Cases', value: covidStats.cases.toLocaleString(), inline: true },    
-                    { name: 'Deaths', value: covidStats.deaths.toLocaleString(), inline: true },    
+                    { name: 'Cases', value: covidStats.cases.toLocaleString(), inline: true },
+                    { name: 'Deaths', value: covidStats.deaths.toLocaleString(), inline: true },
                     { name: 'Recovered', value: covidStats.recovered.toLocaleString(), inline: true },
                     { name: 'Current Infections', value: covidStats.active.toLocaleString(), inline: true },
                     { name: 'Critical Condition', value: covidStats.critical.toLocaleString(), inline: true },

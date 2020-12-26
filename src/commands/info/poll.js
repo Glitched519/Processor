@@ -48,10 +48,10 @@ module.exports = class Poll extends BaseCommand {
             }, 500)
         }
 
-if (message.guild.me.hasPermission('MANAGE_MESSAGES')) await message.delete();
-const fetched = await message.channel.messages.fetch({ limit: 1 })
-if (fetched && fetched.first()) {
-    addReactions(fetched.first())
-}
+        if (message.guild.me.hasPermission('MANAGE_MESSAGES')) await message.delete();
+        const fetched = await message.channel.messages.fetch({ limit: 1 })
+        if (fetched && fetched.first()) {
+            addReactions(fetched.first())
+        }
     }
 }

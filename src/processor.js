@@ -11,25 +11,25 @@ const client = new Client();
 //const options = new ClientOptions();
 
 (async () => {
-  client.commands = new Map();
-  client.events = new Map();
-  client.prefix = config.prefix;
-  await registerCommands(client, '../commands');
-  await registerEvents(client, '../events');
-  await client.login(config.token);
+    client.commands = new Map();
+    client.events = new Map();
+    client.prefix = config.prefix;
+    await registerCommands(client, '../commands');
+    await registerEvents(client, '../events');
+    await client.login(config.token);
 
-  setInterval(() => {
-		api.postStats({
-			serverCount: client.guilds.cache.size,
-			//shardId: client.shard.ids[0], // if you're sharding
-			//shardCount: client.options.shardCount
-		})
-	}, 1800000) // post every 30 minutes
+    setInterval(() => {
+        api.postStats({
+            serverCount: client.guilds.cache.size,
+            //shardId: client.shard.ids[0], // if you're sharding
+            //shardCount: client.options.shardCount
+        })
+    }, 1800000) // post every 30 minutes
 
-	app.post('/dblwebhook', webhook.middleware(), (req, res) => {
-		req.vote // your vote object
-	}) // attach the middleware
+    app.post('/dblwebhook', webhook.middleware(), (req, res) => {
+        req.vote // your vote object
+    }) // attach the middleware
 
-	app.listen(3000)
+    app.listen(3000)
 })();
 

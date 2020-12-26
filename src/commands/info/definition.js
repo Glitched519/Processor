@@ -1,12 +1,12 @@
 const BaseCommand = require('../../utils/structures/BaseCommand');
 
 module.exports = class Definition extends BaseCommand {
-  constructor() {
-    super('definition', 'info', ['def', 'define']);
-  }
+    constructor() {
+        super('definition', 'info', ['def', 'define']);
+    }
 
-  run(client, message, args) {
-    let bannedWords = fs.readFileSync('./events/bannedwords.txt').toString().split("\r\n");
+    run(client, message, args) {
+        let bannedWords = fs.readFileSync('./events/bannedwords.txt').toString().split("\r\n");
         let bannedPhrases = fs.readFileSync('./events/bannedphrases.txt').toString().split("\r\n");
         let msg = message.content.toLowerCase();
         let wordsOnlyMsg = msg.replace(/[.?!#$%^&*,-_+=]/g, ' ');
@@ -24,5 +24,5 @@ module.exports = class Definition extends BaseCommand {
         }
 
         message.channel.send("https://www.vocabulary.com/dictionary/" + args[0]);
-  }
+    }
 }

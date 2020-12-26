@@ -2,13 +2,13 @@ const fs = require('fs');
 const BaseCommand = require('../../utils/structures/BaseCommand');
 
 module.exports = class Wikipedia extends BaseCommand {
-  constructor() {
-    super('wikipedia', 'other', ['wiki']);
-  }
+    constructor() {
+        super('wikipedia', 'other', ['wiki']);
+    }
 
-  run(client, message, args) {
-    if (args.length == 0) return;
-    let bannedWords = fs.readFileSync('./events/bannedwords.txt').toString().split("\r\n");
+    run(client, message, args) {
+        if (args.length == 0) return;
+        let bannedWords = fs.readFileSync('./events/bannedwords.txt').toString().split("\r\n");
         let bannedPhrases = fs.readFileSync('./events/bannedphrases.txt').toString().split("\r\n");
         let msg = message.content.toLowerCase();
         let words = args.join("_");
@@ -25,5 +25,5 @@ module.exports = class Wikipedia extends BaseCommand {
         }
 
         message.channel.send("https://en.wikipedia.org/wiki/" + words);
-  }
+    }
 }

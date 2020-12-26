@@ -1,12 +1,12 @@
 const BaseCommand = require('../../utils/structures/BaseCommand');
 
 module.exports = class Hack extends BaseCommand {
-  constructor() {
-    super('hack', 'other', []);
-  }
+    constructor() {
+        super('hack', 'other', []);
+    }
 
-  run(client, message, args) {
-    let randomDelay = Math.floor(Math.random() * (6000 - 2000)) + 2000;
+    run(client, message, args) {
+        let randomDelay = Math.floor(Math.random() * (6000 - 2000)) + 2000;
         let ip1 = Math.floor(Math.random() * 255);
         let ip2 = Math.floor(Math.random() * 255);
         let ip3 = Math.floor(Math.random() * 255);
@@ -27,19 +27,19 @@ module.exports = class Hack extends BaseCommand {
         }
         if (chance >= 0.4) {
             return message.channel.send('Hacking ' + args[0] + '...')
-            .then(msg => {
-                setTimeout(function () {
-                    msg.edit(hacks[Math.floor(Math.random() * hacks.length)]);
-                }, randomDelay)
-            }).catch(console.error);
+                .then(msg => {
+                    setTimeout(function () {
+                        msg.edit(hacks[Math.floor(Math.random() * hacks.length)]);
+                    }, randomDelay)
+                }).catch(console.error);
         }
         else {
             return message.channel.send('Hacking ' + args[0] + '...')
-            .then(msg => {
-                setTimeout(function () {
-                    msg.edit(fails[Math.floor(Math.random() * fails.length)]);
-                }, randomDelay)
-            }).catch(console.error);
+                .then(msg => {
+                    setTimeout(function () {
+                        msg.edit(fails[Math.floor(Math.random() * fails.length)]);
+                    }, randomDelay)
+                }).catch(console.error);
         }
-  }
+    }
 }
