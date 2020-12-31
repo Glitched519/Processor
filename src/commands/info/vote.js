@@ -9,6 +9,9 @@ module.exports = class Vote extends BaseCommand {
         let voteEmbed = {
             color: `RANDOM`,
             title: "Upvote Processor!",
+            thumbnail: {
+                url: `https://media3.giphy.com/media/KyH6bWpauFsNMr0Vhi/200.gif`
+            },
             fields: [
                 {
                     name: 'top.gg',

@@ -21,7 +21,7 @@ module.exports = class Stats extends BaseCommand {
                     description: `**Roles:** ${member.roles.cache.map(role => role.toString())}`,
                     color: `RANDOM`,
                     thumbnail: {
-                        url: `https://cdn.discordapp.com/avatars/${message.author.id}/${message.author.avatar}.gif`
+                        url: member.user.displayAvatarURL({ dynamic: true })
                     },
                     fields: [
                         {

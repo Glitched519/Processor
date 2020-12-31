@@ -13,6 +13,7 @@
     "dependencies": {
         "@top-gg/sdk": "^3.0.2",
         "bl": "^4.0.3",
+        "bytes": "^3.1.0",
         "cheerio": "^1.0.0-rc.3",
         "dbl": "^0.1.12",
         "discord": "^0.8.2",
@@ -23,6 +24,7 @@
         "ffmpeg-static": "^4.2.7",
         "googleapis": "^54.1.0",
         "http": "^0.0.1-security",
+        "humanize-duration": "^3.25.0",
         "mathjs": "^7.5.1",
         "mongoose": "^5.9.19",
         "ms": "^2.1.2",
@@ -36,6 +38,7 @@
         "restify-cors-middleware": "^1.1.1",
         "simple-youtube-api": "^5.2.1",
         "some-random-api": "^2.0.0",
+        "systeminformation": "^4.33.4",
         "weather-js": "^2.0.0",
         "youtube-search": "^1.1.4",
         "ytdl-core": "^3.1.2"

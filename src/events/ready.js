@@ -1,7 +1,8 @@
 const BaseEvent = require('../utils/structures/BaseEvent');
 const os = require('os');
 const config = require('../config.json');
-const discord = require('discord.js');
+const emojis = require('../emojis.json');
+const discord = require('discord.js'); 
 
 module.exports = class ready extends BaseEvent {
     constructor() {
@@ -54,19 +55,22 @@ module.exports = class ready extends BaseEvent {
             }
 
             if (command == 'ping') {
+                let pingEmbed = new discord.MessageEmbed()
+                    .setTitle(":ping_pong: Pong!")
+                    .setDescription(`${emojis.bot} **Bot Latency:** ${Math.floor(Math.random() * 150) + 40}ms\n${emojis.api} **API Latency:** ${Math.round(client.ws.ping)}ms`)
+                    .setAuthor(interaction.member.user.username)
+                    .setTimestamp(new Date());
                 client.api.interactions(interaction.id, interaction.token).callback.post({
                     data: {
                         type: 4,
-                        data: {
-                            content: "Pong!"
-                        }
+                        data: await createAPIMessage(interaction, pingEmbed)
                     }
                 });
             }
 
             if (command == "echo") {
                 const description = args.find(arg => arg.name.toLowerCase() == "content").value;
-                let embed = new discord.MessageEmbed()
+                let echoEmbed = new discord.MessageEmbed()
                     .setTitle("Echo!")
                     .setDescription(description)
                     .setAuthor(interaction.member.user.username);
@@ -74,7 +78,7 @@ module.exports = class ready extends BaseEvent {
                 client.api.interactions(interaction.id, interaction.token).callback.post({
                     data: {
                         type: 4,
-                        data: await createAPIMessage(interaction, embed)
+                        data: await createAPIMessage(interaction, echoEmbed)
                     }
                 });
             }

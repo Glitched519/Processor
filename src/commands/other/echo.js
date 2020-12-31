@@ -1,3 +1,6 @@
+const used = new Map();
+const Duration = require('humanize-duration');
+
 const fs = require('fs')
 const BaseCommand = require('../../utils/structures/BaseCommand');
 
@@ -7,8 +10,10 @@ module.exports = class Echo extends BaseCommand {
     }
 
     run(client, message, args) {
-        if (!args[0]) return;
+        const timeInSeconds = 30;
+        const cooldown = used.get(message.author.id);
         if (message.guild.me.hasPermission('MANAGE_MESSAGES')) message.delete();
+        if (!args[0]) return;
         let bannedWords = fs.readFileSync('./events/bannedwords.txt').toString().split("\r\n");
         let bannedPhrases = fs.readFileSync('./events/bannedphrases.txt').toString().split("\r\n");
         let msg = message.content.toLowerCase();
@@ -27,6 +32,15 @@ module.exports = class Echo extends BaseCommand {
 
         if (args.includes("@everyone")) return;
         if (args.includes("@here")) return;
-        message.channel.send(args);
+        if (cooldown) {
+            const remaining = Duration(cooldown - Date.now(), { units: ['s'], round: 1 });
+            return message.reply(`you need to wait ${remaining} before using this command.`).catch((err) => message.reply(err));
+        }
+        else {
+            used.set(message.author.id, Date.now() + 1000 * timeInSeconds);
+            setTimeout(() => used.delete(message.author.id), 1000 * timeInSeconds);
+            message.channel.send(args);
+        }
+
     }
 }

@@ -6,6 +6,7 @@ module.exports = class message extends BaseEvent {
     }
 
     async run(client, message) {
+       
         if (message.author.bot) return;
         if (message.content.startsWith(client.prefix)) {
             const [cmdName, ...cmdArgs] = message.content

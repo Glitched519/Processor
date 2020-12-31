@@ -8,17 +8,11 @@ module.exports = class Ping extends BaseCommand {
 
     async run(client, message, args) {
         let pingEmbed = {
-            title: `${emojis.loading}`
+            color: `RANDOM`,
+            title: ":ping_pong: Pong!",
+            description: `${emojis.bot} **Bot Latency:** ${Math.abs(Date.now() - message.createdTimestamp)}ms\n${emojis.api} **API Latency:** ${Math.round(client.ws.ping)}ms`,
+            timestamp: new Date()
         }
-        const msg = await message.channel.send({ embed: pingEmbed });
-        msg.edit(
-            pingEmbed = {
-                color: `RANDOM`,
-                title: ":ping_pong: Pong!",
-                description: `${emojis.bot} **Bot Latency:** ${msg.createdTimestamp - message.createdTimestamp}ms\n${emojis.api} **API Latency:** ${Math.round(message.client.ws.ping)}ms`,
-                timestamp: new Date()
-            }
-        );
-        await msg.edit({ embed: pingEmbed });
+        await message.channel.send({ embed: pingEmbed });
     }
 }
