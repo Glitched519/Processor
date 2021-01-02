@@ -248,6 +248,10 @@ module.exports = class Help extends BaseCommand {
                     value: `${infoDef.definition.description}.\nAliases: [${infoDef.definition.aliases}]`,
                 },
                 {
+                    name: ':computer: docs `<query>',
+                    value: `${infoDef.docs.description}.\nAliases: [${infoDef.docs.aliases}]`,
+                },
+                {
                     name: ':frame_photo: giphygif `<search>`',
                     value: `${infoDef.giphygif.description}.\nAliases: [${infoDef.giphygif.aliases}]`,
                 },

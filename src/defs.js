@@ -128,6 +128,10 @@ let infoDef = {
         aliases: ['def', 'define'],
         description: 'Shows the definition of a word'
     },
+    docs: {
+        aliases: ['djs'],
+        description: 'Shows an embed of the docs based on the query'
+    },
     giphygif: {
         aliases: ['gif', 'giphy'],
         description: 'Shows a random GIF with given search item'
