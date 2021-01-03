@@ -3,6 +3,8 @@ const os = require('os');
 const config = require('../config.json');
 const emojis = require('../emojis.json');
 const discord = require('discord.js'); 
+const antiAd = require('../features/anti-ad');
+const mongo = require('../features/mongo');
 
 module.exports = class ready extends BaseEvent {
     constructor() {
@@ -10,6 +12,10 @@ module.exports = class ready extends BaseEvent {
     }
     async run(client) {
         client.options.restTimeOffset = 150;
+
+        antiAd(client);
+        await mongo();
+
         client.api.applications(client.user.id).guilds('687138260014858260').commands.post({
             data: {
                 name: "hello",

@@ -248,7 +248,7 @@ module.exports = class Help extends BaseCommand {
                     value: `${infoDef.definition.description}.\nAliases: [${infoDef.definition.aliases}]`,
                 },
                 {
-                    name: ':computer: docs `<query>',
+                    name: ':computer: docs `<query>`',
                     value: `${infoDef.docs.description}.\nAliases: [${infoDef.docs.aliases}]`,
                 },
                 {
