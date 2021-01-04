@@ -8,6 +8,5 @@ module.exports = async () => {
     useUnifiedTopology: true,
     useFindAndModify: false,
   });
-  console.log(`Connected to ${mongoPath}`);
-  return mongoose
+  return mongoose;
 }
