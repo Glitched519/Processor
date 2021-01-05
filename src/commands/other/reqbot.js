@@ -11,7 +11,7 @@ module.exports = class ChuckNorrisJoke extends BaseCommand {
         let responses = [];
         let filter = m => m.author.id;
         let collector = new MessageCollector(message.channel, filter);
-        let destination = client.channels.cache.get('794433377721647144');
+        let destination = client.channels.cache.get('784090416470425610');
         collector.on('collect', (m, col) => {
             responses.push(m.content);
             if (responses.length == 5) {

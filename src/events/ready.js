@@ -1,5 +1,7 @@
 const BaseEvent = require('../utils/structures/BaseEvent');
 const os = require('os');
+const fs = require('fs');
+const colors = require('colors');
 const config = require('../config.json');
 const emojis = require('../emojis.json');
 const discord = require('discord.js'); 
@@ -11,9 +13,9 @@ module.exports = class ready extends BaseEvent {
         super('ready');
     }
     async run(client) {
-        client.options.restTimeOffset = 150;
+        client.options.restTimeOffset = 50;
 
-        antiAd(client);
+        //antiAd(client);
         await mongo();
 
         client.api.applications(client.user.id).guilds('687138260014858260').commands.post({
@@ -109,14 +111,10 @@ module.exports = class ready extends BaseEvent {
             const status = statuses[Math.floor(Math.random() * statuses.length)];
             client.user.setActivity(status, { type: 'WATCHING' }).catch(console.error);
         }, 15000);
-        console.log("\x1b[36m", `${new Date()}`);
-        console.log('\x1b[35m', `  
- _____                                        
-|  __ \\                                       
-| |__) | __ ___   ___ ___  ___ ___  ___  _ __ 
-|  ___/ '__/ _ \\ / __/ _ \\/ __/ __|/ _ \\| '__|
-| |   | | | (_) | (_ | __/\\__ \\__ \\ (_) | |   
-|_|   |_|  \\___/ \\___\\___||___/___/\\___/|_|   `);
-        console.log("\x1b[37m");
+        console.log(`${new Date()}`.magenta);
+        fs.readFile("./src/events/.post", "utf-8", (err, data) => {
+            if (err) { console.log(err) }
+            console.log(data);
+        });
     }
 }
