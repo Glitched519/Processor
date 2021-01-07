@@ -427,7 +427,7 @@ module.exports = class Help extends BaseCommand {
                 return ['❌', '🛡', '🐱', '⚔', '💙', '🔢', 'ℹ', '🎵', '⭕'].includes(reaction.emoji.name) && user.id === message.author.id;
             };
 
-            msg.awaitReactions(filter, { max: 1, time: 600000, errors: ['time'] })
+            msg.awaitReactions(filter, { max: 1, time: 600000 })
                 .then(collected => {
                     const reaction = collected.first();
 
@@ -460,9 +460,7 @@ module.exports = class Help extends BaseCommand {
                             break;
                     }
                 })
-                .catch(collected => {
-                    msg.delete();
-                });
+
         }
 
         function mod(msg) {
@@ -481,7 +479,7 @@ module.exports = class Help extends BaseCommand {
                 return ['🔼', '❌', '🐱', '⚔', '💙', '🔢', 'ℹ', '🎵', '⭕'].includes(reaction.emoji.name) && user.id === message.author.id;
             };
 
-            msg.awaitReactions(filter, { max: 1, time: 600000, errors: ['time'] })
+            msg.awaitReactions(filter, { max: 1, time: 600000 })
                 .then(collected => {
                     const reaction = collected.first();
 
@@ -514,9 +512,7 @@ module.exports = class Help extends BaseCommand {
                             break;
                     }
                 })
-                .catch(collected => {
-                    msg.delete();
-                });
+
         }
 
         function animal(msg) {
@@ -535,7 +531,7 @@ module.exports = class Help extends BaseCommand {
                 return ['🔼', '❌', '🛡', '⚔', '💙', '🔢', 'ℹ', '🎵', '⭕'].includes(reaction.emoji.name) && user.id === message.author.id;
             };
 
-            msg.awaitReactions(filter, { max: 1, time: 600000, errors: ['time'] })
+            msg.awaitReactions(filter, { max: 1, time: 600000 })
                 .then(collected => {
                     const reaction = collected.first();
 
@@ -568,9 +564,7 @@ module.exports = class Help extends BaseCommand {
                             break;
                     }
                 })
-                .catch(collected => {
-                    msg.delete();
-                });
+
         }
 
         function clash(msg) {
@@ -589,7 +583,7 @@ module.exports = class Help extends BaseCommand {
                 return ['🔼', '❌', '🛡', '🐱', '💙', '🔢', 'ℹ', '🎵', '⭕'].includes(reaction.emoji.name) && user.id === message.author.id;
             };
 
-            msg.awaitReactions(filter, { max: 1, time: 600000, errors: ['time'] })
+            msg.awaitReactions(filter, { max: 1, time: 600000 })
                 .then(collected => {
                     const reaction = collected.first();
 
@@ -621,9 +615,7 @@ module.exports = class Help extends BaseCommand {
                             break;
                     }
                 })
-                .catch(collected => {
-                    msg.delete();
-                });
+
         }
 
         function cute(msg) {
@@ -642,7 +634,7 @@ module.exports = class Help extends BaseCommand {
                 return ['🔼', '❌', '🛡', '🐱', '⚔', '🔢', 'ℹ', '🎵', '⭕'].includes(reaction.emoji.name) && user.id === message.author.id;
             };
 
-            msg.awaitReactions(filter, { max: 1, time: 600000, errors: ['time'] })
+            msg.awaitReactions(filter, { max: 1, time: 600000 })
                 .then(collected => {
                     const reaction = collected.first();
 
@@ -675,9 +667,7 @@ module.exports = class Help extends BaseCommand {
                             break;
                     }
                 })
-                .catch(collected => {
-                    msg.delete();
-                });
+
         }
 
         function math(msg) {
@@ -696,7 +686,7 @@ module.exports = class Help extends BaseCommand {
                 return ['🔼', '❌', '🛡', '🐱', '⚔', '💙', 'ℹ', '🎵', '⭕'].includes(reaction.emoji.name) && user.id === message.author.id;
             };
 
-            msg.awaitReactions(filter, { max: 1, time: 600000, errors: ['time'] })
+            msg.awaitReactions(filter, { max: 1, time: 600000 })
                 .then(collected => {
                     const reaction = collected.first();
 
@@ -729,9 +719,7 @@ module.exports = class Help extends BaseCommand {
                             break;
                     }
                 })
-                .catch(collected => {
-                    msg.delete();
-                });
+
         }
 
         function info(msg) {
@@ -750,7 +738,7 @@ module.exports = class Help extends BaseCommand {
                 return ['🔼', '❌', '🛡', '🐱', '⚔', '💙', '🔢', '🎵', '⭕'].includes(reaction.emoji.name) && user.id === message.author.id;
             };
 
-            msg.awaitReactions(filter, { max: 1, time: 600000, errors: ['time'] })
+            msg.awaitReactions(filter, { max: 1, time: 600000 })
                 .then(collected => {
                     const reaction = collected.first();
 
@@ -783,9 +771,7 @@ module.exports = class Help extends BaseCommand {
                             break;
                     }
                 })
-                .catch(collected => {
-                    msg.delete();
-                });
+
         }
 
         function music(msg) {
@@ -804,7 +790,7 @@ module.exports = class Help extends BaseCommand {
                 return ['🔼', '❌', '🛡', '🐱', '⚔', '💙', '🔢', 'ℹ', '⭕'].includes(reaction.emoji.name) && user.id === message.author.id;
             };
 
-            msg.awaitReactions(filter, { max: 1, time: 600000, errors: ['time'] })
+            msg.awaitReactions(filter, { max: 1, time: 600000 })
                 .then(collected => {
                     const reaction = collected.first();
 
@@ -837,9 +823,7 @@ module.exports = class Help extends BaseCommand {
                             break;
                     }
                 })
-                .catch(collected => {
-                    msg.delete();
-                });
+
         }
 
         function other(msg) {
@@ -858,7 +842,7 @@ module.exports = class Help extends BaseCommand {
                 return ['🔼', '❌', '🛡', '🐱', '⚔', '💙', '🔢', 'ℹ', '🎵'].includes(reaction.emoji.name) && user.id === message.author.id;
             };
 
-            msg.awaitReactions(filter, { max: 1, time: 600000, errors: ['time'] })
+            msg.awaitReactions(filter, { max: 1, time: 600000 })
                 .then(collected => {
                     const reaction = collected.first();
 
@@ -891,9 +875,7 @@ module.exports = class Help extends BaseCommand {
                             break;
                     }
                 })
-                .catch(collected => {
-                    msg.delete();
-                });
+
         }
         if (args[0] == "mod") {
             return message.channel.send({ embed: modEmbed });

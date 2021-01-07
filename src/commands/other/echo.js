@@ -2,6 +2,7 @@ const used = new Map();
 const Duration = require('humanize-duration');
 
 const fs = require('fs')
+const path = require('path');
 const BaseCommand = require('../../utils/structures/BaseCommand');
 
 module.exports = class Echo extends BaseCommand {
@@ -14,8 +15,8 @@ module.exports = class Echo extends BaseCommand {
         const cooldown = used.get(message.author.id);
         if (message.guild.me.hasPermission('MANAGE_MESSAGES')) message.delete();
         if (!args[0]) return;
-        let bannedWords = fs.readFileSync('./events/bannedwords.txt').toString().split("\r\n");
-        let bannedPhrases = fs.readFileSync('./events/bannedphrases.txt').toString().split("\r\n");
+        let bannedWords = fs.readFileSync(path.join(__dirname, '../../events/bannedwords.txt')).toString().split("\r\n");
+        let bannedPhrases = fs.readFileSync(path.join(__dirname, '../../events/bannedphrases.txt')).toString().split("\r\n");
         let msg = message.content.toLowerCase();
         let words = args.join("_");
 

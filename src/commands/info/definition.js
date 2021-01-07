@@ -1,3 +1,5 @@
+const fs = require('fs');
+const path = require('path');
 const BaseCommand = require('../../utils/structures/BaseCommand');
 
 module.exports = class Definition extends BaseCommand {
@@ -6,8 +8,8 @@ module.exports = class Definition extends BaseCommand {
     }
 
     run(client, message, args) {
-        let bannedWords = fs.readFileSync('./events/bannedwords.txt').toString().split("\r\n");
-        let bannedPhrases = fs.readFileSync('./events/bannedphrases.txt').toString().split("\r\n");
+        let bannedWords = fs.readFileSync(path.join(__dirname, '../../events/bannedwords.txt')).toString().split("\r\n");
+        let bannedPhrases = fs.readFileSync(path.join(__dirname, '../../events/bannedphrases.txt')).toString().split("\r\n");
         let msg = message.content.toLowerCase();
         let wordsOnlyMsg = msg.replace(/[.?!#$%^&*,-_+=]/g, ' ');
         let words = wordsOnlyMsg.split(/\s+/);
