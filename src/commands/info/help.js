@@ -25,7 +25,7 @@ module.exports = class Help extends BaseCommand {
         let helpFallbackEmbed = {
             color: `RANDOM`,
             title: 'Need some help?',
-            description: `Prefix is **${PREFIX}** as in **${PREFIX}help**.\n<required> [optional]`,
+            description: `Prefix is **${PREFIX}** as in **${PREFIX}help**.\n{required} [optional]`,
             fields: [
                 {
                     name: ':shield: Moderation  `mod`',
@@ -69,7 +69,7 @@ module.exports = class Help extends BaseCommand {
         let helpEmbed = {
             color: `RANDOM`,
             title: 'Need some help?',
-            description: `Prefix is **${PREFIX}** as in **${PREFIX}help**.\n<required> [optional]\n${PREFIX}help [topic]`,
+            description: `Prefix is **${PREFIX}** as in **${PREFIX}help**.\n{required} [optional]\n${PREFIX}help [topic]`,
             fields: [
                 {
                     name: ':shield: Moderation',
@@ -120,15 +120,15 @@ module.exports = class Help extends BaseCommand {
                     value: `${modDef.permissions.description}.\nAliases: [${modDef.permissions.aliases}]`,
                 },
                 {
-                    name: ':hammer_pick: __user__ban `<@member> [reason]`',
+                    name: ':hammer_pick: __user__ban `{@member} [reason]`',
                     value: `${modDef.userban.description}.\nAliases: [${modDef.userban.aliases}]`,
                 },
                 {
-                    name: ':boot: __user__kick `<@member> [reason]`',
+                    name: ':boot: __user__kick `{@member} [reason]`',
                     value: `${modDef.userkick.description}.\nAliases: [${modDef.userkick.aliases}]`,
                 },
                 {
-                    name: ':broom: purge `<number>`',
+                    name: ':broom: purge `{number}`',
                     value: `${modDef.purge.description}.\nAliases: [${modDef.purge.aliases}]`,
                 },
                 {
@@ -136,15 +136,15 @@ module.exports = class Help extends BaseCommand {
                     value: `${modDef.slowmode.description}.\nAliases: [${modDef.slowmode.aliases}]`,
                 },
                 {
-                    name: ':hammer_pick: __id__ban `<@id> [reason]`',
+                    name: ':hammer_pick: __id__ban `{@id} [reason]`',
                     value: `${modDef.idban.description}.\nAliases: [${modDef.idban.aliases}]`,
                 },
                 {
-                    name: ':boot: __id__kick `<@id> [reason]`',
+                    name: ':boot: __id__kick `{@id} [reason]`',
                     value: `${modDef.idkick.description}.\nAliases: [${modDef.idkick.aliases}]`,
                 },
                 {
-                    name: ':warning: warn `<@member> [reason]`',
+                    name: ':warning: warn `{@member} [reason]`',
                     value: `${modDef.warn.description}.\nAliases: [${modDef.warn.aliases}]`,
                 },
             ],
@@ -156,23 +156,23 @@ module.exports = class Help extends BaseCommand {
             description: `Prefix is **${PREFIX}** as in **${PREFIX}help**.`,
             fields: [
                 {
-                    name: ':1234: base32 `<number>`',
+                    name: ':1234: base32 `{number}`',
                     value: `${mathDef.base32.description}.\nAliases: [${mathDef.base32.aliases}]`,
                 },
                 {
-                    name: ':1234: base64 `<number>`',
+                    name: ':1234: base64 `{number}`',
                     value: `${mathDef.base64.description}.\nAliases: [${mathDef.base64.aliases}]`,
                 },
                 {
-                    name: ':1234: binary `<number>`',
+                    name: ':1234: binary `{number}`',
                     value: `${mathDef.binary.description}.\nAliases: [${mathDef.binary.aliases}]`,
                 },
                 {
-                    name: ':computer: calculate `<expression>`',
+                    name: ':computer: calculate `{expression}`',
                     value: `${mathDef.calculate.description}.\nAliases: [${mathDef.calculate.aliases}]`,
                 },
                 {
-                    name: ':capital_abcd: hexadecimal `<number>`',
+                    name: ':capital_abcd: hexadecimal `{number}`',
                     value: `${mathDef.hexadecimal.description}.\nAliases: [${mathDef.hexadecimal.aliases}]`,
                 },
             ]
@@ -184,11 +184,11 @@ module.exports = class Help extends BaseCommand {
             description: `Prefix is **${PREFIX}** as in **${PREFIX}help**.`,
             fields: [
                 {
-                    name: ':information_source: animalfact `<animal>`',
+                    name: ':information_source: animalfact `{animal}`',
                     value: `${animalDef.animalfact.description}.\nAliases: [${animalDef.animalfact.aliases}]`,
                 },
                 {
-                    name: ':frame_photo: animalimage `<animal>`',
+                    name: ':frame_photo: animalimage `{animal}`',
                     value: `${animalDef.animalimage.description}.\nAliases: [${animalDef.animalimage.aliases}]`,
                 },
             ]
@@ -200,7 +200,7 @@ module.exports = class Help extends BaseCommand {
             description: `Prefix is **${PREFIX}** as in **${PREFIX}help**.`,
             fields: [
                 {
-                    name: ':green_square: baselayout `<th/bh level>`',
+                    name: ':green_square: baselayout `{th/bh level}`',
                     value: `${clashDef.baselayout.description}.\nAliases: [${clashDef.baselayout.aliases}]`,
                 },
                 {
@@ -208,11 +208,11 @@ module.exports = class Help extends BaseCommand {
                     value: `${clashDef.clashtips.description}.\nAliases: [${clashDef.clashtips.aliases}]`,
                 },
                 {
-                    name: ':mag: searchclan `<#tag>`',
+                    name: ':mag: searchclan `{#tag}`',
                     value: `${clashDef.searchclan.description}.\nAliases: [${clashDef.searchclan.aliases}]`,
                 },
                 {
-                    name: ':mag: searchplayer `<#tag>`',
+                    name: ':mag: searchplayer `{#tag}`',
                     value: `${clashDef.searchplayer.description}.\nAliases: [${clashDef.searchplayer.aliases}]`,
                 },
             ]
@@ -224,15 +224,15 @@ module.exports = class Help extends BaseCommand {
             description: `Prefix is **${PREFIX}** as in **${PREFIX}help**.`,
             fields: [
                 {
-                    name: ':hugging: hug `<@member>`',
+                    name: ':hugging: hug `{@member}`',
                     value: `${cuteDef.hug.description}.`,
                 },
                 {
-                    name: ':open_hands: pat `<@member>`',
+                    name: ':open_hands: pat `{@member}`',
                     value: `${cuteDef.pat.description}.`,
                 },
                 {
-                    name: ':wink: wink `<@member>`',
+                    name: ':wink: wink `{@member}`',
                     value: `${cuteDef.wink.description}.`,
                 },
             ]
@@ -256,15 +256,15 @@ module.exports = class Help extends BaseCommand {
                     value: `${infoDef.covid19.description}.\nAliases: [${infoDef.covid19.aliases}]`,
                 },
                 {
-                    name: ':book: definition `<word>`',
+                    name: ':book: definition `{word}`',
                     value: `${infoDef.definition.description}.\nAliases: [${infoDef.definition.aliases}]`,
                 },
                 {
-                    name: ':computer: docs `<query>`',
+                    name: ':computer: docs `{query}`',
                     value: `${infoDef.docs.description}.\nAliases: [${infoDef.docs.aliases}]`,
                 },
                 {
-                    name: ':frame_photo: giphygif `<search>`',
+                    name: ':frame_photo: giphygif `{search}`',
                     value: `${infoDef.giphygif.description}.\nAliases: [${infoDef.giphygif.aliases}]`,
                 },
                 {
@@ -272,7 +272,7 @@ module.exports = class Help extends BaseCommand {
                     value: `${infoDef.github.description}.\nAliases: [${infoDef.github.aliases}]`,
                 },
                 {
-                    name: ':mag: googleimage `<search>`',
+                    name: ':mag: googleimage `{search}`',
                     value: `${infoDef.googleimage.description}.\nAliases: [${infoDef.googleimage.aliases}]`,
                 },
                 {
@@ -280,11 +280,11 @@ module.exports = class Help extends BaseCommand {
                     value: `${infoDef.invite.description}.\nAliases: [${infoDef.invite.aliases}]`,
                 },
                 {
-                    name: ':musical_note: lyrics `<song>`',
+                    name: ':musical_note: lyrics `{song}`',
                     value: `${infoDef.lyrics.description}.\nAliases: [${infoDef.lyrics.aliases}]`,
                 },
                 {
-                    name: ':mobile_phone: phone `<phone name>`',
+                    name: ':mobile_phone: phone `{phone name}`',
                     value: `${infoDef.phone.description}.`,
                 },
                 {
@@ -292,16 +292,12 @@ module.exports = class Help extends BaseCommand {
                     value: `${infoDef.ping.description}.\nAliases: [${infoDef.ping.aliases}]`,
                 },
                 {
-                    name: ':dog2: pokemon `<pokemon>`',
+                    name: ':dog2: pokemon `{pokemon}`',
                     value: `${infoDef.pokemon.description}.\nAliases: [${infoDef.pokemon.aliases}]`,
                 },
                 {
-                    name: ':information_source: poll `<question>`',
+                    name: ':information_source: poll `{question}`',
                     value: `${infoDef.poll.description}.`,
-                },
-                {
-                    name: ':information_source: stats `[@member]`',
-                    value: `${infoDef.stats.description}.`,
                 },
                 {
                     name: ':information_source: stats `[@member]`',
@@ -315,6 +311,10 @@ module.exports = class Help extends BaseCommand {
                     name: ':blue_heart: vote',
                     value: `${infoDef.vote.description}.`,
                 },
+                {
+                    name: ':white_sun_rain_cloud: weather `[location]`',
+                    value: `${infoDef.weather.description}.`,
+                },
             ]
         }
 
@@ -324,7 +324,7 @@ module.exports = class Help extends BaseCommand {
             description: `Commands won't work until issue is fixed.`,
             fields: [
                 {
-                    name: ':arrow_forward: play `<song>`',
+                    name: ':arrow_forward: play `{song}`',
                     value: `Plays a song via search term or URL from YouTube.\nAliases: [p]`,
                 },
                 {
@@ -368,7 +368,7 @@ module.exports = class Help extends BaseCommand {
                     value: `${otherDef.chucknorrisjoke.description}.\nAliases: [${otherDef.chucknorrisjoke.aliases}]`,
                 },
                 {
-                    name: ':speech_left: comment `<your comment>`',
+                    name: ':speech_left: comment `{your comment}`',
                     value: `${otherDef.comment.description}.`
                 },
                 {
@@ -376,11 +376,11 @@ module.exports = class Help extends BaseCommand {
                     value: `${otherDef.dadjoke.description}.\nAliases: [${otherDef.dadjoke.aliases}]`,
                 },
                 {
-                    name: ':sound: echo `<message>`',
+                    name: ':sound: echo `{message}`',
                     value: `${otherDef.echo.description}.\nAliases: [${otherDef.echo.aliases}]`,
                 },
                 {
-                    name: ':computer: hack `<@member>`',
+                    name: ':computer: hack `{@member}`',
                     value: `${otherDef.hack.description}.`,
                 },
                 {
@@ -400,11 +400,11 @@ module.exports = class Help extends BaseCommand {
                     value: `${otherDef.roll.description}.\nAliases: [${otherDef.roll.aliases}]`,
                 },
                 {
-                    name: ':information_source: suggest `<suggestion>`',
+                    name: ':information_source: suggest `{suggestion}`',
                     value: `${otherDef.suggest.description}.`,
                 },
                 {
-                    name: ':information_source: wikipedia `<wiki>`',
+                    name: ':information_source: wikipedia `{wiki}`',
                     value: `${otherDef.wikipedia.description}.\nAliases: [${otherDef.wikipedia.aliases}]`,
                 },
             ]
@@ -432,6 +432,8 @@ module.exports = class Help extends BaseCommand {
                     const reaction = collected.first();
 
                     switch (reaction.emoji.name) {
+                        case '🔼':
+                            break;
                         case '❌':
                             return msg.delete();
                         case '🛡':

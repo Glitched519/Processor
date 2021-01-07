@@ -5,7 +5,7 @@ const BaseCommand = require('../../utils/structures/BaseCommand');
 
 module.exports = class Weather extends BaseCommand {
     constructor() {
-        super('weather', 'info', []);
+        super('weather', 'info', ['wea']);
     }
 
     run(client, message, args) {

@@ -176,7 +176,8 @@ let infoDef = {
         description: 'Brings up the vote link of Processor'
     },
     weather: {
-        description: 'Finds weather in an area'
+        description: 'Shows the weather stats of the given location.',
+        aliases: ['wea']
     },
 }
 
