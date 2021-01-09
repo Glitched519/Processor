@@ -8,7 +8,7 @@ const discord = require('discord.js');
 const antiAd = require('../features/anti-ad');
 const mongo = require('../features/mongo');
 
-module.exports = class ready extends BaseEvent {
+module.exports = class Ready extends BaseEvent {
     constructor() {
         super('ready');
     }

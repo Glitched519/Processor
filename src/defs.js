@@ -1,4 +1,12 @@
-
+let setupDef = {
+    prefix: {
+        description: 'Change the prefix of the bot'
+    },
+    setlogschannel: {
+        aliases: ['logchannel'],
+        description: 'Set or change the logging channel for message events'
+    }
+}
 let modDef = {
     idban: {
         aliases: ['hackban', 'iban', 'banid', 'idban'],
@@ -228,6 +236,7 @@ let otherDef = {
 }
 
 module.exports = {
+    setupDef,
     modDef,
     mathDef,
     animalDef,

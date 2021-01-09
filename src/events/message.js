@@ -4,7 +4,7 @@ const { prefix: globalPrefix } = require('../config.json');
 const commandPrefixSchema = require('../schemas/command-prefix-schema');
 const BaseEvent = require('../utils/structures/BaseEvent');
 
-module.exports = class message extends BaseEvent {
+module.exports = class Message extends BaseEvent {
     constructor() {
         super('message');
     }

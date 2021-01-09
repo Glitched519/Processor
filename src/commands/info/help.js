@@ -3,7 +3,7 @@ const guildPrefixes = {};
 const { prefix: globalPrefix } = require('../../config.json');
 const commandPrefixSchema = require('../../schemas/command-prefix-schema');
 const BaseCommand = require('../../utils/structures/BaseCommand');
-const { modDef, mathDef, animalDef, clashDef, cuteDef, infoDef, otherDef } = require('../../defs');
+const { setupDef, modDef, mathDef, animalDef, clashDef, cuteDef, infoDef, otherDef } = require('../../defs');
 
 
 module.exports = class Help extends BaseCommand {
@@ -109,6 +109,22 @@ module.exports = class Help extends BaseCommand {
                 },
             ]
         }
+
+        let setupEmbed = {
+            color: `RANDOM`,
+            title: 'Moderation Commands',
+            description: `Only members with the \`Manage Server\` permission such as mod or admin, can use these commands. Prefix is **${PREFIX}** as in **${PREFIX}help**.`,
+            fields: [
+                {
+                    name: ':interrobang: prefix {new prefix}',
+                    value: `${setupDef.prefix.description}.`,
+                },
+                {
+                    name: ':speech_left: setlogschannel `{#channel}`',
+                    value: `${setupDef.setlogschannel.description}.\nAliases: [${setupDef.setlogschannel.aliases}]`,
+                },
+            ],
+        };
 
         let modEmbed = {
             color: `RANDOM`,
@@ -878,6 +894,9 @@ module.exports = class Help extends BaseCommand {
                     }
                 })
 
+        }
+        if (args[0] == "setup") {
+            return message.channel.send({embed: setupEmbed});
         }
         if (args[0] == "mod") {
             return message.channel.send({ embed: modEmbed });

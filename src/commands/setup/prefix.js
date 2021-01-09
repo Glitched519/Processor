@@ -4,7 +4,7 @@ const BaseCommand = require('../../utils/structures/BaseCommand');
 
 module.exports = class Prefix extends BaseCommand {
     constructor() {
-        super('prefix', 'prefix', []);
+        super('prefix', 'setup', []);
     }
 
     async run(client, message, args) {
