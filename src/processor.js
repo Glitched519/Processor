@@ -17,7 +17,7 @@ const client = new Client();
     client.prefix = config.prefix;
     await registerCommands(client, '../commands');
     await registerEvents(client, '../events');
-
+    
     setInterval(() => {
         api.postStats({
             serverCount: client.guilds.cache.size,

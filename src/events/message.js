@@ -31,7 +31,13 @@ module.exports = class Message extends BaseEvent {
                 .split(/\s+/);
             const command = client.commands.get(cmdName);
             if (command) {
-                command.run(client, message, cmdArgs);
+                try {
+                    command.run(client, message, cmdArgs);
+                }
+                catch (err) {
+                    console.error(err);
+                    message.reply(`unforuntately there was an error while executing that command.`);
+                }
             }
         }
     }
