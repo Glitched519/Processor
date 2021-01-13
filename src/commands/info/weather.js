@@ -10,7 +10,8 @@ module.exports = class Weather extends BaseCommand {
 
     run(client, message, args) {
         weather.find({ search: args.join(' '), degreeType: "C" }, function (err, result) {
-            if (err) console.log(err);
+            let tz = result[0].location.timezone;
+            if (err) return console.log(err);
             try {
                 let weatherEmbed = {
                     color: `RANDOM`,
@@ -21,17 +22,22 @@ module.exports = class Weather extends BaseCommand {
                     fields: [
                         {
                             name: 'Temperature',
-                            value: `${result[0].current.temperature}°C`,
+                            value: `${result[0].current.temperature}°C (${Math.round(result[0].current.temperature*1.8+32)}°F)`,
                             inline: true
                         },
                         {
                             name: 'Feels Like',
-                            value: `${result[0].current.feelslike}°C`,
-                            inline: true
+                            value: `${result[0].current.feelslike}°C (${Math.round(result[0].current.feelslike*1.8+32)}°F)`,
+                            inline: true                      
                         },
                         {
                             name: 'Wind Speed',
-                            value: `${result[0].current.winddisplay}`,
+                            value: `${result[0].current.windspeed}`,
+                            inline: true
+                        },
+                        {
+                            name: 'Humidity',
+                            value: `${result[0].current.humidity}%`,
                             inline: true
                         },
                         {
@@ -54,7 +60,9 @@ module.exports = class Weather extends BaseCommand {
                             inline: true
                         },
                     ],
-                    timestamp: new Date()
+                    footer: {
+                        text: `${result[0].current.date} UTC${parseInt(tz) >= 0 ? '+' : ''}${parseInt(tz)}`
+                    }
                 }
                 message.channel.send({ embed: weatherEmbed });
             } catch (err) {

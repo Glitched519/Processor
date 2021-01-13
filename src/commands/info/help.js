@@ -112,11 +112,11 @@ module.exports = class Help extends BaseCommand {
 
         let setupEmbed = {
             color: `RANDOM`,
-            title: 'Moderation Commands',
+            title: 'Setup Commands',
             description: `Only members with the \`Manage Server\` permission such as mod or admin, can use these commands. Prefix is **${PREFIX}** as in **${PREFIX}help**.`,
             fields: [
                 {
-                    name: ':interrobang: prefix {new prefix}',
+                    name: ':interrobang: prefix `{new prefix}`',
                     value: `${setupDef.prefix.description}.`,
                 },
                 {
