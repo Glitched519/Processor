@@ -1,6 +1,6 @@
 {
     "name": "processor",
-    "version": "5.1.1",
+    "version": "5.4.0",
     "description": "A bot for Discord.",
     "main": "processor.js",
     "scripts": {
