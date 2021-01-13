@@ -21,6 +21,14 @@ module.exports = class Message extends BaseEvent {
             }
         }
         const prefix = guildPrefixes[message.guild.id] || globalPrefix;
+        if (message.mentions.users.size > 2) {
+            message.delete();
+            return message.channel.send(`<@${message.author.id}>, you are mentioning too many people at once.`);
+        }
+        if (message.mentions.roles.size > 1) {
+            message.delete();
+            return message.channel.send(`<@${message.author.id}>, you are mentioning too many roles at once.`);
+        }
         if (message.content == `<@!689678745782714464>`) {
             message.reply(`my prefix is **${prefix}**`);
         }
