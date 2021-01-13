@@ -1,10 +1,9 @@
-const config = require('../../config.json');
 const guildPrefixes = {};
 const { prefix: globalPrefix } = require('../../config.json');
 const commandPrefixSchema = require('../../schemas/command-prefix-schema');
-const BaseCommand = require('../../utils/structures/BaseCommand');
+const { MessageEmbed } = require('discord.js');
 const { setupDef, modDef, mathDef, animalDef, clashDef, cuteDef, infoDef, otherDef } = require('../../defs');
-
+const BaseCommand = require('../../utils/structures/BaseCommand');
 
 module.exports = class Help extends BaseCommand {
     constructor() {
@@ -12,6 +11,9 @@ module.exports = class Help extends BaseCommand {
     }
 
     async run(client, message, args) {
+        let page = 1;
+        let maxPages = 9;
+
         for (const guild of client.guilds.cache) {
             const result = await commandPrefixSchema.findOne({ _id: message.guild.id });
             if (result == null) {
@@ -22,913 +24,256 @@ module.exports = class Help extends BaseCommand {
             }
         }
         const PREFIX = guildPrefixes[message.guild.id] || globalPrefix;
-        let helpFallbackEmbed = {
-            color: `RANDOM`,
-            title: 'Need some help?',
-            description: `Prefix is **${PREFIX}** as in **${PREFIX}help**.\n{required} [optional]`,
-            fields: [
-                {
-                    name: ':shield: Moderation  `mod`',
-                    value: "Manages server members.",
-                },
-                {
-                    name: ':cat: Animal  `animal`',
-                    value: "Learn about animals.",
-                },
-                {
-                    name: ':crossed_swords: Clash  `clash`',
-                    value: "Look up Clash of Clans related things.",
-                },
-                {
-                    name: ':blue_heart: Cute  `cute`',
-                    value: "Adore a member.",
-                },
-                {
-                    name: ':1234: Math  `math`',
-                    value: "Play with numbers.",
-                },
-                {
-                    name: ':information_source: Info  `info`',
-                    value: "Get information about a user or the server.",
-                },
-                {
-                    name: ':musical_note: Music  `music`',
-                    value: "Play music.",
-                },
-                // {
-                //     name: ':newspaper: SYSLX `syslx`',
-                //     value: "[GTA V Mod Menu.](https://discord.gg/zrMMayP)",
-                // }, 
-                {
-                    name: ':o: Other  `other`',
-                    value: "Play with other commands.",
-                },
-            ]
-        }
 
-        let helpEmbed = {
-            color: `RANDOM`,
-            title: 'Need some help?',
-            description: `Prefix is **${PREFIX}** as in **${PREFIX}help**.\n{required} [optional]\n${PREFIX}help [topic]`,
-            fields: [
-                {
-                    name: ':shield: Moderation',
-                    value: "Manages server members.",
-                },
-                {
-                    name: ':cat: Animal',
-                    value: "Learn about animals.",
-                },
-                {
-                    name: ':crossed_swords: Clash',
-                    value: "Look up Clash of Clans related things.",
-                },
-                {
-                    name: ':blue_heart: Cute',
-                    value: "Adore a member.",
-                },
-                {
-                    name: ':1234: Math',
-                    value: "Play with numbers.",
-                },
-                {
-                    name: ':information_source: Info',
-                    value: "Get information about a user or the server.",
-                },
-                // {
-                //     name: ':musical_note: Music',
-                //     value: "Play music.",
-                // },
-                // {
-                //     name: ':newspaper: SYSLX `syslx`',
-                //     value: "[GTA V Mod Menu.](https://discord.gg/zrMMayP)",
-                // }, 
-                {
-                    name: ':o: Other',
-                    value: "Play with other commands.",
-                },
-            ]
-        }
+        let helpClosed = new MessageEmbed()
+            .setColor('ORANGE')
+            .setTitle(`Help Closed`)
+            .setDescription('Deleting this embed in 5 seconds...');
 
-        let setupEmbed = {
-            color: `RANDOM`,
-            title: 'Setup Commands',
-            description: `Only members with the \`Manage Server\` permission such as mod or admin, can use these commands. Prefix is **${PREFIX}** as in **${PREFIX}help**.`,
-            fields: [
-                {
-                    name: ':interrobang: prefix `{new prefix}`',
-                    value: `${setupDef.prefix.description}.`,
-                },
-                {
-                    name: ':speech_left: setlogschannel `{#channel}`',
-                    value: `${setupDef.setlogschannel.description}.\nAliases: [${setupDef.setlogschannel.aliases}]`,
-                },
-            ],
-        };
+        let helpFallbackEmbed = new MessageEmbed()
+            .setColor(`RANDOM`)
+            .setTitle('Need some help?')
+            .setDescription(`Prefix is **${PREFIX}** as in **${PREFIX}help**.\n{required} [optional]`)
+            .addField(':shield: Moderation  `mod`', 'Manages server members.')
+            .addField(':cat: Animal  `animal`', 'Learn about animals.')
+            .addField(':crossed_swords: Clash  `clash`', 'Look up Clash of Clans related things.')
+            .addField(':blue_heart: Cute  `cute`', 'Adore a member.')
+            .addField(':1234: Math  `math`', 'Play with numbers.')
+            .addField(':information_source: Info  `info`', 'Get information about a user or the server.')
+            .addField(':o: Other  `other`', 'Play with other commands.')
 
-        let modEmbed = {
-            color: `RANDOM`,
-            title: 'Moderation Commands',
-            description: `Prefix is **${PREFIX}** as in **${PREFIX}help**.`,
-            fields: [
-                {
-                    name: ':shield: permissions',
-                    value: `${modDef.permissions.description}.\nAliases: [${modDef.permissions.aliases}]`,
-                },
-                {
-                    name: ':hammer_pick: __user__ban `{@member} [reason]`',
-                    value: `${modDef.userban.description}.\nAliases: [${modDef.userban.aliases}]`,
-                },
-                {
-                    name: ':boot: __user__kick `{@member} [reason]`',
-                    value: `${modDef.userkick.description}.\nAliases: [${modDef.userkick.aliases}]`,
-                },
-                {
-                    name: ':broom: purge `{number}`',
-                    value: `${modDef.purge.description}.\nAliases: [${modDef.purge.aliases}]`,
-                },
-                {
-                    name: ':clock10: slowmode `[number]`',
-                    value: `${modDef.slowmode.description}.\nAliases: [${modDef.slowmode.aliases}]`,
-                },
-                {
-                    name: ':hammer_pick: __id__ban `{@id} [reason]`',
-                    value: `${modDef.idban.description}.\nAliases: [${modDef.idban.aliases}]`,
-                },
-                {
-                    name: ':boot: __id__kick `{@id} [reason]`',
-                    value: `${modDef.idkick.description}.\nAliases: [${modDef.idkick.aliases}]`,
-                },
-                {
-                    name: ':warning: warn `{@member} [reason]`',
-                    value: `${modDef.warn.description}.\nAliases: [${modDef.warn.aliases}]`,
-                },
-            ],
-        };
+        let helpEmbed = new MessageEmbed()
+            .setColor(`RANDOM`)
+            .setTitle('Need some help?')
+            .setDescription(`Prefix is **${PREFIX}** as in **${PREFIX}help**.\n{required} [optional]`)
+            .addField(':shield: Moderation', 'Manages server members.')
+            .addField(':cat: Animal', 'Learn about animals.')
+            .addField(':crossed_swords: Clash', 'Look up Clash of Clans related things.')
+            .addField(':blue_heart: Cute', 'Adore a member.')
+            .addField(':1234: Math', 'Play with numbers.')
+            .addField(':information_source: Info', 'Get information about a user or the server.')
+            .addField(':o: Other', 'Play with other commands.')
 
-        let mathEmbed = {
-            color: `RANDOM`,
-            title: 'Math Commands',
-            description: `Prefix is **${PREFIX}** as in **${PREFIX}help**.`,
-            fields: [
-                {
-                    name: ':1234: base32 `{number}`',
-                    value: `${mathDef.base32.description}.\nAliases: [${mathDef.base32.aliases}]`,
-                },
-                {
-                    name: ':1234: base64 `{number}`',
-                    value: `${mathDef.base64.description}.\nAliases: [${mathDef.base64.aliases}]`,
-                },
-                {
-                    name: ':1234: binary `{number}`',
-                    value: `${mathDef.binary.description}.\nAliases: [${mathDef.binary.aliases}]`,
-                },
-                {
-                    name: ':computer: calculate `{expression}`',
-                    value: `${mathDef.calculate.description}.\nAliases: [${mathDef.calculate.aliases}]`,
-                },
-                {
-                    name: ':capital_abcd: hexadecimal `{number}`',
-                    value: `${mathDef.hexadecimal.description}.\nAliases: [${mathDef.hexadecimal.aliases}]`,
-                },
-            ]
-        }
+        let setupEmbed = new MessageEmbed()
+            .setColor(`RANDOM`)
+            .setTitle('Setup Commands')
+            .setDescription(`Only members with the \`Manage Server\` permission such as mod or admin, can use these commands. Prefix is **${PREFIX}** as in **${PREFIX}help**.`)
+            .addField(':interrobang: prefix `{new prefix}`', `${setupDef.prefix.description}`)
+            .addField(':speech_left: setlogschannel `{#channel}`', `${setupDef.setlogschannel.description}.\nAliases: [${setupDef.setlogschannel.aliases}]`)
 
-        let animalEmbed = {
-            color: `RANDOM`,
-            title: 'Animal Commands',
-            description: `Prefix is **${PREFIX}** as in **${PREFIX}help**.`,
-            fields: [
-                {
-                    name: ':information_source: animalfact `{animal}`',
-                    value: `${animalDef.animalfact.description}.\nAliases: [${animalDef.animalfact.aliases}]`,
-                },
-                {
-                    name: ':frame_photo: animalimage `{animal}`',
-                    value: `${animalDef.animalimage.description}.\nAliases: [${animalDef.animalimage.aliases}]`,
-                },
-            ]
-        }
+        let modEmbed = new MessageEmbed()
+            .setColor(`RANDOM`)
+            .setTitle('Moderation Commands')
+            .setDescription(`Prefix is **${PREFIX}** as in **${PREFIX}help**.`)
+            .addField(':shield: permissions', `${modDef.permissions.description}.\nAliases: [${modDef.permissions.aliases}]`)
+            .addField(':hammer_pick: __user__ban `{@member} [reason]`', `${modDef.userban.description}.\nAliases: [${modDef.userban.aliases}]`)
+            .addField(':boot: __user__kick `{@member} [reason]`', `${modDef.userkick.description}.\nAliases: [${modDef.userkick.aliases}]`)
+            .addField(':broom: purge `{number}`', `${modDef.purge.description}.\nAliases: [${modDef.purge.aliases}]`)
+            .addField(':clock10: slowmode `[number]`', `${modDef.slowmode.description}.\nAliases: [${modDef.slowmode.aliases}]`)
+            .addField(':hammer_pick: __id__ban `{@id} [reason]`', `${modDef.idban.description}.\nAliases: [${modDef.idban.aliases}]`)
+            .addField(':boot: __id__kick `{@id} [reason]`', `${modDef.idkick.description}.\nAliases: [${modDef.idkick.aliases}]`)
+            .addField(':warning: warn `{@member} [reason]`', `${modDef.warn.description}.\nAliases: [${modDef.warn.aliases}]`)
 
-        let clashEmbed = {
-            color: `RANDOM`,
-            title: 'Clash of Clans Commands',
-            description: `Prefix is **${PREFIX}** as in **${PREFIX}help**.`,
-            fields: [
-                {
-                    name: ':green_square: baselayout `{th/bh level}`',
-                    value: `${clashDef.baselayout.description}.\nAliases: [${clashDef.baselayout.aliases}]`,
-                },
-                {
-                    name: ':information_source: clashtips `[index]`',
-                    value: `${clashDef.clashtips.description}.\nAliases: [${clashDef.clashtips.aliases}]`,
-                },
-                {
-                    name: ':mag: searchclan `{#tag}`',
-                    value: `${clashDef.searchclan.description}.\nAliases: [${clashDef.searchclan.aliases}]`,
-                },
-                {
-                    name: ':mag: searchplayer `{#tag}`',
-                    value: `${clashDef.searchplayer.description}.\nAliases: [${clashDef.searchplayer.aliases}]`,
-                },
-            ]
-        }
+        let mathEmbed = new MessageEmbed()
+            .setColor(`RANDOM`)
+            .setTitle('Math Commands')
+            .setDescription(`Prefix is **${PREFIX}** as in **${PREFIX}help**.`)
+            .addField(':1234: base32 `{number}`', `${mathDef.base32.description}.\nAliases: [${mathDef.base32.aliases}]`)
+            .addField(':1234: base64 `{number}`', `${mathDef.base64.description}.\nAliases: [${mathDef.base64.aliases}]`)
+            .addField(':1234: binary `{number}`', `${mathDef.binary.description}.\nAliases: [${mathDef.binary.aliases}]`)
+            .addField(':computer: calculate `{expression}`', `${mathDef.calculate.description}.\nAliases: [${mathDef.calculate.aliases}]`)
+            .addField(':capital_abcd: hexadecimal `{number}`', `${mathDef.hexadecimal.description}.\nAliases: [${mathDef.hexadecimal.aliases}]`)
 
-        let cuteEmbed = {
-            color: `RANDOM`,
-            title: 'Cute Commands',
-            description: `Prefix is **${PREFIX}** as in **${PREFIX}help**.`,
-            fields: [
-                {
-                    name: ':hugging: hug `{@member}`',
-                    value: `${cuteDef.hug.description}.`,
-                },
-                {
-                    name: ':open_hands: pat `{@member}`',
-                    value: `${cuteDef.pat.description}.`,
-                },
-                {
-                    name: ':wink: wink `{@member}`',
-                    value: `${cuteDef.wink.description}.`,
-                },
-            ]
-        }
+        let animalEmbed = new MessageEmbed()
+            .setColor(`RANDOM`)
+            .setTitle('Animal Commands')
+            .setDescription(`Prefix is **${PREFIX}** as in **${PREFIX}help**.`)
+            .addField(':information_source: animalfact `{animal}`', `${animalDef.animalfact.description}.\nAliases: [${animalDef.animalfact.aliases}]`)
+            .addField(':frame_photo: animalimage `{animal}`', `${animalDef.animalimage.description}.\nAliases: [${animalDef.animalimage.aliases}]`)
 
-        let infoEmbed = {
-            color: `RANDOM`,
-            title: 'Info Commands',
-            description: `Prefix is **${PREFIX}** as in **${PREFIX}help**.`,
-            fields: [
-                {
-                    name: ':man_construction_worker: author',
-                    value: `${infoDef.author.description}.\nAliases: [${infoDef.author.aliases}]`,
-                },
-                {
-                    name: ':frame_photo: avatar `[@member]`',
-                    value: `${infoDef.avatar.description}.\nAliases: [${infoDef.avatar.aliases}]`,
-                },
-                {
-                    name: ':mask: covid19 `[country]`',
-                    value: `${infoDef.covid19.description}.\nAliases: [${infoDef.covid19.aliases}]`,
-                },
-                {
-                    name: ':book: definition `{word}`',
-                    value: `${infoDef.definition.description}.\nAliases: [${infoDef.definition.aliases}]`,
-                },
-                {
-                    name: ':computer: docs `{query}`',
-                    value: `${infoDef.docs.description}.\nAliases: [${infoDef.docs.aliases}]`,
-                },
-                {
-                    name: ':frame_photo: giphygif `{search}`',
-                    value: `${infoDef.giphygif.description}.\nAliases: [${infoDef.giphygif.aliases}]`,
-                },
-                {
-                    name: ':link: github',
-                    value: `${infoDef.github.description}.\nAliases: [${infoDef.github.aliases}]`,
-                },
-                {
-                    name: ':mag: googleimage `{search}`',
-                    value: `${infoDef.googleimage.description}.\nAliases: [${infoDef.googleimage.aliases}]`,
-                },
-                {
-                    name: ':link: invite',
-                    value: `${infoDef.invite.description}.\nAliases: [${infoDef.invite.aliases}]`,
-                },
-                {
-                    name: ':musical_note: lyrics `{song}`',
-                    value: `${infoDef.lyrics.description}.\nAliases: [${infoDef.lyrics.aliases}]`,
-                },
-                {
-                    name: ':mobile_phone: phone `{phone name}`',
-                    value: `${infoDef.phone.description}.`,
-                },
-                {
-                    name: ':exclamation: ping',
-                    value: `${infoDef.ping.description}.\nAliases: [${infoDef.ping.aliases}]`,
-                },
-                {
-                    name: ':dog2: pokemon `{pokemon}`',
-                    value: `${infoDef.pokemon.description}.\nAliases: [${infoDef.pokemon.aliases}]`,
-                },
-                {
-                    name: ':information_source: poll `{question}`',
-                    value: `${infoDef.poll.description}.`,
-                },
-                {
-                    name: ':information_source: stats `[@member]`',
-                    value: `${infoDef.stats.description}.`,
-                },
-                {
-                    name: ':heart: support',
-                    value: `${infoDef.support.description}.`,
-                },
-                {
-                    name: ':blue_heart: vote',
-                    value: `${infoDef.vote.description}.`,
-                },
-                {
-                    name: ':white_sun_rain_cloud: weather `[location]`',
-                    value: `${infoDef.weather.description}.`,
-                },
-            ]
-        }
+        let clashEmbed = new MessageEmbed()
+            .setColor(`RANDOM`)
+            .setTitle('Clash Commands')
+            .setDescription(`Prefix is **${PREFIX}** as in **${PREFIX}help**.`)
+            .addField(':green_square: baselayout `{th/bh level}`', `${clashDef.baselayout.description}.\nAliases: [${clashDef.baselayout.aliases}]`)
+            .addField(':information_source: clashtips `[index]`', `${clashDef.clashtips.description}.\nAliases: [${clashDef.clashtips.aliases}]`)
+            .addField(':mag: searchclan `{#tag}', `${clashDef.searchclan.description}.\nAliases: [${clashDef.searchclan.aliases}]`)
+            .addField(':mag: searchplayer `{#tag}', `${clashDef.searchplayer.description}.\nAliases: [${clashDef.searchplayer.aliases}]`)
 
-        let musicEmbed = {
-            color: `RANDOM`,
-            title: 'Music Commands [SUSPENDED]',
-            description: `Commands won't work until issue is fixed.`,
-            fields: [
-                {
-                    name: ':arrow_forward: play `{song}`',
-                    value: `Plays a song via search term or URL from YouTube.\nAliases: [p]`,
-                },
-                {
-                    name: ':stop_button: stop',
-                    value: `Stops the current song playing. Clears the queue.`,
-                },
-                {
-                    name: ':track_next: skip',
-                    value: `Skips to the next song.`,
-                },
-                {
-                    name: ':loud_sound: volume',
-                    value: `Change the volume.\n Aliases: [vol]`,
-                },
-                {
-                    name: ':card_box: queue',
-                    value: `Shows the song queue, and the song now playing.\nAliases: [q]`
-                },
-                {
-                    name: ':pause_button: pause',
-                    value: `Pauses the current song.`
-                },
-                {
-                    name: ':arrow_forward: resume',
-                    value: `Resumes the current song if paused.`
-                },
-                {
-                    name: ':repeat_one: loop',
-                    value: `Loops the current song.`
-                },
-            ]
-        }
+        let cuteEmbed = new MessageEmbed()
+            .setColor(`RANDOM`)
+            .setTitle('Cute Commands')
+            .setDescription(`Prefix is **${PREFIX}** as in **${PREFIX}help**.`)
+            .addField(':hugging: hug `{@member}`', `${cuteDef.hug.description}.`)
+            .addField(':open_hands: pat `{@member}`', `${cuteDef.pat.description}.`)
+            .addField(':wink: wink `{@member}`', `${cuteDef.wink.description}.`)
 
-        let otherEmbed = {
-            color: `RANDOM`,
-            title: 'Other Commands',
-            description: `Prefix is **${PREFIX}** as in **${PREFIX}help**.`,
-            fields: [
-                {
-                    name: ':man_running: chucknorrisjoke',
-                    value: `${otherDef.chucknorrisjoke.description}.\nAliases: [${otherDef.chucknorrisjoke.aliases}]`,
-                },
-                {
-                    name: ':speech_left: comment `{your comment}`',
-                    value: `${otherDef.comment.description}.`
-                },
-                {
-                    name: ':man_curly_haired_tone3: dadjoke',
-                    value: `${otherDef.dadjoke.description}.\nAliases: [${otherDef.dadjoke.aliases}]`,
-                },
-                {
-                    name: ':sound: echo `{message}`',
-                    value: `${otherDef.echo.description}.\nAliases: [${otherDef.echo.aliases}]`,
-                },
-                {
-                    name: ':computer: hack `{@member}`',
-                    value: `${otherDef.hack.description}.`,
-                },
-                {
-                    name: ':rofl: joke',
-                    value: `${otherDef.joke.description}.`,
-                },
-                {
-                    name: ':rofl: meme',
-                    value: `${otherDef.meme.description}.\nAliases: [${otherDef.meme.aliases}]`,
-                },
-                {
-                    name: ':bookmark: quote',
-                    value: `${otherDef.quote.description}.`,
-                },
-                {
-                    name: ':game_die: roll',
-                    value: `${otherDef.roll.description}.\nAliases: [${otherDef.roll.aliases}]`,
-                },
-                {
-                    name: ':information_source: suggest `{suggestion}`',
-                    value: `${otherDef.suggest.description}.`,
-                },
-                {
-                    name: ':information_source: wikipedia `{wiki}`',
-                    value: `${otherDef.wikipedia.description}.\nAliases: [${otherDef.wikipedia.aliases}]`,
-                },
-            ]
-        }
+        let infoEmbed = new MessageEmbed()
+            .setColor(`RANDOM`)
+            .setTitle('Info Commands')
+            .setDescription(`Prefix is **${PREFIX}** as in **${PREFIX}help**.`)
+            .addField(':man_construction_worker: author', `${infoDef.author.description}.\nAliases: [${infoDef.author.aliases}]`)
+            .addField(':frame_photo: avatar `[@member]`', `${infoDef.avatar.description}.\nAliases: [${infoDef.avatar.aliases}]`)
+            .addField(':mask: covid19 `[country]`', `${infoDef.covid19.description}.\nAliases: [${infoDef.covid19.aliases}]`)
+            .addField(':book: definition `{word}`', `${infoDef.definition.description}.\nAliases: [${infoDef.definition.aliases}]`)
+            .addField(':computer: docs `{query}`', `${infoDef.docs.description}.\nAliases: [${infoDef.docs.aliases}]`)
+            .addField(':frame_photo: giphygif `{search}`', `${infoDef.giphygif.description}.\nAliases: [${infoDef.giphygif.aliases}]`)
+            .addField(':link: github', `${infoDef.github.description}.\nAliases: [${infoDef.github.aliases}]`)
+            .addField(':mag: googleimage `{search}`', `${infoDef.googleimage.description}.\nAliases: [${infoDef.googleimage.aliases}]`)
+            .addField(':link: invite', `${infoDef.invite.description}.\nAliases: [${infoDef.invite.aliases}]`)
+            .addField(':musical_note: lyrics `{song}`', `${infoDef.lyrics.description}.\nAliases: [${infoDef.lyrics.aliases}]`)
+            .addField(':mobile_phone: phone `{phone name}`', `${infoDef.phone.description}.`)
+            .addField(':exclamation: ping', `${infoDef.ping.description}.\nAliases: [${infoDef.ping.aliases}]`)
+            .addField(':dog2: pokemon `{pokemon}`', `${infoDef.pokemon.description}.\nAliases: [${infoDef.pokemon.aliases}]`)
+            .addField(':information_source: poll `{question}`', `${infoDef.poll.description}.`)
+            .addField(':information_source: stats `[@member]`', `${infoDef.stats.description}.`)
+            .addField(':heart: support', `${infoDef.support.description}.`)
+            .addField(':blue_heart: vote', `${infoDef.vote.description}.`)
+            .addField(':white_sun_rain_cloud: weather `[location]`', `${infoDef.weather.description}.`)
 
-        function help(msg) {
-            if (msg.embeds[0].title !== "Need some help?") {
-                msg.edit({ embed: helpEmbed });
+        let otherEmbed = new MessageEmbed()
+            .setColor(`RANDOM`)
+            .setTitle('Info Commands')
+            .setDescription(`Prefix is **${PREFIX}** as in **${PREFIX}help**.`)
+            .addField(':man_running: chucknorrisjoke', `${otherDef.chucknorrisjoke.description}.\nAliases: [${otherDef.chucknorrisjoke.aliases}]`)
+            .addField(':speech_left: comment `{your comment}`', `${otherDef.comment.description}.`)
+            .addField(':man_curly_haired_tone3: dadjoke', `${otherDef.dadjoke.description}.\nAliases: [${otherDef.dadjoke.aliases}]`)
+            .addField(':computer: hack `{@member}`', `${otherDef.hack.description}.`)
+            .addField(':rofl: joke', `${otherDef.joke.description}.`)
+            .addField(':rofl: meme', `${otherDef.meme.description}.\nAliases: [${otherDef.meme.aliases}]`)
+            .addField(':bookmark: quote', `${otherDef.quote.description}.`)
+            .addField(':game_die: roll', `${otherDef.roll.description}.\nAliases: [${otherDef.roll.aliases}]`)
+            .addField(':information_source: suggest `{suggestion}`', `${otherDef.suggest.description}.`)
+            .addField(':information_source: wikipedia `{wiki}`', `${otherDef.wikipedia.description}.\nAliases: [${otherDef.wikipedia.aliases}]`)
+
+        function gotoPage(msg, page) {
+            switch (page) {
+                case 1:
+                    helpEmbed.setFooter(`Page ${page} of ${maxPages}`, `${message.author.displayAvatarURL()}`);
+                    msg.edit(helpEmbed);
+                    break;
+                case 2:
+                    setupEmbed.setFooter(`Page ${page} of ${maxPages}`, `${message.author.displayAvatarURL()}`);
+                    msg.edit(setupEmbed);
+                    break;
+                case 3:
+                    modEmbed.setFooter(`Page ${page} of ${maxPages}`, `${message.author.displayAvatarURL()}`);
+                    msg.edit(modEmbed);
+                    break;
+                case 4:
+                    animalEmbed.setFooter(`Page ${page} of ${maxPages}`, `${message.author.displayAvatarURL()}`);
+                    msg.edit(animalEmbed);
+                    break;
+                case 5:
+                    clashEmbed.setFooter(`Page ${page} of ${maxPages}`, `${message.author.displayAvatarURL()}`);
+                    msg.edit(clashEmbed);
+                    break;
+                case 6:
+                    cuteEmbed.setFooter(`Page ${page} of ${maxPages}`, `${message.author.displayAvatarURL()}`);
+                    msg.edit(cuteEmbed);
+                    break;
+                case 7:
+                    mathEmbed.setFooter(`Page ${page} of ${maxPages}`, `${message.author.displayAvatarURL()}`);
+                    msg.edit(mathEmbed);
+                    break;
+                case 8:
+                    infoEmbed.setFooter(`Page ${page} of ${maxPages}`, `${message.author.displayAvatarURL()}`);
+                    msg.edit(infoEmbed);
+                    break;
+                case 9:
+                    otherEmbed.setFooter(`Page ${page} of ${maxPages}`, `${message.author.displayAvatarURL()}`);
+                    msg.edit(otherEmbed);
+                    break;
             }
-            msg.react('🛡')
-                .then(() => msg.react('🐱'))
-                .then(() => msg.react('⚔'))
-                .then(() => msg.react('💙'))
-                .then(() => msg.react('🔢'))
-                .then(() => msg.react('ℹ'))
-                .then(() => msg.react('⭕'))
-                ////.then(() => msg.react('🎵')
-                .then(() => msg.react('❌'))
-            const filter = (reaction, user) => {
-                return ['❌', '🛡', '🐱', '⚔', '💙', '🔢', 'ℹ', '🎵', '⭕'].includes(reaction.emoji.name) && user.id === message.author.id;
-            };
+            changePage(msg);
+        }
 
-            msg.awaitReactions(filter, { max: 1, time: 600000 })
+        function changePage(msg) {
+            msg.react('⏮')
+                .then(msg.react('◀'))
+                .then(msg.react('💠'))
+                .then(msg.react('▶'))
+                .then(msg.react('⏭'))
+                .then(msg.react('❌'))
+
+
+            const filter = (reaction, user) => {
+                return ['⏮', '◀', '💠', '▶', '⏭', '❌'].includes(reaction.emoji.name) && user.id === message.author.id;
+            };
+            msg.awaitReactions(filter, { max: 1, time: 300000 })
                 .then(collected => {
                     const reaction = collected.first();
 
                     switch (reaction.emoji.name) {
-                        case '🔼':
+                        case '⏮':
+                            page = 1;
+                            gotoPage(msg, 1);
+                            break;
+                        case '◀':
+                            if (page <= 1) {
+                                page = 1;
+                            }
+                            else {
+                                page--;
+                            }
+                            gotoPage(msg, page);
+                            break;
+                        case '💠':
+                            if (page == Math.round(maxPages / 2)) {
+                                page = Math.round(maxPages / 2);
+                            }
+                            else {
+                                page = Math.round(maxPages / 2);
+                            }
+                            gotoPage(msg, page);
+                            break;
+                        case '▶':
+                            if (page >= maxPages) {
+                                page = maxPages;
+                            }
+                            else {
+                                page++;
+                            }
+                            gotoPage(msg, page);
+                            break;
+                        case '⏭':
+                            page = maxPages;
+                            gotoPage(msg, maxPages);
                             break;
                         case '❌':
-                            return msg.delete();
-                        case '🛡':
-                            mod(msg);
-                            break;
-                        case '🐱':
-                            animal(msg);
-                            break;
-                        case '⚔':
-                            clash(msg);
-                            break;
-                        case '💙':
-                            cute(msg);
-                            break;
-                        case '🔢':
-                            math(msg);
-                            break;
-                        case 'ℹ':
-                            info(msg);
-                            break;
-                        case '🎵':
-                            music(msg);
-                            break;
-                        case '⭕':
-                            other(msg);
-                            break;
+                            return msg.edit(helpClosed)
+                                .then(close => {
+                                    close.delete({ timeout: 5000 });
+                                });
                     }
-                })
-
+                });
         }
-
-        function mod(msg) {
-            msg.edit({ embed: modEmbed });
-            msg.react('🔼')
-                .then(() => msg.react('🐱'))
-                .then(() => msg.react('⚔'))
-                .then(() => msg.react('💙'))
-                .then(() => msg.react('🔢'))
-                .then(() => msg.react('ℹ'))
-                //.then(() => msg.react('🎵')
-                .then(() => msg.react('⭕'))
-                .then(() => msg.react('❌'))
-
-            const filter = (reaction, user) => {
-                return ['🔼', '❌', '🐱', '⚔', '💙', '🔢', 'ℹ', '🎵', '⭕'].includes(reaction.emoji.name) && user.id === message.author.id;
-            };
-
-            msg.awaitReactions(filter, { max: 1, time: 600000 })
-                .then(collected => {
-                    const reaction = collected.first();
-
-                    switch (reaction.emoji.name) {
-                        case '🔼':
-                            help(msg);
-                            break;
-                        case '❌':
-                            return msg.delete();
-                        case '🐱':
-                            animal(msg);
-                            break;
-                        case '⚔':
-                            clash(msg);
-                            break;
-                        case '💙':
-                            cute(msg);
-                            break;
-                        case '🔢':
-                            math(msg);
-                            break;
-                        case 'ℹ':
-                            info(msg);
-                            break;
-                        case '🎵':
-                            music(msg);
-                            break;
-                        case '⭕':
-                            other(msg);
-                            break;
-                    }
-                })
-
-        }
-
-        function animal(msg) {
-            msg.edit({ embed: animalEmbed });
-            msg.react('🔼')
-                .then(() => msg.react('🛡'))
-                .then(() => msg.react('⚔'))
-                .then(() => msg.react('💙'))
-                .then(() => msg.react('🔢'))
-                .then(() => msg.react('ℹ'))
-                //.then(() => msg.react('🎵')
-                .then(() => msg.react('⭕'))
-                .then(() => msg.react('❌'));
-
-            const filter = (reaction, user) => {
-                return ['🔼', '❌', '🛡', '⚔', '💙', '🔢', 'ℹ', '🎵', '⭕'].includes(reaction.emoji.name) && user.id === message.author.id;
-            };
-
-            msg.awaitReactions(filter, { max: 1, time: 600000 })
-                .then(collected => {
-                    const reaction = collected.first();
-
-                    switch (reaction.emoji.name) {
-                        case '🔼':
-                            help(msg);
-                            break;
-                        case '❌':
-                            return msg.delete();
-                        case '🛡':
-                            mod(msg);
-                            break;
-                        case '⚔':
-                            clash(msg);
-                            break;
-                        case '💙':
-                            cute(msg);
-                            break;
-                        case '🔢':
-                            math(msg);
-                            break;
-                        case 'ℹ':
-                            info(msg);
-                            break;
-                        case '🎵':
-                            music(msg);
-                            break;
-                        case '⭕':
-                            other(msg);
-                            break;
-                    }
-                })
-
-        }
-
-        function clash(msg) {
-            msg.edit({ embed: clashEmbed });
-            msg.react('🔼')
-                .then(() => msg.react('🛡'))
-                .then(() => msg.react('🐱'))
-                .then(() => msg.react('💙'))
-                .then(() => msg.react('🔢'))
-                .then(() => msg.react('ℹ'))
-                //.then(() => msg.react('🎵')
-                .then(() => msg.react('⭕'))
-                .then(() => msg.react('❌'))
-
-            const filter = (reaction, user) => {
-                return ['🔼', '❌', '🛡', '🐱', '💙', '🔢', 'ℹ', '🎵', '⭕'].includes(reaction.emoji.name) && user.id === message.author.id;
-            };
-
-            msg.awaitReactions(filter, { max: 1, time: 600000 })
-                .then(collected => {
-                    const reaction = collected.first();
-
-                    switch (reaction.emoji.name) {
-                        case '🔼':
-                            help(msg);
-                            break;
-                        case '❌':
-                            return msg.delete();
-                        case '🛡':
-                            mod(msg);
-                            break;
-                        case '🐱':
-                            animal(msg);
-                        case '💙':
-                            cute(msg);
-                            break;
-                        case '🔢':
-                            math(msg);
-                            break;
-                        case 'ℹ':
-                            info(msg);
-                            break;
-                        case '🎵':
-                            music(msg);
-                            break;
-                        case '⭕':
-                            other(msg);
-                            break;
-                    }
-                })
-
-        }
-
-        function cute(msg) {
-            msg.edit({ embed: cuteEmbed });
-            msg.react('🔼')
-                .then(() => msg.react('🛡'))
-                .then(() => msg.react('🐱'))
-                .then(() => msg.react('⚔'))
-                .then(() => msg.react('🔢'))
-                .then(() => msg.react('ℹ'))
-                //.then(() => msg.react('🎵')
-                .then(() => msg.react('⭕'))
-                .then(() => msg.react('❌'))
-
-            const filter = (reaction, user) => {
-                return ['🔼', '❌', '🛡', '🐱', '⚔', '🔢', 'ℹ', '🎵', '⭕'].includes(reaction.emoji.name) && user.id === message.author.id;
-            };
-
-            msg.awaitReactions(filter, { max: 1, time: 600000 })
-                .then(collected => {
-                    const reaction = collected.first();
-
-                    switch (reaction.emoji.name) {
-                        case '🔼':
-                            help(msg);
-                            break;
-                        case '❌':
-                            return msg.delete();
-                        case '🛡':
-                            mod(msg);
-                            break;
-                        case '🐱':
-                            animal(msg);
-                            break;
-                        case '⚔':
-                            clash(msg);
-                            break;
-                        case '🔢':
-                            math(msg);
-                            break;
-                        case 'ℹ':
-                            info(msg);
-                            break;
-                        case '🎵':
-                            music(msg);
-                            break;
-                        case '⭕':
-                            other(msg);
-                            break;
-                    }
-                })
-
-        }
-
-        function math(msg) {
-            msg.edit({ embed: mathEmbed });
-            msg.react('🔼')
-                .then(() => msg.react('🛡'))
-                .then(() => msg.react('🐱'))
-                .then(() => msg.react('⚔'))
-                .then(() => msg.react('💙'))
-                .then(() => msg.react('ℹ'))
-                //.then(() => msg.react('🎵')
-                .then(() => msg.react('⭕'))
-                .then(() => msg.react('❌'))
-
-            const filter = (reaction, user) => {
-                return ['🔼', '❌', '🛡', '🐱', '⚔', '💙', 'ℹ', '🎵', '⭕'].includes(reaction.emoji.name) && user.id === message.author.id;
-            };
-
-            msg.awaitReactions(filter, { max: 1, time: 600000 })
-                .then(collected => {
-                    const reaction = collected.first();
-
-                    switch (reaction.emoji.name) {
-                        case '🔼':
-                            help(msg);
-                            break;
-                        case '❌':
-                            return msg.delete();
-                        case '🛡':
-                            mod(msg);
-                            break;
-                        case '🐱':
-                            animal(msg);
-                            break;
-                        case '⚔':
-                            clash(msg);
-                            break;
-                        case '💙':
-                            cute(msg);
-                            break;
-                        case 'ℹ':
-                            info(msg);
-                            break;
-                        case '🎵':
-                            music(msg);
-                            break;
-                        case '⭕':
-                            other(msg);
-                            break;
-                    }
-                })
-
-        }
-
-        function info(msg) {
-            msg.edit({ embed: infoEmbed });
-            msg.react('🔼')
-                .then(() => msg.react('🛡'))
-                .then(() => msg.react('🐱'))
-                .then(() => msg.react('⚔'))
-                .then(() => msg.react('💙'))
-                .then(() => msg.react('🔢'))
-                //.then(() => msg.react('🎵')
-                .then(() => msg.react('⭕'))
-                .then(() => msg.react('❌'))
-
-            const filter = (reaction, user) => {
-                return ['🔼', '❌', '🛡', '🐱', '⚔', '💙', '🔢', '🎵', '⭕'].includes(reaction.emoji.name) && user.id === message.author.id;
-            };
-
-            msg.awaitReactions(filter, { max: 1, time: 600000 })
-                .then(collected => {
-                    const reaction = collected.first();
-
-                    switch (reaction.emoji.name) {
-                        case '🔼':
-                            help(msg);
-                            break;
-                        case '❌':
-                            return msg.delete();
-                        case '🛡':
-                            mod(msg);
-                            break;
-                        case '🐱':
-                            animal(msg);
-                            break;
-                        case '⚔':
-                            clash(msg);
-                            break;
-                        case '💙':
-                            cute(msg);
-                            break;
-                        case '🔢':
-                            math(msg);
-                            break;
-                        case '🎵':
-                            music(msg);
-                            break;
-                        case '⭕':
-                            other(msg);
-                            break;
-                    }
-                })
-
-        }
-
-        function music(msg) {
-            msg.edit({ embed: musicEmbed });
-            msg.react('🔼')
-                .then(() => msg.react('🛡'))
-                .then(() => msg.react('🐱'))
-                .then(() => msg.react('⚔'))
-                .then(() => msg.react('💙'))
-                .then(() => msg.react('🔢'))
-                .then(() => msg.react('ℹ'))
-                .then(() => msg.react('⭕'))
-                .then(() => msg.react('❌'))
-
-            const filter = (reaction, user) => {
-                return ['🔼', '❌', '🛡', '🐱', '⚔', '💙', '🔢', 'ℹ', '⭕'].includes(reaction.emoji.name) && user.id === message.author.id;
-            };
-
-            msg.awaitReactions(filter, { max: 1, time: 600000 })
-                .then(collected => {
-                    const reaction = collected.first();
-
-                    switch (reaction.emoji.name) {
-                        case '🔼':
-                            help(msg);
-                            break;
-                        case '❌':
-                            return msg.delete();
-                        case '🛡':
-                            mod(msg);
-                            break;
-                        case '🐱':
-                            animal(msg);
-                            break;
-                        case '⚔':
-                            clash(msg);
-                            break;
-                        case '💙':
-                            cute(msg);
-                            break;
-                        case '🔢':
-                            math(msg);
-                            break;
-                        case 'ℹ':
-                            info(msg);
-                            break;
-                        case '⭕':
-                            other(msg);
-                            break;
-                    }
-                })
-
-        }
-
-        function other(msg) {
-            msg.edit({ embed: otherEmbed });
-            msg.react('🔼')
-                .then(() => msg.react('❌'))
-                .then(() => msg.react('🛡'))
-                .then(() => msg.react('🐱'))
-                .then(() => msg.react('⚔'))
-                .then(() => msg.react('💙'))
-                .then(() => msg.react('🔢'))
-                .then(() => msg.react('ℹ'))
-            //.then(() => msg.react('🎵');
-
-            const filter = (reaction, user) => {
-                return ['🔼', '❌', '🛡', '🐱', '⚔', '💙', '🔢', 'ℹ', '🎵'].includes(reaction.emoji.name) && user.id === message.author.id;
-            };
-
-            msg.awaitReactions(filter, { max: 1, time: 600000 })
-                .then(collected => {
-                    const reaction = collected.first();
-
-                    switch (reaction.emoji.name) {
-                        case '🔼':
-                            help(msg);
-                            break;
-                        case '❌':
-                            return msg.delete();
-                        case '🛡':
-                            mod(msg);
-                            break;
-                        case '🐱':
-                            animal(msg);
-                            break;
-                        case '⚔':
-                            clash(msg);
-                            break;
-                        case '💙':
-                            cute(msg);
-                            break;
-                        case '🔢':
-                            math(msg);
-                            break;
-                        case 'ℹ':
-                            info(msg);
-                            break;
-                        case '🎵':
-                            music(msg);
-                            break;
-                    }
-                })
-
-        }
-        if (args[0] == "setup") {
-            return message.channel.send({embed: setupEmbed});
-        }
-        if (args[0] == "mod") {
-            return message.channel.send({ embed: modEmbed });
-        }
-        if (args[0] == "animal") {
-            return message.channel.send({ embed: animalEmbed });
-        }
-        if (args[0] == "clash") {
-            return message.channel.send({ embed: clashEmbed });
-        }
-        if (args[0] == "cute") {
-            return message.channel.send({ embed: cuteEmbed });
-        }
-        if (args[0] == "math") {
-            return message.channel.send({ embed: mathEmbed });
-        }
-        if (args[0] == "info") {
-            return message.channel.send({ embed: infoEmbed });
-        }
-        // if (args[0] == "music") {
-        //     return message.channel.send({ embed: musicEmbed });
-        // }
-        if (args[0] == "other") {
-            return message.channel.send({ embed: otherEmbed });
+        switch (args[0]) {
+            case "setup":
+                return message.channel.send(setupEmbed);
+            case "mod":
+                return message.channel.send(modEmbed);
+            case "animal":
+                return message.channel.send(animalEmbed);
+            case "clash":
+                return message.channel.send(clashEmbed);
+            case "cute":
+                return message.channel.send(cuteEmbed);
+            case "math":
+                return message.channel.send(mathEmbed);
+            case "info":
+                return message.channel.send(infoEmbed);
+            case "other":
+                return message.channel.send(otherEmbed);
         }
 
         if (!message.guild.me.hasPermission(["READ_MESSAGE_HISTORY", "ADD_REACTIONS"])) {
             message.channel.send(`:grey_question: If you wish to use reactions to navigate the help menu, please make make the following permissions are enabled:\n**Read Messages\nAdd Reactions**\nUsage: ${PREFIX}help \`[topic]\``);
-            return message.channel.send({ embed: helpFallbackEmbed });
+            return message.channel.send(helpFallbackEmbed);
         }
-        message.channel.send({ embed: helpEmbed }).then((msg) => {
-            help(msg);
+        helpEmbed.setFooter(`Page ${page} of ${maxPages}`, `${message.author.displayAvatarURL()}`);
+        message.channel.send(helpEmbed).then(msg => {
+            changePage(msg);
         });
     }
 }
