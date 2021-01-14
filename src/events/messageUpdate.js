@@ -9,6 +9,7 @@ module.exports = class MessageUpdate extends BaseEvent {
     }
     async run(client, oldMessage, newMessage) {
         if (oldMessage.author.bot) return;
+        if (oldMessage.content == newMessage.content) return;
         const logChannelQuery = await logSchema.findOne({ _id: oldMessage.guild.id });
         if (logChannelQuery == null) return;
         const logChannel = logChannelQuery.channel;
