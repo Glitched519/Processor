@@ -9,9 +9,9 @@ module.exports = class GuildDelete extends BaseEvent {
     async run(client, guild) {
         let destination = client.channels.cache.get('797849546612932668');
         const leaveEmbed = new MessageEmbed()
-            .setTitle(`${leave} Oh no, a server removed ${client.user.tag}`)
-            .setColor('RED')
-            .setFooter(`Currently in ${client.guilds.cache.size} servers`)
+        .setTitle(`${leave} **${guild}** removed ${client.user.tag}`)
+        .setColor('RED')
+        .setFooter(`Currently in ${client.guilds.cache.size} servers`)
         destination.send(leaveEmbed)
     }
 }

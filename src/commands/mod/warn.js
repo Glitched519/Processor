@@ -9,14 +9,15 @@ module.exports = class Warn extends BaseCommand {
         let memberTag = args.shift();
         let reason = args.join(' ');
 
-        if (args.length == 0) {
-            return message.channel.send(":x: **You need to specify a member to warn.**")
+        if (!message.member.hasPermission('KICK_MEMBERS')) {
+            return message.channel.send(":x: **You don't have permission to warn a member.**")
                 .then(msg => {
                     msg.delete({ timeout: 4000 });
                 });
         }
-        if (!message.member.hasPermission('KICK_MEMBERS')) {
-            return message.channel.send(":x: **You don't have permission to warn a member.**")
+
+        if (args.length == 0) {
+            return message.channel.send(":x: **You need to specify a member to warn.**")
                 .then(msg => {
                     msg.delete({ timeout: 4000 });
                 });
