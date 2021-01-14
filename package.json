@@ -2,6 +2,7 @@
     "name": "processor",
     "version": "6.1.0",
     "description": "An EPIC bot for Discord.",
+    "repository": "https://github.com/Glitched519/Processor",
     "main": "processor.js",
     "scripts": {
         "start": "pm2 start ./src/processor.js && pm2 log"
@@ -14,7 +15,7 @@
         "bl": "^4.0.3",
         "bytes": "^3.1.0",
         "canvas": "^2.6.1",
-        "cheerio": "^1.0.0-rc.3",
+        "cheerio": "^1.0.0-rc.5",
         "colors": "^1.4.0",
         "discord.js": "^12.5.1",
         "express": "^4.2.0",
@@ -28,7 +29,6 @@
         "request": "^2.88.2",
         "restify": "^8.5.1",
         "restify-cors-middleware": "^1.1.1",
-        "some-random-api": "^2.0.0",
         "systeminformation": "^4.33.4"
     },
     "keywords": []

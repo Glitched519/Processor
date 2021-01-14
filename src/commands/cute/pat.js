@@ -1,4 +1,5 @@
-const { api } = require("some-random-api");
+const axios = require("axios").default;
+const { MessageEmbed } = require('discord.js');
 const BaseCommand = require('../../utils/structures/BaseCommand');
 
 module.exports = class Pat extends BaseCommand {
@@ -7,16 +8,21 @@ module.exports = class Pat extends BaseCommand {
     }
 
     run(client, message, args) {
-        api.animu.pat().then(res => {
+
+        const options = {
+            method: 'GET',
+            url: 'https://some-random-api.ml/animu/pat',
+        };
+
+        axios.request(options).then(response => {
             let patEmbed = new MessageEmbed()
                 .setDescription(`**<@!${message.author.id}> pats ${args}! Wholesome :blue_heart:**`)
                 .setColor(`RANDOM`)
-                .setImage(res.link)
-                .setTimestamp()
+                .setImage(response.data.link)
             if (!args[0]) patEmbed.setDescription(`**<@!${message.author.id}> pats himself?**`);
             return message.channel.send(patEmbed);
         }).catch(err => {
-            message.channel.send(":x: Unfortunately, something went wrong with the API, and you could not pat your love :cry:.");
+            return message.channel.send(":x: Unfortunately, something went wrong with the API, and you could not pat your love :cry:.");
         });
     }
 }

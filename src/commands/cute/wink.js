@@ -1,4 +1,5 @@
-const { api } = require("some-random-api");
+const axios = require("axios").default;
+const { MessageEmbed } = require('discord.js');
 const BaseCommand = require('../../utils/structures/BaseCommand');
 
 module.exports = class Wink extends BaseCommand {
@@ -7,16 +8,21 @@ module.exports = class Wink extends BaseCommand {
     }
 
     run(client, message, args) {
-        api.animu.wink().then(res => {
+
+        const options = {
+            method: 'GET',
+            url: 'https://some-random-api.ml/animu/wink',
+        };
+
+        axios.request(options).then(response => {
             let winkEmbed = new MessageEmbed()
                 .setDescription(`**<@!${message.author.id}> winks at ${args}! Wholesome :blue_heart:**`)
                 .setColor(`RANDOM`)
-                .setImage(res.link)
-                .setTimestamp()
+                .setImage(response.data.link)
             if (!args[0]) winkEmbed.setDescription(`**<@!${message.author.id}> winks at himself?**`);
             return message.channel.send(winkEmbed);
         }).catch(err => {
-            message.channel.send(":x: Unfortunately, something went wrong with the API, and you could not wink at your love :cry:");
+            return message.channel.send(":x: Unfortunately, something went wrong with the API, and you could not wink your love :cry:.");
         });
     }
 }

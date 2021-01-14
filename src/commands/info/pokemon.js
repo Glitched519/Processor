@@ -1,4 +1,4 @@
-const { api } = require('some-random-api');
+const axios = require("axios").default;
 const { MessageEmbed } = require('discord.js');
 const BaseCommand = require('../../utils/structures/BaseCommand');
 
@@ -8,7 +8,13 @@ module.exports = class Pokemon extends BaseCommand {
     }
 
     run(client, message, args) {
-        api.pokemon.pokedex(args.join(' ')).then(res => {
+        const options = {
+            method: 'GET',
+            url: `https://some-random-api.ml/pokedex?pokemon=${args.join(' ')}`,
+        };
+
+        axios.request(options).then(response => {
+            let res = response.data;
             let pokemonEmbed = new MessageEmbed()
                 .setTitle(`${res.name} (${res.id})`)
                 .setDescription(res.description)
@@ -23,7 +29,7 @@ module.exports = class Pokemon extends BaseCommand {
 
             message.channel.send(pokemonEmbed);
         }).catch(err => {
-            return message.reply(":x: **That isn't a valid pokemon.**")
+            return message.channel.send(":x: That is an invalid pokemon.");
         });
     }
 }

@@ -1,52 +1,28 @@
-const { api } = require('some-random-api');
-const config = require('../../config.json');
-const PREFIX = config["bot-prefix"];
+const axios = require("axios").default;
+const { MessageEmbed } = require('discord.js');
 const BaseCommand = require('../../utils/structures/BaseCommand');
 
 module.exports = class AnimalFact extends BaseCommand {
     constructor() {
-        super('animalfact', 'animal', ['fact', 'randomfact', 'animalfact']);
+        super('animalfact', 'animal', ['fact']);
     }
 
     run(client, message, args) {
-        if (args[0] == ``) {
-            return message.channel.send("**:information_source: You can learn facts about these animals: dog :dog:, cat :cat:, bird :bird:, koala :koala:, panda :panda_face:, fox :fox:.**");
-        } else if (args[0] == "cat") {
-            api.facts.cat().then(res => {
-                return message.channel.send(res.fact);
-            }).catch(err => {
-                message.channel.send(":x: Something went wrong with the API. Please try again later.");
-            });
-        } else if (args[0] == "dog") {
-            api.facts.dog().then(res => {
-                return message.channel.send(res.fact);
-            }).catch(err => {
-                message.channel.send(":x: Something went wrong with the API. Please try again later.");
-            });
-        } else if (args[0] == "koala") {
-            api.facts.koala().then(res => {
-                return message.channel.send(res.fact);
-            }).catch(err => {
-                message.channel.send(":x: Something went wrong with the API. Please try again later.");
-            });
-        } else if (args[0] == "panda") {
-            api.facts.panda().then(res => {
-                return message.channel.send(res.fact);
-            }).catch(err => {
-                message.channel.send(":x: Something went wrong with the API. Please try again later.");
-            });
-        } else if (args[0] == "bird") {
-            api.facts.bird().then(res => {
-                return message.channel.send(res.fact);
-            }).catch(err => {
-                message.channel.send(":x: Something went wrong with the API. Please try again later.");
-            });
-        } else if (args[0] == "fox") {
-            api.facts.fox().then(res => {
-                return message.channel.send(res.fact);
-            }).catch(err => {
-                message.channel.send(":x: Something went wrong with the API. Please try again later.");
-            });
-        }
+
+        if (!args[0]) return;
+
+        const options = {
+            method: 'GET',
+            url: `https://some-random-api.ml/facts/${args.join(' ')}`,
+        };
+
+        axios.request(options).then(response => {
+            let factEmbed = new MessageEmbed()
+                .setColor(`RANDOM`)
+                .setDescription(response.data.fact);
+            return message.channel.send(factEmbed);
+        }).catch(err => {
+            return message.channel.send(":x: Sorry, we don't have any facts for that animal.");
+        });
     }
 }

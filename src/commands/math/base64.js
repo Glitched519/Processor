@@ -1,4 +1,4 @@
-const { api } = require("some-random-api");
+const axios = require("axios").default;
 const BaseCommand = require('../../utils/structures/BaseCommand');
 
 module.exports = class Base64 extends BaseCommand {
@@ -7,8 +7,15 @@ module.exports = class Base64 extends BaseCommand {
     }
 
     run(client, message, args) {
-        api.other.base64Encode(args[0]).then(res => {
-            message.channel.send('`' + res.base64 + '`');
+        const options = {
+            method: 'GET',
+            url: `https://some-random-api.ml/base64?encode=${args.join(' ')}`,
+        };
+
+        axios.request(options).then(response => {
+            return message.channel.send('`' + response.data.base64 + '`');
+        }).catch(err => {
+            return message.channel.send(err);
         });
     }
 }

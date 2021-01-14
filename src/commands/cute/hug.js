@@ -1,4 +1,4 @@
-const { api } = require("some-random-api");
+const axios = require("axios").default;
 const { MessageEmbed } = require('discord.js');
 const BaseCommand = require('../../utils/structures/BaseCommand');
 
@@ -8,16 +8,21 @@ module.exports = class Hug extends BaseCommand {
     }
 
     run(client, message, args) {
-        api.animu.hug().then(res => {
+
+        const options = {
+            method: 'GET',
+            url: 'https://some-random-api.ml/animu/hug',
+        };
+
+        axios.request(options).then(response => {
             let hugEmbed = new MessageEmbed()
                 .setDescription(`**<@!${message.author.id}> hugs ${args}! Wholesome :blue_heart:**`)
                 .setColor(`RANDOM`)
-                .setImage(res.link)
-                .setTimestamp()
+                .setImage(response.data.link)
             if (!args[0]) hugEmbed.setDescription(`**<@!${message.author.id}> hugs himself?**`);
             return message.channel.send(hugEmbed);
         }).catch(err => {
-            message.channel.send(":x: Unfortunately, something went wrong with the API, and you could not hug your love :cry:.");
+            return message.channel.send(":x: Unfortunately, something went wrong with the API, and you could not hug your love :cry:.");
         });
     }
 }
