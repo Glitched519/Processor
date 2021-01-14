@@ -1,76 +1,39 @@
-const weather = require('weather-js');
-const config = require('../../config.json');
-const PREFIX = config.prefix;
+const fetch = require('node-fetch');
+const APIKey = require('../../config.json')['weather-key'];
+const { MessageEmbed } = require('discord.js');
 const BaseCommand = require('../../utils/structures/BaseCommand');
 
-module.exports = class Weather extends BaseCommand {
+module.exports = class Prefix extends BaseCommand {
     constructor() {
         super('weather', 'info', ['wea']);
     }
 
-    run(client, message, args) {
-        weather.find({ search: args.join(' '), degreeType: "C" }, function (err, result) {
-            let tz = result[0].location.timezone;
-            if (err) return console.log(err);
-            try {
-                let weatherEmbed = {
-                    color: `RANDOM`,
-                    title: `${result[0].current.skytext} in ${result[0].location.name}`,
-                    thumbnail: {
-                        url: result[0].current.imageUrl,
-                    },
-                    fields: [
-                        {
-                            name: 'Temperature',
-                            value: `${result[0].current.temperature}°C (${Math.round(result[0].current.temperature*1.8+32)}°F)`,
-                            inline: true
-                        },
-                        {
-                            name: 'Feels Like',
-                            value: `${result[0].current.feelslike}°C (${Math.round(result[0].current.feelslike*1.8+32)}°F)`,
-                            inline: true                      
-                        },
-                        {
-                            name: 'Wind Speed',
-                            value: `${result[0].current.windspeed}`,
-                            inline: true
-                        },
-                        {
-                            name: 'Humidity',
-                            value: `${result[0].current.humidity}%`,
-                            inline: true
-                        },
-                        {
-                            name: `**3-day Forecast**`,
-                            value: '------------------',
-                        },
-                        {
-                            name: `${result[0].forecast[2].day}`,
-                            value: `**${result[0].forecast[2].skytextday}**\nLow:  ${result[0].forecast[2].low}\nHigh:  ${result[0].forecast[2].high}`,
-                            inline: true
-                        },
-                        {
-                            name: `${result[0].forecast[3].day}`,
-                            value: `**${result[0].forecast[3].skytextday}**\nLow:  ${result[0].forecast[3].low}\nHigh:  ${result[0].forecast[3].high}`,
-                            inline: true
-                        },
-                        {
-                            name: `${result[0].forecast[4].day}`,
-                            value: `**${result[0].forecast[4].skytextday}**\nLow:  ${result[0].forecast[4].low}\nHigh:  ${result[0].forecast[4].high}`,
-                            inline: true
-                        },
-                    ],
-                    footer: {
-                        text: `${result[0].current.date} UTC${parseInt(tz) >= 0 ? '+' : ''}${parseInt(tz)}`
-                    }
-                }
-                message.channel.send({ embed: weatherEmbed });
-            } catch (err) {
-                message.channel.send(":x: **That isn't a valid location.**")
-                    .then(msg => {
-                        msg.delete({ timeout: 4000 });
-                    });
-            }
+    async run(client, message, args) {
+        fetch(`https://api.openweathermap.org/data/2.5/weather?q=${args.join(' ')}&appid=${APIKey}&units=metric`)
+        .then(res => res.json())
+        .then(base => {
+            let weather = base.weather[0];
+            let main = base.main;
+            let sunrise = new Date(base.sys.sunrise * 1000).toLocaleTimeString();
+            let sunset = new Date(base.sys.sunset * 1000).toLocaleTimeString();
+            const weatherEmbed = new MessageEmbed()
+            .setTitle(`:white_sun_rain_cloud: Current Weather in ${base.name}, ${base.sys.country}`)
+            .setURL(`https://openweathermap.org/city/${base.id}`)
+            .setDescription(`${weather.main} (${weather.description})`)
+            .setColor(`RANDOM`)
+            .addField('Temperature', `${Math.round(main.temp)}°C (${Math.round(main.temp*1.8+32)}°F)`, true)
+            .addField('Min Temp', `${Math.round(main.temp_min)}°C (${Math.round(main.temp_min*1.8+32)}°F)`, true)
+            .addField('Max Temp', `${Math.round(main.temp_max)}°C (${Math.round(main.temp_max*1.8+32)}°F)`, true)
+            .addField('Feels Like', `${Math.round(main.feels_like)}°C (${Math.round(main.feels_like*1.8+32)}°F)`, true)
+            .addField('Humidity', `${Math.round(main.humidity)}%`, true)
+            .addField('Pressure', `${main.pressure}hPa`, true)
+            .addField('Sunrise', sunrise, true)
+            .addField('Sunset', sunset, true)
+            .addField('Wind Speed', `${base.wind.speed}m/s`, true)
+            .setThumbnail(`https://openweathermap.org/img/wn/${weather.icon}@2x.png`)
+            .setTimestamp()
+            .setFooter(`From openweathermap.org`, `https://openweathermap.org/img/wn/02d@2x.png`)
+            return message.channel.send(weatherEmbed);
         });
     }
 }
