@@ -58,7 +58,7 @@ module.exports = class Help extends BaseCommand {
             .setColor(`RANDOM`)
             .setTitle('Setup Commands')
             .setDescription(`Only members with the \`Manage Server\` permission such as mod or admin, can use these commands. Prefix is **${PREFIX}** as in **${PREFIX}help**.`)
-            .addField(':interrobang: prefix `{new prefix}`', `${setupDef.prefix.description}`)
+            .addField(':interrobang: prefix `{new prefix}`', `${setupDef.prefix.description}.`)
             .addField(':speech_left: setlogschannel `{#channel}`', `${setupDef.setlogschannel.description}.\nAliases: [${setupDef.setlogschannel.aliases}]`)
 
         let modEmbed = new MessageEmbed()
@@ -119,7 +119,7 @@ module.exports = class Help extends BaseCommand {
             .addField(':computer: docs `{query}`', `${infoDef.docs.description}.\nAliases: [${infoDef.docs.aliases}]`)
             .addField(':frame_photo: giphygif `{search}`', `${infoDef.giphygif.description}.\nAliases: [${infoDef.giphygif.aliases}]`)
             .addField(':link: github', `${infoDef.github.description}.\nAliases: [${infoDef.github.aliases}]`)
-            .addField(':mag: googleimage `{search}`', `${infoDef.googleimage.description}.\nAliases: [${infoDef.googleimage.aliases}]`)
+            .addField(':mag: image `{search}`', `${infoDef.image.description}.\nAliases: [${infoDef.image.aliases}]`)
             .addField(':link: invite', `${infoDef.invite.description}.\nAliases: [${infoDef.invite.aliases}]`)
             .addField(':musical_note: lyrics `{song}`', `${infoDef.lyrics.description}.\nAliases: [${infoDef.lyrics.aliases}]`)
             .addField(':mobile_phone: phone `{phone name}`', `${infoDef.phone.description}.`)

@@ -9,9 +9,9 @@ module.exports = class GuildCreate extends BaseEvent {
     async run(client, guild) {
         let destination = client.channels.cache.get('797849546612932668');
         const joinEmbed = new MessageEmbed()
-        .setTitle(`${join} Yay, a server added ${client.user.tag}`)
-        .setColor('GREEN')
-        .setFooter(`Currently in ${client.guilds.cache.size} servers`)
+            .setTitle(`${join} Yay, a server added ${client.user.tag}`)
+            .setColor('GREEN')
+            .setFooter(`Currently in ${client.guilds.cache.size} servers`)
         destination.send(joinEmbed)
     }
 }

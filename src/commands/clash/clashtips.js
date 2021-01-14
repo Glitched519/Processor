@@ -1,3 +1,4 @@
+const { MessageEmbed } = require('discord.js');
 const BaseCommand = require('../../utils/structures/BaseCommand');
 
 module.exports = class ClashTips extends BaseCommand {
@@ -159,31 +160,22 @@ module.exports = class ClashTips extends BaseCommand {
         const randomTipIndex = Math.floor(Math.random() * tips.length);
         let index = parseInt(args[0]);
         if (index >= 1 && index <= tips.length) {
-            let tipEmbed = {
-                color: `RANDOM`,
-                title: 'Clash of Clans Tip #' + (index),
-                description: tips[index - 1],
-                thumbnail: {
-                    url: 'https://vignette.wikia.nocookie.net/clashofclans/images/6/61/Villager_info.png/revision/latest/scale-to-width-down/340?cb=20200622145823',
-                },
-                timestamp: new Date()
-            };
-            message.channel.send({
-                embed: tipEmbed
-            });
+            let tipEmbed = new MessageEmbed()
+                .setColor(`RANDOM`)
+                .setTitle(`Clash of Clans Tip #${index}`)
+                .setDescription(tips[index - 1])
+                .setThumbnail('https://vignette.wikia.nocookie.net/clashofclans/images/6/61/Villager_info.png/revision/latest/scale-to-width-down/340?cb=20200622145823')
+                .setTimestamp()
+            message.channel.send(tipEmbed);
         } else {
-            let tipEmbed = {
-                color: `RANDOM`,
-                title: 'Clash of Clans Tip #' + (randomTipIndex + 1),
-                description: tips[randomTipIndex],
-                thumbnail: {
-                    url: 'https://vignette.wikia.nocookie.net/clashofclans/images/6/61/Villager_info.png/revision/latest/scale-to-width-down/340?cb=20200622145823',
-                },
-                timestamp: new Date()
-            };
-            message.channel.send({
-                embed: tipEmbed
-            });
+            let tipEmbed = new MessageEmbed()
+                .setColor(`RANDOM`)
+                .setTitle(`Clash of Clans Tip #${randomTipIndex + 1}`)
+                .setDescription(tips[randomTipIndex])
+                .setThumbnail('https://vignette.wikia.nocookie.net/clashofclans/images/6/61/Villager_info.png/revision/latest/scale-to-width-down/340?cb=20200622145823')
+                .setTimestamp()
+
+            message.channel.send(tipEmbed);
         }
     }
 }

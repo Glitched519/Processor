@@ -1,3 +1,4 @@
+const { MessageEmbed } = require('discord.js');
 const BaseCommand = require('../../utils/structures/BaseCommand');
 
 module.exports = class Support extends BaseCommand {
@@ -6,12 +7,12 @@ module.exports = class Support extends BaseCommand {
     }
 
     run(client, message, args) {
-        let inviteEmbed = {
-            color: `RANDOM`,
-            title: 'Need Special Help? Join My Support Server!',
-            description: ':arrow_right: [Support Server!](https://discord.gg/UNmdd8V) :arrow_left:',
-            timestamp: new Date()
-        }
-        message.channel.send({ embed: inviteEmbed });
+        let inviteEmbed = new MessageEmbed()
+            .setTitle('Need Some Help? Join My Support Server!')
+            .setColor('#FF77DD')
+            .setThumbnail(client.user.displayAvatarURL())
+            .setDescription(':arrow_right: [Support Server!](https://discord.gg/UNmdd8V) :arrow_left:')
+            
+        message.channel.send(inviteEmbed);
     }
 }

@@ -15,11 +15,11 @@ module.exports = class MessageUpdate extends BaseEvent {
         let destination = client.channels.cache.get(logChannel.toString());
 
         let editedEmbed = new MessageEmbed()
-        .setTitle(`Message Edited by ${oldMessage.author.tag}`)
-        .setDescription(`**Channel:** <#${oldMessage.channel.id}>\n**Old Message:** ${oldMessage.content}\n**New Message:** ${newMessage.content}`)
-        .setColor('YELLOW')
-        .setFooter(new Date().toLocaleTimeString());
-        
+            .setTitle(`Message Edited by ${oldMessage.author.tag}`)
+            .setDescription(`**Channel:** <#${oldMessage.channel.id}>\n**Old Message:** ${oldMessage.content}\n**New Message:** ${newMessage.content}`)
+            .setColor('YELLOW')
+            .setFooter(new Date().toLocaleTimeString());
+
         destination.send(editedEmbed);
 
     }

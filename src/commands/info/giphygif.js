@@ -32,13 +32,7 @@ module.exports = class GiphyGif extends BaseCommand {
         fetch(url)
             .then(res => res.json())
             .then(json => {
-                let gifEmbed = {
-                    image: {
-                        url: json.data[randomIndex].images.original.url
-                    },
-                    timestamp: new Date()
-                }
-                message.channel.send({ embed: gifEmbed });
+                message.channel.send(json.data[randomIndex].images.original.url);
             });
     }
 }

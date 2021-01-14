@@ -148,9 +148,9 @@ let infoDef = {
         aliases: ['code', 'source'],
         description: 'Brings up the GitHub repo of Processor'
     },
-    googleimage: {
-        aliases: ['image', 'img'],
-        description: 'Shows an image from google'
+    image: {
+        aliases: ['img'],
+        description: 'Shows an image from the web'
     },
     invite: {
         aliases: ['botinvite'],

@@ -8,7 +8,7 @@ module.exports = class Ping extends BaseCommand {
 
     async run(client, message, args) {
         let pingEmbed = {
-            title: `${emojis.loading}`
+            title: emojis.loading
         }
         const msg = await message.channel.send({ embed: pingEmbed });
         msg.edit(

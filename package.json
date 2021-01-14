@@ -1,12 +1,10 @@
 {
     "name": "processor",
-    "version": "6.0.0",
-    "description": "A bot for Discord.",
+    "version": "6.1.0",
+    "description": "An EPIC bot for Discord.",
     "main": "processor.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "dev": "nodemon ./src/processor.js",
-        "start": "node ./src/processor.js"
+        "start": "pm2 start ./src/processor.js && pm2 log"
     },
     "author": "Partha Sarker",
     "license": "ISC",
@@ -18,33 +16,20 @@
         "canvas": "^2.6.1",
         "cheerio": "^1.0.0-rc.3",
         "colors": "^1.4.0",
-        "dbl": "^0.1.12",
-        "discord": "^0.8.2",
-        "discord-youtube-api": "^0.1.0",
         "discord.js": "^12.5.1",
         "express": "^4.2.0",
-        "ffmpeg": "0.0.4",
-        "ffmpeg-static": "^4.2.7",
-        "googleapis": "^54.1.0",
-        "http": "^0.0.1-security",
         "humanize-duration": "^3.25.0",
         "mathjs": "^7.5.1",
         "mongoose": "^5.9.19",
         "ms": "^2.1.2",
         "node-fetch": "^2.6.1",
         "node-forge": "^0.10.0",
-        "nodemon": "^2.0.4",
         "novelcovid": "^3.0.0",
-        "opusscript": "0.0.7",
         "request": "^2.88.2",
         "restify": "^8.5.1",
         "restify-cors-middleware": "^1.1.1",
-        "simple-youtube-api": "^5.2.1",
         "some-random-api": "^2.0.0",
-        "systeminformation": "^4.33.4",
-        "weather-js": "^2.0.0",
-        "youtube-search": "^1.1.4",
-        "ytdl-core": "^3.1.2"
+        "systeminformation": "^4.33.4"
     },
     "keywords": []
 }

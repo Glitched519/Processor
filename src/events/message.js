@@ -10,6 +10,7 @@ module.exports = class Message extends BaseEvent {
     }
 
     async run(client, message) {
+        if (!message.guild) return;
         if (message.author.bot) return;
         for (const guild of client.guilds.cache) {
             const result = await commandPrefixSchema.findOne({ _id: message.guild.id });
@@ -32,19 +33,19 @@ module.exports = class Message extends BaseEvent {
         if (message.content == `<@!689678745782714464>`) {
             message.reply(`my prefix is **${prefix}**`);
         }
-        if (message.content.startsWith(prefix)) {
+        if (message.content.startsWith(prefix.toLowerCase())) {
             const [cmdName, ...cmdArgs] = message.content
                 .slice(prefix.length)
                 .trim()
                 .split(/\s+/);
-            const command = client.commands.get(cmdName);
+            const command = client.commands.get(cmdName.toLowerCase());
             if (command) {
                 try {
                     command.run(client, message, cmdArgs);
                 }
                 catch (err) {
                     console.error(err);
-                    message.reply(`unforuntately there was an error while executing that command.`);
+                    message.reply(`unfortunately there was an error while executing that command.`);
                 }
             }
         }

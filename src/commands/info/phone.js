@@ -1,6 +1,7 @@
 const getphone = require('../../utils/getphone');
 const fetch = require('node-fetch');
 const emojis = require('../../emojis.json');
+const { MessageEmbed } = require('discord.js');
 const BaseCommand = require('../../utils/structures/BaseCommand');
 
 module.exports = class Phone extends BaseCommand {
@@ -18,84 +19,27 @@ module.exports = class Phone extends BaseCommand {
                         fetch(`http://localhost:8888/gsmarena/phone/${json[0].url}`)
                             .then(res2 => res2.json())
                             .then(json2 => {
-                                let phoneEmbed = {
-                                    title: `${json[i].name}`,
-                                    url: `https://www.gsmarena.com/${json[i].url}`,
-                                    thumbnail: {
-                                        url: json[i].img
-                                    },
-                                    color: `RANDOM`,
-                                    fields: [{
-                                        name: "Status",
-                                        value: json2.spec_detail[1].specs[1].value,
-                                    },
-                                    {
-                                        name: "Dimensions",
-                                        value: json2.spec_detail[2].specs[0].value,
-                                    },
-                                    {
-                                        name: "Display Type",
-                                        value: json2.spec_detail[3].specs[0].value,
-                                        inline: true
-                                    },
-                                    {
-                                        name: "Screen Size",
-                                        value: json2.spec_detail[3].specs[1].value,
-                                        inline: true
-                                    },
-                                    {
-                                        name: "Screen Resolution",
-                                        value: json2.spec_detail[3].specs[2].value,
-                                        inline: true
-                                    },
-                                    {
-                                        name: "Operating System",
-                                        value: json2.spec_detail[4].specs[0].value,
-                                        inline: true
-                                    },
-                                    {
-                                        name: "Battery",
-                                        value: json2.spec_detail[11].specs[0].value,
-                                        inline: true
-                                    },
-                                    {
-                                        name: "Memory",
-                                        value: json2.spec_detail[5].specs[1].value,
-                                        inline: true
-                                    },
-                                    {
-                                        name: "Chipset",
-                                        value: json2.spec_detail[4].specs[1].value,
-                                    },
-                                    {
-                                        name: "Photo",
-                                        value: `${json2.spec_detail[6].specs[0].name}: ${json2.spec_detail[6].specs[0].value}`,
-                                    },
-                                    {
-                                        name: "Video",
-                                        value: json2.spec_detail[6].specs[2].value,
-                                    },
-                                    {
-                                        name: "Colours",
-                                        value: json2.spec_detail[12].specs[0].value,
-                                        inline: true
-                                    },
-                                    {
-                                        name: "Models",
-                                        value: json2.spec_detail[12].specs[1].value,
-                                        inline: true
-                                    },
-                                    {
-                                        name: "Network Tech",
-                                        value: json2.spec_detail[0].specs[0].value,
-                                        inline: true
-                                    },
-                                    ],
-                                    timestamp: new Date()
-                                }
-                                message.channel.send({
-                                    embed: phoneEmbed
-                                });
+                                let phoneEmbed = new MessageEmbed()
+                                    .setTitle(json[i].name)
+                                    .setURL(`https://www.gsmarena.com/${json[i].url}`)
+                                    .setThumbnail(json[i].img)
+                                    .setColor(`RANDOM`)
+                                    .addField('Status', json2.spec_detail[1].specs[1].value)
+                                    .addField('Dimensions', json2.spec_detail[2].specs[0].value)
+                                    .addField('Display Type', json2.spec_detail[3].specs[0].value, true)
+                                    .addField('Screen Size', json2.spec_detail[3].specs[1].value, true)
+                                    .addField('Screen Resolution', json2.spec_detail[3].specs[2].value, true)
+                                    .addField('Operating System', json2.spec_detail[4].specs[0].value, true)
+                                    .addField('Battery', json2.spec_detail[11].specs[0].value, true)
+                                    .addField('Memory', json2.spec_detail[5].specs[1].value, true)
+                                    .addField('Chipset', json2.spec_detail[4].specs[1].value)
+                                    .addField('Photo', `${json2.spec_detail[6].specs[0].name}: ${json2.spec_detail[6].specs[0].value}`)
+                                    .addField('Video', json2.spec_detail[6].specs[2].value)
+                                    .addField('Colours', json2.spec_detail[12].specs[0].value, true)
+                                    .addField('Model', json2.spec_detail[12].specs[1].value, true)
+                                    .addField('Network Tech', json2.spec_detail[0].specs[0].value, true)
+
+                                message.channel.send(phoneEmbed);
                             })
                     }
                 }

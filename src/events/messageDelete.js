@@ -15,11 +15,11 @@ module.exports = class MessageDelete extends BaseEvent {
         let destination = client.channels.cache.get(logChannel.toString());
 
         let deletedEmbed = new MessageEmbed()
-        .setTitle(`Message Deleted from ${message.author.tag}`)
-        .setDescription(`**Channel:** <#${message.channel.id}>\n**Content:** ${message.content}`)
-        .setColor('RED')
-        .setFooter(new Date().toLocaleTimeString());
-        
+            .setTitle(`Message Deleted from ${message.author.tag}`)
+            .setDescription(`**Channel:** <#${message.channel.id}>\n**Content:** ${message.content}`)
+            .setColor('RED')
+            .setFooter(new Date().toLocaleTimeString());
+
         destination.send(deletedEmbed);
 
     }

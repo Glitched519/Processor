@@ -5,6 +5,6 @@ module.exports = class GuildMemberAdd extends BaseEvent {
         super('guildMemberAdd');
     }
     async run(client, message) {
-        
+
     }
 }

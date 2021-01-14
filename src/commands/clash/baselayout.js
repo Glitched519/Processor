@@ -1,3 +1,4 @@
+const { MessageEmbed } = require('discord.js');
 const BaseCommand = require('../../utils/structures/BaseCommand');
 
 module.exports = class BaseLayout extends BaseCommand {
@@ -6,15 +7,13 @@ module.exports = class BaseLayout extends BaseCommand {
     }
 
     run(client, message, args) {
-        let baseEmbed = {
-            title: 'Base Layout for ',
-            color: `RANDOM`,
-            description: "[Layout Analysis Video]",
-            image: {
-                url: '',
-            },
-            timestamp: new Date()
-        }
+        let baseEmbed = new MessageEmbed()
+            .setTitle('Base Layout for ')
+            .setColor(`RANDOM`)
+            .setDescription('[Layout Analysis Video]')
+            .setImage('')
+            .setTimestamp()
+
         if (args[0] == "th5") {
             baseEmbed.title += args[0];
             baseEmbed.description += "(https://www.youtube.com/watch?v=sfmJKS8WYBc) | ";
@@ -88,8 +87,6 @@ module.exports = class BaseLayout extends BaseCommand {
         } else {
             return message.channel.send("Invalid town hall or builder hall level. Ex: `th10` or `bh7`.");
         }
-        message.channel.send({
-            embed: baseEmbed
-        });
+        message.channel.send(baseEmbed);
     }
 }

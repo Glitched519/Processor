@@ -1,3 +1,4 @@
+const { MessageEmbed } = require('discord.js');
 const BaseCommand = require('../../utils/structures/BaseCommand');
 
 module.exports = class Author extends BaseCommand {
@@ -6,15 +7,13 @@ module.exports = class Author extends BaseCommand {
     }
 
     run(client, message, args) {
-        let authorEmbed = {
-            color: `RANDOM`,
-            title: `Hi, I'm ${client.user.tag}`,
-            description: 'I am currently being developed by <@!638064155965915187> and <@!749985510889619576> :blue_heart:',
-            thumbnail: {
-                url: client.user.displayAvatarURL(),
-            },
-            timestamp: new Date()
-        };
-        message.channel.send({ embed: authorEmbed });
+        let authorEmbed = new MessageEmbed()
+            .setColor(`RANDOM`)
+            .setTitle(`Hi, I'm ${client.user.tag}`)
+            .setAuthor('I am currently being developed by <@!638064155965915187> and <@!749985510889619576> :blue_heart:')
+            .setThumbnail(client.user.displayAvatarURL())
+            .setTimestamp()
+
+        message.channel.send(authorEmbed);
     }
 }

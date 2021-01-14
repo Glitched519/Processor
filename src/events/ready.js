@@ -4,7 +4,7 @@ const fs = require('fs');
 const colors = require('colors');
 const config = require('../config.json');
 const emojis = require('../emojis.json');
-const discord = require('discord.js'); 
+const discord = require('discord.js');
 const antiAd = require('../features/anti-ad');
 const mongo = require('../features/mongo');
 
