@@ -1,4 +1,5 @@
-const fetch = require('node-fetch');
+const axios = require('axios').default;
+const { MessageEmbed } = require('discord.js');
 const BaseCommand = require('../../utils/structures/BaseCommand');
 
 module.exports = class Meme extends BaseCommand {
@@ -7,24 +8,24 @@ module.exports = class Meme extends BaseCommand {
     }
 
     run(client, message, args) {
-        fetch('https://meme-api.herokuapp.com/gimme')
-            .then(res => res.json())
-            .then(json => {
-                if (!message.channel.nsfw) {
-                    if (json.nsfw) return message.channel.send("Sorry, this meme was not sent due to NSFW content.");
-                }
-                let memeEmbed = {
-                    title: json.title,
-                    url: json.postLink,
-                    color: `RANDOM`,
-                    image: {
-                        url: json.url
-                    },
-                    footer: {
-                        text: `👍 ${json.ups} | from r/${json.subreddit} | by u/${json.author}`
-                    }
-                }
-                return message.channel.send({ embed: memeEmbed });
-            });
+        const options = {
+            method: 'GET',
+            url: `https://reddit.com/r/memes/random/.json`,
+        };
+
+        axios.request(options).then(response => {
+            let meme = response.data[0].data.children[0].data;
+            let memeEmbed = new MessageEmbed()
+                .setTitle(meme.title)
+                .setURL(`https://reddit.com/${meme.permalink}`)
+                .setImage(meme.url)
+                .setColor(`RANDOM`)
+                .setFooter(`👍 ${meme.ups} | 💬 ${meme.num_comments}`)
+
+            message.channel.send(memeEmbed);
+        }).catch(err => {
+            console.log(err);
+            return message.channel.send(":x: Unfortunately, something went wrong with the API, and your meme could not be loaded.");
+        });
     }
 }
