@@ -200,7 +200,7 @@ module.exports = class Help extends BaseCommand {
             const filter = (reaction, user) => {
                 return ['⏮', '◀', '💠', '▶', '⏭', '❌'].includes(reaction.emoji.name) && user.id === message.author.id;
             };
-            msg.awaitReactions(filter, { max: 1, time: 300000 })
+            msg.awaitReactions(filter, { max: 1, time: 300000, errors: ['time']})
                 .then(collected => {
                     const reaction = collected.first();
 
@@ -246,7 +246,10 @@ module.exports = class Help extends BaseCommand {
                                     close.delete({ timeout: 5000 });
                                 });
                     }
-                });
+                })
+                .catch(err => {
+                    return msg.delete();
+                })
         }
         switch (args[0]) {
             case "setup":

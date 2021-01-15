@@ -15,7 +15,7 @@ module.exports = class Author extends BaseCommand {
                 .setColor("RED")
                 .addField('Cases', covidStats.cases.toLocaleString(), true)
                 .addField('Deaths', covidStats.deaths.toLocaleString(), true)
-                .addField('Recovered', covidStats.recovered.toLocaleString(), true))
+                .addField('Recovered', covidStats.recovered.toLocaleString(), true)
                 .addField('Cases Today', covidStats.todayCases.toLocaleString(), true)
                 .addField('Deaths Today', covidStats.todayDeaths.toLocaleString(), true)
                 .addField('Recovered Today', covidStats.todayRecovered.toLocaleString(), true)
@@ -23,6 +23,7 @@ module.exports = class Author extends BaseCommand {
                 .addField('Critical Condition', covidStats.critical.toLocaleString(), true)
                 .addField('Tested', covidStats.tests.toLocaleString(), true)
                 .setFooter(new Date())
+            );
         }
         else {
             const covidStats = await covid.countries({ country: args[0] });

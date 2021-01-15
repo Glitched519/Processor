@@ -17,6 +17,7 @@
         "canvas": "^2.6.1",
         "cheerio": "^1.0.0-rc.5",
         "colors": "^1.4.0",
+        "colorthief": "^2.3.2",
         "discord.js": "^12.5.1",
         "express": "^4.17.1",
         "humanize-duration": "^3.25.1",
