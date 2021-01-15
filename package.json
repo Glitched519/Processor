@@ -22,6 +22,7 @@
         "express": "^4.17.1",
         "humanize-duration": "^3.25.1",
         "ini": "^2.0.0",
+        "jpeg-js": "^0.4.3",
         "mathjs": "^8.1.1",
         "mongoose": "^5.11.11",
         "ms": "^2.1.3",
