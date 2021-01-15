@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const axios = require('axios').default;
 const { MessageEmbed } = require("discord.js");
 const BaseCommand = require('../../utils/structures/BaseCommand');
 
@@ -18,6 +19,7 @@ module.exports = class Lyrics extends BaseCommand {
         };
 
         axios.request(options).then(response => {
+            let res = response.data;
             // Checks if parameter is an nsfw term. Blocks command in non-nsfw channels.
             if (!message.channel.nsfw) {
                 for (let i = 0; i < bannedWords.length; i++) {
@@ -34,9 +36,10 @@ module.exports = class Lyrics extends BaseCommand {
                 .setDescription(response.data.links.genius)
 
             return message.channel.send(lyricsEmbed);
-        }).catch(err => {
-            return message.channel.send(":x: The request song's lyrics could not be found.");
-        });
+        })
+        // }).catch(err => {
+        //     return message.channel.send(":x: The request song's lyrics could not be found.");
+        // });
 
     }
 }
