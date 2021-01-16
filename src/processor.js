@@ -22,7 +22,7 @@ const client = new Client();
     setInterval(() => {
         api.postStats({
             serverCount: client.guilds.cache.size,
-            shardId: client.shard.ids[0], // Sharding
+            // shardId: client.shard.ids[0], // Sharding
             shardCount: client.options.shardCount
         })
     }, 1800000) // post every 30 minutes
