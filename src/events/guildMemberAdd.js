@@ -1,8 +1,8 @@
 const Canvas = require('canvas');
 const path = require('path');
 const { MessageAttachment } = require('discord.js');
-const { getChannelId } = require('../commands/setup/setwelcome');
 const BaseEvent = require('../utils/structures/BaseEvent');
+const welcomeSchema = require('../schemas/welcome-schema');
 
 // Passing the entire Canvas object to access its width, as well its context
 const applyText = (canvas, text) => {
@@ -27,12 +27,10 @@ module.exports = class GuildMemberAdd extends BaseEvent {
     }
     async run(client, member) {
         const { guild } = member;
-
-        const channelId = getChannelId(guild.id);
-        if (!channelId) return;
-
-        const channel = guild.channels.cache.get(channelId);
-        if (!channel) return;
+        const welcomeChannelQuery = await welcomeSchema.findOne({ _id: guild.id });
+        if (welcomeChannelQuery == null) return;
+        let welcomeChannel = welcomeChannelQuery.channel;
+        let destination = client.channels.cache.get(welcomeChannel.toString());
 
         // Set a new canvas to the dimensions of 700x250 pixels
         const canvas = Canvas.createCanvas(700, 250);
@@ -88,6 +86,6 @@ module.exports = class GuildMemberAdd extends BaseEvent {
         // Use helpful Attachment class structure to process the file for you
         const attachment = new MessageAttachment(canvas.toBuffer());
 
-        channel.send('', attachment);
+        destination.send('', attachment);
     }
 }

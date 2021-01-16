@@ -8,7 +8,7 @@ module.exports = class Console extends BaseCommand {
 
 	run(client, message, args) {
         if (message.author.id !== '638064155965915187') return;
-        //if (args.length == 0) return;
+        if (args.length == 0) return;
 
         exec(args.join(' '), { 'shell': 'pwsh.exe' }, (error, stdout, stderr) => {
             if (error) {

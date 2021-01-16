@@ -111,7 +111,6 @@ module.exports = class Ready extends BaseEvent {
             const status = statuses[Math.floor(Math.random() * statuses.length)];
             client.user.setActivity(status, { type: 'WATCHING' }).catch(console.error);
         }, 15000);
-        console.log(`${new Date()}`.magenta);
         fs.readFile("./src/events/.post", "utf-8", (err, data) => {
             if (err) { console.log(err) }
             console.log(data);

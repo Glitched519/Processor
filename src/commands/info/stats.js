@@ -64,7 +64,7 @@ module.exports = class Stats extends BaseCommand {
                 description: `**Top 20 Roles:** ${roleMap}`,
                 color: `RANDOM`,
                 thumbnail: {
-                    url: guild.iconURL()
+                    url: guild.iconURL({ dynamic: true })
                 },
                 fields: [
                     {

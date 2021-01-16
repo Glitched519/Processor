@@ -44,8 +44,7 @@ module.exports = class Message extends BaseEvent {
                     command.run(client, message, cmdArgs);
                 }
                 catch (err) {
-                    console.error(err);
-                    message.reply(`unfortunately there was an error while executing that command.`);
+                    message.reply(`Unfortunately, there was an error upon executing this command: \`\`\`${err}\`\`\``);
                 }
             }
         }

@@ -320,7 +320,7 @@ server.head('/gsmarena/review/:url', phoneReview);
 
 
 server.listen(8888, function () {
-    console.log('%s listening at %s', server.name, server.url);
+    console.log('GSMArena API running at http://localhost:8888.');
 });
 
 module.exports = {

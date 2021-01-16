@@ -14,6 +14,13 @@ module.exports = class MessageDelete extends BaseEvent {
         const logChannel = logChannelQuery.channel;
         let destination = client.channels.cache.get(logChannel.toString());
 
+        client.snipes.set(message.channel.id, {
+            content: message.content,
+            author: message.author.tag,
+            member: message.member,
+            image: message.attachments.first() ? message.attachments.first().proxyURL : null
+        });
+
         let deletedEmbed = new MessageEmbed()
             .setTitle(`Message Deleted from ${message.author.tag}`)
             .setDescription(`**Channel:** <#${message.channel.id}>\n**Content:** ${message.content}`)
