@@ -6,7 +6,7 @@ module.exports = class DadJoke extends BaseCommand {
         super('dadjoke', 'other', ['dad', 'djoke']);
     }
 
-    run(client, message, args) {
+    async run(client, message, args) {
         fetch('https://icanhazdadjoke.com/slack')
             .then(res => res.json())
             .then(json => {

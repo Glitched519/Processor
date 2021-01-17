@@ -5,7 +5,7 @@ module.exports = class Slowmode extends BaseCommand {
         super('slowmode', 'mod', ['slow']);
     }
 
-    run(client, message, args) {
+    async run(client, message, args) {
         if (!message.guild.me.hasPermission('MANAGE_CHANNELS')) {
             return message.channel.send(":x: **I need the `Manage Channels` permission to change the slowmode.**")
                 .then(msg => {

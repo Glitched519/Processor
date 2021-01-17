@@ -6,7 +6,7 @@ module.exports = class Purge extends BaseCommand {
         super('purge', 'mod', ['clear', 'clean', 'delete', 'del']);
     }
 
-    run(client, message, args) {
+    async run(client, message, args) {
         if (!message.guild.me.hasPermission("MANAGE_MESSAGES")) {
             return message.channel.send(":x: **I need the `Manage Messages` permission to delete messages.**")
             .then(msg => {

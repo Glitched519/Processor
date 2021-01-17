@@ -7,7 +7,7 @@ module.exports = class SearchClan extends BaseCommand {
         super('searchclan', 'clash', ['clan', 'findclan', 'clanfind']);
     }
 
-    run(client, message, args) {
+    async run(client, message, args) {
         let bannedWords = fs.readFileSync(path.join(__dirname, '../../events/bannedwords.txt')).toString().split("\r\n");
         let bannedPhrases = fs.readFileSync(path.join(__dirname, '../../events/bannedphrases.txt')).toString().split("\r\n");
         let msg = message.content.toLowerCase();

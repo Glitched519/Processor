@@ -6,7 +6,7 @@ module.exports = class Author extends BaseCommand {
         super('author', 'info', ['creator', 'dev', 'developer']);
     }
 
-    run(client, message, args) {
+    async run(client, message, args) {
         let authorEmbed = new MessageEmbed()
             .setColor(`RANDOM`)
             .setTitle(`Hi, I'm ${client.user.tag}`)

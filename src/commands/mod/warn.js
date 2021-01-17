@@ -1,47 +1,53 @@
+const warnSchema = require('../../schemas/warn-schema');
 const BaseCommand = require('../../utils/structures/BaseCommand');
 
 module.exports = class Warn extends BaseCommand {
     constructor() {
-        super('warn', 'mod', []);
+        super('warn', 'mod', ['w']);
     }
 
-    run(client, message, args) {
-        let memberTag = args.shift();
-        let reason = args.join(' ');
+    async run(client, message, args) {
+        const mentionedMember = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
 
-        if (!message.member.hasPermission('KICK_MEMBERS')) {
-            return message.channel.send(":x: **You don't have permission to warn a member.**")
-                .then(msg => {
-                    msg.delete({ timeout: 4000 });
-                });
+        if (!message.member.hasPermission('MANAGE_MESSAGES')) {
+            return message.channel.send("You need the `Manage Messages` permission to warn a member.");
         }
-
-        if (args.length == 0) {
-            return message.channel.send(":x: **You need to specify a member to warn.**")
-                .then(msg => {
-                    msg.delete({ timeout: 4000 });
-                });
+        if (!mentionedMember) {
+            return message.channel.send('You need to mention member you want to warn.');
         }
 
-        if (memberTag == `<@!${message.author.id}>`) {
-            return message.channel.send(":grey_question: **Wait, why would you warn yourself?**")
-        }
-        else if (memberTag == `<@!689678745782714464>`) {
-            return message.channel.send(":grey_question: **I don't think I can warn myself?**")
+        const mentionedPosition = mentionedMember.roles.highest.position;
+        const memberPosition = message.member.roles.highest.position;
+
+        if (memberPosition <= mentionedPosition) {
+            return message.channel.send("You can't warn this member as their role is higher than or equal to yours.");
         }
 
-        else if (reason == '') {
-            return message.channel.send(":grey_question: **What's the reason you're warning this member?**")
-                .then(msg => {
-                    msg.delete({ timeout: 4000 });
-                });
+        const reason = args.slice(1).join(' ') || 'Not Specified';
+
+        let warnDoc = await warnSchema.findOne({
+            guildId: message.guild.id,
+            memberId: mentionedMember.id,
+        }).catch(err => console.log(err))
+
+        if (!warnDoc) {
+            warnDoc = new warnSchema({
+                guildId: message.guild.id,
+                memberId: mentionedMember.id,
+                warnings: [reason],
+                moderator: [message.member.id],
+                date: [Date.now()],
+            });
+            await warnDoc.save().catch(err => console.log(err));
+        }
+        else {
+            warnDoc.warnings.push(reason);
+            warnDoc.moderator.push(message.member.id);
+            warnDoc.date.push(Date.now());
+
+            await warnDoc.save().catch(err => console.log(err));
         }
 
-        let warnEmbed = {
-            title: ":warning: Member Warned :warning:",
-            color: `#c4f942`,
-            description: `**Member:** ${memberTag}\n**Reason: **${reason}`
-        }
-        message.channel.send({ embed: warnEmbed });
+        message.channel.send(`Warned ${mentionedMember} for reason: **${reason}**`);
     }
 }

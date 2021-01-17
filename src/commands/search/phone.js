@@ -6,10 +6,10 @@ const BaseCommand = require('../../utils/structures/BaseCommand');
 
 module.exports = class Phone extends BaseCommand {
     constructor() {
-        super('phone', 'info', []);
+        super('phone', 'search', []);
     }
 
-    run(client, message, args) {
+    async run(client, message, args) {
         message.channel.send(`**Please wait... If it takes too long, check your spelling and try again.${emojis.loading}**\nNot sure what phone to search? Try OnePlus 8.`);
         fetch(`http://localhost:8888/gsmarena/search/phone/${args.join('%20')}`)
             .then(res => res.json())

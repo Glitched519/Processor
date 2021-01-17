@@ -6,7 +6,7 @@ module.exports = class Base64 extends BaseCommand {
         super('base64', 'math', ['b64']);
     }
 
-    run(client, message, args) {
+    async run(client, message, args) {
         const options = {
             method: 'GET',
             url: `https://some-random-api.ml/base64?encode=${args.join(' ')}`,

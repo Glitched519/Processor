@@ -5,7 +5,7 @@ module.exports = class Nickname extends BaseCommand {
 		super('nickname', 'mod', ['nick', 'name']);
 	}
 
-	run(client, message, args) {
+	async run(client, message, args) {
 		if (!args[0]) return;
 		if (!message.guild.me.hasPermission(['MANAGE_NICKNAMES'])) {
 			return message.channel.send(":x: **I need the `Manage Nicknames` permission to change a member's nickname.**")

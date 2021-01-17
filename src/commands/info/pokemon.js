@@ -7,7 +7,7 @@ module.exports = class Pokemon extends BaseCommand {
         super('pokemon', 'info', ['poke']);
     }
 
-    run(client, message, args) {
+    async run(client, message, args) {
         const options = {
             method: 'GET',
             url: `https://some-random-api.ml/pokedex?pokemon=${args.join(' ')}`,

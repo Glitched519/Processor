@@ -7,7 +7,7 @@ module.exports = class AnimalImage extends BaseCommand {
         super('animalimage', 'animal', ['animal']);
     }
 
-    run(client, message, args) {
+    async run(client, message, args) {
 
         if (!args[0]) return;
 

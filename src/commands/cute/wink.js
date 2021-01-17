@@ -7,7 +7,7 @@ module.exports = class Wink extends BaseCommand {
         super('wink', 'cute', []);
     }
 
-    run(client, message, args) {
+    async run(client, message, args) {
 
         const options = {
             method: 'GET',

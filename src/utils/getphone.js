@@ -2,6 +2,7 @@ const restify = require('restify');
 const cheerio = require('cheerio');
 const request = require('request');
 const corsMiddleware = require('restify-cors-middleware');
+const { chalk } = require('chalk');
 
 var URI = "https://www.gsmarena.com";
 
@@ -11,9 +12,9 @@ const cors = corsMiddleware({
 })
 
 // Get All Phone Brands Maker from GSM ARENA
-const phoneBrands = (req, res, next) => {
+const phoneBrands = async (req, res, next) => {
 
-    request({
+    await request({
         url: URI + '/makers.php3',
         headers: {
             "User-Agent": "request"
@@ -45,8 +46,8 @@ const phoneBrands = (req, res, next) => {
 
 
 // Get brand phone list
-const phoneBrand = (req, res, next) => {
-    request({
+const phoneBrand = async (req, res, next) => {
+    await request({
         url: URI + '/' + req.params.id,
         headers: {
             "User-Agent": "request"
@@ -91,8 +92,8 @@ const phoneBrand = (req, res, next) => {
 
 
 // Get phone detail
-const phoneDetail = (req, res, next) => {
-    request({
+const phoneDetail = async (req, res, next) => {
+    await request({
         url: URI + '/' + req.params.phone,
         headers: {
             "User-Agent": "request"
@@ -171,8 +172,8 @@ const phoneDetail = (req, res, next) => {
 
 
 // search for phone
-const phoneSearch = (req, res, next) => {
-    request({
+const phoneSearch = async (req, res, next) => {
+    await request({
         url: URI + '/results.php3?sQuickSearch=yes&sName=' + req.params.phone,
         headers: {
             "User-Agent": "request"
@@ -208,8 +209,8 @@ const phoneSearch = (req, res, next) => {
 
 
 // Get all reviews
-const phoneReviews = (req, res, next) => {
-    request({
+const phoneReviews = async (req, res, next) => {
+    await request({
         url: URI + '/reviews.php3',
         headers: {
             "User-Agent": "request"
@@ -253,8 +254,8 @@ const phoneReviews = (req, res, next) => {
     })
 };
 
-const phoneReview = (req, res, next) => {
-    request({
+const phoneReview = async (req, res, next) => {
+    await request({
         url: URI + '/' + req.params.url,
         headers: {
             "User-Agent": "request"
@@ -319,7 +320,7 @@ server.head('/gsmarena/review/:url', phoneReview);
 
 
 
-server.listen(8888, function () {
+server.listen(8888, async function () {
     console.log('GSMArena API running at http://localhost:8888.');
 });
 

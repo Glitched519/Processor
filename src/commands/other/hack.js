@@ -5,7 +5,7 @@ module.exports = class Hack extends BaseCommand {
         super('hack', 'other', []);
     }
 
-    run(client, message, args) {
+    async run(client, message, args) {
         let randomDelay = Math.floor(Math.random() * (6000 - 2000)) + 2000;
         let ip1 = Math.floor(Math.random() * 255);
         let ip2 = Math.floor(Math.random() * 255);

@@ -7,7 +7,7 @@ module.exports = class Topic extends BaseCommand {
         super('topic', 'mod', []);
     }
 
-    run(client, message, args) {
+    async run(client, message, args) {
         if (message.guild.me.hasPermission('MANAGE_MESSAGES')) message.delete();
         if (!message.guild.me.hasPermission('MANAGE_CHANNELS')) {
             return message.channel.send(":x: **I need the `Manage Channels` permission change the topic of this channel.**")

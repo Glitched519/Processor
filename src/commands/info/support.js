@@ -6,7 +6,7 @@ module.exports = class Support extends BaseCommand {
         super('support', 'info', []);
     }
 
-    run(client, message, args) {
+    async run(client, message, args) {
         let inviteEmbed = new MessageEmbed()
             .setTitle('Need Some Help? Join My Support Server!')
             .setColor('#FF77DD')

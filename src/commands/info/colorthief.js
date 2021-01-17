@@ -6,7 +6,7 @@ module.exports = class Author extends BaseCommand {
         super('colorthief', 'info', ['thief']);
     }
 
-    run(client, message, args) {
+    async run(client, message, args) {
         let img = 'https://lokeshdhakar.com/projects/color-thief/image-1.e59bc3bd.jpg';
         ColorThief.getColor(img)
             .then(color => { console.log(color) })

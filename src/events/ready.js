@@ -1,7 +1,6 @@
 const BaseEvent = require('../utils/structures/BaseEvent');
 const os = require('os');
 const fs = require('fs');
-const colors = require('colors');
 const config = require('../config.json');
 const emojis = require('../emojis.json');
 const discord = require('discord.js');

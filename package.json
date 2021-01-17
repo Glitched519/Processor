@@ -1,6 +1,6 @@
 {
     "name": "processor",
-    "version": "6.1.1",
+    "version": "6.2.0",
     "description": "An EPIC bot for Discord.",
     "repository": "https://github.com/Glitched519/Processor",
     "main": "shard.js",
@@ -15,8 +15,8 @@
         "better-discord-antispam": "^2.0.0",
         "bytes": "^3.1.0",
         "canvas": "^2.6.1",
+        "chalk": "^4.1.0",
         "cheerio": "^1.0.0-rc.5",
-        "colors": "^1.4.0",
         "colorthief": "^2.3.2",
         "discord.js": "^12.5.1",
         "express": "^4.17.1",

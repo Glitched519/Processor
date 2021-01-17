@@ -6,7 +6,7 @@ module.exports = class Eval extends BaseCommand {
         super('eval', 'other', ['e']);
     }
 
-    run(client, message, args) {
+    async run(client, message, args) {
         if (args.length == 0) return;
         if (message.author.id !== '638064155965915187') return;
 

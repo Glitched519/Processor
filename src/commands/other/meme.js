@@ -7,7 +7,7 @@ module.exports = class Meme extends BaseCommand {
         super('meme', 'other', ['haha', 'funny', 'lol']);
     }
 
-    run(client, message, args) {
+    async run(client, message, args) {
         const options = {
             method: 'GET',
             url: `https://reddit.com/r/memes/random/.json`,

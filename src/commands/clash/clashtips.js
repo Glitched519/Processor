@@ -6,7 +6,7 @@ module.exports = class ClashTips extends BaseCommand {
         super('clashtips', 'clash', ['tip', 'clashtip', 'tips', 'clashtips']);
     }
 
-    run(client, message, args) {
+    async run(client, message, args) {
         const tips = ["Upgrade your cannons to improve your defense against intruders.",
             "Taking a break from Clash of Clans? Buy a Shield to protect your trophies!",
             "Improve your army! Build the Laboratory and upgrade your troops.",

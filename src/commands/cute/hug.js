@@ -7,7 +7,7 @@ module.exports = class Hug extends BaseCommand {
         super('hug', 'cute', []);
     }
 
-    run(client, message, args) {
+    async run(client, message, args) {
 
         const options = {
             method: 'GET',

@@ -1,15 +1,17 @@
-const config = require('../../config.json');
-const fetch = require('node-fetch');
 const fs = require('fs');
 const path = require('path');
+const axios = require("axios").default;
+const config = require('../../config.json');
 const BaseCommand = require('../../utils/structures/BaseCommand');
 
-module.exports = class GiphyGif extends BaseCommand {
+
+
+module.exports = class Image extends BaseCommand {
     constructor() {
-        super('giphygif', 'info', ['gif', 'giphy']);
+        super('image', 'search', ['img']);
     }
 
-    run(client, message, args) {
+    async run(client, message, args) {
         let bannedWords = fs.readFileSync(path.join(__dirname, '../../events/bannedwords.txt')).toString().split("\r\n");
         let bannedPhrases = fs.readFileSync(path.join(__dirname, '../../events/bannedphrases.txt')).toString().split("\r\n");
         let msg = message.content.toLowerCase();
@@ -27,12 +29,24 @@ module.exports = class GiphyGif extends BaseCommand {
             }
         }
 
-        let randomIndex = Math.floor(Math.random() * 20);
-        let url = `https://api.giphy.com/v1/gifs/search?api_key=${config['giphy-token']}&limit=20&q=${args.join('%20')}`
-        fetch(url)
-            .then(res => res.json())
-            .then(json => {
-                message.channel.send(json.data[randomIndex].images.original.url);
-            });
+        let size = 10;
+
+        const options = {
+          method: 'GET',
+          url: 'https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/Search/ImageSearchAPI',
+          params: {q: args.join(' '), pageSize: size, autoCorrect: 'true'},
+          headers: {
+            'x-rapidapi-key': config['x-rapid-api-key'],
+            'x-rapidapi-host': 'contextualwebsearch-websearch-v1.p.rapidapi.com'
+          }
+        };
+        
+        axios.request(options).then(function (response) {
+            let randomIndex = Math.floor(Math.random() * size);
+            let image = response.data.value[randomIndex].url;
+            message.channel.send(image);
+        }).catch(function (error) {
+            console.error(error);
+        });
     }
 }

@@ -10,7 +10,7 @@ module.exports = class Echo extends BaseCommand {
         super('echo', 'other', ['say']);
     }
 
-    run(client, message, args) {
+    async run(client, message, args) {
         const timeInSeconds = 30;
         const cooldown = used.get(message.author.id);
         if (message.guild.me.hasPermission('MANAGE_MESSAGES')) message.delete();

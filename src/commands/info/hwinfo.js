@@ -9,7 +9,7 @@ module.exports = class Avatar extends BaseCommand {
         super('hwinfo', 'info', ['hw']);
     }
 
-    run(client, message, args) {
+    async run(client, message, args) {
         let cpuModel = os.cpus()[0].model
         let cpuArch = os.arch;
         let cpuSpeed = `${Number.parseFloat(os.cpus()[0].speed / 1000).toPrecision(2)} GHz`;

@@ -7,7 +7,7 @@ module.exports = class Stats extends BaseCommand {
         super('stats', 'info', []);
     }
 
-    run(client, message, args) {
+    async run(client, message, args) {
         const statArgs = args.length;
         if (statArgs >= 2) {
             message.channel.send(`Incorrect usage: ${PREFIX}stats | ${PREFIX}stats <user_id> | ${PREFIX}stats @mention`)

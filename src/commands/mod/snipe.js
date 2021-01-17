@@ -6,7 +6,7 @@ module.exports = class Snipe extends BaseCommand {
         super('snipe', 'mod', []);
     }
 
-    run(client, message, args) {
+    async run(client, message, args) {
         const msg = client.snipes.get(message.channel.id);
 
         if (msg == null) return message.channel.send("There's no message to snipe.");

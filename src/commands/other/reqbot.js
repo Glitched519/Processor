@@ -6,7 +6,7 @@ module.exports = class ChuckNorrisJoke extends BaseCommand {
         super('reqbot', 'other', ['req']);
     }
 
-    run(client, message, args) {
+    async run(client, message, args) {
         message.channel.send('In order to submit your bot requires, you must send your responses in the following format:\n**Name of the bot**\n**Owner of the bot**\n**Bot Summary**\n**Valid Invite Link**');
         let responses = [];
         let filter = m => m.author.id;

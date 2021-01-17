@@ -3,10 +3,10 @@ const BaseCommand = require('../../utils/structures/BaseCommand');
 
 module.exports = class Author extends BaseCommand {
     constructor() {
-        super('docs', 'info', ['djs']);
+        super('docs', 'search', ['djs']);
     }
 
-    run(client, message, args) {
+    async run(client, message, args) {
         if (!args.length) return;
         const uri = `https://djsdocs.sorta.moe/v2/embed?src=stable&q=${encodeURIComponent(args.join(' '))}`;
 

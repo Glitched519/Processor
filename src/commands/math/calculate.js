@@ -7,7 +7,7 @@ module.exports = class Calculate extends BaseCommand {
         super('calculate', 'math', ['calc', 'c']);
     }
 
-    run(client, message, args) {
+    async run(client, message, args) {
         try {
             let ans = math.evaluate(args.join(' '));
             message.channel.send('`' + math.format(ans, { precision: 16 }) + '`');

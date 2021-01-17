@@ -7,7 +7,7 @@ module.exports = class AnimalFact extends BaseCommand {
         super('animalfact', 'animal', ['fact']);
     }
 
-    run(client, message, args) {
+    async run(client, message, args) {
 
         if (!args[0]) return;
 

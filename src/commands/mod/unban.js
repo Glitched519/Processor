@@ -24,7 +24,7 @@ module.exports = class Unban extends BaseCommand {
         const bannedUser = allBans.get(mentionedUser.id);
 
         if (!bannedUser) {
-            return message.channel.send('This member is not banned.'); 
+            return message.channel.send('This member is not banned.');
         }
 
         const reason = args.slice(1).join(' ');

@@ -6,7 +6,7 @@ module.exports = class Quote extends BaseCommand {
         super('quote', 'other', []);
     }
 
-    run(client, message, args) {
+    async run(client, message, args) {
         fetch('https://api.quotable.io/random')
             .then(res => res.json())
             .then(json => {

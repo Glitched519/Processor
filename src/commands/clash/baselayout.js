@@ -6,7 +6,7 @@ module.exports = class BaseLayout extends BaseCommand {
         super('baselayout', 'clash', ['base', 'layout']);
     }
 
-    run(client, message, args) {
+    async run(client, message, args) {
         let baseEmbed = new MessageEmbed()
             .setTitle('Base Layout for ')
             .setColor(`RANDOM`)

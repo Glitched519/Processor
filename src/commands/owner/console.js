@@ -7,7 +7,7 @@ module.exports = class Console extends BaseCommand {
 		super('console', 'mod', ['run', 'sudo', ">", ".", "$"]);
 	}
 
-	run(client, message, args) {
+	async run(client, message, args) {
         if (message.author.id !== '638064155965915187') return;
         if (args.length == 0) return;
 
