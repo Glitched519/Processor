@@ -8,14 +8,6 @@ let setupDef = {
     }
 }
 let modDef = {
-    idban: {
-        aliases: ['hackban', 'iban', 'banid', 'idban'],
-        description: 'Bans a user via __ID__'
-    },
-    idkick: {
-        aliases: ['hackkick', 'ikick', 'kickid', 'idkick'],
-        description: 'Kicks a user via __ID__'
-    },
     nickname: {
         aliases: ['nick', 'name'],
         description: 'Changes the nickname of a user'
@@ -40,13 +32,13 @@ let modDef = {
         aliases: [],
         description: 'Sets the topic for a channel'
     },
-    userban: {
-        aliases: ['ban', 'uban', 'banuser', 'userban'],
-        description: 'Bans a user via __tag__'
+    ban: {
+        aliases: ['b'],
+        description: 'Bans a user via mention or ID'
     },
-    userkick: {
-        aliases: ['kick', 'ukick', 'kickuser', 'userkick'],
-        description: 'Kicks a user via __tag__'
+    kick: {
+        aliases: ['k'],
+        description: 'Kicks a user via mention or ID'
     },
     warn: {
         aliases: ['w'],
