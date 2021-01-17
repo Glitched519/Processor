@@ -1,4 +1,3 @@
-const mongo = require('../features/mongo');
 const guildPrefixes = {};
 const { prefix: globalPrefix } = require('../config.json');
 const commandPrefixSchema = require('../schemas/command-prefix-schema');

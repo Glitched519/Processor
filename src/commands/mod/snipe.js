@@ -1,7 +1,7 @@
 const BaseCommand = require('../../utils/structures/BaseCommand');
 const { MessageEmbed } = require('discord.js');
 
-module.exports = class Purge extends BaseCommand {
+module.exports = class Snipe extends BaseCommand {
     constructor() {
         super('snipe', 'mod', []);
     }

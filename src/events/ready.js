@@ -7,6 +7,7 @@ const emojis = require('../emojis.json');
 const discord = require('discord.js');
 const antiAd = require('../features/anti-ad');
 const mongo = require('../features/mongo');
+const muteSchema = require('../schemas/mute-schema');
 
 module.exports = class Ready extends BaseEvent {
     constructor() {
@@ -17,6 +18,31 @@ module.exports = class Ready extends BaseEvent {
 
         //antiAd(client);
         await mongo();
+
+        setInterval(async () => {
+            for (const guild of client.guilds.cache) {
+                const muteArray = await muteSchema.find({
+                    guildId: guild[0],
+                });
+
+                for (const muteDoc of muteArray) {
+                    if (Date.now() >= Number(muteDoc.length)) {
+                        const guild = client.guilds.cache.get(muteDoc.guildId);
+                        const member = guild ? guild.members.cache.get(muteDoc.memberId) : null;
+                        const muteRole = guild ? guild.roles.cache.find(r => r.name == 'Muted') : null;
+
+                        if (member) {
+                            await member.roles.remove(muteRole ? muteRole.id : '').catch(err => console.log(err));
+
+                            for (const role of muteDoc.memberRoles) {
+                                await member.roles.add(role).catch(err => console.log(err));
+                            }
+                        }
+                        await muteDoc.deleteOne().catch(err => console.log(err));
+                    }
+                }
+            }
+        }, 15000)
 
         client.api.applications(client.user.id).guilds('687138260014858260').commands.post({
             data: {

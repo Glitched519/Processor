@@ -3,6 +3,7 @@ const path = require('path');
 const { MessageAttachment } = require('discord.js');
 const BaseEvent = require('../utils/structures/BaseEvent');
 const welcomeSchema = require('../schemas/welcome-schema');
+const muteSchema = require('../schemas/mute-schema');
 
 // Passing the entire Canvas object to access its width, as well its context
 const applyText = (canvas, text) => {
@@ -27,6 +28,22 @@ module.exports = class GuildMemberAdd extends BaseEvent {
     }
     async run(client, member) {
         const { guild } = member;
+
+        const muteDoc = await muteSchema.findOne({
+            guildId: guild.id,
+            memberId: member.id,
+        });
+
+        if (muteDoc) {
+            const muteRole = guild.roles.cache.find(r => r.name == 'Muted');
+
+            if (muteRole) member.roles.add(muteRole.id).catch(err => console.log(err));
+
+            muteDoc.memberRoles = [];
+
+            await muteDoc.save().catch(err => console.log(err));
+        }
+
         const welcomeChannelQuery = await welcomeSchema.findOne({ _id: guild.id });
         if (welcomeChannelQuery == null) return;
         let welcomeChannel = welcomeChannelQuery.channel;

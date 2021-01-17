@@ -15,7 +15,7 @@ module.exports = class Kick extends BaseCommand {
             return message.channel.send('I need the `Kick Members` permission to kick a member.');
         }
         if (!mentionedMember) {
-            return message.channel.send('Mention a member whom you want to kick.');
+            return message.channel.send('You need to mention a member you want to kick.');
         }
 
         const mentionedPosition = mentionedMember.roles.highest.position;

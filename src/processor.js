@@ -3,12 +3,14 @@ const { Client } = require('discord.js');
 const { registerCommands, registerEvents } = require('./utils/registry');
 const config = require('./config.json');
 const Topgg = require("@top-gg/sdk");
-const express = require('express');
-const app = express();
+const { getAllFiles } = require('./utils/registry');
+//const express = require('express');
+//const app = express();
 const api = new Topgg.Api(config["topgg-token"]);
-const webhook = new Topgg.Webhook(config["topgg-auth"]);
+//const webhook = new Topgg.Webhook(config["topgg-auth"]);
 const client = new Client();
 //const options = new ClientOptions();
+
 
 (async () => {
     await client.login(config.token);
@@ -16,8 +18,11 @@ const client = new Client();
     client.events = new Map();
     client.snipes = new Map();
     client.prefix = config.prefix;
+    console.log('Client settings configured')
     await registerCommands(client, '../commands');
+    console.log("Registered Commands");
     await registerEvents(client, '../events');
+    console.log("Registered Events");
 
     setInterval(() => {
         api.postStats({
@@ -26,12 +31,13 @@ const client = new Client();
             shardCount: client.options.shardCount
         })
     }, 1800000) // post every 30 minutes
+    console.log("Bot stats are being posted to top.gg.");
 
-    app.post('/dblwebhook', webhook.middleware(), (req, res) => {
-        // req.vote is your vote object e.g
-        console.log(req.vote.user) // user id
-    }) // attach the middleware
+    // app.post('/dblwebhook', webhook.middleware(), (req, res) => {
+    //     // req.vote is your vote object e.g
+    //     console.log(req.vote.user) // user id
+    // }) // attach the middleware
 
-    app.listen(3000)
+    // app.listen(3000)
 })();
 

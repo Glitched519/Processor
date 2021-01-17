@@ -17,7 +17,7 @@ module.exports = class Ban extends BaseCommand {
             return message.channel.send('I need the `Ban Members` permission to ban a member.');
         }
         if (!mentionedUser) {
-            return message.channel.send('Mention a member whom you want to ban.');
+            return message.channel.send('You need to mention a member you want to ban.');
         }
 
         const allBans = await message.guild.fetchBans();
