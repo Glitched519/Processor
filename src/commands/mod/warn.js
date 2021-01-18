@@ -1,3 +1,4 @@
+const { MessageEmbed } = require('discord.js');
 const warnSchema = require('../../schemas/warn-schema');
 const BaseCommand = require('../../utils/structures/BaseCommand');
 
@@ -48,6 +49,9 @@ module.exports = class Warn extends BaseCommand {
             await warnDoc.save().catch(err => console.log(err));
         }
 
-        message.channel.send(`Warned ${mentionedMember} for reason: **${reason}**`);
+        message.channel.send(new MessageEmbed()
+            .setDescription(`Warned ${mentionedMember} for reason: **${reason}**`)
+            .setColor('YELLOW')
+        );
     }
 }

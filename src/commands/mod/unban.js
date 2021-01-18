@@ -1,4 +1,5 @@
 const userReg = RegExp(/<@!?(\d+)>/);
+const { MessageEmbed } = require('discord.js');
 const BaseCommand = require('../../utils/structures/BaseCommand');
 
 module.exports = class Unban extends BaseCommand {
@@ -33,6 +34,9 @@ module.exports = class Unban extends BaseCommand {
             message.channel.send('Failed to unban this member: ' + err);
         });
 
-        message.channel.send(`Unbanned ${mentionedUser} ${reason ? `for **${reason}**` : ''}`);
+        message.channel.send(new MessageEmbed()
+            .setDescription(`Unbanned ${mentionedUser} ${reason ? `for **${reason}**` : ''}`)
+            .setColor('DARK_BLUE')
+        );
     }
 }

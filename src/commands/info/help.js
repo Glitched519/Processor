@@ -25,6 +25,8 @@ module.exports = class Help extends BaseCommand {
         }
         const PREFIX = guildPrefixes[message.guild.id] || globalPrefix;
 
+        message.channel.send(new MessageEmbed().setDescription('**Note:** Command description and aliases are deprecated in the help menu. In the future, please refer to the bot website for details of all commands: https://processorbot.xyz/commands').setColor('YELLOW'));
+
         let helpClosed = new MessageEmbed()
             .setColor('ORANGE')
             .setTitle(`Help Closed`)
@@ -61,6 +63,8 @@ module.exports = class Help extends BaseCommand {
             .setTitle('Setup Commands')
             .setDescription(`Only members with the \`Manage Server\` permission such as mod or admin, can use these commands. Prefix is **${PREFIX}** as in **${PREFIX}help**.`)
             .addField(':interrobang: prefix `{new prefix}`', `${setupDef.prefix.description}.`)
+            .addField(':wave: setwelcome `{#channel}`', `${setupDef.setwelcome.description}.`)
+            .addField(':no_mouth: setantispam `{#channel}`', `${setupDef.setantispam.description}.\nAliases: [${setupDef.setantispam.aliases}]`)
             .addField(':speech_left: setlogschannel `{#channel}`', `${setupDef.setlogschannel.description}.\nAliases: [${setupDef.setlogschannel.aliases}]`)
 
         let modEmbed = new MessageEmbed()
@@ -69,10 +73,15 @@ module.exports = class Help extends BaseCommand {
             .setDescription(`Prefix is **${PREFIX}** as in **${PREFIX}help**.`)
             .addField(':shield: permissions', `${modDef.permissions.description}.\nAliases: [${modDef.permissions.aliases}]`)
             .addField(':hammer_pick: ban `{@member or ID} [reason]`', `${modDef.ban.description}.\nAliases: [${modDef.ban.aliases}]`)
+            .addField(':angel: unban `{@member or ID} [reason]`', `${modDef.unban.description}.\nAliases: [${modDef.unban.aliases}]`)
             .addField(':boot: kick `{@member or ID} [reason]`', `${modDef.kick.description}.\nAliases: [${modDef.kick.aliases}]`)
+            .addField(':mute: mute `{@member or ID} [reason]`', `${modDef.mute.description}.\nAliases: [${modDef.mute.aliases}]`)
+            .addField(':speaker: unmute `{@member or ID} [reason]`', `${modDef.unmute.description}.\nAliases: [${modDef.unmute.aliases}]`)
             .addField(':broom: purge `{number}`', `${modDef.purge.description}.\nAliases: [${modDef.purge.aliases}]`)
             .addField(':clock10: slowmode `[number]`', `${modDef.slowmode.description}.\nAliases: [${modDef.slowmode.aliases}]`)
             .addField(':warning: warn `{@member} [reason]`', `${modDef.warn.description}.\nAliases: [${modDef.warn.aliases}]`)
+            .addField(':warning: warnings `{@member} [reason]`', `${modDef.warnings.description}.\nAliases: [${modDef.warnings.aliases}]`)
+            .addField(':warning: unwarn `{@member} [reason]`', `${modDef.unwarn.description}.\nAliases: [${modDef.unwarn.aliases}]`)
 
         let mathEmbed = new MessageEmbed()
             .setColor(`RANDOM`)
@@ -200,7 +209,7 @@ module.exports = class Help extends BaseCommand {
             const filter = (reaction, user) => {
                 return ['⏮', '◀', '💠', '▶', '⏭', '❌'].includes(reaction.emoji.name) && user.id === message.author.id;
             };
-            msg.awaitReactions(filter, { max: 1, time: 300000, errors: ['time']})
+            msg.awaitReactions(filter, { max: 1, time: 300000, errors: ['time'] })
                 .then(collected => {
                     const reaction = collected.first();
 

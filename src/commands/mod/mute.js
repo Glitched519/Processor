@@ -1,3 +1,4 @@
+const { MessageEmbed } = require('discord.js');
 const ms = require('ms');
 const muteSchema = require('../../schemas/mute-schema');
 const BaseCommand = require('../../utils/structures/BaseCommand');
@@ -81,6 +82,9 @@ module.exports = class Mute extends BaseCommand {
 
         const reason = args.slice(2).join(' ');
 
-        message.channel.send(`Muted ${mentionedMember} for **${msRegex.exec(args[1])[1]}** ${reason ? `for **${reason}**` : ''}`);
+        message.channel.send(new MessageEmbed()
+            .setDescription(`Muted ${mentionedMember} for **${msRegex.exec(args[1])[1]}** ${reason ? `for **${reason}**` : ''}`)
+            .setColor('GREY')
+        );
     }
 }

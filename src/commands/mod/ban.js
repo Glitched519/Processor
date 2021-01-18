@@ -1,4 +1,5 @@
 const userReg = RegExp(/<@!?(\d+)>/);
+const { MessageEmbed } = require('discord.js');
 const BaseCommand = require('../../utils/structures/BaseCommand');
 
 module.exports = class Ban extends BaseCommand {
@@ -46,6 +47,9 @@ module.exports = class Ban extends BaseCommand {
 
         message.guild.members.ban(mentionedUser.id, { reason: reason });
 
-        message.channel.send(`Banned ${mentionedUser} ${reason ? `for **${reason}**` : ''}`);
+        message.channel.send(new MessageEmbed()
+            .setDescription(`Banned ${mentionedUser} ${reason ? `for **${reason}**` : ''}`)
+            .setColor('DARK_RED')
+        );
     }
 }

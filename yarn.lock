@@ -1061,10 +1061,10 @@ lru-cache@^5.1.1:
   dependencies:
     yallist "^3.0.2"
 
-mathjs@^8.1.1:
-  version "8.1.1"
-  resolved "https://registry.yarnpkg.com/mathjs/-/mathjs-8.1.1.tgz#89d6f2fc4a90e9038db3690678a9e1ce563e15ea"
-  integrity sha512-b3TX3EgiZObujjwb8lZnTDLUuivC2jar4ZBjmGJ4stFYCDXx/DNwx5yry5t/z65p9mvejyZel1qoeR05KtChcQ==
+mathjs@^9.0.0:
+  version "9.0.0"
+  resolved "https://registry.yarnpkg.com/mathjs/-/mathjs-9.0.0.tgz#2edd3dfdca805d7e0e5454a46b2798d95a837887"
+  integrity sha512-ZfNz90wyed1MJUQOfL+Jr9IWG6vevVPM+cFf93sV568lbY8w2obEv5Ba7e7+Ylg5Zv0PTPtEY5CbqivHw/AxGQ==
   dependencies:
     complex.js "^2.0.11"
     decimal.js "^10.2.1"

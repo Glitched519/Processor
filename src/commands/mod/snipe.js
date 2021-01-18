@@ -13,6 +13,7 @@ module.exports = class Snipe extends BaseCommand {
 
         const snipeEmbed = new MessageEmbed()
             .setAuthor(msg.author, msg.member.user.displayAvatarURL())
+            .setColor('RED')
             .setDescription(msg.content)
             .setFooter('Get Sniped lmao')
             .setTimestamp();

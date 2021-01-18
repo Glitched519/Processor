@@ -1,42 +1,42 @@
+const { MessageEmbed } = require('discord.js');
 const BaseCommand = require('../../utils/structures/BaseCommand');
 
 module.exports = class Nickname extends BaseCommand {
-	constructor() {
-		super('nickname', 'mod', ['nick', 'name']);
-	}
+    constructor() {
+        super('nickname', 'mod', ['nick', 'name']);
+    }
 
-	async run(client, message, args) {
-		if (!args[0]) return;
-		if (!message.guild.me.hasPermission(['MANAGE_NICKNAMES'])) {
-			return message.channel.send(":x: **I need the `Manage Nicknames` permission to change a member's nickname.**")
-				.then(msg => {
-					msg.delete({ timeout: 4000 });
-				});
-		}
-		if (!message.member.hasPermission(['MANAGE_NICKNAMES'])) {
-			return message.channel.send(":x: **You need the `Manage Nicknames` permission to change a member's nickname.**")
-				.then(msg => {
-					msg.delete({ timeout: 4000 });
-				});
-		}
-		if (args[0].startsWith("<@") && args[0].endsWith(">") && !args[1]) {
-			return message.channel.send(":grey_question: **You need to specify a nickname to give to this member.**");
-		}
-		const member = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
-		if (!args[1]) {
-			return message.channel.send(":grey_question: **You need to specify a nickname to give to this member.**");
-		}
-		if (!member) {
-			return message.channel.send(":x: **You need to specify an existing member.**")
-				.then(msg => {
-					msg.delete({ timeout: 4000 });
-				});
-		}
-		const newNickname = args[1];
+    async run(client, message, args) {
+        const mentionedMember = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
 
-		member.setNickname(newNickname)
-			.catch(err => {
-				message.channel.send(":x: **Cannot change nickname. The member has a higher role than me.**");
-			})
-	}
+        if (!message.member.hasPermission('MANAGE_NICKNAMES')) {
+            return message.channel.send('You need the `Manage Nicknames` permission to change the nickname a member.');
+        }
+        if (!message.guild.me.hasPermission('MANAGE_NICKNAMES')) {
+            return message.channel.send('I need the `Manage Nicknames` permission to change the nickname of a member.');
+        }
+        if (!mentionedMember) {
+            return message.channel.send('You need to mention a member you want to kick.');
+        }
+
+        const mentionedPosition = mentionedMember.roles.highest.position;
+        const memberPosition = message.member.roles.highest.position;
+        const botPosition = message.guild.me.roles.highest.position;
+
+        if (memberPosition <= mentionedPosition) {
+            return message.channel.send('Cannot change their nickname as their role is higher than or equal to yours.');
+        }
+        else if (botPosition <= mentionedPosition) {
+            return message.channel.send('Cannot their nickname as their role is higher than or equal to mine.');
+        }
+
+        args.shift();
+        const nickname = args.join(' ');
+
+        mentionedMember.setNickname(nickname);
+        message.channel.send(new MessageEmbed()
+            .setDescription(`${mentionedMember}'s nickname has been changed to **${nickname}**.`)
+            .setColor('GREEN')
+        );
+    }
 }

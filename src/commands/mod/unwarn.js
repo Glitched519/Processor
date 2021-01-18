@@ -1,9 +1,10 @@
+const { MessageEmbed } = require('discord.js');
 const warnSchema = require('../../schemas/warn-schema');
 const BaseCommand = require('../../utils/structures/BaseCommand');
 
 module.exports = class Unwarn extends BaseCommand {
     constructor() {
-        super('unwarn', 'mod', ['unm', 'um']);
+        super('unwarn', 'mod', ['unw', 'uw']);
     }
 
     async run(client, message, args) {
@@ -44,6 +45,9 @@ module.exports = class Unwarn extends BaseCommand {
         warnDoc.warnings.splice(warningId - 1, warningId !== 1 ? warningId - 1 : 1);
         await warnDoc.save().catch(err => console.log(err));
 
-        message.channel.send(`Unwarned ${mentionedMember} ${reason ? `for **${reason}**` : ''}`);
+        message.channel.send(new MessageEmbed()
+            .setDescription(`Unwarned ${mentionedMember} ${reason ? `for **${reason}**` : ''}`)
+            .setColor('DARK_GOLD')
+        );
     }
 }

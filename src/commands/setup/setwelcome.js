@@ -1,7 +1,7 @@
 const welcomeSchema = require('../../schemas/welcome-schema');
 const BaseCommand = require('../../utils/structures/BaseCommand');
 
-module.exports = class SetSuggestionChannel extends BaseCommand {
+module.exports = class SetWelcomeChannel extends BaseCommand {
     constructor() {
         super('setwelcome', 'mod', []);
     }

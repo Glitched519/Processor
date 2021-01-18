@@ -5,6 +5,13 @@ let setupDef = {
     setlogschannel: {
         aliases: ['logchannel'],
         description: 'Set or change the logging channel for message events'
+    },
+    setwelcome: {
+        description: 'Set or change the welcome chanel for new joining members'
+    },
+    setantispam: {
+        aliases: ['nospam'],
+        description: 'Set a channel where spam is not allowed.'
     }
 }
 let modDef = {
@@ -28,6 +35,9 @@ let modDef = {
         aliases: ['slow'],
         description: 'Sets the slowmode of a channel in seconds'
     },
+    snipe: {
+        description: 'Shows the last delete message from a user'
+    },
     topic: {
         aliases: [],
         description: 'Sets the topic for a channel'
@@ -36,14 +46,34 @@ let modDef = {
         aliases: ['b'],
         description: 'Bans a user via mention or ID'
     },
+    unban: {
+        aliases: ['b'],
+        description: 'Unbans a user via mention or ID'
+    },
     kick: {
         aliases: ['k'],
         description: 'Kicks a user via mention or ID'
     },
+    mute: {
+        aliases: ['m', 'shut'],
+        description: 'Mutes as user via mention or ID or a specified duration'
+    },
+    unmute: {
+        aliases: ['um', 'unm'],
+        description: 'Unmutes a user via mention or ID if already muted'
+    },
     warn: {
         aliases: ['w'],
-        description: 'Warns a user'
-    }
+        description: 'Warns a user via mention or ID'
+    },
+    warnings: {
+        aliases: ['warns'],
+        description: 'Check the warnings for a specific user.'
+    },
+    unwarn: {
+        aliases: ['uw', 'unw'],
+        description: 'Removes a warning from a user via mention or ID'
+    },
 }
 
 let mathDef = {

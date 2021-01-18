@@ -1,3 +1,4 @@
+const { MessageEmbed } = require('discord.js');
 const BaseCommand = require('../../utils/structures/BaseCommand');
 
 module.exports = class Kick extends BaseCommand {
@@ -34,7 +35,10 @@ module.exports = class Kick extends BaseCommand {
 
         try {
             await mentionedMember.kick([reason]);
-            message.channel.send(`Kicked ${mentionedMember} ${reason ? `for **${reason}**` : ''}`);
+            message.channel.send(new MessageEmbed()
+                .setDescription(`Kicked ${mentionedMember} ${reason ? `for **${reason}**` : ''}`)
+                .setColor('ORANGE')
+            );
         }
         catch (err) {
             message.channel.send('Failed to kick this member: ' + err);
