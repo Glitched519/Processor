@@ -1,6 +1,6 @@
 {
     "name": "processor",
-    "version": "6.2.2",
+    "version": "6.2.3",
     "description": "An EPIC bot for Discord.",
     "repository": "https://github.com/Glitched519/Processor",
     "main": "shard.js",
