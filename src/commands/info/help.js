@@ -106,8 +106,8 @@ module.exports = class Help extends BaseCommand {
             .setDescription(`Prefix is **${PREFIX}** as in **${PREFIX}help**.`)
             .addField(':green_square: baselayout `{th/bh level}`', `${clashDef.baselayout.description}.\nAliases: [${clashDef.baselayout.aliases}]`)
             .addField(':information_source: clashtips `[index]`', `${clashDef.clashtips.description}.\nAliases: [${clashDef.clashtips.aliases}]`)
-            .addField(':mag: searchclan `{#tag}', `${clashDef.searchclan.description}.\nAliases: [${clashDef.searchclan.aliases}]`)
-            .addField(':mag: searchplayer `{#tag}', `${clashDef.searchplayer.description}.\nAliases: [${clashDef.searchplayer.aliases}]`)
+            .addField(':mag: searchclan `{#tag}`', `${clashDef.searchclan.description}.\nAliases: [${clashDef.searchclan.aliases}]`)
+            .addField(':mag: searchplayer `{#tag}`', `${clashDef.searchplayer.description}.\nAliases: [${clashDef.searchplayer.aliases}]`)
 
         let cuteEmbed = new MessageEmbed()
             .setColor(`RANDOM`)
@@ -203,11 +203,11 @@ module.exports = class Help extends BaseCommand {
                 .then(msg.react('💠'))
                 .then(msg.react('▶'))
                 .then(msg.react('⏭'))
-                .then(msg.react('❌'))
+                .then(msg.react('788157446178340915'))
 
 
             const filter = (reaction, user) => {
-                return ['⏮', '◀', '💠', '▶', '⏭', '❌'].includes(reaction.emoji.name) && user.id === message.author.id;
+                return ['⏮', '◀', '💠', '▶', '⏭', 'no'].includes(reaction.emoji.name) && user.id === message.author.id;
             };
             msg.awaitReactions(filter, { max: 1, time: 300000, errors: ['time'] })
                 .then(collected => {
@@ -249,7 +249,7 @@ module.exports = class Help extends BaseCommand {
                             page = maxPages;
                             gotoPage(msg, maxPages);
                             break;
-                        case '❌':
+                        case 'no':
                             return msg.edit(helpClosed)
                                 .then(close => {
                                     close.delete({ timeout: 5000 });

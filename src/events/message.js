@@ -29,7 +29,7 @@ module.exports = class Message extends BaseEvent {
         if (message.content == `<@!689678745782714464>`) {
             message.reply(`my prefix is **${prefix}**`);
         }
-        if (message.content.startsWith(prefix.toLowerCase())) {
+        if (message.content.startsWith(prefix)) {
             const [cmdName, ...cmdArgs] = message.content
                 .slice(prefix.length)
                 .trim()
