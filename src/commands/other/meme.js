@@ -10,7 +10,7 @@ module.exports = class Meme extends BaseCommand {
     async run(client, message, args) {
         const options = {
             method: 'GET',
-            url: `https://reddit.com/r/memes/random/.json`,
+            url: `https://reddit.com/r/dankmemes/random/.json`,
         };
 
         axios.request(options).then(response => {
