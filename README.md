@@ -20,23 +20,6 @@ Processor comes with several fun features that you and your members will appreci
 ---
 
 ## Image Examples
- ![Help Command](https://media.discordapp.net/attachments/782100726146924584/798812347346583552/unknown.png)
- ![Meme Command](https://media.discordapp.net/attachments/782100726146924584/798813346090450944/unknown.png)
- ![Changeable Prefix](https://media.discordapp.net/attachments/782100726146924584/798813478155452436/unknown.png)
-<style>
-<h2>Images</h2>
-
-<table>
-  <tr>
-    <th>Help Command</th>
-    <th>Meme Command</th>
-    <th>Changeable Prefix</th>
-  </tr>
-  <tr>
-    <td>![Help Command](https://media.discordapp.net/attachments/782100726146924584/798812347346583552/unknown.png)</td>
-    <td>![Meme Command](https://media.discordapp.net/attachments/782100726146924584/798813346090450944/unknown.png)</td>
-    <td>![Changeable Prefix](https://media.discordapp.net/attachments/782100726146924584/798813478155452436/unknown.png)</td>
-  </tr>
-</table>
-
-</body>
+- ![Help Command](https://media.discordapp.net/attachments/782100726146924584/798812347346583552/unknown.png)
+- ![Meme Command](https://media.discordapp.net/attachments/782100726146924584/798813346090450944/unknown.png)
+- ![Changeable Prefix](https://media.discordapp.net/attachments/782100726146924584/798813478155452436/unknown.png)
