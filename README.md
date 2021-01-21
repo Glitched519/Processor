@@ -1,6 +1,6 @@
 # Processor
 ---
-**Processor is a Discord bot developed by [Isopropyl#3066](https://dsc.bio/Isopropyl) along with several other developers who devote their time to this project.**
+**Processor is a Discord bot developed by [Isopropyl#9371](https://dsc.bio/Isopropyl) along with several other developers who devote their time to this project.**
 ## Adding the Bot
 To add Processor to your discord server, you can click [this invite link.](https://discord.com/oauth2/authorize?client_id=689678745782714464&scope=bot&permissions=2134338815) You must have the **Manage Server** permission to invite this bot to your desired server.
 
