@@ -36,7 +36,7 @@ module.exports = class Purge extends BaseCommand {
         deleteAmount == 100 ? message.channel.bulkDelete(deleteAmount, true) : message.channel.bulkDelete(deleteAmount + 1, true);
         message.channel.send(deleteEmbed)
         .then(msg => {
-            msg.delete({ timeout: 4000 });
+            msg.delete({ timeout: 5000 });
         });
     }
 }
