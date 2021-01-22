@@ -16,7 +16,7 @@ module.exports = class Nickname extends BaseCommand {
             return message.channel.send('I need the `Manage Nicknames` permission to change the nickname of a member.');
         }
         if (!mentionedMember) {
-            return message.channel.send('You need to mention a member you want to kick.');
+            return message.channel.send('You need to mention a member whose nickname you want to change.');
         }
 
         const mentionedPosition = mentionedMember.roles.highest.position;
@@ -33,9 +33,11 @@ module.exports = class Nickname extends BaseCommand {
         args.shift();
         const nickname = args.join(' ');
 
-        mentionedMember.setNickname(nickname);
+        nickname == '' ? 
+        mentionedMember.setNickname(null) : 
+        mentionedMember.setNickname(nickname)
         message.channel.send(new MessageEmbed()
-            .setDescription(`${mentionedMember}'s nickname has been changed to **${nickname}**.`)
+            .setDescription(`${mentionedMember}'s nickname has been ${nickname == '' ? `reset.` : `changed to **${nickname}**.`}`)
             .setColor('GREEN')
         );
     }
