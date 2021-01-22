@@ -25,6 +25,11 @@ module.exports = class Slowmode extends BaseCommand {
                     .then(msg => {
                         msg.delete({ timeout: 4000 });
                     });
+            } else if (args[0] > 21600) {
+                return message.reply("Slowmode has a maximum of 21600 seconds (6h).")
+                    .then(msg => {
+                        msg.delete({ timeout: 4000 });
+                    });
             }
             else {
                 message.channel.setRateLimitPerUser(parseInt(args[0]), "");
