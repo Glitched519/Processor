@@ -17,7 +17,7 @@ module.exports = class Meme extends BaseCommand {
             let meme = response.data[0].data.children[0].data;
             let memeEmbed = new MessageEmbed()
                 .setTitle(meme.title)
-                .setURL(`https://reddit.com/${meme.permalink}`)
+                .setURL(`https://reddit.com${meme.permalink}`)
                 .setImage(meme.url)
                 .setColor(`RANDOM`)
                 .setFooter(`👍 ${meme.ups} | 💬 ${meme.num_comments}`)

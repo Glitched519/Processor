@@ -28,7 +28,7 @@ const log = console.log;
             serverCount: client.guilds.cache.size,
             // shardId: client.shard.ids[0], // Sharding
             shardCount: client.options.shardCount
-        })
+        });
     }, 1800000) // post every 30 minutes
     console.log("Started Posting Bot Stats on top.gg.");
 

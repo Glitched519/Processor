@@ -9,8 +9,14 @@ const muteSchema = require('../schemas/mute-schema');
 const applyText = (canvas, text) => {
     const ctx = canvas.getContext('2d');
 
-    // Declare a base size of the font
-    let fontSize = 40;
+    let fontSize = 70;
+
+    do {
+        // Assign the font to the context and decrement it so it can be measured again
+        ctx.font = `${fontSize -= 10}px sans-serif`;
+        // Compare pixel width of the text to the canvas minus the approximate avatar size
+    } while (ctx.measureText(text).width > canvas.width - 300);
+
 
     // Return the result to use in the actual canvas
     return ctx.font;
@@ -58,20 +64,13 @@ module.exports = class GuildMemberAdd extends BaseEvent {
         // Draw a rectangle with the dimensions of the entire canvas
         ctx.strokeRect(0, 0, canvas.width, canvas.height);
 
-        // Select the font size and type from one of the natively available fonts
-        ctx.font = '40px sans-serif';
-        // Select the style that will be used to fill the text in
-        ctx.fillStyle = '#ffffff';
-        // Actually fill the text with a solid color
-        ctx.fillText(member.displayName, canvas.width / 2.5, canvas.height / 1.8);
-
         // Slightly smaller text placed above the member's display name
         ctx.font = '28px sans-serif';
         ctx.fillStyle = '#ffffff';
         ctx.fillText('Welcome to the server,', canvas.width / 2.5, canvas.height / 3.5);
 
         // Even smaller text placed below the member's display name
-        ctx.font = '24px sans-serif';
+        ctx.font = '24px product sans';
         ctx.fillStyle = '#ffffff';
         ctx.fillText(`Member #${guild.memberCount}`, canvas.width / 2.5, canvas.height - 25);
 
@@ -90,12 +89,12 @@ module.exports = class GuildMemberAdd extends BaseEvent {
         ctx.clip();
 
         // Wait for Canvas to load the image
-        const avatar = await Canvas.loadImage(member.user.displayAvatarURL({ format: 'jpg' }));
+        const avatar = await Canvas.loadImage(member.user.displayAvatarURL({ format: 'png' }));
         // Move the image downwards vertically and constrain its height to 200, so it's a square
         ctx.drawImage(avatar, 25, 25, 200, 200);
 
         // Use helpful Attachment class structure to process the file for you
-        const attachment = new MessageAttachment(canvas.toBuffer());
+        const attachment = new MessageAttachment(canvas.toBuffer(), 'welcome.png');
 
         destination.send('', attachment);
     }
