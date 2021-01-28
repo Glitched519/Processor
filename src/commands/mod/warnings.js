@@ -21,7 +21,7 @@ module.exports = class Warnings extends BaseCommand {
         const data = [];
 
         for (let i = 0; i < warnDoc.warnings.length; i++) {
-            data.push(`**ID: ${i + 1}`);
+            data.push(`**ID:** ${i + 1}`);
             data.push(`**Warn:** ${warnDoc.warnings[i]}`)
             data.push(`**Moderator:** ${await message.client.users.fetch(warnDoc.moderator[i]).catch(() => 'Deleted User')}`);
             data.push(`**Date:** ${new Date(warnDoc.date[i]).toLocaleDateString()}\n`);
