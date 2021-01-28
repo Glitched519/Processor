@@ -30,7 +30,7 @@ module.exports = class Ready extends BaseEvent {
             ignoredRoles: ["Admin", "Owner"], // The members with this role(or roles) will be ignored if they have it. Suggest to not add this to any random guys. Also it's case sensitive.
             ignoredMembers: ["Mavis#2389"], // These members are directly affected and they do not require to have the role above. Good for undercover pranks.
             mutedRole: "Muted", // Here you put the name of the role that should not let people write/speak or anything else in your server. If there is no role set, by default, the module will attempt to create the role for you & set it correctly for every channel in your server. It will be named "muted".
-            timeMuted: 1000 * 1800, // This is how much time member X will be muted. if not set, default would be 10 min.
+            timeMuted: 1000 * 600, // This is how much time member X will be muted. if not set, default would be 10 min.
             logChannel: "antispam-logs" // This is the channel where every report about spamming goes to. If it's not set up, it will attempt to create the channel.
           });
 
