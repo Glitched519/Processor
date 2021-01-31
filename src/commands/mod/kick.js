@@ -8,7 +8,6 @@ module.exports = class Kick extends BaseCommand {
 
     async run(client, message, args) {
         const mentionedMember = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
-
         if (!message.member.hasPermission('KICK_MEMBERS')) {
             return message.channel.send('You need the `Kick Members` permission to kick a member.');
         }

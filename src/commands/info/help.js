@@ -1,8 +1,9 @@
 const guildPrefixes = {};
+const fs = require('fs');
+const path = require('path');
 const { prefix: globalPrefix } = require('../../config.json');
 const commandPrefixSchema = require('../../schemas/command-prefix-schema');
 const { MessageEmbed } = require('discord.js');
-const { setupDef, modDef, mathDef, animalDef, clashDef, cuteDef, infoDef, otherDef } = require('../../defs');
 const BaseCommand = require('../../utils/structures/BaseCommand');
 
 module.exports = class Help extends BaseCommand {
@@ -14,6 +15,57 @@ module.exports = class Help extends BaseCommand {
         let page = 1;
         let maxPages = 9;
 
+        let setupCmds = [];
+        let modCmds = [];
+        let mathCmds = [];
+        let animalCmds = [];
+        let clashCmds = [];
+        let cuteCmds = [];
+        let infoCmds = [];
+        let otherCmds = [];
+
+        let setupCmdNames = fs.readdirSync(path.join(__dirname, '../setup'));
+        let modCmdNames = fs.readdirSync(path.join(__dirname, '../mod'));
+        let mathCmdNames = fs.readdirSync(path.join(__dirname, '../math'));
+        let animalCmdNames = fs.readdirSync(path.join(__dirname, '../animal'));
+        let clashCmdNames = fs.readdirSync(path.join(__dirname, '../clash'));
+        let cuteCmdNames = fs.readdirSync(path.join(__dirname, '../cute'));
+        let infoCmdNames = fs.readdirSync(path.join(__dirname, '../info'));
+        let otherCmdNames = fs.readdirSync(path.join(__dirname, '../other'));
+
+        setupCmdNames.forEach(cmd => {
+            cmd = cmd.slice(0, cmd.indexOf('.js'));
+            setupCmds.push(cmd);
+        });
+        modCmdNames.forEach(cmd => {
+            cmd = cmd.slice(0, cmd.indexOf('.js'));
+            modCmds.push(cmd);
+        });
+        mathCmdNames.forEach(cmd => {
+            cmd = cmd.slice(0, cmd.indexOf('.js'));
+            mathCmds.push(cmd);
+        });
+        animalCmdNames.forEach(cmd => {
+            cmd = cmd.slice(0, cmd.indexOf('.js'));
+            animalCmds.push(cmd);
+        });
+        clashCmdNames.forEach(cmd => {
+            cmd = cmd.slice(0, cmd.indexOf('.js'));
+            clashCmds.push(cmd);
+        });
+        cuteCmdNames.forEach(cmd => {
+            cmd = cmd.slice(0, cmd.indexOf('.js'));
+            cuteCmds.push(cmd);
+        });
+        infoCmdNames.forEach(cmd => {
+            cmd = cmd.slice(0, cmd.indexOf('.js'));
+            infoCmds.push(cmd);
+        });
+        otherCmdNames.forEach(cmd => {
+            cmd = cmd.slice(0, cmd.indexOf('.js'));
+            otherCmds.push(cmd);
+        });
+
         for (const guild of client.guilds.cache) {
             const result = await commandPrefixSchema.findOne({ _id: message.guild.id });
             if (result == null) {
@@ -24,8 +76,6 @@ module.exports = class Help extends BaseCommand {
             }
         }
         const PREFIX = guildPrefixes[message.guild.id] || globalPrefix;
-
-        message.channel.send(new MessageEmbed().setDescription('**Note:** Command description and aliases are deprecated in the help menu. In the future, please refer to the bot website for details of all commands: https://processorbot.xyz/commands').setColor('YELLOW'));
 
         let helpClosed = new MessageEmbed()
             .setColor('ORANGE')
@@ -61,138 +111,54 @@ module.exports = class Help extends BaseCommand {
         let setupEmbed = new MessageEmbed()
             .setColor(`RANDOM`)
             .setTitle('Setup Commands')
-            .setDescription(`Only members with the \`Manage Server\` permission such as mod or admin, can use these commands. Prefix is **${PREFIX}** as in **${PREFIX}help**.`)
-            .addField(':interrobang: prefix `{new prefix}`', `${setupDef.prefix.description}.`)
-            .addField(':wave: setwelcome `{#channel}`', `${setupDef.setwelcome.description}.`)
-            .addField(':no_mouth: setantispam `{#channel}`', `${setupDef.setantispam.description}.\nAliases: [${setupDef.setantispam.aliases}]`)
-            .addField(':speech_left: setlogschannel `{#channel}`', `${setupDef.setlogschannel.description}.\nAliases: [${setupDef.setlogschannel.aliases}]`)
+            .setDescription(`Only members with the \`Manage Server\` permission such as mod or admin, can use these commands. \n\n\`${setupCmds.join('\n')}\``)
 
         let modEmbed = new MessageEmbed()
             .setColor(`RANDOM`)
             .setTitle('Moderation Commands')
-            .setDescription(`Prefix is **${PREFIX}** as in **${PREFIX}help**.`)
-            .addField(':shield: permissions', `${modDef.permissions.description}.\nAliases: [${modDef.permissions.aliases}]`)
-            .addField(':hammer_pick: ban `{@member or ID} [reason]`', `${modDef.ban.description}.\nAliases: [${modDef.ban.aliases}]`)
-            .addField(':angel: unban `{@member or ID} [reason]`', `${modDef.unban.description}.\nAliases: [${modDef.unban.aliases}]`)
-            .addField(':boot: kick `{@member or ID} [reason]`', `${modDef.kick.description}.\nAliases: [${modDef.kick.aliases}]`)
-            .addField(':mute: mute `{@member or ID} [reason]`', `${modDef.mute.description}.\nAliases: [${modDef.mute.aliases}]`)
-            .addField(':speaker: unmute `{@member or ID} [reason]`', `${modDef.unmute.description}.\nAliases: [${modDef.unmute.aliases}]`)
-            .addField(':broom: purge `{number}`', `${modDef.purge.description}.\nAliases: [${modDef.purge.aliases}]`)
-            .addField(':clock10: slowmode `[number]`', `${modDef.slowmode.description}.\nAliases: [${modDef.slowmode.aliases}]`)
-            .addField(':warning: warn `{@member} [reason]`', `${modDef.warn.description}.\nAliases: [${modDef.warn.aliases}]`)
-            .addField(':warning: warnings `{@member} [reason]`', `${modDef.warnings.description}.\nAliases: [${modDef.warnings.aliases}]`)
-            .addField(':warning: unwarn `{@member} [reason]`', `${modDef.unwarn.description}.\nAliases: [${modDef.unwarn.aliases}]`)
+            .setDescription(`\`${modCmds.join('\n')}\``)
 
         let mathEmbed = new MessageEmbed()
             .setColor(`RANDOM`)
             .setTitle('Math Commands')
-            .setDescription(`Prefix is **${PREFIX}** as in **${PREFIX}help**.`)
-            .addField(':1234: base32 `{number}`', `${mathDef.base32.description}.\nAliases: [${mathDef.base32.aliases}]`)
-            .addField(':1234: base64 `{number}`', `${mathDef.base64.description}.\nAliases: [${mathDef.base64.aliases}]`)
-            .addField(':1234: binary `{number}`', `${mathDef.binary.description}.\nAliases: [${mathDef.binary.aliases}]`)
-            .addField(':computer: calculate `{expression}`', `${mathDef.calculate.description}.\nAliases: [${mathDef.calculate.aliases}]`)
-            .addField(':capital_abcd: hexadecimal `{number}`', `${mathDef.hexadecimal.description}.\nAliases: [${mathDef.hexadecimal.aliases}]`)
+            .setDescription(`\`${mathCmds.join('\n')}\``)
 
         let animalEmbed = new MessageEmbed()
             .setColor(`RANDOM`)
             .setTitle('Animal Commands')
-            .setDescription(`Prefix is **${PREFIX}** as in **${PREFIX}help**.`)
-            .addField(':information_source: animalfact `{animal}`', `${animalDef.animalfact.description}.\nAliases: [${animalDef.animalfact.aliases}]`)
-            .addField(':frame_photo: animalimage `{animal}`', `${animalDef.animalimage.description}.\nAliases: [${animalDef.animalimage.aliases}]`)
+            .setDescription(`\`${animalCmds.join('\n')}\``)
 
         let clashEmbed = new MessageEmbed()
             .setColor(`RANDOM`)
             .setTitle('Clash Commands')
-            .setDescription(`Prefix is **${PREFIX}** as in **${PREFIX}help**.`)
-            .addField(':green_square: baselayout `{th/bh level}`', `${clashDef.baselayout.description}.\nAliases: [${clashDef.baselayout.aliases}]`)
-            .addField(':information_source: clashtips `[index]`', `${clashDef.clashtips.description}.\nAliases: [${clashDef.clashtips.aliases}]`)
-            .addField(':mag: searchclan `{#tag}`', `${clashDef.searchclan.description}.\nAliases: [${clashDef.searchclan.aliases}]`)
-            .addField(':mag: searchplayer `{#tag}`', `${clashDef.searchplayer.description}.\nAliases: [${clashDef.searchplayer.aliases}]`)
+            .setDescription(`\`${clashCmds.join('\n')}\``)
 
         let cuteEmbed = new MessageEmbed()
             .setColor(`RANDOM`)
             .setTitle('Cute Commands')
-            .setDescription(`Prefix is **${PREFIX}** as in **${PREFIX}help**.`)
-            .addField(':hugging: hug `{@member}`', `${cuteDef.hug.description}.`)
-            .addField(':open_hands: pat `{@member}`', `${cuteDef.pat.description}.`)
-            .addField(':wink: wink `{@member}`', `${cuteDef.wink.description}.`)
+            .setDescription(`\`${cuteCmds.join('\n')}\``)
 
         let infoEmbed = new MessageEmbed()
             .setColor(`RANDOM`)
             .setTitle('Info Commands')
             .setDescription(`Prefix is **${PREFIX}** as in **${PREFIX}help**.`)
-            .addField(':man_construction_worker: author', `${infoDef.author.description}.\nAliases: [${infoDef.author.aliases}]`)
-            .addField(':frame_photo: avatar `[@member]`', `${infoDef.avatar.description}.\nAliases: [${infoDef.avatar.aliases}]`)
-            .addField(':mask: covid19 `[country]`', `${infoDef.covid19.description}.\nAliases: [${infoDef.covid19.aliases}]`)
-            .addField(':book: definition `{word}`', `${infoDef.definition.description}.\nAliases: [${infoDef.definition.aliases}]`)
-            .addField(':computer: docs `{query}`', `${infoDef.docs.description}.\nAliases: [${infoDef.docs.aliases}]`)
-            .addField(':frame_photo: giphygif `{search}`', `${infoDef.giphygif.description}.\nAliases: [${infoDef.giphygif.aliases}]`)
-            .addField(':link: github', `${infoDef.github.description}.\nAliases: [${infoDef.github.aliases}]`)
-            .addField(':mag: image `{search}`', `${infoDef.image.description}.\nAliases: [${infoDef.image.aliases}]`)
-            .addField(':link: invite', `${infoDef.invite.description}.\nAliases: [${infoDef.invite.aliases}]`)
-            .addField(':musical_note: lyrics `{song}`', `${infoDef.lyrics.description}.\nAliases: [${infoDef.lyrics.aliases}]`)
-            .addField(':mobile_phone: phone `{phone name}`', `${infoDef.phone.description}.`)
-            .addField(':exclamation: ping', `${infoDef.ping.description}.\nAliases: [${infoDef.ping.aliases}]`)
-            .addField(':dog2: pokemon `{pokemon}`', `${infoDef.pokemon.description}.\nAliases: [${infoDef.pokemon.aliases}]`)
-            .addField(':information_source: poll `{question}`', `${infoDef.poll.description}.`)
-            .addField(':information_source: stats `[@member]`', `${infoDef.stats.description}.`)
-            .addField(':heart: support', `${infoDef.support.description}.`)
-            .addField(':blue_heart: vote', `${infoDef.vote.description}.`)
-            .addField(':white_sun_rain_cloud: weather `[location]`', `${infoDef.weather.description}.`)
+            .setDescription(`\`${infoCmds.join('\n')}\``)
 
         let otherEmbed = new MessageEmbed()
             .setColor(`RANDOM`)
             .setTitle('Info Commands')
-            .setDescription(`Prefix is **${PREFIX}** as in **${PREFIX}help**.`)
-            .addField(':man_running: chucknorrisjoke', `${otherDef.chucknorrisjoke.description}.\nAliases: [${otherDef.chucknorrisjoke.aliases}]`)
-            .addField(':speech_left: comment `{your comment}`', `${otherDef.comment.description}.`)
-            .addField(':man_curly_haired_tone3: dadjoke', `${otherDef.dadjoke.description}.\nAliases: [${otherDef.dadjoke.aliases}]`)
-            .addField(':computer: hack `{@member}`', `${otherDef.hack.description}.`)
-            .addField(':rofl: joke', `${otherDef.joke.description}.`)
-            .addField(':rofl: meme', `${otherDef.meme.description}.\nAliases: [${otherDef.meme.aliases}]`)
-            .addField(':bookmark: quote', `${otherDef.quote.description}.`)
-            .addField(':game_die: roll', `${otherDef.roll.description}.\nAliases: [${otherDef.roll.aliases}]`)
-            .addField(':information_source: suggest `{suggestion}`', `${otherDef.suggest.description}.`)
-            .addField(':information_source: wikipedia `{wiki}`', `${otherDef.wikipedia.description}.\nAliases: [${otherDef.wikipedia.aliases}]`)
+            .setDescription(`\`${otherCmds.join('\n')}\``)
+
+        let allEmbeds = [helpEmbed, setupEmbed, modEmbed, animalEmbed, clashEmbed, cuteEmbed, mathEmbed, infoEmbed, otherEmbed];
 
         function gotoPage(msg, page) {
-            switch (page) {
-                case 1:
-                    helpEmbed.setFooter(`Page ${page} of ${maxPages}`, `${message.author.displayAvatarURL()}`);
-                    msg.edit(helpEmbed);
-                    break;
-                case 2:
-                    setupEmbed.setFooter(`Page ${page} of ${maxPages}`, `${message.author.displayAvatarURL()}`);
-                    msg.edit(setupEmbed);
-                    break;
-                case 3:
-                    modEmbed.setFooter(`Page ${page} of ${maxPages}`, `${message.author.displayAvatarURL()}`);
-                    msg.edit(modEmbed);
-                    break;
-                case 4:
-                    animalEmbed.setFooter(`Page ${page} of ${maxPages}`, `${message.author.displayAvatarURL()}`);
-                    msg.edit(animalEmbed);
-                    break;
-                case 5:
-                    clashEmbed.setFooter(`Page ${page} of ${maxPages}`, `${message.author.displayAvatarURL()}`);
-                    msg.edit(clashEmbed);
-                    break;
-                case 6:
-                    cuteEmbed.setFooter(`Page ${page} of ${maxPages}`, `${message.author.displayAvatarURL()}`);
-                    msg.edit(cuteEmbed);
-                    break;
-                case 7:
-                    mathEmbed.setFooter(`Page ${page} of ${maxPages}`, `${message.author.displayAvatarURL()}`);
-                    msg.edit(mathEmbed);
-                    break;
-                case 8:
-                    infoEmbed.setFooter(`Page ${page} of ${maxPages}`, `${message.author.displayAvatarURL()}`);
-                    msg.edit(infoEmbed);
-                    break;
-                case 9:
-                    otherEmbed.setFooter(`Page ${page} of ${maxPages}`, `${message.author.displayAvatarURL()}`);
-                    msg.edit(otherEmbed);
-                    break;
+            for (let i = 0; i < maxPages + 1; i++) {
+                switch (page) {
+                    case i:
+                        allEmbeds[i - 1].setFooter(`Page ${page} of ${maxPages}`, `${message.author.displayAvatarURL()}`);
+                        msg.edit(allEmbeds[i - 1]);
+                        break;
+                }
             }
             changePage(msg);
         }

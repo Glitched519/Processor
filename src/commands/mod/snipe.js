@@ -3,7 +3,7 @@ const { MessageEmbed } = require('discord.js');
 
 module.exports = class Snipe extends BaseCommand {
     constructor() {
-        super('snipe', 'mod', []);
+        super('snipe', 'mod', ['s']);
     }
 
     async run(client, message, args) {
