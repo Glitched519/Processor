@@ -3,25 +3,23 @@ const { Client } = require('discord.js');
 const { registerCommands, registerEvents } = require('./utils/registry');
 const config = require('./config.json');
 const Topgg = require("@top-gg/sdk");
-const { chalk, yellowBright, greenBright, cyanBright } = require('chalk');
 //const express = require('express');
 //const app = express();
 const api = new Topgg.Api(config["topgg-token"]);
 //const webhook = new Topgg.Webhook(config["topgg-auth"]);
 const client = new Client();
 //const options = new ClientOptions();
-const log = console.log;
 
 
 (async () => {
-    await client.login(config.token).then(() => log(yellowBright('Logging In...')));
-    log(greenBright('Configuring Client Settings...'));
+    await client.login(config.token).then(() => console.log('Logging In...'));
+    console.log('Configuring Client Settings...');
     client.commands = new Map();
     client.events = new Map();
     client.snipes = new Map();
     client.prefix = config.prefix;
-    await registerCommands(client, '../commands').then(() => log(cyanBright("Registering Commands...")));
-    await registerEvents(client, '../events').then(() => log(cyanBright("Registering Events...")));
+    await registerCommands(client, '../commands').then(() => console.log("Registering Commands..."));
+    await registerEvents(client, '../events').then(() => console.log("Registering Events..."));
 
     setInterval(() => {
         api.postStats({
@@ -34,7 +32,7 @@ const log = console.log;
 
     // app.post('/dblwebhook', webhook.middleware(), (req, res) => {
     //     // req.vote is your vote object e.g
-    //     console.log(req.vote.user) // user id
+    //     console.console.log(req.vote.user) // user id
     // }) // attach the middleware
 
     // app.listen(3000)

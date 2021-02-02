@@ -12,6 +12,7 @@ module.exports = class Prefix extends BaseCommand {
         fetch(`https://api.openweathermap.org/data/2.5/weather?q=${args.join(' ')}&appid=${APIKey}&units=metric`)
         .then(res => res.json())
         .then(base => {
+            if (base.cod == '404') return message.channel.send(new MessageEmbed().setDescription('Location not found.').setColor('RED'));
             let weather = base.weather[0];
             let main = base.main;
             let sunrise = new Date(base.sys.sunrise * 1000).toLocaleTimeString();

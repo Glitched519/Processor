@@ -246,7 +246,7 @@ module.exports = class Help extends BaseCommand {
         }
 
         if (!message.guild.me.hasPermission(["READ_MESSAGE_HISTORY", "ADD_REACTIONS"])) {
-            message.channel.send(`:grey_question: If you wish to use reactions to navigate the help menu, please make make the following permissions are enabled:\n**Read Messages\nAdd Reactions**\nUsage: ${PREFIX}help \`[topic]\``);
+            message.channel.send(`:grey_question: If you wish to use reactions to navigate the help menu, please make make the following permissions are enabled:\n**Read Message History\nAdd Reactions**\nUsage: ${PREFIX}help \`[topic]\``);
             return message.channel.send(helpFallbackEmbed);
         }
         helpEmbed.setFooter(`Page ${page} of ${maxPages}`, `${message.author.displayAvatarURL()}`);
