@@ -14,6 +14,7 @@ module.exports = class MessageUpdate extends BaseEvent {
         if (logChannelQuery == null) return;
         const logChannel = logChannelQuery.channel;
         let destination = client.channels.cache.get(logChannel.toString());
+        if (!destination) return;
 
         let editedEmbed = new MessageEmbed()
             .setTitle(`Message Edited by ${oldMessage.author.tag}`)

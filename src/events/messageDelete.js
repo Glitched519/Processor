@@ -19,6 +19,7 @@ module.exports = class MessageDelete extends BaseEvent {
         if (logChannelQuery == null) return;
         const logChannel = logChannelQuery.channel;
         let destination = client.channels.cache.get(logChannel.toString());
+        if (!destination) return;
 
         let deletedEmbed = new MessageEmbed()
             .setTitle(`Message Deleted from ${message.author.tag}`)
