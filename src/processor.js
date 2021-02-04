@@ -37,5 +37,6 @@ const client = new Client();
 
     // app.listen(3000)
     console.log('Awaiting Ready Event...');
+    client.emit('ready');
 })();
 

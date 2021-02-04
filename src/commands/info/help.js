@@ -66,15 +66,15 @@ module.exports = class Help extends BaseCommand {
             otherCmds.push(cmd);
         });
 
-        for (const guild of client.guilds.cache) {
-            const result = await commandPrefixSchema.findOne({ _id: message.guild.id });
-            if (result == null) {
-                guildPrefixes[message.guild.id] = globalPrefix;
-            }
-            else {
-                guildPrefixes[message.guild.id] = result.prefix;
-            }
-        }
+        // for (const guild of client.guilds.cache) {
+        //     const result = await commandPrefixSchema.findOne({ _id: message.guild.id });
+        //     if (result == null) {
+        //         guildPrefixes[message.guild.id] = globalPrefix;
+        //     }
+        //     else {
+        //         guildPrefixes[message.guild.id] = result.prefix;
+        //     }
+        // }
         const PREFIX = guildPrefixes[message.guild.id] || globalPrefix;
 
         let helpClosed = new MessageEmbed()

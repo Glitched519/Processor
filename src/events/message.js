@@ -13,10 +13,10 @@ module.exports = class Message extends BaseEvent {
         if (!message.guild) return;
         if (message.author.bot) return;
 
-        for (const guild of client.guilds.cache) {
-            const result = await commandPrefixSchema.findOne({ _id: message.guild.id });
-            result == null ? guildPrefixes[message.guild.id] = globalPrefix : guildPrefixes[message.guild.id] = result.prefix;
-        }
+        // for (const guild of client.guilds.cache) {
+        //     const result = await commandPrefixSchema.findOne({ _id: message.guild.id });
+        //     result == null ? guildPrefixes[message.guild.id] = globalPrefix : guildPrefixes[message.guild.id] = result.prefix;
+        // }
         const prefix = guildPrefixes[message.guild.id] || globalPrefix;
         // if (message.mentions.users.size > 2) {
         //     message.delete();
@@ -45,14 +45,14 @@ module.exports = class Message extends BaseEvent {
             }
         }
 
-        const antiSpamChannelQuery = await antiSpamSchema.findOne({ 
-            guildId: message.guild.id,
-            channelId: message.channel.id,
-        });
-        if (antiSpamChannelQuery == null) return;
-        let antiSpamChannel = antiSpamChannelQuery.channelId;
-        if (message.channel.id == antiSpamChannel) {
-            client.emit('checkMessage', message); // This runs the filter on any message bot receives in any guilds.
-        }
+        // const antiSpamChannelQuery = await antiSpamSchema.findOne({ 
+        //     guildId: message.guild.id,
+        //     channelId: message.channel.id,
+        // });
+        // if (antiSpamChannelQuery == null) return;
+        // let antiSpamChannel = antiSpamChannelQuery.channelId;
+        // if (message.channel.id == antiSpamChannel) {
+        //     client.emit('checkMessage', message); // This runs the filter on any message bot receives in any guilds.
+        // }
     }
 }
