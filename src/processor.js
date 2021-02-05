@@ -1,5 +1,5 @@
 
-const { Client } = require('discord.js');
+const { Client, Intents } = require('discord.js');
 const { registerCommands, registerEvents } = require('./utils/registry');
 const config = require('./config.json');
 const Topgg = require("@top-gg/sdk");
@@ -29,6 +29,8 @@ const client = new Client();
         });
     }, 1800000) // post every 30 minutes
     console.log("Started Posting Bot Stats on top.gg.");
+
+    console.log(Intents.NON_PRIVILEGED)
 
     // app.post('/dblwebhook', webhook.middleware(), (req, res) => {
     //     // req.vote is your vote object e.g
