@@ -1,7 +1,7 @@
 const axios = require('axios');
 const BaseCommand = require('../../utils/structures/BaseCommand');
 
-module.exports = class Author extends BaseCommand {
+module.exports = class Docs extends BaseCommand {
     constructor() {
         super('docs', 'search', ['djs']);
     }

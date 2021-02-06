@@ -6,7 +6,7 @@ const BaseCommand = require('../../utils/structures/BaseCommand');
 
 module.exports = class Image extends BaseCommand {
     constructor() {
-        super('googleimage', 'info', ['image', 'img']);
+        super('image', 'info', ['img']);
     }
 
     run(client, message, args) {

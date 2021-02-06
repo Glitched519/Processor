@@ -4,9 +4,9 @@ const fs = require('fs');
 const path = require('path');
 const BaseCommand = require('../../utils/structures/BaseCommand');
 
-module.exports = class GiphyGif extends BaseCommand {
+module.exports = class Giphy extends BaseCommand {
     constructor() {
-        super('giphygif', 'search', ['gif', 'giphy']);
+        super('giphy', 'search', ['gif']);
     }
 
     async run(client, message, args) {

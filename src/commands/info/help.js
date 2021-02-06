@@ -13,7 +13,7 @@ module.exports = class Help extends BaseCommand {
 
     async run(client, message, args) {
         let page = 1;
-        let maxPages = 9;
+        let maxPages = 10;
 
         let setupCmds = [];
         let modCmds = [];
@@ -22,6 +22,7 @@ module.exports = class Help extends BaseCommand {
         let clashCmds = [];
         let cuteCmds = [];
         let infoCmds = [];
+        let searchCmds = [];
         let otherCmds = [];
 
         let setupCmdNames = fs.readdirSync(path.join(__dirname, '../setup'));
@@ -31,6 +32,7 @@ module.exports = class Help extends BaseCommand {
         let clashCmdNames = fs.readdirSync(path.join(__dirname, '../clash'));
         let cuteCmdNames = fs.readdirSync(path.join(__dirname, '../cute'));
         let infoCmdNames = fs.readdirSync(path.join(__dirname, '../info'));
+        let searchCmdNames = fs.readdirSync(path.join(__dirname, '../search'));
         let otherCmdNames = fs.readdirSync(path.join(__dirname, '../other'));
 
         setupCmdNames.forEach(cmd => {
@@ -61,20 +63,24 @@ module.exports = class Help extends BaseCommand {
             cmd = cmd.slice(0, cmd.indexOf('.js'));
             infoCmds.push(cmd);
         });
+        searchCmdNames.forEach(cmd => {
+            cmd = cmd.slice(0, cmd.indexOf('.js'));
+            searchCmds.push(cmd);
+        });
         otherCmdNames.forEach(cmd => {
             cmd = cmd.slice(0, cmd.indexOf('.js'));
             otherCmds.push(cmd);
         });
 
-        // for (const guild of client.guilds.cache) {
-        //     const result = await commandPrefixSchema.findOne({ _id: message.guild.id });
-        //     if (result == null) {
-        //         guildPrefixes[message.guild.id] = globalPrefix;
-        //     }
-        //     else {
-        //         guildPrefixes[message.guild.id] = result.prefix;
-        //     }
-        // }
+        for (const guild of client.guilds.cache) {
+            const result = await commandPrefixSchema.findOne({ _id: message.guild.id });
+            if (result == null) {
+                guildPrefixes[message.guild.id] = globalPrefix;
+            }
+            else {
+                guildPrefixes[message.guild.id] = result.prefix;
+            }
+        }
         const PREFIX = guildPrefixes[message.guild.id] || globalPrefix;
 
         let helpClosed = new MessageEmbed()
@@ -144,12 +150,18 @@ module.exports = class Help extends BaseCommand {
             .setDescription(`Prefix is **${PREFIX}** as in **${PREFIX}help**.`)
             .setDescription(`\`${infoCmds.join('\n')}\``)
 
+        let searchEmbed = new MessageEmbed()
+            .setColor(`RANDOM`)
+            .setTitle('Search Commands')
+            .setDescription(`Prefix is **${PREFIX}** as in **${PREFIX}help**.`)
+            .setDescription(`\`${searchCmds.join('\n')}\``)
+
         let otherEmbed = new MessageEmbed()
             .setColor(`RANDOM`)
             .setTitle('Info Commands')
             .setDescription(`\`${otherCmds.join('\n')}\``)
 
-        let allEmbeds = [helpEmbed, setupEmbed, modEmbed, animalEmbed, clashEmbed, cuteEmbed, mathEmbed, infoEmbed, otherEmbed];
+        let allEmbeds = [helpEmbed, setupEmbed, modEmbed, animalEmbed, clashEmbed, cuteEmbed, mathEmbed, infoEmbed, searchEmbed, otherEmbed];
 
         function gotoPage(msg, page) {
             for (let i = 0; i < maxPages + 1; i++) {
@@ -241,6 +253,8 @@ module.exports = class Help extends BaseCommand {
                 return message.channel.send(mathEmbed);
             case "info":
                 return message.channel.send(infoEmbed);
+            case "search":
+                return message.channel.send(searchEmbed);
             case "other":
                 return message.channel.send(otherEmbed);
         }
