@@ -8,6 +8,7 @@ module.exports = class Warnings extends BaseCommand {
 
     async run(client, message, args) {
         const mentionedMember = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member;
+        if (mentionedMember.user.bot) return message.channel.send(new MessageEmbed().setDescription(`That member is a bot. I cannot check their warnings.`).setColor('AQUA'));
 
         const warnDoc = await warnSchema.findOne({
             guildId: message.guild.id,

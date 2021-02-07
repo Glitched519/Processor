@@ -8,8 +8,8 @@ module.exports = class Snipe extends BaseCommand {
 
     async run(client, message, args) {
         const msg = client.snipes.get(message.channel.id);
-        if (msg == null) return message.channel.send("There's no message to snipe.");
-        if (msg.content.endsWith("snipe".toLowerCase())) return message.channel.send("There's no message to snipe.");
+        if (msg == null) return message.channel.send(new MessageEmbed().setDescription("There's no message to snipe.").setColor("DARK_GREY"));
+        if (msg.content.endsWith("snipe".toLowerCase())) return message.channel.send(new MessageEmbed().setDescription("There's no message to snipe.").setColor("DARK_GREY"));
 
         const snipeEmbed = new MessageEmbed()
             .setAuthor(msg.author, msg.member.user.displayAvatarURL())
@@ -18,7 +18,7 @@ module.exports = class Snipe extends BaseCommand {
             .setFooter('Get Sniped lmao')
             .setTimestamp();
 
-            message.channel.send(snipeEmbed);
+        message.channel.send(snipeEmbed);
 
     }
 }

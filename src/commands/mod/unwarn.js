@@ -9,6 +9,7 @@ module.exports = class Unwarn extends BaseCommand {
 
     async run(client, message, args) {
         const mentionedMember = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
+        if (mentionedMember.user.bot) return message.channel.send(new MessageEmbed().setDescription(`That member is a bot. I cannot unwarn them.`).setColor('AQUA'));
 
         if (!message.member.hasPermission('MANAGE_MESSAGES')) {
             return message.channel.send('You need to `Message Messages` permission to unwarn a member.');
