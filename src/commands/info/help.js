@@ -199,7 +199,6 @@ module.exports = class Help extends BaseCommand {
             msg.awaitReactions(filter, { max: 1, time: 300000, errors: ['time'] })
                 .then(collected => {
                     const reaction = collected.first();
-
                     switch (reaction.emoji.name) {
                         case '⏮':
                             page = 1;
@@ -244,7 +243,7 @@ module.exports = class Help extends BaseCommand {
                     }
                 })
                 .catch(err => {
-                    return msg.delete();
+                   return msg.delete();
                 })
         }
         switch (args[0]) {

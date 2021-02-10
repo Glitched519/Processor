@@ -14,7 +14,7 @@ module.exports = class Ready extends BaseEvent {
         super('ready');
     }
     async run(client) {
-        client.options.restTimeOffset = 50;
+        client.options.restTimeOffset = 0;
 
         //antiAd(client);
         await mongo();

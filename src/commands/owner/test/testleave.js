@@ -1,8 +1,8 @@
-const BaseCommand = require('../../utils/structures/BaseCommand');
+const BaseCommand = require('../../../utils/structures/BaseCommand');
 
-module.exports = class SimLeave extends BaseCommand {
+module.exports = class TestLeave extends BaseCommand {
     constructor() {
-        super('simleave', 'setup', []);
+        super('testleave', 'setup', []);
     }
 
     async run(client, message, args) {

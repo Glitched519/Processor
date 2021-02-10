@@ -1,8 +1,8 @@
-const BaseCommand = require('../../utils/structures/BaseCommand');
+const BaseCommand = require('../../../utils/structures/BaseCommand');
 
-module.exports = class SimJoin extends BaseCommand {
+module.exports = class TestJoin extends BaseCommand {
     constructor() {
-        super('simjoin', 'setup', []);
+        super('testjoin', 'setup', []);
     }
 
     async run(client, message, args) {
