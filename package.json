@@ -33,7 +33,7 @@
         "request": "^2.88.2",
         "restify": "^8.5.1",
         "restify-cors-middleware": "^1.1.1",
-        "systeminformation": "^4.34.7"
+        "systeminformation": "^5.3.3"
     },
     "keywords": []
 }

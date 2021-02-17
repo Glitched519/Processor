@@ -7,7 +7,7 @@ const Topgg = require("@top-gg/sdk");
 //const app = express();
 const api = new Topgg.Api(config["topgg-token"]);
 //const webhook = new Topgg.Webhook(config["topgg-auth"]);
-const client = new Client();
+const client = new Client();    
 //const options = new ClientOptions();
 
 
@@ -30,7 +30,8 @@ const client = new Client();
     }, 1800000) // post every 30 minutes
     console.log("Started Posting Bot Stats on top.gg.");
 
-    console.log(Intents.NON_PRIVILEGED)
+    console.log(Intents.NON_PRIVILEGED);
+    console.log(client.guilds.cache.size);
 
     // app.post('/dblwebhook', webhook.middleware(), (req, res) => {
     //     // req.vote is your vote object e.g
