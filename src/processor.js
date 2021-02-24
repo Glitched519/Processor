@@ -30,8 +30,8 @@ const client = new Client();
     }, 1800000) // post every 30 minutes
     console.log("Started Posting Bot Stats on top.gg.");
 
-    console.log(Intents.NON_PRIVILEGED);
-    console.log(client.guilds.cache.size);
+    console.log("Non-Privileged Intents: %d", Intents.NON_PRIVILEGED);
+    console.log("Guilds: %d", client.guilds.cache.size);
 
     // app.post('/dblwebhook', webhook.middleware(), (req, res) => {
     //     // req.vote is your vote object e.g
@@ -40,5 +40,6 @@ const client = new Client();
 
     // app.listen(3000)
     console.log('Awaiting Ready Event...');
+    client.emit("ready");
 })();
 
