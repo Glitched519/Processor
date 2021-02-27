@@ -29,7 +29,7 @@
         "node-forge": "^0.10.0",
         "node-superfetch": "^0.1.11",
         "novelcovid": "^3.0.0",
-        "pm2": "^4.5.4",
+        "pm2": "^4.5.5",
         "request": "^2.88.2",
         "restify": "^8.5.1",
         "restify-cors-middleware": "^1.1.1",
