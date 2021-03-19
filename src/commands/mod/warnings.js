@@ -1,4 +1,5 @@
 const warnSchema = require('../../schemas/warn-schema');
+const { MessageEmbed } = require('discord.js');
 const BaseCommand = require('../../utils/structures/BaseCommand');
 
 module.exports = class Warnings extends BaseCommand {
