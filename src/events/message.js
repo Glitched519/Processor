@@ -10,8 +10,11 @@ module.exports = class Message extends BaseEvent {
     }
 
     async run(client, message) {
+
+
         if (!message.guild) return;
         if (message.author.bot) return;
+
 
         for (const guild of client.guilds.cache) {
             const result = await commandPrefixSchema.findOne({ _id: message.guild.id });

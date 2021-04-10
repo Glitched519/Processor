@@ -17,7 +17,7 @@ module.exports = class Ready extends BaseEvent {
         client.options.restTimeOffset = 0;
 
         //antiAd(client);
-        await mongo();
+        await mongo().catch(err => console.log("Mongo Error"));
 
         antispam(client, {
             limitUntilWarn: 4, // The amount of messages allowed to send within the interval(time) before getting a warn.
