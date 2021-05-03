@@ -117,10 +117,10 @@
   resolved "https://registry.yarnpkg.com/@tootallnate/once/-/once-1.1.2.tgz#ccb91445360179a04e7fe6aff78c00ffc1eeaf82"
   integrity sha512-RbzJvlNzmRq5c3O09UipeuXno4tA1FE6ikOjxZK0tuxVv3412l64l5t1W5pj4+rJq9vpkm/kwiR07aZXnsKPxw==
 
-"@top-gg/sdk@^3.0.9":
-  version "3.0.9"
-  resolved "https://registry.yarnpkg.com/@top-gg/sdk/-/sdk-3.0.9.tgz#e42b6d1784d0105de8cd95f16ba06650afe26b6b"
-  integrity sha512-AskJQk6+89lIGu6UzjsDxXe4wRuc9lbpXwftIzzng2+kB8R3ZzN7hwa1nC/AacLG07m0gbBwQBWlE5IgexA/kg==
+"@top-gg/sdk@^3.1.1":
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/@top-gg/sdk/-/sdk-3.1.1.tgz#dbd555eea04975bf177411f90dcedacd684367f3"
+  integrity sha512-G1JmSDN/JDAkIQdKvPbY49Ercca38234WEgnA1s1Zve28Ga0OWpooMm6k7Idran7Phnva6iQxtH/aWyYGaXPvA==
   dependencies:
     node-fetch "^2.6.1"
     raw-body "^2.4.1"
@@ -446,10 +446,10 @@ chalk@3.0.0, chalk@~3.0.0:
     ansi-styles "^4.1.0"
     supports-color "^7.1.0"
 
-chalk@^4.1.0:
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/chalk/-/chalk-4.1.0.tgz#4e14870a618d9e2edd97dd8345fd9d9dc315646a"
-  integrity sha512-qwx12AxXe2Q5xQ43Ac//I6v5aXTipYrSESdOgzrN+9XjgEpyjpKuvSGaN4qE93f7TQTlerQQ8S+EQ0EyDoVL1A==
+chalk@^4.1.1:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/chalk/-/chalk-4.1.1.tgz#c80b3fab28bf6371e6863325eee67e618b77e6ad"
+  integrity sha512-diHzdDKxcU+bAsUboHLPEDQiw0qEe0qd7SYUn3HgcFlWgbDcfLGswOHYeGrHKzG9z6UYf01d9VFMfZxPM1xZSg==
   dependencies:
     ansi-styles "^4.1.0"
     supports-color "^7.1.0"
@@ -1372,10 +1372,10 @@ https-proxy-agent@5, https-proxy-agent@^5.0.0:
     agent-base "6"
     debug "4"
 
-humanize-duration@^3.25.1:
-  version "3.25.1"
-  resolved "https://registry.yarnpkg.com/humanize-duration/-/humanize-duration-3.25.1.tgz#50e12bf4b3f515ec91106107ee981e8cfe955d6f"
-  integrity sha512-P+dRo48gpLgc2R9tMRgiDRNULPKCmqFYgguwqOO2C0fjO35TgdURDQDANSR1Nt92iHlbHGMxOTnsB8H8xnMa2Q==
+humanize-duration@^3.25.2:
+  version "3.25.2"
+  resolved "https://registry.yarnpkg.com/humanize-duration/-/humanize-duration-3.25.2.tgz#5259585b749ecc5ad5a60fb37121aee0e9ab0c5e"
+  integrity sha512-zSerjahuzBazDaE8skjMI7Xmrt/EirvW5cDsXgysx8tYIjcgCMnI5Y5985y3LxYeLah9L5cQY3WEw1k7GRWbfg==
 
 iconv-lite@0.4.24, iconv-lite@^0.4.4:
   version "0.4.24"
@@ -1606,10 +1606,10 @@ lru-cache@^6.0.0:
   dependencies:
     yallist "^4.0.0"
 
-mathjs@^9.3.0:
-  version "9.3.0"
-  resolved "https://registry.yarnpkg.com/mathjs/-/mathjs-9.3.0.tgz#59cc43b536b22616197e56da303604b430daa6ac"
-  integrity sha512-0kYW+TXgB8lCqUj5wHR2hqAO2twSbPRelSFgRJXiwAx4nM6FrIb43Jd6XhW7sVbwYB+9HCNiyg5Kn8VYeB7ilg==
+mathjs@^9.3.2:
+  version "9.3.2"
+  resolved "https://registry.yarnpkg.com/mathjs/-/mathjs-9.3.2.tgz#6523dd5c963d200ff1cea0ff7963b10521b82185"
+  integrity sha512-0YKSKAeN9OkbIQrxfxnBT4kk/KlH71piWOsvVvAasyRIj/Xd/zlpc5VP/aFxwr+llOq2F3f6booPEu2fWv3yjQ==
   dependencies:
     complex.js "^2.0.11"
     decimal.js "^10.2.1"
@@ -1909,10 +1909,10 @@ node-pre-gyp@^0.15.0:
     semver "^5.3.0"
     tar "^4.4.2"
 
-node-superfetch@^0.2.2:
-  version "0.2.2"
-  resolved "https://registry.yarnpkg.com/node-superfetch/-/node-superfetch-0.2.2.tgz#e0d4ff43b2290dab09ae9c4b6fd1633521d4f930"
-  integrity sha512-u/nnm1B5itxgGbMIGOGxLqFRrMFkB9bRbT0YwdM61/KhOXd25PZugX++bzpS+arQimcsIekntapdSSFI2CoCEw==
+node-superfetch@^0.2.3:
+  version "0.2.3"
+  resolved "https://registry.yarnpkg.com/node-superfetch/-/node-superfetch-0.2.3.tgz#bcbf4b03942134946248e3a96341c9e927fe292d"
+  integrity sha512-xOqifvw/3N+tIeeC80/TNJXkoxDZm8JWc7/0VBkJ86ttQTlJvoicuVaeJlKKHYRlmC2O6ygNIhNPwLYX4bxqdA==
   dependencies:
     form-data "^4.0.0"
     node-fetch "^2.6.1"
