@@ -1796,10 +1796,10 @@ mongoose-legacy-pluralize@1.0.2:
   resolved "https://registry.yarnpkg.com/mongoose-legacy-pluralize/-/mongoose-legacy-pluralize-1.0.2.tgz#3ba9f91fa507b5186d399fb40854bff18fb563e4"
   integrity sha512-Yo/7qQU4/EyIS8YDFSeenIvXxZN+ld7YdV9LqFVQJzTLye8unujAWPZ4NWKfFA+RNjh+wvTWKY9Z3E5XM6ZZiQ==
 
-mongoose@^5.12.9:
-  version "5.12.9"
-  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-5.12.9.tgz#71ab1bff7691fb651d5fdd04dfcc9d624695aff4"
-  integrity sha512-ZSDjW15DmUbHQcZ2PqoXsJeYnpYipISi6QJH/XHR9dcSg3IRNCa86apcTptBux03/YBPiSZlKNYUNDx7iuMWoA==
+mongoose@^5.12.10:
+  version "5.12.10"
+  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-5.12.10.tgz#dea5e0ab8718c4cc96f1d608949e3fa0a48730aa"
+  integrity sha512-/VmFFEACH2yiuPcJoBjOzVTXozBhCeminVbWI8mxiZwvgCbNu9PQrIABIgeCJncnZH8VT4G7s2IXO5FySxF1XA==
   dependencies:
     "@types/mongodb" "^3.5.27"
     bson "^1.1.4"
@@ -1944,10 +1944,10 @@ normalize-path@^3.0.0, normalize-path@~3.0.0:
   resolved "https://registry.yarnpkg.com/normalize-path/-/normalize-path-3.0.0.tgz#0dcd69ff23a1c9b11fd0978316644a0388216a65"
   integrity sha512-6eZs5Ls3WtCisHWp9S2GUy8dqkpGi4BVSz3GaqiE6ezub0512ESztXUwUB6C6IKbQkY2Pnb/mD4WYojCRwcwLA==
 
-novelcovid@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/novelcovid/-/novelcovid-3.0.0.tgz#db54488ee84254836596ad6cbc93c9e4c5d535a7"
-  integrity sha512-70LZiuOY52f3uIrcZ5dP1F0LFkbz8GuGRuiC/e+YjGv/jYrbq8WXll67GaCafWCvznFmgSEgDJcztDoXz4m+kg==
+novelcovid@^3.0.2:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/novelcovid/-/novelcovid-3.0.2.tgz#62eac242afd2ae8eda2151fd7ca365e534cba98c"
+  integrity sha512-JPMmLip5ZIyhXg70oRszXpBjMuitN0vKq0cj5hs1lY0w99fmqjyu4o36P9WntGAlzPDTE1wuj29P3HzUutxQrg==
   dependencies:
     "@aero/centra" "^1.0.3"
 
@@ -2826,10 +2826,10 @@ supports-color@^7.1.0:
   dependencies:
     has-flag "^4.0.0"
 
-systeminformation@^5.6.21:
-  version "5.6.21"
-  resolved "https://registry.yarnpkg.com/systeminformation/-/systeminformation-5.6.21.tgz#02ec2272392fa2658d703431726cd25b0c493f29"
-  integrity sha512-9OaqZfyYBn37yTWof+bQqGbFyPjJua9a3+6w6iHHCPyYc0N59sscGaQn5lFosiP/CY4IgR+i5ZpDW/XJNbjV4Q==
+systeminformation@^5.7.1:
+  version "5.7.1"
+  resolved "https://registry.yarnpkg.com/systeminformation/-/systeminformation-5.7.1.tgz#f0ada6ca86c4b4fcd8930dcb41a985211e4ccf4d"
+  integrity sha512-kHzxI4x5/DkO6uMV0GUkxFBavGnmyCWsf30AArkpX22qyKLhFLQA+2CPyEVcuhh/471XIpzZJLhi3qPoa37W5g==
 
 tar@^6.1.0:
   version "6.1.0"
