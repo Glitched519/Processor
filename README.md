@@ -20,6 +20,6 @@ Processor comes with several fun features that you and your members will appreci
 ---
 
 ## Image Examples
-- ![Help Command](https://media.discordapp.net/attachments/782100726146924584/798812347346583552/unknown.png)
-- ![Meme Command](https://media.discordapp.net/attachments/782100726146924584/798813346090450944/unknown.png)
-- ![Changeable Prefix](https://media.discordapp.net/attachments/782100726146924584/798813478155452436/unknown.png)
+- ![Help Command](https://cdn.discordapp.com/attachments/688229874649137188/845282948646174760/unknown.png)
+- ![Meme Command](https://cdn.discordapp.com/attachments/688229874649137188/845283547115159582/unknown.png)
+- ![Changeable Prefix](https://cdn.discordapp.com/attachments/688229874649137188/845284082971967508/unknown.png)
