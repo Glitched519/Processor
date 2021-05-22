@@ -6,7 +6,7 @@ module.exports = class TestJoin extends BaseCommand {
     }
 
     async run(client, message, args) {
-        if (message.author.id !== '638064155965915187') return;
+        if (message.author.id !== '749985510889619576') return;
 
         client.emit('guildMemberAdd', message.member);
     }

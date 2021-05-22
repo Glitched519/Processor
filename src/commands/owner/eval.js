@@ -8,7 +8,7 @@ module.exports = class Eval extends BaseCommand {
 
     async run(client, message, args) {
         if (args.length == 0) return;
-        if (message.author.id !== '638064155965915187') return;
+        if (message.author.id !== '749985510889619576') return;
 
         try {
             const evaled = eval(args.join(' '));
