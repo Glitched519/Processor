@@ -113,7 +113,7 @@ module.exports = class Help extends BaseCommand {
             .addField(':blue_heart: Cute', 'Adore a member.')
             .addField(':1234: Math', 'Play with numbers.')
             .addField(':information_source: Info', 'Get information about a user or the server.')
-            .addField(':mag_right: Search  `search`', 'Search some cool stuff from the bot!')
+            .addField(':mag_right: Search', 'Search some cool stuff from the bot!')
             .addField(':o: Other', 'Play with other commands.')
 
         let setupEmbed = new MessageEmbed()
