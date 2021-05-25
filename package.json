@@ -1,6 +1,6 @@
 {
     "name": "processor",
-    "version": "7.1.0",
+    "version": "7.1.1",
     "description": "An EPIC Verified bot for Discord!",
     "repository": "https://github.com/Glitched519/Processor",
     "main": "shard.js",
@@ -23,9 +23,9 @@
         "humanize-duration": "^3.26.0",
         "ini": "^2.0.0",
         "jpeg-js": "^0.4.3",
-        "mathjs": "^9.4.0",
+        "mathjs": "^9.4.1",
         "mixme": "^0.5.1",
-        "mongoose": "^5.12.10",
+        "mongoose": "^5.12.11",
         "ms": "^2.1.3",
         "node-forge": "^0.10.0",
         "node-superfetch": "^0.2.3",
@@ -34,7 +34,7 @@
         "request": "^2.88.2",
         "restify": "^8.5.1",
         "restify-cors-middleware": "^1.1.1",
-        "systeminformation": "^5.7.1"
+        "systeminformation": "^5.7.2"
     },
     "keywords": []
 }
