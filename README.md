@@ -1,6 +1,6 @@
 # Processor
 ---
-[![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=anuraghazra)](https://github.com/anuraghazra/github-readme-stats)
+[![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=Glitched519)](https://github.com/Glitched519/Processor)
 ---
 **Processor is a Discord bot developed by [Isopropyl#9371](https://dsc.bio/Isopropyl) along with several other developers who devote their time to this project.**
 ## Adding the Bot
