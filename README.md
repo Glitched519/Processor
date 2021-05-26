@@ -1,6 +1,6 @@
 # Processor
 
-[![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=Glitched519&hide=issues,contribs)](https://github.com/Glitched519/Processor)
+[![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=Glitched519&show_icons=true&hide=issues,contribs&theme=radical)](https://github.com/Glitched519/Processor)
 
 ---
 
@@ -29,7 +29,6 @@ Processor comes with several fun features that you and your members will appreci
 
 ---
 
-### Image Examples
 ## Image Examples
 ![Help Command](https://cdn.discordapp.com/attachments/688229874649137188/845282948646174760/unknown.png)
 
