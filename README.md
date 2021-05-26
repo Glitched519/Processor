@@ -1,11 +1,11 @@
 <h1>Processor</h1>
 ---
-```md
+
 [![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=Glitched519)](https://github.com/Glitched519/Processor)
-```
+
 ---
 
-<b>Processor is a Discord bot developed by [Isopropyl#9371](https://dsc.bio/Isopropyl) along with several other developers who devote their time to this project.</b>
+<b>Processor is a Discord bot developed by [Isopropyl#9371](https://dsc.bio/Isopropyl)</b> along with several other developers who devote their time to this project.
 <h2>Adding the Bot</h2>
 
 To add Processor to your discord server, you can click [this invite link.](https://discord.com/oauth2/authorize?client_id=689678745782714464&scope=bot&permissions=2134371583) You must have the <b>Manage Server</b> permission to invite this bot to your desired server.
