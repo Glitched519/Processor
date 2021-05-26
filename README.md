@@ -14,16 +14,16 @@ To add Processor to your discord server, you can click [this invite link.](https
 
 <h2>Getting Started</h2>
 
-<p>The prefix for this bot is <code>pr.</code>. Type <mark>pr.help</mark> to list all the categories of commands. If you wish to change the prefix, you must first have <mark>Manage Server</mark> permissions, or be the person who invited Processor in the first place. If you want to change the prefix, do <mark>pr.prefix {new prefix}</mark>. If you forget what the prefix, just ping the bot <mark>@Processor</mark>. If you want a specific category of those commands, type <mark>pr.help [categoryName]</mark> for all the commands within the category. You will need to set up the correct permissions for the bot. For your convenience, you may give this bot <mark>Administrator</mark> privileges as it resolves all permission conflicts with the bot.</p>
+<p>The prefix for this bot is <code>pr.</code>. Type <code>pr.help</code> to list all the categories of commands. If you wish to change the prefix, you must first have <code>Manage Server</code> permissions, or be the person who invited Processor in the first place. If you want to change the prefix, do <code>pr.prefix {new prefix}</code>. If you forget what the prefix, just ping the bot <code>@Processor</code>. If you want a specific category of those commands, type <code>pr.help [categoryName]</code> for all the commands within the category. You will need to set up the correct permissions for the bot. For your convenience, you may give this bot <code>Administrator</code> privileges as it resolves all permission conflicts with the bot.</p>
 
 ---
 
 <h2>Top Features</h2>
 <p>Processor comes with several fun features that you and your members will appreciate. Here are the most common:</p>
 <u1>
-  <li><mark>meme</mark> Shows a random picture of a meme from Reddit.</li>
-  <li><mark>img [thing]</mark> Shows a random picture of the thing specified, if given.</li>
-  <li><mark>stats [@member]</mark> Shows the stats of the member, otherwise it shows stats of the server.</li>
+  <li><code>meme</code> Shows a random picture of a meme from Reddit.</li>
+  <li><code>img [thing]</code> Shows a random picture of the thing specified, if given.</li>
+  <li><code>stats [@member]</code> Shows the stats of the member, otherwise it shows stats of the server.</li>
 </ul>
 
 ---
