@@ -1,5 +1,4 @@
 <h1>Processor</h1>
----
 
 [![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=Glitched519)](https://github.com/Glitched519/Processor)
 
