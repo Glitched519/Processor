@@ -14,7 +14,7 @@ To add Processor to your discord server, you can click [this invite link.](https
 
 <h2>Getting Started</h2>
 
-<p>The prefix for this bot is <mark>pr.</mark>. Type <mark>pr.help</mark> to list all the categories of commands. If you wish to change the prefix, you must first have <mark>Manage Server</mark> permissions, or be the person who invited Processor in the first place. If you want to change the prefix, do <mark>pr.prefix {new prefix}</mark>. If you forget what the prefix, just ping the bot <mark>@Processor</mark>. If you want a specific category of those commands, type <mark>pr.help [categoryName]</mark> for all the commands within the category. You will need to set up the correct permissions for the bot. For your convenience, you may give this bot <mark>Administrator</mark> privileges as it resolves all permission conflicts with the bot.</p>
+<p>The prefix for this bot is `pr.`. Type <mark>pr.help</mark> to list all the categories of commands. If you wish to change the prefix, you must first have <mark>Manage Server</mark> permissions, or be the person who invited Processor in the first place. If you want to change the prefix, do <mark>pr.prefix {new prefix}</mark>. If you forget what the prefix, just ping the bot <mark>@Processor</mark>. If you want a specific category of those commands, type <mark>pr.help [categoryName]</mark> for all the commands within the category. You will need to set up the correct permissions for the bot. For your convenience, you may give this bot <mark>Administrator</mark> privileges as it resolves all permission conflicts with the bot.</p>
 
 ---
 
