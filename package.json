@@ -18,7 +18,7 @@
         "chalk": "^4.1.1",
         "cheerio": "^1.0.0-rc.9",
         "colorthief": "^2.3.2",
-        "discord.js": "^12.5.1",
+        "discord.js": "^12.5.3",
         "express": "^4.17.1",
         "humanize-duration": "^3.26.0",
         "ini": "^2.0.0",
@@ -34,7 +34,7 @@
         "request": "^2.88.2",
         "restify": "^8.5.1",
         "restify-cors-middleware": "^1.1.1",
-        "systeminformation": "^5.7.2"
+        "systeminformation": "^5.7.3"
     },
     "keywords": []
 }

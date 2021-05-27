@@ -790,7 +790,7 @@ detect-node@^2.0.4:
   resolved "https://registry.yarnpkg.com/detect-node/-/detect-node-2.0.5.tgz#9d270aa7eaa5af0b72c4c9d9b814e7f4ce738b79"
   integrity sha512-qi86tE6hRcFHy8jI1m2VG+LaPUR1LhqDa5G8tVjuUXmOrpuAgqsA1pN0+ldgr3aKUH+QLI9hCY/OcRYisERejw==
 
-discord.js@^12.5.1:
+discord.js@^12.5.3:
   version "12.5.3"
   resolved "https://registry.yarnpkg.com/discord.js/-/discord.js-12.5.3.tgz#56820d473c24320871df9ea0bbc6b462f21cf85c"
   integrity sha512-D3nkOa/pCkNyn6jLZnAiJApw2N9XrIsXUAdThf01i7yrEuqUmDGc7/CexVWwEcgbQR97XQ+mcnqJpmJ/92B4Aw==
@@ -2826,10 +2826,10 @@ supports-color@^7.1.0:
   dependencies:
     has-flag "^4.0.0"
 
-systeminformation@^5.7.2:
-  version "5.7.2"
-  resolved "https://registry.yarnpkg.com/systeminformation/-/systeminformation-5.7.2.tgz#750def331aa5db46aab1917982004801d427d6fa"
-  integrity sha512-pVYb3P2X2jmEQu0AAOZhlH8K8bfZf96dtpAsIGna7fNJ/fVh/pdq6tmuwgT9Oc5nlwDDN8/6yapr+rIphX3L7A==
+systeminformation@^5.7.3:
+  version "5.7.3"
+  resolved "https://registry.yarnpkg.com/systeminformation/-/systeminformation-5.7.3.tgz#31e2aa327c108168f73e702d222357adb46930a5"
+  integrity sha512-J8zxA+YuOLeO3ztK8ceJkRycQQlH72vqf/t/bsmFid5Ac4KM3DnPBXJa5gcxGUxCT9ZTd/vJ7vFfZ5QrHFNHxQ==
 
 tar@^6.1.0:
   version "6.1.0"
