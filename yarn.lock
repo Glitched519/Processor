@@ -2206,10 +2206,10 @@ pm2-multimeter@^0.1.2:
   dependencies:
     charm "~0.1.1"
 
-pm2-sysmonit@^1.2.6:
-  version "1.2.6"
-  resolved "https://registry.yarnpkg.com/pm2-sysmonit/-/pm2-sysmonit-1.2.6.tgz#72ca398f1d9f5a10fd6df76b53871af3aef6fa71"
-  integrity sha512-Jd40fAcMoOL17oZns/E/QU7gEgSgwv4Y9QiQGUdfrZsgiEUFXcZPJcE0Qz/l0pgsPiefDdjxXMpqrHGx4QeNyw==
+pm2-sysmonit@^1.2.8:
+  version "1.2.8"
+  resolved "https://registry.yarnpkg.com/pm2-sysmonit/-/pm2-sysmonit-1.2.8.tgz#eddea34a53fd8c8d7c3efb73b97a3c548686e24d"
+  integrity sha512-ACOhlONEXdCTVwKieBIQLSi2tQZ8eKinhcr9JpZSUAL8Qy0ajIgRtsLxG/lwPOW3JEKqPyw/UaHmTWhUzpP4kA==
   dependencies:
     async "^3.2.0"
     debug "^4.3.1"
@@ -2217,10 +2217,10 @@ pm2-sysmonit@^1.2.6:
     systeminformation "^5.7"
     tx2 "~1.0.4"
 
-pm2@^5.0.0:
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/pm2/-/pm2-5.0.0.tgz#3f9a71706fab06e121e4cfa96749e50d965d9bf0"
-  integrity sha512-K66p6CX3TLpD/5r9DXvZpppu857tzE6pv0Q+GOIUKgxbMLYvV5tkvvToAFZB5DAGS4hECFDCVbQ+lo7zLFHTMQ==
+pm2@^5.0.2:
+  version "5.0.2"
+  resolved "https://registry.yarnpkg.com/pm2/-/pm2-5.0.2.tgz#6c55d160e0e1df6c9ed85e349b1fa331bedbeab3"
+  integrity sha512-+cjoOjUE0v1xpyWt4p230Mq7eoMcugtDO4gnwBs4hQr/IlgwS5B9bMYD/ZJmtU38DwKeM1fEZuGLngcxUAgUjA==
   dependencies:
     "@pm2/agent" "~2.0.0"
     "@pm2/io" "~5.0.0"
@@ -2252,7 +2252,7 @@ pm2@^5.0.0:
     vizion "~2.2.1"
     yamljs "0.3.0"
   optionalDependencies:
-    pm2-sysmonit "^1.2.6"
+    pm2-sysmonit "^1.2.8"
 
 pngjs@^3.3.3:
   version "3.4.0"
