@@ -17,7 +17,6 @@
         "canvas": "^2.8.0",
         "chalk": "^4.1.1",
         "cheerio": "^1.0.0-rc.10",
-        "colorthief": "^2.3.2",
         "css-what": "^5.0.1",
         "discord.js": "^12.5.3",
         "express": "^4.17.1",
