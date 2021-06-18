@@ -7,7 +7,7 @@ const Topgg = require("@top-gg/sdk");
 //const app = express();
 const api = new Topgg.Api(config["topgg-token"]);
 //const webhook = new Topgg.Webhook(config["topgg-auth"]);
-const client = new Client({ intents: ['GUILDS', 'GUILD_MESSAGES'] });    
+const client = new Client({ ws: { intents: ['GUILDS', 'GUILD_MESSAGES', 'GUILD_MESSAGE_REACTIONS', 'GUILD_EMOJIS'] } });    
 //const options = new ClientOptions();
 
 require("discord-buttons")(client);
