@@ -59,49 +59,49 @@ module.exports = class Ready extends BaseEvent {
             }
         }, 15000)
 
-        client.api.applications(client.user.id).guilds('687138260014858260').commands.post({
-            data: {
-                name: "hello",
-                description: "Replies with Hello World!"
-            }
-        });
+        // client.api.applications(client.user.id).guilds('687138260014858260').commands.post({
+        //     data: {
+        //         name: "hello",
+        //         description: "Replies with Hello World!"
+        //     }
+        // });
 
-        client.api.applications(client.user.id).guilds('687138260014858260').commands.post({
-            data: {
-                name: "ping",
-                description: "ping pong!"
-            }
-        });
+        // client.api.applications(client.user.id).guilds('687138260014858260').commands.post({
+        //     data: {
+        //         name: "ping",
+        //         description: "ping pong!"
+        //     }
+        // });
 
-        client.api.applications(client.user.id).guilds('687138260014858260').commands.post({
-            data: {
-                name: "echo",
-                description: "Echos your text as an embed!",
-                options: [
-                    {
-                        name: "content",
-                        description: "Content of the embed",
-                        type: 3,
-                        required: true
-                    }
-                ]
-            }
-        });
+        // client.api.applications(client.user.id).guilds('687138260014858260').commands.post({
+        //     data: {
+        //         name: "echo",
+        //         description: "Echos your text as an embed!",
+        //         options: [
+        //             {
+        //                 name: "content",
+        //                 description: "Content of the embed",
+        //                 type: 3,
+        //                 required: true
+        //             }
+        //         ]
+        //     }
+        // });
 
         client.ws.on('INTERACTION_CREATE', async interaction => {
-            const command = interaction.data.name.toLowerCase();
+            const command = interaction.data.name?.toLowerCase();
             const args = interaction.data.options;
 
-            if (command == 'hello') {
-                client.api.interactions(interaction.id, interaction.token).callback.post({
-                    data: {
-                        type: 4,
-                        data: {
-                            content: "Hello World!"
-                        }
-                    }
-                });
-            }
+            // if (command == 'hello') {
+            //     client.api.interactions(interaction.id, interaction.token).callback.post({
+            //         data: {
+            //             type: 4,
+            //             data: {
+            //                 content: "Hello World!"
+            //             }
+            //         }
+            //     });
+            // }
 
             if (command == 'ping') {
                 let pingEmbed = new discord.MessageEmbed()
@@ -117,20 +117,20 @@ module.exports = class Ready extends BaseEvent {
                 });
             }
 
-            if (command == "echo") {
-                const description = args.find(arg => arg.name.toLowerCase() == "content").value;
-                let echoEmbed = new discord.MessageEmbed()
-                    .setTitle("Echo!")
-                    .setDescription(description)
-                    .setAuthor(interaction.member.user.username);
+            // if (command == "echo") {
+            //     const description = args.find(arg => arg.name.toLowerCase() == "content").value;
+            //     let echoEmbed = new discord.MessageEmbed()
+            //         .setTitle("Echo!")
+            //         .setDescription(description)
+            //         .setAuthor(interaction.member.user.username);
 
-                client.api.interactions(interaction.id, interaction.token).callback.post({
-                    data: {
-                        type: 4,
-                        data: await createAPIMessage(interaction, echoEmbed)
-                    }
-                });
-            }
+            //     client.api.interactions(interaction.id, interaction.token).callback.post({
+            //         data: {
+            //             type: 4,
+            //             data: await createAPIMessage(interaction, echoEmbed)
+            //         }
+            //     });
+            // }
         });
 
         async function createAPIMessage(interaction, content) {
