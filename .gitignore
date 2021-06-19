@@ -105,3 +105,4 @@ dist
 .tern-port
 src/.env
 src/config.json
+*.png

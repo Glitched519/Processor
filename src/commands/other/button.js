@@ -22,8 +22,8 @@ module.exports = class ChuckNorrisJoke extends BaseCommand {
             .setLabel('⏭')
             .setID('button3');
 
-            message.channel.send('Click this button to get a response!', {
-                buttons: [button1, button2, button3]
-            });
+        message.channel.send('Click this button to get a response!', {
+            buttons: [button1, button2, button3]
+        });
     }
 }

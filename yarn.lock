@@ -2645,9 +2645,9 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"mongoose@npm:5.12.13, mongoose@npm:^5.12.13":
-  version: 5.12.13
-  resolution: "mongoose@npm:5.12.13"
+"mongoose@npm:5.12.14, mongoose@npm:^5.12.14":
+  version: 5.12.14
+  resolution: "mongoose@npm:5.12.14"
   dependencies:
     "@types/mongodb": ^3.5.27
     bson: ^1.1.4
@@ -2661,7 +2661,7 @@ fsevents@~2.3.1:
     safe-buffer: 5.2.1
     sift: 13.5.2
     sliced: 1.0.1
-  checksum: f60aa89bf368f4f02c43ac96b7e3f86c92b9ca86e539a2a82492b6883f78c6d9b58f881b564ff13ef8a464bee4b9a787839b5833e3bfeb2033f9d86b8bf73ba5
+  checksum: 2960cc8ae262c9f055ef9c037bdd4311c469514f7fe3809360bd0e30c66a5cb8bc47c6183f83eec404cf7291957e140126cb165a8e6a45c6c6099a6bc645085d
   languageName: node
   linkType: hard
 
@@ -3177,8 +3177,8 @@ fsevents@~2.3.1:
   linkType: hard
 
 "prism-media@npm:^1.2.9":
-  version: 1.2.9
-  resolution: "prism-media@npm:1.2.9"
+  version: 1.3.1
+  resolution: "prism-media@npm:1.3.1"
   peerDependencies:
     "@discordjs/opus": ^0.5.0
     ffmpeg-static: ^4.2.7 || ^3.0.0 || ^2.4.0
@@ -3193,7 +3193,7 @@ fsevents@~2.3.1:
       optional: true
     opusscript:
       optional: true
-  checksum: e266159eadac34f9b57b68113d7bc61deb66516d64a0696eb696349552f19321fd5952a8224997bf26f707aa0dbdeaa13e40417b4031239b323e9b13d852566c
+  checksum: 5d20527179c413b1b8ac8e5036f37641272855ba0d4d49cdd1f9260acb39705cd6dec0dabee0a9c0781919dbf1a301f76e0230ac4913e3a95ca67ae05456b293
   languageName: node
   linkType: hard
 
@@ -3224,7 +3224,7 @@ fsevents@~2.3.1:
     jpeg-js: ^0.4.3
     mathjs: ^9.4.2
     mixme: ^0.5.1
-    mongoose: ^5.12.13
+    mongoose: ^5.12.14
     ms: ^2.1.3
     node-forge: ^0.10.0
     node-superfetch: ^0.2.3
@@ -3234,7 +3234,7 @@ fsevents@~2.3.1:
     restify: ^8.5.1
     restify-cors-middleware: ^1.1.1
     skia-canvas: ^0.9.22
-    systeminformation: ^5.7.6
+    systeminformation: ^5.7.7
   languageName: unknown
   linkType: soft
 
@@ -4104,12 +4104,12 @@ resolve@^1.12.0:
   languageName: node
   linkType: hard
 
-"systeminformation@npm:^5.7.6":
-  version: 5.7.6
-  resolution: "systeminformation@npm:5.7.6"
+"systeminformation@npm:^5.7.7":
+  version: 5.7.7
+  resolution: "systeminformation@npm:5.7.7"
   bin:
     systeminformation: lib/cli.js
-  checksum: a663e99e3fef4514d142b5d95ac6388d3a5f938dae9e12ae9eff5999b331b429b305488afc487073dceb7e60b725f5a83115bc4e2f999b8e787f633cca7fb60f
+  checksum: 3acf624d2ebe6f941ccfeb718f96ffb3bbcb45ea7d0aa98554c937b89d50c347e57b67d9f67b31ad5d0bbfa1eaadb995da59467f63180f1b70b6f8b82d375035
   languageName: node
   linkType: hard
 
@@ -4400,7 +4400,22 @@ resolve@^1.12.0:
   languageName: node
   linkType: hard
 
-"ws@npm:^7.4.4, ws@npm:~7.4.0":
+"ws@npm:^7.4.4":
+  version: 7.5.0
+  resolution: "ws@npm:7.5.0"
+  peerDependencies:
+    bufferutil: ^4.0.1
+    utf-8-validate: ^5.0.2
+  peerDependenciesMeta:
+    bufferutil:
+      optional: true
+    utf-8-validate:
+      optional: true
+  checksum: f9ac36310e795995f13ac7abff9c3b104b2460864de7f0b6233d285f62c6929529e24f386ff87740c3646f818fefa014be587371aa9a5a6fffae2cd9d1e9e008
+  languageName: node
+  linkType: hard
+
+"ws@npm:~7.4.0":
   version: 7.4.6
   resolution: "ws@npm:7.4.6"
   peerDependencies:

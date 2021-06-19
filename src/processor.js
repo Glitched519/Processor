@@ -11,7 +11,8 @@ const nonPrivilegedIntents = ['GUILDS', 'GUILD_BANS', 'GUILD_EMOJIS', 'GUILD_INT
 'GUILD_INVITES', 'GUILD_VOICE_STATES', 'GUILD_MESSAGES', 'GUILD_MESSAGE_REACTIONS', 'GUILD_MESSAGE_TYPING', 
 'DIRECT_MESSAGES', 'DIRECT_MESSAGE_REACTIONS', 'DIRECT_MESSAGE_TYPING'];
 
-const client = new Client({ ws: { intents: nonPrivilegedIntents } });
+
+const client = new Client({ intents: nonPrivilegedIntents });
 //const options = new ClientOptions();
 
 require("discord-buttons")(client);
@@ -35,7 +36,7 @@ require("discord-buttons")(client);
         });
     }, 1800000) // post every 30 minutes
     console.log("Started Posting Bot Stats on top.gg.");
-    
+
     console.log("Guilds: %d", client.guilds.cache.size);
 
     // app.post('/dblwebhook', webhook.middleware(), (req, res) => {

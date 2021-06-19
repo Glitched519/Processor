@@ -149,7 +149,7 @@ module.exports = class Ready extends BaseEvent {
                 `Isopropyl#3066 and Frash#4113`,
             ]
             const status = statuses[Math.floor(Math.random() * statuses.length)];
-            client.user.setActivity(status, { type: 'WATCHING' }).catch(console.error);
+            client.user.setActivity(status, { type: 'WATCHING' });
         }, 15000);
         fs.readFile("./src/events/.post", "utf-8", (err, data) => {
             if (err) { console.log(err) }
