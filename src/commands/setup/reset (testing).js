@@ -8,13 +8,13 @@ module.exports = class Reset extends BaseCommand {
     constructor() {
         super('reset', 'setup', []);
     }
-    
+
     async run(client, message, args) {
-        if (!message.member.hasPermission("MANAGE_GUILD")) {
-            return message.channel.send('You need the `Manage Server` permission to reset the server settings.');
+        if (!message.member.permissions.has("MANAGE_GUILD")) {
+            return message.channel.send({ content: 'You need the `Manage Server` permission to reset the server settings.' });
         }
 
-        message.channel.send(":warning: Are you sure you want to reset the server configuration?")
+        message.channel.send({ content: ":warning: Are you sure you want to reset the server configuration?" })
             .then(async msg => {
                 msg.react('788157429106868235')
                     .then(msg.react('788157446178340915'))
@@ -35,15 +35,15 @@ module.exports = class Reset extends BaseCommand {
                                         _id: guildId
                                     });
                                 });
-                                message.reply(`Configuration reset.`);
+                                message.channel.send({ content: `Configuration reset.` });
                                 break;
                             case 'no':
-                                return message.channel.send('Reset Cancelled.');
+                                return message.channel.send({ content: 'Reset Cancelled.' });
                         }
                     })
-                    // .catch(collected => {
-                    //     //return message.channel.send(`Timed out after 20 seconds.`);
-                    // });
+                    .catch(collected => {
+                        return message.channel.send({ content: `Timed out after 20 seconds.` });
+                    });
             });
     }
 }

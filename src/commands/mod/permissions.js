@@ -9,8 +9,8 @@ module.exports = class Permissions extends BaseCommand {
     }
 
     async run(client, message, args) {
-        if (!message.member.hasPermission(['MANAGE_MESSAGES'])) {
-            return message.channel.send(":x: **You need the `Manage Messages` permission to view my permissions.**")
+        if (!message.member.permissions.has(['MANAGE_MESSAGES'])) {
+            return message.channel.send({ content: ":x: **You need the `Manage Messages` permission to view my permissions.**" })
         }
         const permissions = [
             'Create Instant Invite',
@@ -57,11 +57,11 @@ module.exports = class Permissions extends BaseCommand {
             .setColor(`RANDOM`)
         permissions.forEach(perm => {
             let permName = perm.toUpperCase().replace(/ /g, "_");
-            props += `${me.hasPermission(permName) ? yes : no}  ${perm}\n`
+            props += `${me.permissions.has(permName) ? yes : no}  ${perm}\n`
         });
-            permEmbed.setDescription(props);
+        permEmbed.setDescription(props);
 
-        if (me.hasPermission('EMBED_LINKS')) message.channel.send(permEmbed).then(msg => {
+        if (me.permissions.has('EMBED_LINKS')) message.channel.send({ embeds: [permEmbed] }).then(msg => {
             return xDelete(message, msg);
         })
 

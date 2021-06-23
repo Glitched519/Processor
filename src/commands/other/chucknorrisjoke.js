@@ -10,7 +10,7 @@ module.exports = class ChuckNorrisJoke extends BaseCommand {
         fetch('https://api.chucknorris.io/jokes/random')
             .then(res => res.json())
             .then(json => {
-                message.channel.send(json.value);
+                message.channel.send({ content: json.value });
             });
     }
 }

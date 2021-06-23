@@ -9,7 +9,10 @@ module.exports = class Warnings extends BaseCommand {
 
     async run(client, message, args) {
         const mentionedMember = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member;
-        if (mentionedMember.user.bot) return message.channel.send(new MessageEmbed().setDescription(`That member is a bot. I cannot check their warnings.`).setColor('AQUA'));
+        let cannotCheckWarnings = new MessageEmbed()
+            .setDescription(`That member is a bot. I cannot check their warnings.`)
+            .setColor('AQUA')
+        if (mentionedMember.user.bot) return message.channel.send({ embeds: [cannotCheckWarnings] });
 
         const warnDoc = await warnSchema.findOne({
             guildId: message.guild.id,
@@ -17,7 +20,7 @@ module.exports = class Warnings extends BaseCommand {
         }).catch(err => console.log(err));
 
         if (!warnDoc || !warnDoc.warnings.length) {
-            return message.channel.send(`${mentionedMember} has a clean slate!`);
+            return message.channel.send({ content: `${mentionedMember} has a clean slate!` });
         }
 
         const data = [];
@@ -29,14 +32,14 @@ module.exports = class Warnings extends BaseCommand {
             data.push(`**Date:** ${new Date(warnDoc.date[i]).toLocaleDateString()}\n`);
         }
 
-        const embed = {
-            color: 'BLUE', 
+        const profileEmbed = {
+            color: 'BLUE',
             thumbnail: {
                 url: mentionedMember.user.displayAvatarURL({ dynammic: true }),
             },
             description: data.join('\n'),
         }
 
-        message.channel.send({ embed: embed });
+        message.channel.send({ embeds: [profileEmbed] });
     }
 }

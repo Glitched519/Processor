@@ -13,37 +13,35 @@ module.exports = class Vote extends BaseCommand {
             .setColor(`#42C0FB`)
             .setDescription('Voting for Processor will give you the ability to see the beta development and other vote-only perks!')
             .setThumbnail('https://petridish.pw/engine/img/pvp-up.png')
-            // .addField('top.gg', `[Vote on top.gg!](https://top.gg/bot/689678745782714464/vote)`)
-            // .addField('discord.boats', `[Vote on discord.boats!](https://discord.boats/bot/689678745782714464)`)
-            // .addField('discordbotlist.com', `[Vote on DBL!](https://discordbotlist.com/bots/processor/upvote)`)
-            // .addField('botsfordiscord.com', `[Vote on botsfordiscord.com!](https://botsfordiscord.com/bot/689678745782714464/vote)`)
+            .addField('top.gg', `[Vote on top.gg!](https://top.gg/bot/689678745782714464/vote)`)
+            .addField('discord.boats', `[Vote on discord.boats!](https://discord.boats/bot/689678745782714464)`)
+            .addField('discordbotlist.com', `[Vote on DBL!](https://discordbotlist.com/bots/processor/upvote)`)
+            .addField('botsfordiscord.com', `[Vote on botsfordiscord.com!](https://botsfordiscord.com/bot/689678745782714464/vote)`)
             .setFooter(`Thanks for all the support!`, message.author.displayAvatarURL())
 
-        let topggButton = new MessageButton()
-            .setStyle('url')
-            .setLabel('top.gg')
-            .setURL('https://top.gg/bot/689678745782714464/vote')
+        // let topggButton = new MessageButton()
+        //     .setStyle('url')
+        //     .setLabel('top.gg')
+        //     .setURL('https://top.gg/bot/689678745782714464/vote')
 
-        let discordBoatsButton = new MessageButton()
-            .setStyle('url')
-            .setLabel('discord.boats')
-            .setURL('https://discord.boats/bot/689678745782714464')
+        // let discordBoatsButton = new MessageButton()
+        //     .setStyle('url')
+        //     .setLabel('discord.boats')
+        //     .setURL('https://discord.boats/bot/689678745782714464')
 
-        let discordBotListButton = new MessageButton()
-            .setStyle('url')
-            .setLabel('discordbotlist.com')
-            .setURL('https://discordbotlist.com/bots/processor/upvote')
+        // let discordBotListButton = new MessageButton()
+        //     .setStyle('url')
+        //     .setLabel('discordbotlist.com')
+        //     .setURL('https://discordbotlist.com/bots/processor/upvote')
 
-        let botsForDiscordButton = new MessageButton()
-            .setStyle('url')
-            .setLabel('botsfordiscord.com')
-            .setURL('https://botsfordiscord.com/bot/689678745782714464/vote')
+        // let botsForDiscordButton = new MessageButton()
+        //     .setStyle('url')
+        //     .setLabel('botsfordiscord.com')
+        //     .setURL('https://botsfordiscord.com/bot/689678745782714464/vote')
 
 
 
-        message.channel.send({
-            embed: voteEmbed,
-            buttons: [topggButton, discordBoatsButton, discordBotListButton, botsForDiscordButton]
-        });
+        message.channel.send({ embeds: [voteEmbed] });
+        // message.channel.send({ content: { buttons: [topggButton, discordBoatsButton, discordBotListButton, botsForDiscordButton] }});
     }
 }

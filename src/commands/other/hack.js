@@ -26,7 +26,7 @@ module.exports = class Hack extends BaseCommand {
             return message.reply("who do you want to hack?");
         }
         if (chance >= 0.4) {
-            return message.channel.send('Hacking ' + args[0] + '...')
+            return message.channel.send({ content: 'Hacking ' + args[0] + '...' })
                 .then(msg => {
                     setTimeout(function () {
                         msg.edit(hacks[Math.floor(Math.random() * hacks.length)]);
@@ -34,7 +34,7 @@ module.exports = class Hack extends BaseCommand {
                 }).catch(console.error);
         }
         else {
-            return message.channel.send('Hacking ' + args[0] + '...')
+            return message.channel.send({ content: 'Hacking ' + args[0] + '...' })
                 .then(msg => {
                     setTimeout(function () {
                         msg.edit(fails[Math.floor(Math.random() * fails.length)]);

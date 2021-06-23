@@ -19,7 +19,7 @@
         "cheerio": "^1.0.0-rc.10",
         "css-what": "^5.0.1",
         "discord-buttons": "^3.2.1",
-        "discord.js": "^12.5.3",
+        "discord.js": "dev",
         "express": "^4.17.1",
         "humanize-duration": "^3.27.0",
         "ini": "^2.0.0",

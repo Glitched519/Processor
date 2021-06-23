@@ -12,7 +12,7 @@ module.exports = class Avatar extends BaseCommand {
         let fetchEmbed = new MessageEmbed()
         let uptime = duration(process.uptime() * 1000, { units: ["d", "h", "m"], round: true });
         let version = require('../../../package.json').version;
-        let embed = new MessageEmbed()
+        let infoEmbed = new MessageEmbed()
             .setColor(`RANDOM`)
             .setTitle(`My Stats`)
             .addField(`Name`, client.user.username, true)
@@ -24,6 +24,6 @@ module.exports = class Avatar extends BaseCommand {
             .addField(`GitHub`, `[Repository](https://github.com/Glitched519/Processor)`, true)
             .addField(`CPU Cores`, require('os').cpus().length, true)
             .addField(`Memory Usage`, `${Math.round(process.memoryUsage().heapUsed / 1024 / 1024) + 'MB'}/${Math.round(require('os').totalmem() / 1000000000) + 'GB'}`, true)
-        return message.channel.send(embed);
+        return message.channel.send({ embeds: [infoEmbed] });
     }
 }

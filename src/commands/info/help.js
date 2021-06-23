@@ -177,7 +177,7 @@ module.exports = class Help extends BaseCommand {
                 switch (page) {
                     case i:
                         allEmbeds[i - 1].setFooter(`Page ${page} of ${maxPages}`, `${message.author.displayAvatarURL()}`);
-                        msg.edit(allEmbeds[i - 1]);
+                        msg.edit({ embeds: [allEmbeds[i - 1]] });
                         break;
                 }
             }
@@ -243,36 +243,36 @@ module.exports = class Help extends BaseCommand {
                     }
                 })
                 .catch(err => {
-                   return msg.delete();
+                    return msg.delete();
                 })
         }
         switch (args[0]) {
             case "setup":
-                return message.channel.send(setupEmbed);
+                return message.channel.send({ embeds: [setupEmbed] });
             case "mod":
-                return message.channel.send(modEmbed);
+                return message.channel.send({ embeds: [modEmbed] });
             case "animal":
-                return message.channel.send(animalEmbed);
+                return message.channel.send({ embeds: [animalEmbed] });
             case "clash":
-                return message.channel.send(clashEmbed);
+                return message.channel.send({ embeds: [clashEmbed] });
             case "cute":
-                return message.channel.send(cuteEmbed);
+                return message.channel.send({ embeds: [cuteEmbed] });
             case "math":
-                return message.channel.send(mathEmbed);
+                return message.channel.send({ embeds: [mathEmbed] });
             case "info":
-                return message.channel.send(infoEmbed);
+                return message.channel.send({ embeds: [infoEmbed] });
             case "search":
-                return message.channel.send(searchEmbed);
+                return message.channel.send({ embeds: [searchEmbed] });
             case "other":
-                return message.channel.send(otherEmbed);
+                return message.channel.send({ embeds: [otherEmbed] });
         }
 
-        if (!message.guild.me.hasPermission(["READ_MESSAGE_HISTORY", "ADD_REACTIONS"])) {
-            message.channel.send(`:grey_question: If you wish to use reactions to navigate the help menu, please make make the following permissions are enabled:\n**Read Message History\nAdd Reactions**\nUsage: ${PREFIX}help \`[topic]\``);
-            return message.channel.send(helpFallbackEmbed);
+        if (!message.guild.me.permissions.has(["READ_MESSAGE_HISTORY", "ADD_REACTIONS"])) {
+            message.channel.send({ content: `:grey_question: If you wish to use reactions to navigate the help menu, please make make the following permissions are enabled:\n**Read Message History\nAdd Reactions**\nUsage: ${PREFIX}help \`[topic]\`` });
+            return message.channel.send({ embeds: [helpFallbackEmbed] });
         }
         helpEmbed.setFooter(`Page ${page} of ${maxPages}`, `${message.author.displayAvatarURL()}`);
-        message.channel.send(helpEmbed).then(msg => {
+        message.channel.send({ embeds: [helpEmbed] }).then(msg => {
             changePage(msg);
         });
     }

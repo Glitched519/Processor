@@ -8,25 +8,25 @@ module.exports = class SetLogsChannel extends BaseCommand {
     }
 
     async run(client, message, args) {
-        if (!message.member.hasPermission("MANAGE_GUILD")) {
-            return message.channel.send('You need the `Manage Server` permission to set or change the logging channel.');
+        if (!message.member.permissions.has("MANAGE_GUILD")) {
+            return message.channel.send({ content: 'You need the `Manage Server` permission to set or change the logging channel.' });
         }
         const antiSpamChannel = message.mentions.channels.first() || message.channel;
-        
+
         await mongo().then(async mongoose => {
-                const guildId = message.guild.id;
-                const logChannel = message.mentions.channels.first() || message.channel;
+            const guildId = message.guild.id;
+            const logChannel = message.mentions.channels.first() || message.channel;
 
-                await logsSchema.findOneAndUpdate({
-                    _id: guildId
-                }, {
-                    _id: guildId,
-                    channel: logChannel
-                }, {
-                    upsert: true
-                });
+            await logsSchema.findOneAndUpdate({
+                _id: guildId
+            }, {
+                _id: guildId,
+                channel: logChannel
+            }, {
+                upsert: true
+            });
 
-                message.reply(`the log channel is now ${logChannel}`);
+            message.channel.send({ content: `the log channel is now ${logChannel}` });
         });
     }
 }

@@ -20,9 +20,9 @@ module.exports = class AnimalImage extends BaseCommand {
             let animalEmbed = new MessageEmbed()
                 .setColor(`RANDOM`)
                 .setImage(response.data.image);
-            return message.channel.send(animalEmbed);
+            return message.channel.send({ embeds: [animalEmbed] });
         }).catch(err => {
-            return message.channel.send(":x: Sorry, we don't have any images for that animal.");
+            return message.channel.send({ content: ":x: Sorry, we don't have any images for that animal." });
         });
     }
 }

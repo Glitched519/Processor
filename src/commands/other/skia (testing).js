@@ -40,6 +40,6 @@ module.exports = class Skia extends BaseCommand {
         // ...or use a shorthand for canvas.toBuffer("png")
         //fs.writeFileSync("pilcrow.png", canvas.png)
         // ...or embed it in a string
-        message.channel.send({files: ["image.png"]});
+        message.channel.send({ files: ["image.png"] });
     }
 }

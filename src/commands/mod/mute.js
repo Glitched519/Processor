@@ -14,10 +14,10 @@ module.exports = class Mute extends BaseCommand {
         const msRegex = RegExp(/(\d+(s|m|h|d|w))/);
         let muteRole = message.guild.roles.cache.find(r => r.name == 'Muted');
 
-        if (!message.member.hasPermission('MANAGE_ROLES')) {
+        if (!message.member.permissions.has('MANAGE_ROLES')) {
             return message.channel.send('You need the `Manage Roles` permission to mute a member.');
         }
-        if (!message.guild.me.hasPermission(['MANAGE_ROLES', 'MANAGE_CHANNELS'])) {
+        if (!message.guild.me.permissions.has(['MANAGE_ROLES', 'MANAGE_CHANNELS'])) {
             return message.channel.send('I need the `Manage Roles` and `Manage Channels` permissions to mute a member.');
         }
         if (!mentionedMember) {
@@ -27,7 +27,7 @@ module.exports = class Mute extends BaseCommand {
             return message.channel.send('Invalid mute time.');
         }
         if (!muteRole) {
-            muteRole = await  message.guild.roles.create({
+            muteRole = await message.guild.roles.create({
                 data: {
                     name: 'Muted',
                     color: 'RED',
@@ -60,7 +60,7 @@ module.exports = class Mute extends BaseCommand {
             channel[1].updateOverwrite(muteRole, {
                 SEND_MESSAGES: false,
                 CONNECT: false,
-            }).catch(err => console.log(err)); 
+            }).catch(err => console.log(err));
         }
 
         const noEveryone = mentionedMember.roles.cache.filter(r => r.name !== '@everyone');
@@ -82,9 +82,10 @@ module.exports = class Mute extends BaseCommand {
 
         const reason = args.slice(2).join(' ');
 
-        message.channel.send(new MessageEmbed()
+        let muteEmbed = new MessageEmbed()
             .setDescription(`Muted ${mentionedMember} for **${msRegex.exec(args[1])[1]}** ${reason ? `for **${reason}**` : ''}`)
             .setColor('GREY')
-        );
+
+        message.channel.send({ embeds: [muteEmbed] });
     }
 }

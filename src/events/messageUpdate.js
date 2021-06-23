@@ -22,7 +22,7 @@ module.exports = class MessageUpdate extends BaseEvent {
             .setColor('YELLOW')
             .setFooter(new Date().toLocaleTimeString());
 
-        destination.send(editedEmbed);
+        destination.send({embeds: [editedEmbed]});
 
     }
 }

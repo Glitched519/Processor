@@ -10,7 +10,7 @@ module.exports = class Ping extends BaseCommand {
         let pingEmbed = {
             title: emojis.loading
         }
-        const msg = await message.channel.send({ embed: pingEmbed });
+        const msg = await message.channel.send({ embeds: [pingEmbed] });
         msg.edit(
             pingEmbed = {
                 color: `RANDOM`,
@@ -19,6 +19,6 @@ module.exports = class Ping extends BaseCommand {
                 timestamp: new Date()
             }
         );
-        await msg.edit({ embed: pingEmbed });
+        await msg.edit({ embeds: [pingEmbed] });
     }
 }

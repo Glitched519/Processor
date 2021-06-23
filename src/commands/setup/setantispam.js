@@ -8,24 +8,24 @@ module.exports = class SetAntiSpam extends BaseCommand {
     }
 
     async run(client, message, args) {
-        if (!message.member.hasPermission("MANAGE_GUILD")) {
-            return message.channel.send('You need the `Manage Server` permission to set an antispam channel.');
+        if (!message.member.permissions.has("MANAGE_GUILD")) {
+            return message.channel.send({ content: 'You need the `Manage Server` permission to set an antispam channel.' });
         }
         await mongo().then(async mongoose => {
-                const guildId = message.guild.id;
-                const antiSpamChannel = message.mentions.channels.first() || message.channel;
+            const guildId = message.guild.id;
+            const antiSpamChannel = message.mentions.channels.first() || message.channel;
 
-                await logsSchema.findOneAndUpdate({
-                    guildId,
-                    channelId: antiSpamChannel,
-                }, {
-                    guildId,
-                    channelId: antiSpamChannel,
-                }, {
-                    upsert: true
-                });
+            await logsSchema.findOneAndUpdate({
+                guildId,
+                channelId: antiSpamChannel,
+            }, {
+                guildId,
+                channelId: antiSpamChannel,
+            }, {
+                upsert: true
+            });
 
-                message.reply(`${antiSpamChannel} now disallows any incoming spam messages from other members.`);
+            message.channel.send({ content: `${antiSpamChannel} now disallows any incoming spam messages from other members.` });
         });
     }
 }

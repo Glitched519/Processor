@@ -7,6 +7,8 @@ module.exports = class Avatar extends BaseCommand {
 
     async run(client, message, args) {
         const member = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
-        return member ? message.channel.send(member.user.displayAvatarURL({ dynamic: true })) : message.channel.send(message.author.displayAvatarURL({ dynamic: true }));
+        let avatar = member ? member.user.displayAvatarURL({ dynamic: true }) : message.author.displayAvatarURL({ dynamic: true });
+
+        message.channel.send({ content: avatar })
     }
 }

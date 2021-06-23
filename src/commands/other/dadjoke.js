@@ -10,7 +10,7 @@ module.exports = class DadJoke extends BaseCommand {
         fetch('https://icanhazdadjoke.com/slack')
             .then(res => res.json())
             .then(json => {
-                message.channel.send(json.attachments[0].text);
+                message.channel.send({ content: json.attachments[0].text });
             });
     }
 }

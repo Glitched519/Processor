@@ -12,24 +12,24 @@ module.exports = class Unmute extends BaseCommand {
         const reason = args.slice(1).join(' ');
         const muteRole = message.guild.roles.cache.find(r => r.name == 'Muted');
 
-        if (!message.member.hasPermission('MANAGE_ROLES')) {
-            return message.channel.send('You need the `Manage Roles` permission to unmute a member.');
+        if (!message.member.permissions.has('MANAGE_ROLES')) {
+            return message.channel.send({ content: 'You need the `Manage Roles` permission to unmute a member.' });
         }
 
         if (!mentionedMember) {
-            return message.channel.send('You need to mention a member you want to unmute.');
+            return message.channel.send({ content: 'You need to mention a member you want to unmute.' });
         }
 
         if (!muteRole) {
-            return message.channel.send('This server has no `Muted` role. Please mute a member to create this role.');
+            return message.channel.send({ content: 'This server has no `Muted` role. Please mute a member to create this role.' });
         }
 
         if (mentionedMember.roles.highest.position >= message.guild.me.roles.highest.position) {
-            return message.channel.send('Cannot unmute this member as their role is higher than or equal to mine.');
+            return message.channel.send({ content: 'Cannot unmute this member as their role is higher than or equal to mine.' });
         }
 
         if (muteRole.position >= message.guild.me.roles.highest.position) {
-            return message.channel.send('Cannot unmute members as the Muted role is higher than or equal to mine.');
+            return message.channel.send({ content: 'Cannot unmute members as the Muted role is higher than or equal to mine.' });
         }
 
         const muteDoc = await muteSchema.findOne({
@@ -39,11 +39,11 @@ module.exports = class Unmute extends BaseCommand {
 
         if (mentionedMember.roles.cache.has(muteRole.id) && !muteDoc) {
             mentionedMember.roles.remove(muteRole.id).catch(err => console.log(err));
-            return message.channel.send(`Unmuted ${mentionedMember} ${reason ? `for **${reason}**` : ''}`);
+            return message.channel.send({ content: `Unmuted ${mentionedMember} ${reason ? `for **${reason}**` : ''}` });
         }
 
         if (!muteDoc) {
-            return message.channel.send('This member is not muted.');
+            return message.channel.send({ content: 'This member is not muted.' });
         }
 
         mentionedMember.roles.remove(muteRole.id).catch(err => console.log(err));
@@ -54,9 +54,10 @@ module.exports = class Unmute extends BaseCommand {
 
         await muteDoc.deleteOne();
 
-        message.channel.send(new MessageEmbed()
+        let muteDocEmbed = new MessageEmbed()
             .setDescription(`Unmuted ${mentionedMember} ${reason ? `for **${reason}**` : ''}`)
             .setColor('LUMINOUS_VIVID_PINK')
-        );
+
+        message.channel.send({ embeds: [muteDocEmbed] });
     }
 }

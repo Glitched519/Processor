@@ -3,7 +3,7 @@ const BaseCommand = require('../../utils/structures/BaseCommand');
 
 module.exports = class Eval extends BaseCommand {
     constructor() {
-        super('eval', 'other', ['e']);
+        super('eval', 'owner', ['e']);
     }
 
     async run(client, message, args) {
@@ -18,7 +18,7 @@ module.exports = class Eval extends BaseCommand {
                 color: `RANDOM`,
                 description: `\`\`\`js\n${inspect(evaled, { depth: 0 })}\`\`\``,
             }
-            message.channel.send({ embed: evalEmbed });
+            message.channel.send({ embeds: [evalEmbed] });
         }
         catch (err) {
             let errEmbed = {
@@ -26,7 +26,7 @@ module.exports = class Eval extends BaseCommand {
                 color: '#f08324',
                 description: `\`\`\`js\n${err}\`\`\``,
             }
-            message.channel.send({ embed: errEmbed });
+            message.channel.send({ embed: [errEmbed] });
         }
     }
 }

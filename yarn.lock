@@ -176,6 +176,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@sapphire/async-queue@npm:^1.1.2":
+  version: 1.1.3
+  resolution: "@sapphire/async-queue@npm:1.1.3"
+  checksum: 1557a65173f78fe7e7762a56524338bf56df86d2764d37f2badc382e721b602cbe4be9069c8a7ebcea8bfdb309d9f66a79ebe1645a53658fffb74a27f2440400
+  languageName: node
+  linkType: hard
+
 "@tootallnate/once@npm:1":
   version: 1.1.2
   resolution: "@tootallnate/once@npm:1.1.2"
@@ -216,6 +223,15 @@ __metadata:
   version: 14.14.37
   resolution: "@types/node@npm:14.14.37"
   checksum: 5e2d9baf7594ebacaf016716515f30de0765169412787f981481c2fb8b468923149bb9e2e3219ee672399811672ceddc339a7372a61cf15bc656836a5494d991
+  languageName: node
+  linkType: hard
+
+"@types/ws@npm:^7.4.4":
+  version: 7.4.5
+  resolution: "@types/ws@npm:7.4.5"
+  dependencies:
+    "@types/node": "*"
+  checksum: b467f596cc9992dde38ea9bb824135f20d0eae92515304e3de25e4b98a3b41e71897801900563c1e72f36fa7a6277c873896b842bd6d1b9d4b9457834533903b
   languageName: node
   linkType: hard
 
@@ -1105,6 +1121,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"discord-api-types@npm:^0.18.1":
+  version: 0.18.1
+  resolution: "discord-api-types@npm:0.18.1"
+  checksum: b9ae87cb2d80aaf11ef71d33beeb12d2729d3b3d5ed8bb60413e9c0b0d1a130ee7d1a8f6bc2dd24224794e95ae421306c83cc484c54ae5897a7a5edd37e64a51
+  languageName: node
+  linkType: hard
+
 "discord-buttons@npm:^3.2.1":
   version: 3.2.1
   resolution: "discord-buttons@npm:3.2.1"
@@ -1112,19 +1135,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"discord.js@npm:^12.5.3":
-  version: 12.5.3
-  resolution: "discord.js@npm:12.5.3"
+"discord.js@npm:dev":
+  version: 13.0.0-dev.edf6f0ca7012b6b678367a1b5d716d0b85e23ba3
+  resolution: "discord.js@npm:13.0.0-dev.edf6f0ca7012b6b678367a1b5d716d0b85e23ba3"
   dependencies:
     "@discordjs/collection": ^0.1.6
     "@discordjs/form-data": ^3.0.1
+    "@sapphire/async-queue": ^1.1.2
+    "@types/ws": ^7.4.4
     abort-controller: ^3.0.0
+    discord-api-types: ^0.18.1
     node-fetch: ^2.6.1
-    prism-media: ^1.2.9
-    setimmediate: ^1.0.5
-    tweetnacl: ^1.0.3
-    ws: ^7.4.4
-  checksum: 365e21b12496c47be80a4e2cd6d81665653908fcd22a5f46a5507ad8771cb20c40fab893ebb192af23e2bdb0db5c1eca8c5228c9f689951d0fd1139c3bcd567f
+    ws: ^7.4.6
+  checksum: 4b4e545bf7d62559ddd91abdce4fa09da0486e3d790757d4331ecf42e387a9fd138d170a9ece34e48ea950de68a3b45356be07cd50c1f50342512e65ee9ef6a7
   languageName: node
   linkType: hard
 
@@ -3176,27 +3199,6 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"prism-media@npm:^1.2.9":
-  version: 1.3.1
-  resolution: "prism-media@npm:1.3.1"
-  peerDependencies:
-    "@discordjs/opus": ^0.5.0
-    ffmpeg-static: ^4.2.7 || ^3.0.0 || ^2.4.0
-    node-opus: ^0.3.3
-    opusscript: ^0.0.8
-  peerDependenciesMeta:
-    "@discordjs/opus":
-      optional: true
-    ffmpeg-static:
-      optional: true
-    node-opus:
-      optional: true
-    opusscript:
-      optional: true
-  checksum: 5d20527179c413b1b8ac8e5036f37641272855ba0d4d49cdd1f9260acb39705cd6dec0dabee0a9c0781919dbf1a301f76e0230ac4913e3a95ca67ae05456b293
-  languageName: node
-  linkType: hard
-
 "process-nextick-args@npm:~2.0.0":
   version: 2.0.1
   resolution: "process-nextick-args@npm:2.0.1"
@@ -3217,7 +3219,7 @@ fsevents@~2.3.1:
     cheerio: ^1.0.0-rc.10
     css-what: ^5.0.1
     discord-buttons: ^3.2.1
-    discord.js: ^12.5.3
+    discord.js: dev
     express: ^4.17.1
     humanize-duration: ^3.27.0
     ini: ^2.0.0
@@ -3771,13 +3773,6 @@ resolve@^1.12.0:
   languageName: node
   linkType: hard
 
-"setimmediate@npm:^1.0.5":
-  version: 1.0.5
-  resolution: "setimmediate@npm:1.0.5"
-  checksum: 87884d8add4779fe47ccf763396a5bf875640ae34d80a10802da4de5c25d87647c12f6e7748fd5b8c143b57201caf2a5a781631456c228825f166ca305c12f20
-  languageName: node
-  linkType: hard
-
 "setprototypeof@npm:1.1.0":
   version: 1.1.0
   resolution: "setprototypeof@npm:1.1.0"
@@ -4197,13 +4192,6 @@ resolve@^1.12.0:
   languageName: node
   linkType: hard
 
-"tweetnacl@npm:^1.0.3":
-  version: 1.0.3
-  resolution: "tweetnacl@npm:1.0.3"
-  checksum: 1188f3ef85db04d6dba632d211e481ae0a5805974491633ff60bd56ae3362312dfea1515e0d200685867b69ff212e8778e26923f8203e3c335064b07f620a6c7
-  languageName: node
-  linkType: hard
-
 "tx2@npm:~1.0.4":
   version: 1.0.4
   resolution: "tx2@npm:1.0.4"
@@ -4400,7 +4388,7 @@ resolve@^1.12.0:
   languageName: node
   linkType: hard
 
-"ws@npm:^7.4.4":
+"ws@npm:^7.4.6":
   version: 7.5.0
   resolution: "ws@npm:7.5.0"
   peerDependencies:

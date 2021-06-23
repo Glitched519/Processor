@@ -10,7 +10,7 @@ module.exports = class Quote extends BaseCommand {
         fetch('https://api.quotable.io/random')
             .then(res => res.json())
             .then(json => {
-                message.channel.send(`> ${json.content}\n${json.author}`)
+                message.channel.send({content: `> ${json.content}\n${json.author}`})
             });
     }
 }

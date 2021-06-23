@@ -13,9 +13,9 @@ module.exports = class Base64 extends BaseCommand {
         };
 
         axios.request(options).then(response => {
-            return message.channel.send('`' + response.data.base64 + '`');
+            return message.channel.send({ content: '`' + response.data.base64 + '`' });
         }).catch(err => {
-            return message.channel.send(err);
+            return message.channel.send({ content: err });
         });
     }
 }

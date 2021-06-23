@@ -30,11 +30,11 @@ module.exports = class SearchClan extends BaseCommand {
         if (args[0].includes('#')) {
             args[0] = args[0].slice(1);
             if (args[0].length > 9 || args[0].length < 8) return message.channel.send("Invalid clan tag. Tag ID must be 8 or 9 characters in length. Ex: `#LGG2JY8G` or `#2Y8CVJRV0`.");
-            message.channel.send("https://www.clashofstats.com/clans/" + args[0].toUpperCase());
+            message.channel.send({ content: "https://www.clashofstats.com/clans/" + args[0].toUpperCase() });
         }
         else {
             if (args[0].length > 8 || args[0].length < 7) return message.channel.send("Invalid clan tag. Tag ID must be 8 or 9 characters in length. Ex: `#LGG2JY8G` or `#2Y8CVJRV0`.");
-            message.channel.send("https://www.clashofstats.com/clans/" + args[0].toUpperCase());
+            message.channel.send({ content: "https://www.clashofstats.com/clans/" + args[0].toUpperCase() });
         }
     }
 }

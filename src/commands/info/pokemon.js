@@ -27,9 +27,9 @@ module.exports = class Pokemon extends BaseCommand {
                 .addField('Special Defense', res.stats.sp_def, true)
                 .addField('Speed', res.stats.speed, true)
 
-            message.channel.send(pokemonEmbed);
+            message.channel.send({ embeds: [pokemonEmbed] });
         }).catch(err => {
-            return message.channel.send(":x: That is an invalid pokemon.");
+            return message.channel.send({ content: ":x: That is an invalid pokemon." });
         });
     }
 }

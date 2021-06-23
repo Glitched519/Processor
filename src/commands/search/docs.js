@@ -16,10 +16,10 @@ module.exports = class Docs extends BaseCommand {
                 const { data } = embed;
 
                 if (data && !data.error) {
-                    message.channel.send({ embed: data });
+                    message.channel.send({ embeds: [data] });
                 }
                 else {
-                    message.reply(':x: Could not find that documentation.');
+                    message.channel.send({ content: ':x: Could not find that documentation.' });
                 }
             })
             .catch(err => {

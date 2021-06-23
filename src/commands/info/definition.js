@@ -25,6 +25,6 @@ module.exports = class Definition extends BaseCommand {
             }
         }
 
-        message.channel.send("https://www.vocabulary.com/dictionary/" + args[0]);
+        message.channel.send({ content: "https://www.vocabulary.com/dictionary/" + args[0] });
     }
 }

@@ -7,8 +7,8 @@ module.exports = class SetWelcomeChannel extends BaseCommand {
     }
 
     async run(client, message, args) {
-        if (!message.member.hasPermission('MANAGE_SERVER')) {
-            return message.channel.send(':x: You need the `Manage Channels` permission to set a suggestion channel.')
+        if (!message.member.permissions.has('MANAGE_SERVER')) {
+            return message.channel.send({ content: ':x: You need the `Manage Channels` permission to set a suggestion channel.' })
         }
         const guildId = message.guild.id;
         const welcomeChannel = message.mentions.channels.first() || message.channel;
@@ -22,6 +22,6 @@ module.exports = class SetWelcomeChannel extends BaseCommand {
             upsert: true
         });
 
-        message.reply(`Welcome channel set as ${welcomeChannel}.`);
+        message.channel.send({ content: `Welcome channel set as ${welcomeChannel}.` });
     }
 }

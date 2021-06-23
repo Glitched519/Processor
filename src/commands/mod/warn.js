@@ -9,20 +9,23 @@ module.exports = class Warn extends BaseCommand {
 
     async run(client, message, args) {
         const mentionedMember = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
-        if (mentionedMember.user.bot) return message.channel.send(new MessageEmbed().setDescription(`That member is a bot. I cannot warn them.`).setColor('AQUA'));
+        let cannotWarnEmbed = new MessageEmbed()
+            .setDescription(`That member is a bot. I cannot warn them.`)
+            .setColor('AQUA')
+        if (mentionedMember.user.bot) return message.channel.send({ embeds: [cannotWarnEmbed] });
 
-        if (!message.member.hasPermission('MANAGE_MESSAGES')) {
-            return message.channel.send("You need the `Manage Messages` permission to warn a member.");
+        if (!message.member.permissions.has('MANAGE_MESSAGES')) {
+            return message.channel.send({ content: "You need the `Manage Messages` permission to warn a member." });
         }
         if (!mentionedMember) {
-            return message.channel.send('You need to mention member you want to warn.');
+            return message.channel.send({ content: 'You need to mention member you want to warn.' });
         }
 
         const mentionedPosition = mentionedMember.roles.highest.position;
         const memberPosition = message.member.roles.highest.position;
 
         if (memberPosition <= mentionedPosition) {
-            return message.channel.send("You can't warn this member as their role is higher than or equal to yours.");
+            return message.channel.send({ content: "You can't warn this member as their role is higher than or equal to yours." });
         }
 
         const reason = args.slice(1).join(' ') || 'Not Specified';
@@ -50,9 +53,9 @@ module.exports = class Warn extends BaseCommand {
             await warnDoc.save().catch(err => console.log(err));
         }
 
-        message.channel.send(new MessageEmbed()
+        let warnEmbed = new MessageEmbed()
             .setDescription(`Warned ${mentionedMember} for reason: **${reason}**`)
             .setColor('YELLOW')
-        );
+        message.channel.send({ embeds: [warnEmbed] });
     }
 }

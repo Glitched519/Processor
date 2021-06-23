@@ -12,7 +12,7 @@ module.exports = class Support extends BaseCommand {
             .setColor('#FF77DD')
             .setThumbnail(client.user.displayAvatarURL())
             .setDescription(':arrow_right: [Support Server!](https://discord.gg/UNmdd8V) :arrow_left:')
-            
-        message.channel.send(inviteEmbed);
+
+        message.channel.send({ embeds: [inviteEmbed] });
     }
 }

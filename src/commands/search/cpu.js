@@ -10,7 +10,7 @@ module.exports = class CPU extends BaseCommand {
 
     async run(client, message, args) {
         if (args.length == 0) {
-            return message.reply('Please specify a CPU, such as `AMD Ryzen 9 5950X` or `Intel Core i9-10900K`.');
+            return message.channel.send({content: 'Please specify a CPU, such as `AMD Ryzen 9 5950X` or `Intel Core i9-10900K`.'});
         }
 
         const options = {
@@ -37,7 +37,7 @@ module.exports = class CPU extends BaseCommand {
 
                     cpu.icon.includes('intel') ? cpuEmbed.setThumbnail(intelLogo).setColor('BLUE') : cpuEmbed.setThumbnail(amdLogo).setColor('RED');
 
-                    return message.channel.send(cpuEmbed);
+                    return message.channel.send({embeds: [cpuEmbed]});
                 }
             }
         }).catch(err => console.log(err))

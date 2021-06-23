@@ -20,7 +20,7 @@ module.exports = class MessageDeleteBulk extends BaseEvent {
             .setColor('DARK_RED')
             .setFooter(new Date().toLocaleTimeString());
 
-        destination.send(deletedEmbed);
+        destination.send({embeds: [deletedEmbed]});
 
     }
 }

@@ -6,6 +6,6 @@ module.exports = class Base32 extends BaseCommand {
     }
 
     async run(client, message, args) {
-        message.channel.send('`' + Number(args[0]).toString(32).toUpperCase() + '`');
+        message.channel.send({ content: '`' + Number(args[0]).toString(32).toUpperCase() + '`' });
     }
 }

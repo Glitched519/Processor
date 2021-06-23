@@ -38,7 +38,7 @@ module.exports = class Image extends BaseCommand {
             }
 
             request(options, function (error, response, responseBody) {
-                if (error) return message.channel.send(":x: **Error finding image.**");
+                if (error) return message.channel.send({ content: ":x: **Error finding image.**" });
 
                 let $ = cheerio.load(responseBody);
                 let links = $(".image a.link");
@@ -46,7 +46,7 @@ module.exports = class Image extends BaseCommand {
 
                 if (!urls.length) return;
 
-                message.channel.send(urls[Math.floor(Math.random() * urls.length)]);
+                message.channel.send({ content: urls[Math.floor(Math.random() * urls.length)] });
             });
 
         }

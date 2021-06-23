@@ -13,7 +13,7 @@ module.exports = class Echo extends BaseCommand {
     async run(client, message, args) {
         const timeInSeconds = 30;
         const cooldown = used.get(message.author.id);
-        if (message.guild.me.hasPermission('MANAGE_MESSAGES')) message.delete();
+        if (message.guild.me.permissions.has('MANAGE_MESSAGES')) message.delete();
         if (!args[0]) return;
         let bannedWords = fs.readFileSync(path.join(__dirname, '../../events/bannedwords.txt')).toString().split("\r\n");
         let bannedPhrases = fs.readFileSync(path.join(__dirname, '../../events/bannedphrases.txt')).toString().split("\r\n");
@@ -40,7 +40,7 @@ module.exports = class Echo extends BaseCommand {
         else {
             used.set(message.author.id, Date.now() + 1000 * timeInSeconds);
             setTimeout(() => used.delete(message.author.id), 1000 * timeInSeconds);
-            message.channel.send(args.join(' '));
+            message.channel.send({ content: args.join(' ') });
         }
 
     }

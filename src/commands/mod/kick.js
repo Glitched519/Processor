@@ -8,14 +8,14 @@ module.exports = class Kick extends BaseCommand {
 
     async run(client, message, args) {
         const mentionedMember = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
-        if (!message.member.hasPermission('KICK_MEMBERS')) {
-            return message.channel.send('You need the `Kick Members` permission to kick a member.');
+        if (!message.member.permissions.has('KICK_MEMBERS')) {
+            return message.channel.send({ content: 'You need the `Kick Members` permission to kick a member.' });
         }
-        if (!message.guild.me.hasPermission('KICK_MEMBERS')) {
-            return message.channel.send('I need the `Kick Members` permission to kick a member.');
+        if (!message.guild.me.permissions.has('KICK_MEMBERS')) {
+            return message.channel.send({ content: 'I need the `Kick Members` permission to kick a member.' });
         }
         if (!mentionedMember) {
-            return message.channel.send('You need to mention a member you want to kick.');
+            return message.channel.send({ content: 'You need to mention a member you want to kick.' });
         }
 
         const mentionedPosition = mentionedMember.roles.highest.position;
@@ -23,10 +23,10 @@ module.exports = class Kick extends BaseCommand {
         const botPosition = message.guild.me.roles.highest.position;
 
         if (memberPosition <= mentionedPosition) {
-            return message.channel.send('Cannot kick this member as their role is higher or equal to yours.');
+            return message.channel.send({ content: 'Cannot kick this member as their role is higher or equal to yours.' });
         }
         else if (botPosition <= mentionedPosition) {
-            return message.channel.send('Cannot kick this member as their role is higher or equal to mine.');
+            return message.channel.send({ content: 'Cannot kick this member as their role is higher or equal to mine.' });
         }
 
         const shaft = args.shift();
@@ -34,13 +34,13 @@ module.exports = class Kick extends BaseCommand {
 
         try {
             await mentionedMember.kick([reason]);
-            message.channel.send(new MessageEmbed()
+            let kickEmbed = new MessageEmbed()
                 .setDescription(`Kicked ${mentionedMember} ${reason ? `for **${reason}**` : ''}`)
                 .setColor('ORANGE')
-            );
+            message.channel.send({ embeds: [kickEmbed] });
         }
         catch (err) {
-            message.channel.send('Failed to kick this member: ' + err);
+            message.channel.send({ content: 'Failed to kick this member: ' + err });
         }
     }
 }

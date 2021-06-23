@@ -30,7 +30,7 @@ module.exports = class Author extends BaseCommand {
             const errorMessage = "Country not found or doesn't have any cases";
             if (covidStats.message == errorMessage) return message.channel.send(errorMessage);
 
-            return message.channel.send(new MessageEmbed()
+            let covidEmbed = new MessageEmbed()
                 .setTitle(`COVID-19 Stats (${args[0]})`)
                 .setColor("RED")
                 .addField('Cases', covidStats.cases.toLocaleString(), true)
@@ -40,7 +40,8 @@ module.exports = class Author extends BaseCommand {
                 .addField('Critical Condition', covidStats.critical.toLocaleString(), true)
                 .addField('Tested', covidStats.tests.toLocaleString(), true)
                 .setFooter(new Date().toLocaleTimeString())
-            )
+
+            message.channel.send({ embeds: [covidEmbed] })
         }
     }
 }

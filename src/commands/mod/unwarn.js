@@ -9,21 +9,24 @@ module.exports = class Unwarn extends BaseCommand {
 
     async run(client, message, args) {
         const mentionedMember = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
-        if (mentionedMember.user.bot) return message.channel.send(new MessageEmbed().setDescription(`That member is a bot. I cannot unwarn them.`).setColor('AQUA'));
+        let cannotUnwarnEmbed = new MessageEmbed()
+            .setDescription(`That member is a bot. I cannot unwarn them.`)
+            .setColor('AQUA')
+        if (mentionedMember.user.bot) return message.channel.send({ embeds: [cannotUnwarnEmbed] });
 
-        if (!message.member.hasPermission('MANAGE_MESSAGES')) {
-            return message.channel.send('You need to `Message Messages` permission to unwarn a member.');
+        if (!message.member.permissions.has('MANAGE_MESSAGES')) {
+            return message.channel.send({ content: 'You need to `Message Messages` permission to unwarn a member.' });
         }
 
         if (!mentionedMember) {
-            return message.channel.send('You need to mention a member you want to warn');
+            return message.channel.send({ content: 'You need to mention a member you want to warn' });
         }
 
         const mentionedPosition = mentionedMember.roles.highest.position;
         const memberPosition = message.member.roles.highest.position;
 
         if (memberPosition <= mentionedPosition) {
-            return message.channel.send("You can't unwarn this member as their role is higher than or equal to yours.");
+            return message.channel.send({ content: "You can't unwarn this member as their role is higher than or equal to yours." });
         }
 
         const reason = args.slice(2).join(' ')
@@ -34,21 +37,22 @@ module.exports = class Unwarn extends BaseCommand {
         }).catch(err => console.log(err));
 
         if (!warnDoc || !warnDoc.warnings.length) {
-            return message.channel.send("This member has a clean slate!");
+            return message.channel.send({ content: "This member has a clean slate!" });
         }
 
         const warningId = parseInt(args[1])
 
         if (warningId < 0 || warningId > warnDoc.warnings.length) {
-            return message.channel.send('Invalid warning ID.');
+            return message.channel.send({ content: 'Invalid warning ID.' });
         }
 
         warnDoc.warnings.splice(warningId - 1, warningId !== 1 ? warningId - 1 : 1);
         await warnDoc.save().catch(err => console.log(err));
 
-        message.channel.send(new MessageEmbed()
+        let unwarnEmbed = new MessageEmbed()
             .setDescription(`Unwarned ${mentionedMember} ${reason ? `for **${reason}**` : ''}`)
             .setColor('DARK_GOLD')
-        );
+
+        message.channel.send({ embeds: [unwarnEmbed] });
     }
 }

@@ -20,9 +20,9 @@ module.exports = class Wink extends BaseCommand {
                 .setColor(`RANDOM`)
                 .setImage(response.data.link)
             if (!args[0]) winkEmbed.setDescription(`**<@!${message.author.id}> winks at himself?**`);
-            return message.channel.send(winkEmbed);
+            return message.channel.send({embeds: [winkEmbed]});
         }).catch(err => {
-            return message.channel.send(":x: Unfortunately, something went wrong with the API, and you could not wink your love :cry:.");
+            return message.channel.send({ content: ":x: Unfortunately, something went wrong with the API, and you could not wink your love :cry:." });
         });
     }
 }

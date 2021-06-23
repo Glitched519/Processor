@@ -20,9 +20,9 @@ module.exports = class AnimalFact extends BaseCommand {
             let factEmbed = new MessageEmbed()
                 .setColor(`RANDOM`)
                 .setDescription(response.data.fact);
-            return message.channel.send(factEmbed);
+            return message.channel.send({ embeds: [factEmbed] });
         }).catch(err => {
-            return message.channel.send(":x: Sorry, we don't have any facts for that animal.");
+            return message.channel.send({content: ":x: Sorry, we don't have any facts for that animal."});
         });
     }
 }
