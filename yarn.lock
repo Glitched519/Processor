@@ -12,12 +12,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.14.0":
-  version: 7.14.0
-  resolution: "@babel/runtime@npm:7.14.0"
+"@babel/runtime@npm:^7.14.6":
+  version: 7.14.6
+  resolution: "@babel/runtime@npm:7.14.6"
   dependencies:
     regenerator-runtime: ^0.13.4
-  checksum: ab6653f2f8ecdaebf36674894cef458a9d4f881dc007fdcd50a8261f5c6d9731e03fda2c17e32ecf0e6c779d69eb6cf49d68a48c780aaf07d5b572e8b7ef0508
+  checksum: dd931f6ef1c8dab295c4a00c592db6352bf12a5c443f8222304d5c1d3e88d795fa949afcb6f053eec2e69e9827a17ff274524c1cd43813f56b61e3a540274d2f
   languageName: node
   linkType: hard
 
@@ -1027,10 +1027,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"decimal.js@npm:^10.2.1":
-  version: 10.2.1
-  resolution: "decimal.js@npm:10.2.1"
-  checksum: ba28b27bb8aca6bbb73fbdb51d759961d9ff82218c4aa737b4f4826dee4244618a61c410201bb152950c4915e3d82a86211d1c2a4e23f805ee577574ba115e59
+"decimal.js@npm:^10.3.0":
+  version: 10.3.0
+  resolution: "decimal.js@npm:10.3.0"
+  checksum: 1e4e48bf3f60a0ddff7572505f50f635a20c7baf3ba9fd983d2053a1558d315b0e1b7a0aff391ab3d45b92c6d31f18ba0e6e7019f036ee2d526d566e869a6120
   languageName: node
   linkType: hard
 
@@ -2375,13 +2375,13 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"mathjs@npm:^9.4.2":
-  version: 9.4.2
-  resolution: "mathjs@npm:9.4.2"
+"mathjs@npm:^9.4.3":
+  version: 9.4.3
+  resolution: "mathjs@npm:9.4.3"
   dependencies:
-    "@babel/runtime": ^7.14.0
+    "@babel/runtime": ^7.14.6
     complex.js: ^2.0.13
-    decimal.js: ^10.2.1
+    decimal.js: ^10.3.0
     escape-latex: ^1.2.0
     fraction.js: ^4.1.1
     javascript-natural-sort: ^0.7.1
@@ -2390,7 +2390,7 @@ fsevents@~2.3.1:
     typed-function: ^2.0.0
   bin:
     mathjs: bin/cli.js
-  checksum: 761ae480aaf2dceb5b27bf65b8748a7da85008dd0699767a95735bd3c07979709646579cd98dbc4d4c9a04cbb2087d832d48279d7a9cef433980cdf888859975
+  checksum: f118f1c44fc99bae16e0f924f1d0d3fbd7a9051eef7f8599387df68bcf9060f8be893f0309edf3d6f25caf76fed1ae6fe82fb90600f6b319129d67a26ffa302e
   languageName: node
   linkType: hard
 
@@ -3224,7 +3224,7 @@ fsevents@~2.3.1:
     humanize-duration: ^3.27.0
     ini: ^2.0.0
     jpeg-js: ^0.4.3
-    mathjs: ^9.4.2
+    mathjs: ^9.4.3
     mixme: ^0.5.1
     mongoose: ^5.12.14
     ms: ^2.1.3
