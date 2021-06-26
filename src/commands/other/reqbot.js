@@ -29,7 +29,7 @@ module.exports = class ChuckNorrisJoke extends BaseCommand {
                 color: `RANDOM`,
                 timestamp: new Date()
             }
-            destination.send({ embed: resEmbed }).then(msg => {
+            destination.send({ embeds: [resEmbed] }).then(msg => {
                 msg.react('👍').then(() => {
                     msg.react('👎');
                 });

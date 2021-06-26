@@ -26,7 +26,7 @@ module.exports = class Eval extends BaseCommand {
                 color: '#f08324',
                 description: `\`\`\`js\n${err}\`\`\``,
             }
-            message.channel.send({ embed: [errEmbed] });
+            message.channel.send({ embeds: [errEmbed] });
         }
     }
 }
