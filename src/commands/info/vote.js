@@ -19,29 +19,6 @@ module.exports = class Vote extends BaseCommand {
             .addField('botsfordiscord.com', `[Vote on botsfordiscord.com!](https://botsfordiscord.com/bot/689678745782714464/vote)`)
             .setFooter(`Thanks for all the support!`, message.author.displayAvatarURL())
 
-        // let topggButton = new MessageButton()
-        //     .setStyle('url')
-        //     .setLabel('top.gg')
-        //     .setURL('https://top.gg/bot/689678745782714464/vote')
-
-        // let discordBoatsButton = new MessageButton()
-        //     .setStyle('url')
-        //     .setLabel('discord.boats')
-        //     .setURL('https://discord.boats/bot/689678745782714464')
-
-        // let discordBotListButton = new MessageButton()
-        //     .setStyle('url')
-        //     .setLabel('discordbotlist.com')
-        //     .setURL('https://discordbotlist.com/bots/processor/upvote')
-
-        // let botsForDiscordButton = new MessageButton()
-        //     .setStyle('url')
-        //     .setLabel('botsfordiscord.com')
-        //     .setURL('https://botsfordiscord.com/bot/689678745782714464/vote')
-
-
-
         message.channel.send({ embeds: [voteEmbed] });
-        // message.channel.send({ content: { buttons: [topggButton, discordBoatsButton, discordBotListButton, botsForDiscordButton] }});
     }
 }

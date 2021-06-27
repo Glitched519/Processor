@@ -1128,13 +1128,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"discord-buttons@npm:^3.2.1":
-  version: 3.2.1
-  resolution: "discord-buttons@npm:3.2.1"
-  checksum: 5f5aa8fe59e1a6c22381b7057f0ed9abbb0bcdffd32cc01544e889132c0d0c20e62d25208547c94b4957dd05dc7b179a781858ac73c62234d7e2c50c2b1db98b
-  languageName: node
-  linkType: hard
-
 "discord.js@npm:dev":
   version: 13.0.0-dev.edf6f0ca7012b6b678367a1b5d716d0b85e23ba3
   resolution: "discord.js@npm:13.0.0-dev.edf6f0ca7012b6b678367a1b5d716d0b85e23ba3"
@@ -3218,7 +3211,6 @@ fsevents@~2.3.1:
     chalk: ^4.1.1
     cheerio: ^1.0.0-rc.10
     css-what: ^5.0.1
-    discord-buttons: ^3.2.1
     discord.js: dev
     express: ^4.17.1
     humanize-duration: ^3.27.0
