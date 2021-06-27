@@ -8,6 +8,7 @@ const antispam = require('better-discord-antispam');
 const antiAd = require('../features/anti-ad');
 const mongo = require('../features/mongo');
 const muteSchema = require('../schemas/mute-schema');
+const guildId = '687138260014858260';
 
 module.exports = class Ready extends BaseEvent {
     constructor() {
@@ -32,7 +33,7 @@ module.exports = class Ready extends BaseEvent {
             mutedRole: "Muted", // Here you put the name of the role that should not let people write/speak or anything else in your server. If there is no role set, by default, the module will attempt to create the role for you & set it correctly for every channel in your server. It will be named "muted".
             timeMuted: 1000 * 600, // This is how much time member X will be muted. if not set, default would be 10 min.
             logChannel: "antispam-logs" // This is the channel where every report about spamming goes to. If it's not set up, it will attempt to create the channel.
-          });
+        });
 
         setInterval(async () => {
             for (const guild of client.guilds.cache) {
@@ -59,88 +60,6 @@ module.exports = class Ready extends BaseEvent {
             }
         }, 15000)
 
-        // client.api.applications(client.user.id).guilds('687138260014858260').commands.post({
-        //     data: {
-        //         name: "hello",
-        //         description: "Replies with Hello World!"
-        //     }
-        // });
-
-        // client.api.applications(client.user.id).guilds('687138260014858260').commands.post({
-        //     data: {
-        //         name: "ping",
-        //         description: "ping pong!"
-        //     }
-        // });
-
-        // client.api.applications(client.user.id).guilds('687138260014858260').commands.post({
-        //     data: {
-        //         name: "echo",
-        //         description: "Echos your text as an embed!",
-        //         options: [
-        //             {
-        //                 name: "content",
-        //                 description: "Content of the embed",
-        //                 type: 3,
-        //                 required: true
-        //             }
-        //         ]
-        //     }
-        // });
-
-        client.ws.on('INTERACTION_CREATE', async interaction => {
-            const command = interaction.data.name?.toLowerCase();
-            const args = interaction.data.options;
-
-            // if (command == 'hello') {
-            //     client.api.interactions(interaction.id, interaction.token).callback.post({
-            //         data: {
-            //             type: 4,
-            //             data: {
-            //                 content: "Hello World!"
-            //             }
-            //         }
-            //     });
-            // }
-
-            if (command == 'ping') {
-                let pingEmbed = new discord.MessageEmbed()
-                    .setTitle(":ping_pong: Pong!")
-                    .setDescription(`${emojis.bot} **Bot Latency:** ${Math.floor(Math.random() * 150) + 40}ms\n${emojis.api} **API Latency:** ${Math.round(client.ws.ping)}ms`)
-                    .setAuthor(interaction.member.user.username)
-                    .setTimestamp(new Date());
-                client.api.interactions(interaction.id, interaction.token).callback.post({
-                    data: {
-                        type: 4,
-                        data: await createAPIMessage(interaction, pingEmbed)
-                    }
-                });
-            }
-
-            // if (command == "echo") {
-            //     const description = args.find(arg => arg.name.toLowerCase() == "content").value;
-            //     let echoEmbed = new discord.MessageEmbed()
-            //         .setTitle("Echo!")
-            //         .setDescription(description)
-            //         .setAuthor(interaction.member.user.username);
-
-            //     client.api.interactions(interaction.id, interaction.token).callback.post({
-            //         data: {
-            //             type: 4,
-            //             data: await createAPIMessage(interaction, echoEmbed)
-            //         }
-            //     });
-            // }
-        });
-
-        async function createAPIMessage(interaction, content) {
-            const apiMessage = await discord.APIMessage.create(client.channels.resolve(interaction.channel_id), content)
-                .resolveData()
-                .resolveFiles();
-
-            return { ...apiMessage.data, files: apiMessage.files };
-        }
-
         setInterval(() => {
             const statuses = [
                 `${config.prefix}help`,
@@ -155,5 +74,111 @@ module.exports = class Ready extends BaseEvent {
             if (err) { console.log(err) }
             console.log(data);
         });
+
+        const getApp = () => {
+            const app = client.api.applications(client.user.id);
+            if (guildId) {
+                app.guilds(guildId);
+            }
+            return app;
+        }
+
+
+        // Slash Commands
+        const commands = await getApp(guildId).commands.get();
+        console.log(commands);
+
+        await getApp(guildId).commands.post({
+            data: {
+                name: 'ping',
+                description: 'A simple ping pong command',
+            },
+        });
+
+        await getApp(guildId).commands()
+
+        await getApp(guildId).commands.post({
+            data: {
+                name: 'embed',
+                description: 'Displays an embed',
+                options: [
+                    {
+                        name: 'name',
+                        description: 'Your name',
+                        required: true,
+                        type: 3 // string
+                    },
+                    {
+                        name: 'age',
+                        description: 'Your age',
+                        required: false,
+                        type: 4 // integer
+                    }
+                ]
+            }
+        });
+        await getApp(guildId).commands('793286444990726150').delete();
+        await getApp(guildId).commands('793286446583775262').delete();
+
+        client.ws.on('INTERACTION_CREATE', async (interaction) => {
+            const { name, options } = interaction.data;
+
+            const command = name.toLowerCase();
+
+            const args = {};
+
+            console.log(options);
+
+            if (options) {
+                for (const option of options) {
+                    const { name, value } = option;
+                    args[name] = value;
+                }
+            }
+
+            console.log(args);
+
+            if (command === 'ping') {
+                reply(interaction, 'pong');
+            } else if (command === 'embed') {
+                const embed = new discord.MessageEmbed()
+                    .setTitle('Example Embed')
+
+                for (const arg of args) {
+                    const value = args[arg];
+                    embed.addField(arg, value);
+                }
+            }
+        });
+
+        const reply = async (interaction, response) => {
+            let data = {
+                content: response,
+            }
+
+            if (typeof response === 'object') {
+                data = await createAPIMessage(interaction, response);
+            }
+
+            client.api.interactions(interaction.id, interaction.token).callback.post({
+                data: {
+                    type: 4,
+                    data,
+                }
+            });
+        }
+
+        const createAPIMessage = async (interaction, content) => {
+            const { data, files } = await discord.APIMessage.create(
+                client.channels.resolve(interactions.channel_id),
+                content
+            )
+                .resolveData()
+                .resolveFiles();
+
+            return { ...data, files };
+        }
+
+        await client.api.applications(client.user.id);
     }
 }
