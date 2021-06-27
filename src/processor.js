@@ -3,10 +3,9 @@ const { Client, Intents } = require('discord.js');
 const { registerCommands, registerEvents } = require('./utils/registry');
 const config = require('./config.json');
 const Topgg = require("@top-gg/sdk");
-//const express = require('express');
-//const app = express();
+
 const api = new Topgg.Api(config["topgg-token"]);
-//const webhook = new Topgg.Webhook(config["topgg-auth"]);
+
 const nonPrivilegedIntents = [
     'GUILDS',
     'GUILD_BANS',
@@ -24,10 +23,6 @@ const nonPrivilegedIntents = [
 
 
 const client = new Client({ intents: nonPrivilegedIntents });
-//const options = new ClientOptions();
-
-require("discord-buttons")(client);
-
 
 (async () => {
     await client.login(config.token).then(() => console.log('Logging In...'));
@@ -42,20 +37,13 @@ require("discord-buttons")(client);
     setInterval(() => {
         api.postStats({
             serverCount: client.guilds.cache.size,
-            // shardId: client.shard.ids[0], // Sharding
             shardCount: client.options.shardCount
         });
-    }, 1800000) // post every 30 minutes
+    }, 1800000) // update every 30 minutes
     console.log("Started Posting Bot Stats on top.gg.");
 
     console.log("Guilds: %d", client.guilds.cache.size);
 
-    // app.post('/dblwebhook', webhook.middleware(), (req, res) => {
-    //     // req.vote is your vote object e.g
-    //     console.console.log(req.vote.user) // user id
-    // }) // attach the middleware
-
-    // app.listen(3000)
     console.log('Awaiting Ready Event...');
     client.emit("ready");
 })();

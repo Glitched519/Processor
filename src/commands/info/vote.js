@@ -1,4 +1,3 @@
-const { MessageButton } = require('discord-buttons');
 const { MessageEmbed } = require('discord.js');
 const BaseCommand = require('../../utils/structures/BaseCommand');
 
