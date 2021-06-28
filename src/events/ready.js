@@ -86,7 +86,6 @@ module.exports = class Ready extends BaseEvent {
 
         // Slash Commands
         const commands = await getApp(guildId).commands.get();
-        console.log(commands);
 
         await getApp(guildId).commands.post({
             data: {
@@ -127,8 +126,6 @@ module.exports = class Ready extends BaseEvent {
 
             const args = {};
 
-            console.log(options);
-
             if (options) {
                 for (const option of options) {
                     const { name, value } = option;
@@ -136,7 +133,6 @@ module.exports = class Ready extends BaseEvent {
                 }
             }
 
-            console.log(args);
 
             if (command === 'ping') {
                 reply(interaction, 'pong');
