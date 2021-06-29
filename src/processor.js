@@ -22,7 +22,14 @@ const nonPrivilegedIntents = [
     'DIRECT_MESSAGE_TYPING'];
 
 
-const client = new Client({ intents: nonPrivilegedIntents });
+const client = new Client({
+    intents: nonPrivilegedIntents,
+    allowedMentions: {
+        repliedUser: true,
+    }
+    // partials: ['MESSAGE', 'CHANNEL', 'REACTION', 'GUILD_MEMBER', 'USER']
+});
+//const discordButtons = require('discord-buttons')(client);
 
 (async () => {
     await client.login(config.token).then(() => console.log('Logging In...'));

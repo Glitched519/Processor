@@ -3,7 +3,7 @@ const os = require('os');
 const fs = require('fs');
 const config = require('../config.json');
 const emojis = require('../emojis.json');
-const discord = require('discord.js');
+const { MessageActionRow, MessageButton, MessageEmbed } = require('discord.js');
 const antispam = require('better-discord-antispam');
 const antiAd = require('../features/anti-ad');
 const mongo = require('../features/mongo');
@@ -136,8 +136,9 @@ module.exports = class Ready extends BaseEvent {
 
             if (command === 'ping') {
                 reply(interaction, 'pong');
+                
             } else if (command === 'embed') {
-                const embed = new discord.MessageEmbed()
+                const embed = new MessageEmbed()
                     .setTitle('Example Embed')
 
                 for (const arg of args) {
