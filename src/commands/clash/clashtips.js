@@ -175,7 +175,7 @@ module.exports = class ClashTips extends BaseCommand {
                 .setThumbnail('https://vignette.wikia.nocookie.net/clashofclans/images/6/61/Villager_info.png/revision/latest/scale-to-width-down/340?cb=20200622145823')
                 .setTimestamp()
 
-            message.channel.send({ embeds: [tipEmbed] });
+            message.reply({ embeds: [tipEmbed], allowedMentions: { repliedUser: false } });
         }
     }
 }

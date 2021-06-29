@@ -101,6 +101,6 @@ module.exports = class BaseLayout extends BaseCommand {
                 return message.channel.send("Invalid town hall or builder hall level. Ex: `th10` or `bh7`.");
         }
 
-        message.channel.send({ embeds: [baseEmbed] });
+        message.reply({ embeds: [baseEmbed], allowedMentions: { repliedUser: false } });
     }
 }

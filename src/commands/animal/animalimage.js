@@ -22,7 +22,7 @@ module.exports = class AnimalImage extends BaseCommand {
                 .setImage(response.data.image);
             return message.channel.send({ embeds: [animalEmbed] });
         }).catch(err => {
-            return message.channel.send({ content: ":x: Sorry, we don't have any images for that animal." });
+            return message.reply({ content: ":x: Sorry, we don't have any images for that animal.", allowedMentions: { repliedUser: false } });
         });
     }
 }

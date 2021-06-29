@@ -166,7 +166,7 @@ module.exports = class Help extends BaseCommand {
 
         let otherEmbed = new MessageEmbed()
             .setColor(`RANDOM`)
-            .setTitle('Info Commands')
+            .setTitle('Other Commands')
             .setURL('https://processorbot.xyz/commands/')
             .setDescription(`\`${otherCmds.join('\n')}\``)
 

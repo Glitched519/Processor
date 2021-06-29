@@ -26,10 +26,11 @@ module.exports = class Image extends BaseCommand {
                 if (msg.includes(bannedPhrases[j])) return;
             }
         }
+        
 
         function image(message) {
             let options = {
-                url: "http://results.dogpile.com/serp?qc=images&q=" + args.join('%20'),
+                url: "https://results.dogpile.com/serp?qc=images&q=" + args.join('%20'),
                 method: "GET",
                 headers: {
                     "Accept": "text/html",
@@ -42,14 +43,16 @@ module.exports = class Image extends BaseCommand {
 
                 let $ = cheerio.load(responseBody);
                 let links = $(".image a.link");
+                console.log($.html());
                 let urls = new Array(links.length).fill(0).map((v, i) => links.eq(i).attr("href"));
-
                 if (!urls.length) return;
-
+                console.log("run 2");
                 message.channel.send({ content: urls[Math.floor(Math.random() * urls.length)] });
             });
 
         }
+
+        
 
         image(message);
     }

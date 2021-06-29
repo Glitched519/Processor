@@ -32,7 +32,9 @@ module.exports = class Giphy extends BaseCommand {
         fetch(url)
             .then(res => res.json())
             .then(json => {
-                message.channel.send({ content: json.data[randomIndex].images.original.url });
+                json.data[randomIndex] ? 
+                message.channel.send({ content: json.data[randomIndex].images.original.url }):
+                message.channel.send({ content: "Sorry, no images were found." });
             });
     }
 }

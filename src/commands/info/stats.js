@@ -73,41 +73,30 @@ module.exports = class Stats extends BaseCommand {
                     },
                     {
                         name: 'Server Owner',
-                        value: guild.owner.user.tag,
+                        value: `<@!${guild.ownerID}>`,
                     },
                     {
                         name: 'Total Members',
-                        value: guild.memberCount,
-                        inline: true,
-                    },
-                    {
-                        name: 'Total Real Members',
-                        value: guild.members.cache.filter(member => !member.user.bot).size,
-                        inline: true,
-                    },
-                    {
-                        name: 'Total Bots',
-                        value: guild.members.cache.filter(member => member.user.bot).size,
+                        value: guild.memberCount.toString(),
                         inline: true,
                     },
                     {
                         name: 'Total Channels',
-                        value: guild.channels.cache.size,
+                        value: guild.channels.cache.size.toString(),
                         inline: true,
                     },
                     {
                         name: 'Total Text Channels',
-                        value: guild.channels.cache.filter(ch => ch.type === 'text').size,
-                        inline: true,
+                        value: guild.channels.cache.filter(ch => ch.type === 'text').size.toString(),
                     },
                     {
                         name: 'Total Voice Channels',
-                        value: guild.channels.cache.filter(ch => ch.type === 'voice').size,
+                        value: guild.channels.cache.filter(ch => ch.type === 'voice').size.toString(),
                         inline: true,
                     },
                 ]
             }
-            message.channel.send({ embeds: statEmbed });
+            message.channel.send({ embeds: [statEmbed] });
         }
     }
 }
