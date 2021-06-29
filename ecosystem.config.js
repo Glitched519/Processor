@@ -2,8 +2,6 @@ module.exports = {
   apps: [{
     name: 'processor',
     script: './src/processor.js',
-    instances: "max",
-    exec_mode: "cluster",
     watch: false,
     time: true,
   }
