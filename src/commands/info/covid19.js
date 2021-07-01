@@ -10,7 +10,7 @@ module.exports = class Author extends BaseCommand {
     async run(client, message, args) {
         if (!args[0]) {
             const covidStats = await covid.all();
-            return message.channel.send(new MessageEmbed()
+            let globalCovidEmbed = new MessageEmbed()
                 .setTitle('COVID-19 Stats (Worldwide)')
                 .setColor("RED")
                 .addField('Cases', covidStats.cases.toLocaleString(), true)
@@ -22,8 +22,8 @@ module.exports = class Author extends BaseCommand {
                 .addField('Current Infections', covidStats.active.toLocaleString(), true)
                 .addField('Critical Condition', covidStats.critical.toLocaleString(), true)
                 .addField('Tested', covidStats.tests.toLocaleString(), true)
-                .setFooter(new Date())
-            );
+                .setFooter(new Date().toLocaleTimeString())
+            return message.channel.send({ embeds: [globalCovidEmbed] });
         }
         else {
             const covidStats = await covid.countries({ country: args[0] });
