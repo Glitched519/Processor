@@ -21,6 +21,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@discordjs/builders@npm:^0.1.1":
+  version: 0.1.1
+  resolution: "@discordjs/builders@npm:0.1.1"
+  dependencies:
+    discord-api-types: ^0.18.1
+    tslib: ^2.3.0
+  checksum: 2902d53542467c9fe3353b412c12b273a9ecba10ad3f86029613ef3822eba68a83b491fac644bdc37e254520b6a1fcaa91ae58c3ad859d0a768e47fbd2fe3e06
+  languageName: node
+  linkType: hard
+
 "@discordjs/collection@npm:^0.1.6":
   version: 0.1.6
   resolution: "@discordjs/collection@npm:0.1.6"
@@ -176,10 +186,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sapphire/async-queue@npm:^1.1.2":
-  version: 1.1.3
-  resolution: "@sapphire/async-queue@npm:1.1.3"
-  checksum: 1557a65173f78fe7e7762a56524338bf56df86d2764d37f2badc382e721b602cbe4be9069c8a7ebcea8bfdb309d9f66a79ebe1645a53658fffb74a27f2440400
+"@sapphire/async-queue@npm:^1.1.4":
+  version: 1.1.4
+  resolution: "@sapphire/async-queue@npm:1.1.4"
+  checksum: 325e416a44dd919a6a3eee03852efea207fcfd02db9bb0534dc495c7a695e7298895193cb8674712a7ad619d0e7a742c28589671a9ab2571e320c142f9d7f9e0
   languageName: node
   linkType: hard
 
@@ -226,7 +236,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/ws@npm:^7.4.4":
+"@types/ws@npm:^7.4.5":
   version: 7.4.5
   resolution: "@types/ws@npm:7.4.5"
   dependencies:
@@ -1128,19 +1138,27 @@ __metadata:
   languageName: node
   linkType: hard
 
+"discord-api-types@npm:^0.19.0-next.f393ba520d7d6d2aacaca7b3ca5d355fab614f6e":
+  version: 0.19.0-next.f393ba520d7d6d2aacaca7b3ca5d355fab614f6e
+  resolution: "discord-api-types@npm:0.19.0-next.f393ba520d7d6d2aacaca7b3ca5d355fab614f6e"
+  checksum: ca53bf2bd5f85edc9e08e3bec58cb341eb1b4ebf32f2cf1c67a8d43a78146f2f78d0bb61d3124ded6642b30b84ab3e172b2f8c635df192de62c864d6e5ab15f9
+  languageName: node
+  linkType: hard
+
 "discord.js@npm:dev":
-  version: 13.0.0-dev.edf6f0ca7012b6b678367a1b5d716d0b85e23ba3
-  resolution: "discord.js@npm:13.0.0-dev.edf6f0ca7012b6b678367a1b5d716d0b85e23ba3"
+  version: 13.0.0-dev.a08ce7d.1625097834
+  resolution: "discord.js@npm:13.0.0-dev.a08ce7d.1625097834"
   dependencies:
+    "@discordjs/builders": ^0.1.1
     "@discordjs/collection": ^0.1.6
     "@discordjs/form-data": ^3.0.1
-    "@sapphire/async-queue": ^1.1.2
-    "@types/ws": ^7.4.4
+    "@sapphire/async-queue": ^1.1.4
+    "@types/ws": ^7.4.5
     abort-controller: ^3.0.0
-    discord-api-types: ^0.18.1
+    discord-api-types: ^0.19.0-next.f393ba520d7d6d2aacaca7b3ca5d355fab614f6e
     node-fetch: ^2.6.1
-    ws: ^7.4.6
-  checksum: 4b4e545bf7d62559ddd91abdce4fa09da0486e3d790757d4331ecf42e387a9fd138d170a9ece34e48ea950de68a3b45356be07cd50c1f50342512e65ee9ef6a7
+    ws: ^7.5.1
+  checksum: 6fd69aaf5cdcaec96ef628ec7f7c2c20a48e8ada4e306b374c0282dc83f17319ee6eb24e97ea64d529530e52634945cb19947750edce7a266a2df4ef38062bdf
   languageName: node
   linkType: hard
 
@@ -4161,6 +4179,13 @@ resolve@^1.12.0:
   languageName: node
   linkType: hard
 
+"tslib@npm:^2.3.0":
+  version: 2.3.0
+  resolution: "tslib@npm:2.3.0"
+  checksum: 7b4fc9feff0f704743c3760f5d8d708f6417fac6458159e63df3a6b1100f0736e3b99edb9fe370f274ad15160a1f49ff05cb49402534c818ff552c48e38c3e6e
+  languageName: node
+  linkType: hard
+
 "tunnel-agent@npm:^0.6.0":
   version: 0.6.0
   resolution: "tunnel-agent@npm:0.6.0"
@@ -4380,9 +4405,9 @@ resolve@^1.12.0:
   languageName: node
   linkType: hard
 
-"ws@npm:^7.4.6":
-  version: 7.5.0
-  resolution: "ws@npm:7.5.0"
+"ws@npm:^7.5.1":
+  version: 7.5.1
+  resolution: "ws@npm:7.5.1"
   peerDependencies:
     bufferutil: ^4.0.1
     utf-8-validate: ^5.0.2
@@ -4391,7 +4416,7 @@ resolve@^1.12.0:
       optional: true
     utf-8-validate:
       optional: true
-  checksum: f9ac36310e795995f13ac7abff9c3b104b2460864de7f0b6233d285f62c6929529e24f386ff87740c3646f818fefa014be587371aa9a5a6fffae2cd9d1e9e008
+  checksum: e56541a73cac1d5b4b5e81ddd7e9925e84e45abaab6f3ee5e088e0089b5518f862d8429897243e12482b118971ad8a9a75b1d4900769bce3877878a0a7470043
   languageName: node
   linkType: hard
 
