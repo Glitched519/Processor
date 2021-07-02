@@ -15,7 +15,7 @@ module.exports = (client) => {
   }
 
   client.on('message', async (message) => {
-    const { guild, member, content } = message
+    const { guild, content } = message
 
     const code = content.split('discord.gg/')[1]
 

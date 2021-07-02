@@ -15,7 +15,6 @@ module.exports = class Stats extends BaseCommand {
         else if (statArgs === 1) {
             const member = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
             if (member) {
-                const roleMap = [];
                 const statEmbed = {
                     title: `${member.user.tag} (${member.user.id})`,
                     description: `**Roles:** ${member.roles.cache.map(role => role.toString())}`,

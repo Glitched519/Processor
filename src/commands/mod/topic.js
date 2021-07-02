@@ -1,5 +1,4 @@
 const { MessageEmbed } = require('discord.js');
-const fs = require('fs');
 
 const BaseCommand = require('../../utils/structures/BaseCommand');
 

@@ -6,7 +6,7 @@ module.exports = class Button extends BaseCommand {
         super("button", "other", ["btn"]);
     }
 
-    async run(client, message, args) {
+    async run(client, message) {
         const row = new MessageActionRow()
             .addComponents(
                 new MessageButton()

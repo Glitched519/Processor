@@ -97,6 +97,7 @@ module.exports = class BaseLayout extends BaseCommand {
                 baseEmbed.description += "(https://www.youtube.com/watch?v=86hy9_5eN9Q) | ";
                 baseEmbed.description += "[Copy Link](https://link.clashofclans.com/en?action=OpenLayout&id=TH9%3ABB%3AAAAAQAAAAAFLv0vIOWetDU5AyhxpmZXN)";
                 baseEmbed.image.url = "https://cocwiki.net/wp-content/uploads/2019/06/bh9-builder-hall-9-layout.jpg";
+                break;
             default:
                 return message.channel.send("Invalid town hall or builder hall level. Ex: `th10` or `bh7`.");
         }

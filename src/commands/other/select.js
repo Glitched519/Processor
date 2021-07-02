@@ -6,7 +6,7 @@ module.exports = class Select extends BaseCommand {
         super("select", "other", ["sel"]);
     }
 
-    async run(client, message, args) {
+    async run(client, message) {
         const row = new MessageActionRow()
             .addComponents(
                 new MessageSelectMenu()

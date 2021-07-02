@@ -1,5 +1,5 @@
 
-const { Client, Intents } = require('discord.js');
+const { Client } = require('discord.js');
 const { registerCommands, registerEvents } = require('./utils/registry');
 const config = require('./config.json');
 const Topgg = require("@top-gg/sdk");

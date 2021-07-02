@@ -1,11 +1,12 @@
+/* eslint-disable no-undef */
+/* eslint-disable no-unused-vars */
 const BaseEvent = require('../utils/structures/BaseEvent');
 const os = require('os');
 const fs = require('fs');
 const config = require('../config.json');
-const emojis = require('../emojis.json');
-const { MessageActionRow, MessageButton, MessageEmbed } = require('discord.js');
+const { MessageEmbed } = require('discord.js');
 const antispam = require('better-discord-antispam');
-const antiAd = require('../features/anti-ad');
+// const antiAd = require('../features/anti-ad');
 const mongo = require('../features/mongo');
 const muteSchema = require('../schemas/mute-schema');
 const guildId = '687138260014858260';
@@ -18,7 +19,7 @@ module.exports = class Ready extends BaseEvent {
         client.options.restTimeOffset = 0;
 
         //antiAd(client);
-        await mongo().catch(err => console.log("Mongo Error"));
+        await mongo().catch(() => console.log("Mongo Error"));
 
         antispam(client, {
             limitUntilWarn: 4, // The amount of messages allowed to send within the interval(time) before getting a warn.

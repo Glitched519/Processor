@@ -8,7 +8,7 @@ module.exports = class Avatar extends BaseCommand {
         super('botinfo', 'info', ['bot', 'info']);
     }
 
-    async run(client, message, args) {
+    async run(client, message) {
 
         let uptime = duration(process.uptime() * 1000, { units: ["d", "h", "m"], round: true });
         let version = require('../../../package.json').version;

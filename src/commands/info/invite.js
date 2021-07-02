@@ -7,7 +7,7 @@ module.exports = class Invite extends BaseCommand {
         super('invite', 'info', ['botinvite']);
     }
 
-    async run(client, message, args) {
+    async run(client, message) {
         
         let inviteEmbed = new MessageEmbed()
             .setColor(rgb2code([68, 196, 252]))

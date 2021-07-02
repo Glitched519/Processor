@@ -5,7 +5,7 @@ module.exports = class TestLeave extends BaseCommand {
         super('testleave', 'setup', []);
     }
 
-    async run(client, message, args) {
+    async run(client, message) {
         if (message.author.id !== '749985510889619576') return;
 
         client.emit('guildMemberRemove', message.member);

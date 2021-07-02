@@ -37,5 +37,8 @@
         "skia-canvas": "^0.9.22",
         "systeminformation": "^5.7.7"
     },
-    "keywords": []
+    "keywords": [],
+    "devDependencies": {
+        "eslint": "^7.29.0"
+    }
 }

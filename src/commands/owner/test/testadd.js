@@ -5,7 +5,7 @@ module.exports = class TestAdd extends BaseCommand {
         super('testadd', 'setup', []);
     }
 
-    async run(client, message, args) {
+    async run(client, message) {
         if (message.author.id !== '749985510889619576') return;
 
         client.emit('guildCreate', message.guild);

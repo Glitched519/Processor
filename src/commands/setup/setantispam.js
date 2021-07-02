@@ -7,10 +7,11 @@ module.exports = class SetAntiSpam extends BaseCommand {
         super('antispam', 'setup', ['nospam']);
     }
 
-    async run(client, message, args) {
+    async run(client, message) {
         if (!message.member.permissions.has("MANAGE_GUILD")) {
             return message.channel.send({ content: 'You need the `Manage Server` permission to set an antispam channel.' });
         }
+        // eslint-disable-next-line no-unused-vars
         await mongo().then(async mongoose => {
             const guildId = message.guild.id;
             const antiSpamChannel = message.mentions.channels.first() || message.channel;

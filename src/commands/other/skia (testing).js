@@ -1,4 +1,4 @@
-const { Canvas, loadImage } = require('skia-canvas');
+const { Canvas } = require('skia-canvas');
 const BaseCommand = require('../../utils/structures/BaseCommand');
 
 module.exports = class Skia extends BaseCommand {
@@ -6,7 +6,7 @@ module.exports = class Skia extends BaseCommand {
         super('skia', 'other', []);
     }
 
-    async run(client, message, args) {
+    async run(client, message) {
         let rand = n => Math.floor(n * Math.random());
 
         let canvas = new Canvas(600, 600),

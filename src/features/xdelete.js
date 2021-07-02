@@ -12,7 +12,7 @@ function xDelete(message, msg) {
                 return message.delete();
             }
         })
-        .catch(err => {
+        .catch(() => {
             msg.delete();
             message.delete();
         });

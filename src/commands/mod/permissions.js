@@ -8,7 +8,7 @@ module.exports = class Permissions extends BaseCommand {
         super('permissions', 'mod', ['perm', 'perms']);
     }
 
-    async run(client, message, args) {
+    async run(client, message) {
         if (!message.member.permissions.has(['MANAGE_MESSAGES'])) {
             return message.channel.send({ content: ":x: **You need the `Manage Messages` permission to view my permissions.**" })
         }

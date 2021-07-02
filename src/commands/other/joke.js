@@ -6,7 +6,7 @@ module.exports = class Joke extends BaseCommand {
         super('joke', 'other', []);
     }
 
-    async run(client, message, args) {
+    async run(client, message) {
         fetch('https://official-joke-api.appspot.com/random_joke')
             .then(res => res.json())
             .then(json => {

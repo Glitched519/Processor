@@ -6,7 +6,7 @@ module.exports = class Github extends BaseCommand {
         super('github', 'info', ['code', 'source']);
     }
 
-    async run(client, message, args) {
+    async run(client, message) {
         let codeEmbed = new MessageEmbed()
             .setColor(`#0F1111`)
             .setTitle("Here's All My Source Code!")

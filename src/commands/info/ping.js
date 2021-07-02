@@ -6,7 +6,7 @@ module.exports = class Ping extends BaseCommand {
         super('ping', 'info', ['alive']);
     }
 
-    async run(client, message, args) {
+    async run(client, message) {
         let pingEmbed = {
             title: emojis.loading
         }

@@ -6,7 +6,7 @@ module.exports = class SetWelcomeChannel extends BaseCommand {
         super('setwelcome', 'mod', []);
     }
 
-    async run(client, message, args) {
+    async run(client, message) {
         if (!message.member.permissions.has('MANAGE_SERVER')) {
             return message.channel.send({ content: ':x: You need the `Manage Channels` permission to set a suggestion channel.' })
         }

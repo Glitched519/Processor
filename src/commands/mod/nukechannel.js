@@ -5,7 +5,7 @@ module.exports = class Nukechannel extends BaseCommand {
         super('nukechannel', 'mod', ['nuke']);
     }
 
-    async run(client, message, args) {
+    async run(client, message) {
         if (!message.guild.me.permissions.has('MANAGE_CHANNELS')) {
             return message.channel.send({ content: ":x: **I need the `Manage Channels` permission to nuke this channel.**" })
                 .then(msg => {
@@ -24,15 +24,15 @@ module.exports = class Nukechannel extends BaseCommand {
             const filter = m => m.content == fetchedChannel.id;
             message.channel.send({ content: ":warning: Are you sure you wish to delete this channel? Reply within **20 seconds** the `channel ID` to confirm." })
             message.channel.awaitMessages(filter, { max: 1, time: 20000, errors: ['time'] })
-                .then(collected => {
+                .then(() => {
                     fetchedChannel.clone();
                     fetchedChannel.delete();
                     fetchedChannel.setTopic(fetchedTopic)
-                        .catch(err => {
+                        .catch(() => {
                             return;
                         });
                 })
-                .catch(collected => {
+                .catch(() => {
                     return message.channel.send({ content: `:x: **${fetchedChannel}** will not be deleted.` });
                 });
 

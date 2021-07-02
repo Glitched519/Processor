@@ -6,7 +6,7 @@ module.exports = class ChuckNorrisJoke extends BaseCommand {
         super('chucknorrisjoke', 'other', ['chuck', 'chuckjoke', 'norrisjoke', 'cjoke']);
     }
 
-    async run(client, message, args) {
+    async run(client, message) {
         fetch('https://api.chucknorris.io/jokes/random')
             .then(res => res.json())
             .then(json => {

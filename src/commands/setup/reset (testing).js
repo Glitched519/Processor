@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 const antiSpamSchema = require('../../schemas/antispam-schema');
 const commandPrefixSchema = require('../../schemas/command-prefix-schema');
 const logsSchema = require('../../schemas/logs-schema');
@@ -9,7 +10,7 @@ module.exports = class Reset extends BaseCommand {
         super('reset', 'setup', []);
     }
 
-    async run(client, message, args) {
+    async run(client, message) {
         if (!message.member.permissions.has("MANAGE_GUILD")) {
             return message.channel.send({ content: 'You need the `Manage Server` permission to reset the server settings.' });
         }
@@ -41,7 +42,7 @@ module.exports = class Reset extends BaseCommand {
                                 return message.channel.send({ content: 'Reset Cancelled.' });
                         }
                     })
-                    .catch(collected => {
+                    .catch(() => {
                         return message.channel.send({ content: `Timed out after 20 seconds.` });
                     });
             });

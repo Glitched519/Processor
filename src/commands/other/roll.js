@@ -5,7 +5,7 @@ module.exports = class Roll extends BaseCommand {
         super('roll', 'other', ['dice', 'rolldice']);
     }
 
-    async run(client, message, args) {
+    async run(client, message) {
         const rollDice = Math.floor(Math.random() * 6) + 1;
         let nums = [':one:', ':two:', ':three:', ':four:', ':five:', ':six:'];
         let diceNum = '';

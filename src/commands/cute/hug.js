@@ -21,7 +21,7 @@ module.exports = class Hug extends BaseCommand {
                 .setImage(response.data.link)
             if (!args[0]) hugEmbed.setDescription(`**<@!${message.author.id}> hugs himself?**`);
             return message.channel.send({ embeds: [hugEmbed] });
-        }).catch(err => {
+        }).catch(() => {
             return message.channel.send({ content: ":x: Unfortunately, something went wrong with the API, and you could not hug your love :cry:." });
         });
     }

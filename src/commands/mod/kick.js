@@ -29,7 +29,7 @@ module.exports = class Kick extends BaseCommand {
             return message.channel.send({ content: 'Cannot kick this member as their role is higher or equal to mine.' });
         }
 
-        const shaft = args.shift();
+        args.shift();
         const reason = args.join(' ');
 
         try {

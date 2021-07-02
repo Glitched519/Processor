@@ -16,6 +16,7 @@ module.exports = class Message extends BaseEvent {
         if (message.author.bot) return;
 
 
+        // eslint-disable-next-line no-unused-vars
         for (const guild of client.guilds.cache) {
             const result = await commandPrefixSchema.findOne({ _id: message.guild.id });
             result == null ? guildPrefixes[message.guild.id] = globalPrefix : guildPrefixes[message.guild.id] = result.prefix;

@@ -21,7 +21,7 @@ module.exports = class Pat extends BaseCommand {
                 .setImage(response.data.link)
             if (!args[0]) patEmbed.setDescription(`**<@!${message.author.id}> pats himself?**`);
             return message.channel.send({ embeds: [patEmbed] });
-        }).catch(err => {
+        }).catch(() => {
             return message.channel.send({ content: ":x: Unfortunately, something went wrong with the API, and you could not pat your love :cry:." });
         });
     }

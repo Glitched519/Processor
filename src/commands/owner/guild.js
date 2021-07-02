@@ -7,7 +7,7 @@ module.exports = class Guild extends BaseCommand {
         super('guild', 'owner', []);
     }
 
-    async run(client, message, args) {
+    async run(client, message) {
         if (message.author.id !== '749985510889619576') return;
         const guildEmbed = new MessageEmbed()
             .setColor(`RANDOM`)

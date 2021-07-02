@@ -42,7 +42,7 @@ module.exports = class Ban extends BaseCommand {
             }
         }
 
-        const shaft = args.shift();
+        args.shift();
         const reason = args.join(' ');
 
         message.guild.members.ban(mentionedUser.id, { reason: reason });

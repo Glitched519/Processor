@@ -72,6 +72,7 @@ module.exports = class Help extends BaseCommand {
             otherCmds.push(cmd);
         });
 
+        // eslint-disable-next-line no-unused-vars
         for (const guild of client.guilds.cache) {
             const result = await commandPrefixSchema.findOne({ _id: message.guild.id });
             if (result == null) {
@@ -242,7 +243,7 @@ module.exports = class Help extends BaseCommand {
                                 });
                     }
                 })
-                .catch(err => {
+                .catch(() => {
                     return msg.delete();
                 })
         }

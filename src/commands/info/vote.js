@@ -6,7 +6,7 @@ module.exports = class Vote extends BaseCommand {
         super('vote', 'info', []);
     }
 
-    async run(client, message, args) {
+    async run(client, message) {
         let voteEmbed = new MessageEmbed()
             .setTitle("Upvote Processor!")
             .setColor(`#42C0FB`)
