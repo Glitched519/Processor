@@ -1,11 +1,11 @@
-const fetch = require('node-fetch');
-const APIKey = require('../../config.json')['weather-key'];
-const { MessageEmbed } = require('discord.js');
-const BaseCommand = require('../../utils/structures/BaseCommand');
+const fetch = require('node-fetch')
+const APIKey = require('../../config.json')['weather-key']
+const { MessageEmbed } = require('discord.js')
+const BaseCommand = require('../../utils/structures/BaseCommand')
 
 module.exports = class Prefix extends BaseCommand {
     constructor() {
-        super('weather', 'info', ['wea']);
+        super('weather', 'info', ['wea'])
     }
 
     async run(client, message, args) {
@@ -15,11 +15,11 @@ module.exports = class Prefix extends BaseCommand {
                 let notFoundEmbed = new MessageEmbed()
                     .setDescription('Location not found.')
                     .setColor('RED')
-                if (base.cod == '404') return message.channel.send({ embeds: [notFoundEmbed] });
-                let weather = base.weather[0];
-                let main = base.main;
-                let sunrise = new Date(base.sys.sunrise * 1000).toLocaleTimeString();
-                let sunset = new Date(base.sys.sunset * 1000).toLocaleTimeString();
+                if (base.cod == '404') return message.channel.send({ embeds: [notFoundEmbed] })
+                let weather = base.weather[0]
+                let main = base.main
+                let sunrise = new Date(base.sys.sunrise * 1000).toLocaleTimeString()
+                let sunset = new Date(base.sys.sunset * 1000).toLocaleTimeString()
                 const weatherEmbed = new MessageEmbed()
                     .setTitle(`:white_sun_rain_cloud: Current Weather in ${base.name}, ${base.sys.country}`)
                     .setURL(`https://openweathermap.org/city/${base.id}`)
@@ -37,7 +37,7 @@ module.exports = class Prefix extends BaseCommand {
                     .setThumbnail(`https://openweathermap.org/img/wn/${weather.icon}@2x.png`)
                     .setTimestamp()
                     .setFooter(`From openweathermap.org`, `https://openweathermap.org/img/wn/02d@2x.png`)
-                return message.channel.send({ embeds: [weatherEmbed] });
-            });
+                return message.channel.send({ embeds: [weatherEmbed] })
+            })
     }
 }

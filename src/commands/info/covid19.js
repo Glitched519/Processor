@@ -1,15 +1,15 @@
-const covid = require('novelcovid');
-const { MessageEmbed } = require('discord.js');
-const BaseCommand = require('../../utils/structures/BaseCommand');
+const covid = require('novelcovid')
+const { MessageEmbed } = require('discord.js')
+const BaseCommand = require('../../utils/structures/BaseCommand')
 
 module.exports = class Author extends BaseCommand {
     constructor() {
-        super('covid19', 'info', ['covid', 'cov']);
+        super('covid19', 'info', ['covid', 'cov'])
     }
 
     async run(client, message, args) {
         if (!args[0]) {
-            const covidStats = await covid.all();
+            const covidStats = await covid.all()
             let globalCovidEmbed = new MessageEmbed()
                 .setTitle('COVID-19 Stats (Worldwide)')
                 .setColor("RED")
@@ -23,12 +23,12 @@ module.exports = class Author extends BaseCommand {
                 .addField('Critical Condition', covidStats.critical.toLocaleString(), true)
                 .addField('Tested', covidStats.tests.toLocaleString(), true)
                 .setFooter(new Date().toLocaleTimeString())
-            return message.channel.send({ embeds: [globalCovidEmbed] });
+            return message.channel.send({ embeds: [globalCovidEmbed] })
         }
         else {
-            const covidStats = await covid.countries({ country: args[0] });
-            const errorMessage = "Country not found or doesn't have any cases";
-            if (covidStats.message == errorMessage) return message.channel.send(errorMessage);
+            const covidStats = await covid.countries({ country: args[0] })
+            const errorMessage = "Country not found or doesn't have any cases"
+            if (covidStats.message == errorMessage) return message.channel.send(errorMessage)
 
             let covidEmbed = new MessageEmbed()
                 .setTitle(`COVID-19 Stats (${args[0]})`)

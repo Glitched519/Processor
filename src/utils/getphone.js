@@ -1,10 +1,10 @@
-const restify = require('restify');
-const cheerio = require('cheerio');
-const request = require('request');
-const corsMiddleware = require('restify-cors-middleware');
-const { chalk } = require('chalk');
+/* eslint-disable no-undef */
+const restify = require('restify')
+const cheerio = require('cheerio')
+const request = require('request')
+const corsMiddleware = require('restify-cors-middleware')
 
-var URI = "https://www.gsmarena.com";
+var URI = "https://www.gsmarena.com"
 
 const cors = corsMiddleware({
     preflightMaxAge: 5, //Optional 
@@ -22,7 +22,7 @@ const phoneBrands = async (req, res, next) => {
     }, (error, response, html) => {
         if (!error) {
             $ = cheerio.load(html)
-            let json = [];
+            let json = []
             let brands = $('table').find('td')
             brands.each((i, el) => {
                 let brand = {
@@ -33,8 +33,8 @@ const phoneBrands = async (req, res, next) => {
                 json.push(brand)
             })
 
-            res.send(json);
-            next();
+            res.send(json)
+            next()
         } else {
             res.send({
                 error: "Error failed fetching source"
@@ -42,7 +42,7 @@ const phoneBrands = async (req, res, next) => {
             next()
         }
     })
-};
+}
 
 
 // Get brand phone list
@@ -55,7 +55,7 @@ const phoneBrand = async (req, res, next) => {
     }, (error, response, html) => {
         if (!error) {
             $ = cheerio.load(html)
-            let json = [];
+            let json = []
 
             // Get all list phone
             let phones = $('.makers').find('li')
@@ -70,8 +70,8 @@ const phoneBrand = async (req, res, next) => {
             })
 
             // get next and prev page link
-            let nextPage = $('a.pages-next').attr('href');
-            let prevPage = $('a.pages-prev').attr('href');
+            let nextPage = $('a.pages-next').attr('href')
+            let prevPage = $('a.pages-prev').attr('href')
 
             let data = {
                 data: json,
@@ -79,8 +79,8 @@ const phoneBrand = async (req, res, next) => {
                 prev: prevPage
             }
 
-            res.send(data);
-            next();
+            res.send(data)
+            next()
         } else {
             res.send({
                 error: "Error failed fetching source"
@@ -88,7 +88,7 @@ const phoneBrand = async (req, res, next) => {
             next()
         }
     })
-};
+}
 
 
 // Get phone detail
@@ -101,17 +101,16 @@ const phoneDetail = async (req, res, next) => {
     }, function (error, response, html) {
         if (!error) {
             $ = cheerio.load(html)
-            let json = [];
 
             // Get phone detail
-            let display_size = $('span[data-spec=displaysize-hl]').text();
-            let display_res = $('div[data-spec=displayres-hl]').text();
-            let camera_pixels = $('.accent-camera').text();
-            let video_pixels = $('div[data-spec=videopixels-hl]').text();
-            let ram_size = $('.accent-expansion').text();
-            let chipset = $('div[data-spec=chipset-hl]').text();
-            let battery_size = $('.accent-battery').text();
-            let battery_type = $('div[data-spec=battype-hl]').text();
+            let display_size = $('span[data-spec=displaysize-hl]').text()
+            let display_res = $('div[data-spec=displayres-hl]').text()
+            let camera_pixels = $('.accent-camera').text()
+            let video_pixels = $('div[data-spec=videopixels-hl]').text()
+            let ram_size = $('.accent-expansion').text()
+            let chipset = $('div[data-spec=chipset-hl]').text()
+            let battery_size = $('.accent-battery').text()
+            let battery_type = $('div[data-spec=battype-hl]').text()
 
             let quick_spec = {
                 display_size: display_size,
@@ -124,15 +123,15 @@ const phoneDetail = async (req, res, next) => {
                 battery_type: battery_type
             }
 
-            let title = $('.specs-phone-name-title').text();
-            let img = $('.specs-photo-main a img').attr('src');
-            let img_url = $('.specs-photo-main a').attr('href');
+            let title = $('.specs-phone-name-title').text()
+            let img = $('.specs-photo-main a img').attr('src')
+            let img_url = $('.specs-photo-main a').attr('href')
 
             let specNode = $('table')
             let spec_detail = []
             specNode.each((i, el) => {
                 let specList = []
-                let category = $(el).find('th').text();
+                let category = $(el).find('th').text()
                 let specN = $(el).find('tr')
                 specN.each((index, ele) => {
                     let a = {
@@ -140,13 +139,13 @@ const phoneDetail = async (req, res, next) => {
                         value: $('td.nfo', ele).text()
                     }
                     specList.push(a)
-                });
+                })
 
                 spec_detail.push({
                     category: category,
                     specs: specList
                 })
-            });
+            })
 
             // get next and prev page link
 
@@ -159,8 +158,8 @@ const phoneDetail = async (req, res, next) => {
                 quick_spec: quick_spec
             }
 
-            res.send(data);
-            next();
+            res.send(data)
+            next()
         } else {
             res.send({
                 error: "Error failed fetching source"
@@ -168,7 +167,7 @@ const phoneDetail = async (req, res, next) => {
             next()
         }
     })
-};
+}
 
 
 // search for phone
@@ -181,7 +180,7 @@ const phoneSearch = async (req, res, next) => {
     }, (error, response, html) => {
         if (!error) {
             $ = cheerio.load(html)
-            let json = [];
+            let json = []
 
             // Get all list phone
             let phones = $('.makers').find('li')
@@ -196,8 +195,8 @@ const phoneSearch = async (req, res, next) => {
             })
 
 
-            res.send(json);
-            next();
+            res.send(json)
+            next()
         } else {
             res.send({
                 error: "Error failed fetching source"
@@ -205,7 +204,7 @@ const phoneSearch = async (req, res, next) => {
             next()
         }
     })
-};
+}
 
 
 // Get all reviews
@@ -218,7 +217,7 @@ const phoneReviews = async (req, res, next) => {
     }, (error, response, html) => {
         if (!error) {
             $ = cheerio.load(html)
-            let json = [];
+            let json = []
 
             // Get all list phone
             let reviews = $('.review-item')
@@ -234,8 +233,8 @@ const phoneReviews = async (req, res, next) => {
 
 
             // get next and prev page link
-            let nextPage = $('a.pages-next').attr('href');
-            let prevPage = $('a.pages-prev').attr('href');
+            let nextPage = $('a.pages-next').attr('href')
+            let prevPage = $('a.pages-prev').attr('href')
 
             data = {
                 data: json,
@@ -243,8 +242,8 @@ const phoneReviews = async (req, res, next) => {
                 prev: prevPage
             }
 
-            res.send(data);
-            next();
+            res.send(data)
+            next()
         } else {
             res.send({
                 error: "Error failed fetching source"
@@ -252,7 +251,7 @@ const phoneReviews = async (req, res, next) => {
             next()
         }
     })
-};
+}
 
 const phoneReview = async (req, res, next) => {
     await request({
@@ -263,16 +262,15 @@ const phoneReview = async (req, res, next) => {
     }, (error, response, html) => {
         if (!error) {
             $ = cheerio.load(html)
-            let json = [];
 
             // Get all list phone
-            let date = $('.dtreviewed').text();
-            let reviewer = $('.reviewer').text();
-            let title = $('.article-info-name').text();
+            let date = $('.dtreviewed').text()
+            let reviewer = $('.reviewer').text()
+            let title = $('.article-info-name').text()
             let review = $('#review-body').html()
             // get next and prev page link
-            let nextPage = $('a.pages-next').attr('href');
-            let prevPage = $('a.pages-prev').attr('href');
+            let nextPage = $('a.pages-next').attr('href')
+            let prevPage = $('a.pages-prev').attr('href')
 
             let data = {
                 date: date,
@@ -282,8 +280,8 @@ const phoneReview = async (req, res, next) => {
                 next: nextPage,
                 prev: prevPage
             }
-            res.send(data);
-            next();
+            res.send(data)
+            next()
         } else {
             res.send({
                 error: "Error failed fetching source"
@@ -291,38 +289,38 @@ const phoneReview = async (req, res, next) => {
             next()
         }
     })
-};
+}
 
 
 
 
-var server = restify.createServer();
-server.pre(cors.preflight);
-server.use(cors.actual);
+var server = restify.createServer()
+server.pre(cors.preflight)
+server.use(cors.actual)
 
-server.get('/gsmarena/brands', phoneBrands);
-server.head('/gsmarena/brands', phoneBrands);
+server.get('/gsmarena/brands', phoneBrands)
+server.head('/gsmarena/brands', phoneBrands)
 
-server.get('/gsmarena/brand/:id', phoneBrand);
-server.head('/gsmarena/brand/:id', phoneBrand);
+server.get('/gsmarena/brand/:id', phoneBrand)
+server.head('/gsmarena/brand/:id', phoneBrand)
 
-server.get('/gsmarena/phone/:phone', phoneDetail);
-server.head('/gsmarena/phone/:phone', phoneDetail);
+server.get('/gsmarena/phone/:phone', phoneDetail)
+server.head('/gsmarena/phone/:phone', phoneDetail)
 
-server.get('/gsmarena/search/phone/:phone', phoneSearch);
-server.head('/gsmarena/search/phone/:phone', phoneSearch);
+server.get('/gsmarena/search/phone/:phone', phoneSearch)
+server.head('/gsmarena/search/phone/:phone', phoneSearch)
 
-server.get('/gsmarena/reviews', phoneReviews);
-server.head('/gsmarena/reviews', phoneReviews);
+server.get('/gsmarena/reviews', phoneReviews)
+server.head('/gsmarena/reviews', phoneReviews)
 
-server.get('/gsmarena/review/:url', phoneReview);
-server.head('/gsmarena/review/:url', phoneReview);
+server.get('/gsmarena/review/:url', phoneReview)
+server.head('/gsmarena/review/:url', phoneReview)
 
 
 
 server.listen(8888, async function () {
-    console.log('GSMArena API running at http://localhost:8888.');
-});
+    console.log('GSMArena API running at http://localhost:8888.')
+})
 
 module.exports = {
     phoneBrands,

@@ -1300,8 +1300,8 @@ __metadata:
   linkType: hard
 
 "discord.js@npm:dev":
-  version: 13.0.0-dev.a08ce7d.1625097834
-  resolution: "discord.js@npm:13.0.0-dev.a08ce7d.1625097834"
+  version: 13.0.0-dev.fe6cc0c.1625227356
+  resolution: "discord.js@npm:13.0.0-dev.fe6cc0c.1625227356"
   dependencies:
     "@discordjs/builders": ^0.1.1
     "@discordjs/collection": ^0.1.6
@@ -1312,7 +1312,7 @@ __metadata:
     discord-api-types: ^0.19.0-next.f393ba520d7d6d2aacaca7b3ca5d355fab614f6e
     node-fetch: ^2.6.1
     ws: ^7.5.1
-  checksum: 6fd69aaf5cdcaec96ef628ec7f7c2c20a48e8ada4e306b374c0282dc83f17319ee6eb24e97ea64d529530e52634945cb19947750edce7a266a2df4ef38062bdf
+  checksum: b3761076136904a3ab0e6cf556ec1e2ea5f582df84b1669ba8f8a43caa2d17a6aef405d2bebaf4453999ed4f8a33306a7d7cfb7426012e50f73e5dd2b2cd8b85
   languageName: node
   linkType: hard
 
@@ -3111,9 +3111,9 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"mongoose@npm:5.12.14, mongoose@npm:^5.12.14":
-  version: 5.12.14
-  resolution: "mongoose@npm:5.12.14"
+"mongoose@npm:5.13.0, mongoose@npm:^5.13.0":
+  version: 5.13.0
+  resolution: "mongoose@npm:5.13.0"
   dependencies:
     "@types/mongodb": ^3.5.27
     bson: ^1.1.4
@@ -3127,7 +3127,7 @@ fsevents@~2.3.1:
     safe-buffer: 5.2.1
     sift: 13.5.2
     sliced: 1.0.1
-  checksum: 2960cc8ae262c9f055ef9c037bdd4311c469514f7fe3809360bd0e30c66a5cb8bc47c6183f83eec404cf7291957e140126cb165a8e6a45c6c6099a6bc645085d
+  checksum: 16e8efe9b40f56caab732594865910af27718ca5aa6db2e3736b6266f2ef0bc8cc70844286424d54c9e319bfcf5c0008f9673de1b38c33c972b5dd62dcd10df5
   languageName: node
   linkType: hard
 
@@ -3713,7 +3713,7 @@ fsevents@~2.3.1:
     jpeg-js: ^0.4.3
     mathjs: ^9.4.3
     mixme: ^0.5.1
-    mongoose: ^5.12.14
+    mongoose: ^5.13.0
     ms: ^2.1.3
     node-forge: ^0.10.0
     node-superfetch: ^0.2.3

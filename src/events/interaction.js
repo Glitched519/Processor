@@ -1,8 +1,8 @@
-const BaseEvent = require('../utils/structures/BaseEvent');
+const BaseEvent = require('../utils/structures/BaseEvent')
 
 module.exports = class GuildMemberAdd extends BaseEvent {
     constructor() {
-        super('interaction');
+        super('interaction')
     }
     async run(client, interaction) {
         switch (interaction.customID) {
@@ -19,7 +19,7 @@ module.exports = class GuildMemberAdd extends BaseEvent {
                 interaction.reply({ content: "Red", ephemeral: true })
                 break
             default:
-                console.log(interaction.customID);
+                console.log(interaction.customID)
         }
     }
 }

@@ -1,9 +1,9 @@
-const { MessageEmbed } = require('discord.js');
-const BaseCommand = require('../../utils/structures/BaseCommand');
+const { MessageEmbed } = require('discord.js')
+const BaseCommand = require('../../utils/structures/BaseCommand')
 
 module.exports = class Vote extends BaseCommand {
     constructor() {
-        super('vote', 'info', []);
+        super('vote', 'info', [])
     }
 
     async run(client, message) {
@@ -18,6 +18,6 @@ module.exports = class Vote extends BaseCommand {
             .addField('botsfordiscord.com', `[Vote on botsfordiscord.com!](https://botsfordiscord.com/bot/689678745782714464/vote)`)
             .setFooter(`Thanks for all the support!`, message.author.displayAvatarURL())
 
-        message.channel.send({ embeds: [voteEmbed] });
+        message.channel.send({ embeds: [voteEmbed] })
     }
 }

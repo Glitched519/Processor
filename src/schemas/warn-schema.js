@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
 
 const warnSchema = mongoose.Schema({
     guildId: String,
@@ -6,6 +6,6 @@ const warnSchema = mongoose.Schema({
     warnings: Array,
     moderator: Array,
     date: Array
-});
+})
 
-module.exports = mongoose.model('infractions', warnSchema);
+module.exports = mongoose.model('infractions', warnSchema)

@@ -1,35 +1,35 @@
-const warnSchema = require('../../schemas/warn-schema');
-const { MessageEmbed } = require('discord.js');
-const BaseCommand = require('../../utils/structures/BaseCommand');
+const warnSchema = require('../../schemas/warn-schema')
+const { MessageEmbed } = require('discord.js')
+const BaseCommand = require('../../utils/structures/BaseCommand')
 
 module.exports = class Warnings extends BaseCommand {
     constructor() {
-        super('warnings', 'mod', ['warns']);
+        super('warnings', 'mod', ['warns'])
     }
 
     async run(client, message, args) {
-        const mentionedMember = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member;
+        const mentionedMember = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member
         let cannotCheckWarnings = new MessageEmbed()
             .setDescription(`That member is a bot. I cannot check their warnings.`)
             .setColor('AQUA')
-        if (mentionedMember.user.bot) return message.channel.send({ embeds: [cannotCheckWarnings] });
+        if (mentionedMember.user.bot) return message.channel.send({ embeds: [cannotCheckWarnings] })
 
         const warnDoc = await warnSchema.findOne({
             guildId: message.guild.id,
             memberId: mentionedMember.id,
-        }).catch(err => console.log(err));
+        }).catch(err => console.log(err))
 
         if (!warnDoc || !warnDoc.warnings.length) {
-            return message.channel.send({ content: `${mentionedMember} has a clean slate!` });
+            return message.channel.send({ content: `${mentionedMember} has a clean slate!` })
         }
 
-        const data = [];
+        const data = []
 
         for (let i = 0; i < warnDoc.warnings.length; i++) {
-            data.push(`**ID:** ${i + 1}`);
+            data.push(`**ID:** ${i + 1}`)
             data.push(`**Warn:** ${warnDoc.warnings[i]}`)
-            data.push(`**Moderator:** ${await message.client.users.fetch(warnDoc.moderator[i]).catch(() => 'Deleted User')}`);
-            data.push(`**Date:** ${new Date(warnDoc.date[i]).toLocaleDateString()}\n`);
+            data.push(`**Moderator:** ${await message.client.users.fetch(warnDoc.moderator[i]).catch(() => 'Deleted User')}`)
+            data.push(`**Date:** ${new Date(warnDoc.date[i]).toLocaleDateString()}\n`)
         }
 
         const profileEmbed = {
@@ -40,6 +40,6 @@ module.exports = class Warnings extends BaseCommand {
             description: data.join('\n'),
         }
 
-        message.channel.send({ embeds: [profileEmbed] });
+        message.channel.send({ embeds: [profileEmbed] })
     }
 }

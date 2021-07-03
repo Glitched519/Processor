@@ -1,17 +1,17 @@
-const { Canvas } = require('skia-canvas');
-const BaseCommand = require('../../utils/structures/BaseCommand');
+const { Canvas } = require('skia-canvas')
+const BaseCommand = require('../../utils/structures/BaseCommand')
 
 module.exports = class Skia extends BaseCommand {
     constructor() {
-        super('skia', 'other', []);
+        super('skia', 'other', [])
     }
 
     async run(client, message) {
-        let rand = n => Math.floor(n * Math.random());
+        let rand = n => Math.floor(n * Math.random())
 
         let canvas = new Canvas(600, 600),
             ctx = canvas.getContext("2d"),
-            { width, height } = canvas;
+            { width, height } = canvas
 
         // draw a sea of blurred dots filling the canvas
         ctx.filter = 'blur(12px) hue-rotate(20deg)'
@@ -36,10 +36,10 @@ module.exports = class Skia extends BaseCommand {
         ctx.fillRect(0, 0, width, height)
 
         // save the graphic...
-        canvas.saveAs("image.png");
+        canvas.saveAs("image.png")
         // ...or use a shorthand for canvas.toBuffer("png")
         //fs.writeFileSync("pilcrow.png", canvas.png)
         // ...or embed it in a string
-        message.channel.send({ files: ["image.png"] });
+        message.channel.send({ files: ["image.png"] })
     }
 }

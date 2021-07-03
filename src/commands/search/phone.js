@@ -1,17 +1,17 @@
 // eslint-disable-next-line no-unused-vars
-const getphone = require('../../utils/getphone');
-const fetch = require('node-fetch');
-const emojis = require('../../emojis.json');
-const { MessageEmbed } = require('discord.js');
-const BaseCommand = require('../../utils/structures/BaseCommand');
+const getphone = require('../../utils/getphone')
+const fetch = require('node-fetch')
+const emojis = require('../../emojis.json')
+const { MessageEmbed } = require('discord.js')
+const BaseCommand = require('../../utils/structures/BaseCommand')
 
 module.exports = class Phone extends BaseCommand {
     constructor() {
-        super('phone', 'search', []);
+        super('phone', 'search', [])
     }
 
     async run(client, message, args) {
-        message.channel.send({ content: `**Please wait... If it takes too long, check your spelling and try again.${emojis.loading}**\nNot sure what phone to search? Try OnePlus 8.` });
+        message.channel.send({ content: `**Please wait... If it takes too long, check your spelling and try again.${emojis.loading}**\nNot sure what phone to search? Try OnePlus 8.` })
         fetch(`http://localhost:8888/gsmarena/search/phone/${args.join('%20')}`)
             .then(res => res.json())
             .then(json => {
@@ -40,10 +40,10 @@ module.exports = class Phone extends BaseCommand {
                                     .addField('Model', json2.spec_detail[12].specs[1].value, true)
                                     .addField('Network Tech', json2.spec_detail[0].specs[0].value, true)
 
-                                message.channel.send({ embeds: [phoneEmbed] });
+                                message.channel.send({ embeds: [phoneEmbed] })
                             })
                     }
                 }
-            });
+            })
     }
 }

@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
 
 const muteSchema = mongoose.Schema({
     guildId: {
@@ -9,6 +9,6 @@ const muteSchema = mongoose.Schema({
         type: String,
         required: true,
     }
-});
+})
 
-module.exports = mongoose.model('antispam-channels', muteSchema);
+module.exports = mongoose.model('antispam-channels', muteSchema)

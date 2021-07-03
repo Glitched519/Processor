@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
 
 const welcomeSchema = mongoose.Schema({
     _id: {
@@ -10,6 +10,6 @@ const welcomeSchema = mongoose.Schema({
         type: String,
         required: true
     }
-});
+})
 
-module.exports = mongoose.model('welcome-channels', welcomeSchema);
+module.exports = mongoose.model('welcome-channels', welcomeSchema)

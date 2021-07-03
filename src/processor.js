@@ -1,10 +1,10 @@
 
-const { Client } = require('discord.js');
-const { registerCommands, registerEvents } = require('./utils/registry');
-const config = require('./config.json');
-const Topgg = require("@top-gg/sdk");
+const { Client } = require('discord.js')
+const { registerCommands, registerEvents } = require('./utils/registry')
+const config = require('./config.json')
+const Topgg = require("@top-gg/sdk")
 
-const api = new Topgg.Api(config["topgg-token"]);
+const api = new Topgg.Api(config["topgg-token"])
 
 const nonPrivilegedIntents = [
     'GUILDS',
@@ -19,7 +19,7 @@ const nonPrivilegedIntents = [
     'GUILD_MESSAGE_TYPING',
     'DIRECT_MESSAGES',
     'DIRECT_MESSAGE_REACTIONS',
-    'DIRECT_MESSAGE_TYPING'];
+    'DIRECT_MESSAGE_TYPING']
 
 
 const client = new Client({
@@ -29,29 +29,28 @@ const client = new Client({
     }
     // partials: ['MESSAGE', 'CHANNEL', 'REACTION', 'GUILD_MEMBER', 'USER']
 });
-//const discordButtons = require('discord-buttons')(client);
 
 (async () => {
-    await client.login(config.token).then(() => console.log('Logging In...'));
-    console.log('Configuring Client Settings...');
-    client.commands = new Map();
-    client.events = new Map();
-    client.snipes = new Map();
-    client.prefix = config.prefix;
-    await registerCommands(client, '../commands').then(() => console.log("Registering Commands..."));
-    await registerEvents(client, '../events').then(() => console.log("Registering Events..."));
+    await client.login(config.token).then(() => console.log('Logging In...'))
+    console.log('Configuring Client Settings...')
+    client.commands = new Map()
+    client.events = new Map()
+    client.snipes = new Map()
+    client.prefix = config.prefix
+    await registerCommands(client, '../commands').then(() => console.log("Registering Commands..."))
+    await registerEvents(client, '../events').then(() => console.log("Registering Events..."))
 
     setInterval(() => {
         api.postStats({
             serverCount: client.guilds.cache.size,
             shardCount: client.options.shardCount
-        });
+        })
     }, 1800000) // update every 30 minutes
-    console.log("Started Posting Bot Stats on top.gg.");
+    console.log("Started Posting Bot Stats on top.gg.")
 
-    console.log("Guilds: %d", client.guilds.cache.size);
+    console.log("Guilds: %d", client.guilds.cache.size)
 
-    console.log('Awaiting Ready Event...');
-    client.emit("ready");
-})();
+    console.log('Awaiting Ready Event...')
+    client.emit("ready")
+})()
 

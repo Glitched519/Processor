@@ -1,9 +1,9 @@
-const fetch = require('node-fetch');
-const BaseCommand = require('../../utils/structures/BaseCommand');
+const fetch = require('node-fetch')
+const BaseCommand = require('../../utils/structures/BaseCommand')
 
 module.exports = class Quote extends BaseCommand {
     constructor() {
-        super('quote', 'other', []);
+        super('quote', 'other', [])
     }
 
     async run(client, message) {
@@ -11,6 +11,6 @@ module.exports = class Quote extends BaseCommand {
             .then(res => res.json())
             .then(json => {
                 message.channel.send({content: `> ${json.content}\n${json.author}`})
-            });
+            })
     }
 }

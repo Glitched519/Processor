@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
 
 const commandPrefixSchema = mongoose.Schema({
     // Guild ID
@@ -10,6 +10,6 @@ const commandPrefixSchema = mongoose.Schema({
         type: String,
         required: true
     }
-});
+})
 
-module.exports = mongoose.model('guild-prefixes', commandPrefixSchema);
+module.exports = mongoose.model('guild-prefixes', commandPrefixSchema)

@@ -1,93 +1,93 @@
-const guildPrefixes = {};
-const fs = require('fs');
-const path = require('path');
-const { prefix: globalPrefix } = require('../../config.json');
-const commandPrefixSchema = require('../../schemas/command-prefix-schema');
-const { MessageEmbed } = require('discord.js');
-const BaseCommand = require('../../utils/structures/BaseCommand');
+const guildPrefixes = {}
+const fs = require('fs')
+const path = require('path')
+const { prefix: globalPrefix } = require('../../config.json')
+const commandPrefixSchema = require('../../schemas/command-prefix-schema')
+const { MessageEmbed } = require('discord.js')
+const BaseCommand = require('../../utils/structures/BaseCommand')
 
 module.exports = class Help extends BaseCommand {
     constructor() {
-        super('help', 'info', []);
+        super('help', 'info', [])
     }
 
     async run(client, message, args) {
-        let page = 1;
-        let maxPages = 10;
+        let page = 1
+        let maxPages = 10
 
-        let setupCmds = [];
-        let modCmds = [];
-        let mathCmds = [];
-        let animalCmds = [];
-        let clashCmds = [];
-        let cuteCmds = [];
-        let infoCmds = [];
-        let searchCmds = [];
-        let otherCmds = [];
+        let setupCmds = []
+        let modCmds = []
+        let mathCmds = []
+        let animalCmds = []
+        let clashCmds = []
+        let cuteCmds = []
+        let infoCmds = []
+        let searchCmds = []
+        let otherCmds = []
 
-        let setupCmdNames = fs.readdirSync(path.join(__dirname, '../setup'));
-        let modCmdNames = fs.readdirSync(path.join(__dirname, '../mod'));
-        let mathCmdNames = fs.readdirSync(path.join(__dirname, '../math'));
-        let animalCmdNames = fs.readdirSync(path.join(__dirname, '../animal'));
-        let clashCmdNames = fs.readdirSync(path.join(__dirname, '../clash'));
-        let cuteCmdNames = fs.readdirSync(path.join(__dirname, '../cute'));
-        let infoCmdNames = fs.readdirSync(path.join(__dirname, '../info'));
-        let searchCmdNames = fs.readdirSync(path.join(__dirname, '../search'));
-        let otherCmdNames = fs.readdirSync(path.join(__dirname, '../other'));
+        let setupCmdNames = fs.readdirSync(path.join(__dirname, '../setup'))
+        let modCmdNames = fs.readdirSync(path.join(__dirname, '../mod'))
+        let mathCmdNames = fs.readdirSync(path.join(__dirname, '../math'))
+        let animalCmdNames = fs.readdirSync(path.join(__dirname, '../animal'))
+        let clashCmdNames = fs.readdirSync(path.join(__dirname, '../clash'))
+        let cuteCmdNames = fs.readdirSync(path.join(__dirname, '../cute'))
+        let infoCmdNames = fs.readdirSync(path.join(__dirname, '../info'))
+        let searchCmdNames = fs.readdirSync(path.join(__dirname, '../search'))
+        let otherCmdNames = fs.readdirSync(path.join(__dirname, '../other'))
 
         setupCmdNames.forEach(cmd => {
-            cmd = cmd.slice(0, cmd.indexOf('.js'));
-            setupCmds.push(cmd);
-        });
+            cmd = cmd.slice(0, cmd.indexOf('.js'))
+            setupCmds.push(cmd)
+        })
         modCmdNames.forEach(cmd => {
-            cmd = cmd.slice(0, cmd.indexOf('.js'));
-            modCmds.push(cmd);
-        });
+            cmd = cmd.slice(0, cmd.indexOf('.js'))
+            modCmds.push(cmd)
+        })
         mathCmdNames.forEach(cmd => {
-            cmd = cmd.slice(0, cmd.indexOf('.js'));
-            mathCmds.push(cmd);
-        });
+            cmd = cmd.slice(0, cmd.indexOf('.js'))
+            mathCmds.push(cmd)
+        })
         animalCmdNames.forEach(cmd => {
-            cmd = cmd.slice(0, cmd.indexOf('.js'));
-            animalCmds.push(cmd);
-        });
+            cmd = cmd.slice(0, cmd.indexOf('.js'))
+            animalCmds.push(cmd)
+        })
         clashCmdNames.forEach(cmd => {
-            cmd = cmd.slice(0, cmd.indexOf('.js'));
-            clashCmds.push(cmd);
-        });
+            cmd = cmd.slice(0, cmd.indexOf('.js'))
+            clashCmds.push(cmd)
+        })
         cuteCmdNames.forEach(cmd => {
-            cmd = cmd.slice(0, cmd.indexOf('.js'));
-            cuteCmds.push(cmd);
-        });
+            cmd = cmd.slice(0, cmd.indexOf('.js'))
+            cuteCmds.push(cmd)
+        })
         infoCmdNames.forEach(cmd => {
-            cmd = cmd.slice(0, cmd.indexOf('.js'));
-            infoCmds.push(cmd);
-        });
+            cmd = cmd.slice(0, cmd.indexOf('.js'))
+            infoCmds.push(cmd)
+        })
         searchCmdNames.forEach(cmd => {
-            cmd = cmd.slice(0, cmd.indexOf('.js'));
-            searchCmds.push(cmd);
-        });
+            cmd = cmd.slice(0, cmd.indexOf('.js'))
+            searchCmds.push(cmd)
+        })
         otherCmdNames.forEach(cmd => {
-            cmd = cmd.slice(0, cmd.indexOf('.js'));
-            otherCmds.push(cmd);
-        });
+            cmd = cmd.slice(0, cmd.indexOf('.js'))
+            otherCmds.push(cmd)
+        })
 
         // eslint-disable-next-line no-unused-vars
         for (const guild of client.guilds.cache) {
-            const result = await commandPrefixSchema.findOne({ _id: message.guild.id });
+            const result = await commandPrefixSchema.findOne({ _id: message.guild.id })
             if (result == null) {
-                guildPrefixes[message.guild.id] = globalPrefix;
+                guildPrefixes[message.guild.id] = globalPrefix
             }
             else {
-                guildPrefixes[message.guild.id] = result.prefix;
+                guildPrefixes[message.guild.id] = result.prefix
             }
         }
-        const PREFIX = guildPrefixes[message.guild.id] || globalPrefix;
+        const PREFIX = guildPrefixes[message.guild.id] || globalPrefix
 
         let helpClosed = new MessageEmbed()
             .setColor('ORANGE')
             .setTitle(`Help Closed`)
-            .setDescription('Deleting this embed in 5 seconds...');
+            .setDescription('Deleting this embed in 5 seconds...')
 
         let helpFallbackEmbed = new MessageEmbed()
             .setColor(`RANDOM`)
@@ -171,18 +171,18 @@ module.exports = class Help extends BaseCommand {
             .setURL('https://processorbot.xyz/commands/')
             .setDescription(`\`${otherCmds.join('\n')}\``)
 
-        let allEmbeds = [helpEmbed, setupEmbed, modEmbed, animalEmbed, clashEmbed, cuteEmbed, mathEmbed, infoEmbed, searchEmbed, otherEmbed];
+        let allEmbeds = [helpEmbed, setupEmbed, modEmbed, animalEmbed, clashEmbed, cuteEmbed, mathEmbed, infoEmbed, searchEmbed, otherEmbed]
 
         function gotoPage(msg, page) {
             for (let i = 0; i < maxPages + 1; i++) {
                 switch (page) {
                     case i:
-                        allEmbeds[i - 1].setFooter(`Page ${page} of ${maxPages}`, `${message.author.displayAvatarURL()}`);
-                        msg.edit({ embeds: [allEmbeds[i - 1]] });
-                        break;
+                        allEmbeds[i - 1].setFooter(`Page ${page} of ${maxPages}`, `${message.author.displayAvatarURL()}`)
+                        msg.edit({ embeds: [allEmbeds[i - 1]] })
+                        break
                 }
             }
-            changePage(msg);
+            changePage(msg)
         }
 
         function changePage(msg) {
@@ -195,86 +195,86 @@ module.exports = class Help extends BaseCommand {
 
 
             const filter = (reaction, user) => {
-                return ['⏮', '◀', '💠', '▶', '⏭', 'no'].includes(reaction.emoji.name) && user.id === message.author.id;
-            };
+                return ['⏮', '◀', '💠', '▶', '⏭', 'no'].includes(reaction.emoji.name) && user.id === message.author.id
+            }
             msg.awaitReactions(filter, { max: 1, time: 300000, errors: ['time'] })
                 .then(collected => {
-                    const reaction = collected.first();
+                    const reaction = collected.first()
                     switch (reaction.emoji.name) {
                         case '⏮':
-                            page = 1;
-                            gotoPage(msg, 1);
-                            break;
+                            page = 1
+                            gotoPage(msg, 1)
+                            break
                         case '◀':
                             if (page <= 1) {
-                                page = 1;
+                                page = 1
                             }
                             else {
-                                page--;
+                                page--
                             }
-                            gotoPage(msg, page);
-                            break;
+                            gotoPage(msg, page)
+                            break
                         case '💠':
                             if (page == Math.round(maxPages / 2)) {
-                                page = Math.round(maxPages / 2);
+                                page = Math.round(maxPages / 2)
                             }
                             else {
-                                page = Math.round(maxPages / 2);
+                                page = Math.round(maxPages / 2)
                             }
-                            gotoPage(msg, page);
-                            break;
+                            gotoPage(msg, page)
+                            break
                         case '▶':
                             if (page >= maxPages) {
-                                page = maxPages;
+                                page = maxPages
                             }
                             else {
-                                page++;
+                                page++
                             }
-                            gotoPage(msg, page);
-                            break;
+                            gotoPage(msg, page)
+                            break
                         case '⏭':
-                            page = maxPages;
-                            gotoPage(msg, maxPages);
-                            break;
+                            page = maxPages
+                            gotoPage(msg, maxPages)
+                            break
                         case 'no':
                             return msg.edit(helpClosed)
                                 .then(close => {
-                                    close.delete({ timeout: 5000 });
-                                });
+                                    close.delete({ timeout: 5000 })
+                                })
                     }
                 })
                 .catch(() => {
-                    return msg.delete();
+                    return msg.delete()
                 })
         }
         switch (args[0]) {
             case "setup":
-                return message.channel.send({ embeds: [setupEmbed] });
+                return message.channel.send({ embeds: [setupEmbed] })
             case "mod":
-                return message.channel.send({ embeds: [modEmbed] });
+                return message.channel.send({ embeds: [modEmbed] })
             case "animal":
-                return message.channel.send({ embeds: [animalEmbed] });
+                return message.channel.send({ embeds: [animalEmbed] })
             case "clash":
-                return message.channel.send({ embeds: [clashEmbed] });
+                return message.channel.send({ embeds: [clashEmbed] })
             case "cute":
-                return message.channel.send({ embeds: [cuteEmbed] });
+                return message.channel.send({ embeds: [cuteEmbed] })
             case "math":
-                return message.channel.send({ embeds: [mathEmbed] });
+                return message.channel.send({ embeds: [mathEmbed] })
             case "info":
-                return message.channel.send({ embeds: [infoEmbed] });
+                return message.channel.send({ embeds: [infoEmbed] })
             case "search":
-                return message.channel.send({ embeds: [searchEmbed] });
+                return message.channel.send({ embeds: [searchEmbed] })
             case "other":
-                return message.channel.send({ embeds: [otherEmbed] });
+                return message.channel.send({ embeds: [otherEmbed] })
         }
 
         if (!message.guild.me.permissions.has(["READ_MESSAGE_HISTORY", "ADD_REACTIONS"])) {
-            message.channel.send({ content: `:grey_question: If you wish to use reactions to navigate the help menu, please make make the following permissions are enabled:\n**Read Message History\nAdd Reactions**\nUsage: ${PREFIX}help \`[topic]\`` });
-            return message.channel.send({ embeds: [helpFallbackEmbed] });
+            message.channel.send({ content: `:grey_question: If you wish to use reactions to navigate the help menu, please make make the following permissions are enabled:\n**Read Message History\nAdd Reactions**\nUsage: ${PREFIX}help \`[topic]\`` })
+            return message.channel.send({ embeds: [helpFallbackEmbed] })
         }
-        helpEmbed.setFooter(`Page ${page} of ${maxPages}`, `${message.author.displayAvatarURL()}`);
+        helpEmbed.setFooter(`Page ${page} of ${maxPages}`, `${message.author.displayAvatarURL()}`)
         message.channel.send({ embeds: [helpEmbed] }).then(msg => {
-            changePage(msg);
-        });
+            changePage(msg)
+        })
     }
 }
