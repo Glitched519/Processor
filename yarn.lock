@@ -1324,7 +1324,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"discord.js@npm:^13.0.0-dev.fe5d56c.1625443439":
+"discord.js@npm:dev":
   version: 13.0.0-dev.fe5d56c.1625443439
   resolution: "discord.js@npm:13.0.0-dev.fe5d56c.1625443439"
   dependencies:
@@ -3732,7 +3732,7 @@ fsevents@~2.3.1:
     chalk: ^4.1.1
     cheerio: ^1.0.0-rc.10
     css-what: ^5.0.1
-    discord.js: ^13.0.0-dev.fe5d56c.1625443439
+    discord.js: dev
     eslint: ^7.30.0
     express: ^4.17.1
     humanize-duration: ^3.27.0

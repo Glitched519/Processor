@@ -4,9 +4,9 @@ const commandPrefixSchema = require('../schemas/command-prefix-schema')
 const antiSpamSchema = require('../schemas/antispam-schema')
 const BaseEvent = require('../utils/structures/BaseEvent')
 
-module.exports = class Message extends BaseEvent {
+module.exports = class MessageCreate extends BaseEvent {
     constructor() {
-        super('message')
+        super('messageCreate')
     }
 
     async run(client, message) {
