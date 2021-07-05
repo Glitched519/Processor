@@ -48,13 +48,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@discordjs/builders@npm:^0.1.1":
-  version: 0.1.1
-  resolution: "@discordjs/builders@npm:0.1.1"
+"@discordjs/builders@npm:^0.2.0":
+  version: 0.2.0
+  resolution: "@discordjs/builders@npm:0.2.0"
   dependencies:
     discord-api-types: ^0.18.1
     tslib: ^2.3.0
-  checksum: 2902d53542467c9fe3353b412c12b273a9ecba10ad3f86029613ef3822eba68a83b491fac644bdc37e254520b6a1fcaa91ae58c3ad859d0a768e47fbd2fe3e06
+  checksum: d273d10d711ba0d45e0fff35d7e722231ce008bdbef04fe993488d551aea222d8e5754e4727e71e3e6cbe7d39900a47320d859c4db5c49c1ea3f780b4ab5d64b
   languageName: node
   linkType: hard
 
@@ -90,6 +90,24 @@ __metadata:
     minimatch: ^3.0.4
     strip-json-comments: ^3.1.1
   checksum: 60b66ce4257bf5c36a920dea83a056102fef746e7afd7100a6fe245a126ff455f67f4948e75d28ed73090bff8f8556b6a996e74a124911ca703440bc245dbc23
+  languageName: node
+  linkType: hard
+
+"@humanwhocodes/config-array@npm:^0.5.0":
+  version: 0.5.0
+  resolution: "@humanwhocodes/config-array@npm:0.5.0"
+  dependencies:
+    "@humanwhocodes/object-schema": ^1.2.0
+    debug: ^4.1.1
+    minimatch: ^3.0.4
+  checksum: 71e3c1fef40166ecaacbe29b681499dc6bab3fe45df5bfb3e137baf6e50f22813cf14f24ff759a4da43b6743d7f5a776298ae1e0e266c9602bab62da2ee3b302
+  languageName: node
+  linkType: hard
+
+"@humanwhocodes/object-schema@npm:^1.2.0":
+  version: 1.2.0
+  resolution: "@humanwhocodes/object-schema@npm:1.2.0"
+  checksum: ef533ee0d227b8036e4220013575fedc3d0346e2e40bc5f5536ba5761825f23577eb4b71e52f18a2d3b827c9d83cfa60c821a71e30d5f6537918a94bc1990963
   languageName: node
   linkType: hard
 
@@ -244,13 +262,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@top-gg/sdk@npm:^3.1.1":
-  version: 3.1.1
-  resolution: "@top-gg/sdk@npm:3.1.1"
+"@top-gg/sdk@npm:^3.1.2":
+  version: 3.1.2
+  resolution: "@top-gg/sdk@npm:3.1.2"
   dependencies:
     node-fetch: ^2.6.1
     raw-body: ^2.4.1
-  checksum: 223969aebb23959b23d4be3e29dca3450641bf028d44b40a39fc6025bfaa1d89d7e8d86b02693bdbfbbd8d4d3d5ab6dee2a28ce68f0c30fbad444f251ff811d2
+  checksum: 735c25630c8a72b41f3cceb76383ed42734ebf25fdb6d099b3bb8406ad49caf37f44d47f389a26b519139da87d49606187c9e11b0ed14c832123d07b3f993433
   languageName: node
   linkType: hard
 
@@ -280,12 +298,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/node@npm:14.x || 15.x":
+  version: 15.14.1
+  resolution: "@types/node@npm:15.14.1"
+  checksum: 6340f64e439381a4843ac9d8087d92370caf5fac44b296d83ddb93f0212a9f8ac3ca80b38958519dac4b104d7aa8e75e4a5ae8c3fce3b1bd3cc2c86c2a9bc8b9
+  languageName: node
+  linkType: hard
+
 "@types/ws@npm:^7.4.5":
-  version: 7.4.5
-  resolution: "@types/ws@npm:7.4.5"
+  version: 7.4.6
+  resolution: "@types/ws@npm:7.4.6"
   dependencies:
     "@types/node": "*"
-  checksum: b467f596cc9992dde38ea9bb824135f20d0eae92515304e3de25e4b98a3b41e71897801900563c1e72f36fa7a6277c873896b842bd6d1b9d4b9457834533903b
+  checksum: bf81b170ab2caeb5f602e1094058d31b2e19fbb725d25007fbca01c1043c10c3fdd0ee67dd29cadab3bdfed52cf930d9d0ec06bb51b811e67176959476cbd043
   languageName: node
   linkType: hard
 
@@ -1299,11 +1324,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"discord.js@npm:dev":
-  version: 13.0.0-dev.fe6cc0c.1625227356
-  resolution: "discord.js@npm:13.0.0-dev.fe6cc0c.1625227356"
+"discord.js@npm:^13.0.0-dev.fe5d56c.1625443439":
+  version: 13.0.0-dev.fe5d56c.1625443439
+  resolution: "discord.js@npm:13.0.0-dev.fe5d56c.1625443439"
   dependencies:
-    "@discordjs/builders": ^0.1.1
+    "@discordjs/builders": ^0.2.0
     "@discordjs/collection": ^0.1.6
     "@discordjs/form-data": ^3.0.1
     "@sapphire/async-queue": ^1.1.4
@@ -1312,7 +1337,7 @@ __metadata:
     discord-api-types: ^0.19.0-next.f393ba520d7d6d2aacaca7b3ca5d355fab614f6e
     node-fetch: ^2.6.1
     ws: ^7.5.1
-  checksum: b3761076136904a3ab0e6cf556ec1e2ea5f582df84b1669ba8f8a43caa2d17a6aef405d2bebaf4453999ed4f8a33306a7d7cfb7426012e50f73e5dd2b2cd8b85
+  checksum: d569b20eaf5f0f3c4fc892b157deb7c397b3af760ca0ca6ddd05e7559692d52851e2198071bda4dfa82b8608255798d8311683af970bb134025ff39d08dc5850
   languageName: node
   linkType: hard
 
@@ -1581,12 +1606,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint@npm:^7.29.0":
-  version: 7.29.0
-  resolution: "eslint@npm:7.29.0"
+"eslint@npm:^7.30.0":
+  version: 7.30.0
+  resolution: "eslint@npm:7.30.0"
   dependencies:
     "@babel/code-frame": 7.12.11
     "@eslint/eslintrc": ^0.4.2
+    "@humanwhocodes/config-array": ^0.5.0
     ajv: ^6.10.0
     chalk: ^4.0.0
     cross-spawn: ^7.0.2
@@ -1626,7 +1652,7 @@ __metadata:
     v8-compile-cache: ^2.0.3
   bin:
     eslint: bin/eslint.js
-  checksum: 812f8c5123860cf5bd877018ffd29abd52bbaaca55fdd616008c97da9bf47a20a7b7c7ecb7c8f753c06f77ea5d59480f3d6d76475699b2ea380237fbb7c6b3a2
+  checksum: 028048847e0252d6c972ac612fe37be55822ae2255d10d1bf68255749f7ae1364b2aa538cd95f3bc4d951fc7d36195e46b62fe8d215297ef9a6a8aeb8ca28a90
   languageName: node
   linkType: hard
 
@@ -3111,11 +3137,12 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"mongoose@npm:5.13.0, mongoose@npm:^5.13.0":
-  version: 5.13.0
-  resolution: "mongoose@npm:5.13.0"
+"mongoose@npm:5.13.2, mongoose@npm:^5.13.2":
+  version: 5.13.2
+  resolution: "mongoose@npm:5.13.2"
   dependencies:
     "@types/mongodb": ^3.5.27
+    "@types/node": 14.x || 15.x
     bson: ^1.1.4
     kareem: 2.3.2
     mongodb: 3.6.8
@@ -3127,7 +3154,7 @@ fsevents@~2.3.1:
     safe-buffer: 5.2.1
     sift: 13.5.2
     sliced: 1.0.1
-  checksum: 16e8efe9b40f56caab732594865910af27718ca5aa6db2e3736b6266f2ef0bc8cc70844286424d54c9e319bfcf5c0008f9673de1b38c33c972b5dd62dcd10df5
+  checksum: 1b1d6c13e89108a92e39e0c9f95c005fa9d8da236e4eecbb5d670d45579a1cb137e6d22fec9e30e784ac937c1a46a47f894c5c883a17acdf79c6b80256a0102f
   languageName: node
   linkType: hard
 
@@ -3697,7 +3724,7 @@ fsevents@~2.3.1:
   version: 0.0.0-use.local
   resolution: "processor@workspace:."
   dependencies:
-    "@top-gg/sdk": ^3.1.1
+    "@top-gg/sdk": ^3.1.2
     axios: ^0.21.1
     better-discord-antispam: ^2.0.0
     bytes: ^3.1.0
@@ -3705,15 +3732,15 @@ fsevents@~2.3.1:
     chalk: ^4.1.1
     cheerio: ^1.0.0-rc.10
     css-what: ^5.0.1
-    discord.js: dev
-    eslint: ^7.29.0
+    discord.js: ^13.0.0-dev.fe5d56c.1625443439
+    eslint: ^7.30.0
     express: ^4.17.1
     humanize-duration: ^3.27.0
     ini: ^2.0.0
     jpeg-js: ^0.4.3
     mathjs: ^9.4.3
     mixme: ^0.5.1
-    mongoose: ^5.13.0
+    mongoose: ^5.13.2
     ms: ^2.1.3
     node-forge: ^0.10.0
     node-superfetch: ^0.2.3
@@ -5018,8 +5045,8 @@ resolve@^1.12.0:
   linkType: hard
 
 "ws@npm:^7.5.1":
-  version: 7.5.1
-  resolution: "ws@npm:7.5.1"
+  version: 7.5.2
+  resolution: "ws@npm:7.5.2"
   peerDependencies:
     bufferutil: ^4.0.1
     utf-8-validate: ^5.0.2
@@ -5028,7 +5055,7 @@ resolve@^1.12.0:
       optional: true
     utf-8-validate:
       optional: true
-  checksum: e56541a73cac1d5b4b5e81ddd7e9925e84e45abaab6f3ee5e088e0089b5518f862d8429897243e12482b118971ad8a9a75b1d4900769bce3877878a0a7470043
+  checksum: 45eccd77921681f3cae0d646813b5c6aad40e11f90a57e7070a5ceed1ff27629d23034cb223bf77cc6de41a8a2591faa2635558bb5ba9e280edccbc088655770
   languageName: node
   linkType: hard
 
