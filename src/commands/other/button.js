@@ -11,19 +11,19 @@ module.exports = class Button extends BaseCommand {
             .addComponents(
                 new MessageButton()
                     .setLabel("Blurple")
-                    .setCustomID("Blurple")
+                    .setCustomId("Blurple")
                     .setStyle("PRIMARY"),
                     new MessageButton()
                     .setLabel("Grey")
-                    .setCustomID("Grey")
+                    .setCustomId("Grey")
                     .setStyle("SECONDARY"),
                     new MessageButton()
                     .setLabel("Green")
-                    .setCustomID("Green")
+                    .setCustomId("Green")
                     .setStyle("SUCCESS"),
                     new MessageButton()
                     .setLabel("Red")
-                    .setCustomID("Red")
+                    .setCustomId("Red")
                     .setStyle("DANGER"),
                 new MessageButton()
                     .setLabel("Click Me!")

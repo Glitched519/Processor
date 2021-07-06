@@ -72,7 +72,7 @@ module.exports = class Stats extends BaseCommand {
                     },
                     {
                         name: 'Server Owner',
-                        value: `<@!${guild.ownerID}>`,
+                        value: `<@!${guild.ownerId}>`,
                     },
                     {
                         name: 'Total Members',
