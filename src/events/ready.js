@@ -137,7 +137,7 @@ module.exports = class Ready extends BaseEvent {
 
             if (command === 'ping') {
                 reply(interaction, 'pong')
-                
+
             } else if (command === 'embed') {
                 const embed = new MessageEmbed()
                     .setTitle('Example Embed')

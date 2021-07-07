@@ -15,6 +15,6 @@ module.exports = class GuildCreate extends BaseEvent {
             .addField("Member Count", guild.memberCount, true)
             .addField("Owner", guild.owner ? `<@${guild.owner.id}>` : `Anonymous`, true)
             .setFooter(`Currently in ${client.guilds.cache.size} servers`)
-        destination.send({embeds: [joinEmbed]})
+        destination.send({ embeds: [joinEmbed] })
     }
 }

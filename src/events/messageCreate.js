@@ -23,7 +23,7 @@ module.exports = class MessageCreate extends BaseEvent {
         }
 
         const prefix = guildPrefixes[message.guild.id] || globalPrefix
-        
+
         if (message.content == `<@!689678745782714464>`) {
             message.reply(`my prefix is **${prefix}**`)
         }
@@ -38,12 +38,12 @@ module.exports = class MessageCreate extends BaseEvent {
                     command.run(client, message, cmdArgs)
                 }
                 catch (err) {
-                    message.reply(`Unfortunately, there was an error upon executing this command: \`\`\`${err}\`\`\``)
+                    message.channel.send({ content: `Unfortunately, there was an error upon executing this command: \`\`\`${err}\`\`\`` })
                 }
             }
         }
 
-        const antiSpamChannelQuery = await antiSpamSchema.findOne({ 
+        const antiSpamChannelQuery = await antiSpamSchema.findOne({
             guildId: message.guild.id,
             channelId: message.channel.id,
         })

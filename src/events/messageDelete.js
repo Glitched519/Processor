@@ -26,7 +26,7 @@ module.exports = class MessageDelete extends BaseEvent {
             .setColor('RED')
             .setFooter(new Date().toLocaleTimeString())
 
-        destination.send({embeds: [deletedEmbed]})
+        destination.send({ embeds: [deletedEmbed] })
 
     }
 }

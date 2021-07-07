@@ -1,15 +1,17 @@
-const cheerio = require('cheerio')
-const request = require('request')
 const fs = require('fs')
 const path = require('path')
+const axios = require("axios").default
+const config = require('../../config.json')
 const BaseCommand = require('../../utils/structures/BaseCommand')
+
+
 
 module.exports = class Image extends BaseCommand {
     constructor() {
-        super('image', 'info', ['img'])
+        super('image', 'search', ['img'])
     }
 
-    run(client, message, args) {
+    async run(client, message, args) {
         let bannedWords = fs.readFileSync(path.join(__dirname, '../../events/bannedwords.txt')).toString().split("\r\n")
         let bannedPhrases = fs.readFileSync(path.join(__dirname, '../../events/bannedphrases.txt')).toString().split("\r\n")
         let msg = message.content.toLowerCase()
@@ -26,33 +28,25 @@ module.exports = class Image extends BaseCommand {
                 if (msg.includes(bannedPhrases[j])) return
             }
         }
-        
 
-        function image(message) {
-            let options = {
-                url: "https://results.dogpile.com/serp?qc=images&q=" + args.join('%20'),
-                method: "GET",
-                headers: {
-                    "Accept": "text/html",
-                    "User-Agent": "Chrome"
-                }
-            }
+        let size = 10
 
-            request(options, function (error, response, responseBody) {
-                if (error) return message.channel.send({ content: ":x: **Error finding image.**" })
-
-                let $ = cheerio.load(responseBody)
-                let links = $(".image a.link")
-                console.log($.html())
-                let urls = new Array(links.length).fill(0).map((v, i) => links.eq(i).attr("href"))
-                if (!urls.length) return
-                message.channel.send({ content: urls[Math.floor(Math.random() * urls.length)] })
-            })
-
+        const options = {
+          method: 'GET',
+          url: 'https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/Search/ImageSearchAPI',
+          params: {q: args.join(' '), pageSize: size, autoCorrect: 'true'},
+          headers: {
+            'x-rapidapi-key': config['x-rapid-api-key'],
+            'x-rapidapi-host': 'contextualwebsearch-websearch-v1.p.rapidapi.com'
+          }
         }
-
         
-
-        image(message)
+        axios.request(options).then(function (response) {
+            let randomIndex = Math.floor(Math.random() * size)
+            let image = response.data.value[randomIndex].url
+            message.channel.send(image)
+        }).catch(function (error) {
+            console.error(error)
+        })
     }
 }
