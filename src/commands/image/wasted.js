@@ -5,9 +5,9 @@ module.exports = class Wasted extends BaseCommand {
         super('wasted', 'image', [])
     }
 
-    async run(message, args) {
-        const mentionedMember = message.mentions.members.first() || message.guild.members.cache.get(args[0])
-        let link = mentionedMember ? `https://some-random-api.ml/canvas/wasted/?avatar=${mentionedMember.user.avatarURL({ format: 'png', dynamic: true, size: 1024 })}` : `https://some-random-api.ml/canvas/wasted/?avatar=${message.author.avatarURL({ format: 'png', dynamic: true, size: 1024 })}`
+    async run(client, message) {
+        const mentionedMember = message.mentions.members.first() || message.author
+        let link = `https://some-random-api.ml/canvas/wasted/?avatar=https://cdn.discordapp.com/avatars/${mentionedMember.id}/${mentionedMember.avatar || mentionedMember.user.avatar}.png`
 
         message.channel.send({ content: link })
     }

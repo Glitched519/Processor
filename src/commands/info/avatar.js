@@ -5,9 +5,10 @@ module.exports = class Avatar extends BaseCommand {
         super('avatar', 'info', ['pic', 'pfp', 'av'])
     }
 
-    async run(client, message, args) {
-        const member = message.mentions.members.first() || message.guild.members.cache.get(args[0])
-        let avatar = member ? member.user.displayAvatarURL({ dynamic: true }) : message.author.displayAvatarURL({ dynamic: true })
+    async run(client, message) {
+        const mentionedMember = message.mentions.members.first() || message.author
+        console.log(mentionedMember.avatar)
+        let avatar = `https://cdn.discordapp.com/avatars/${mentionedMember.id}/${mentionedMember.avatar || mentionedMember.user.avatar}.png`
 
         message.channel.send({ content: avatar })
     }
