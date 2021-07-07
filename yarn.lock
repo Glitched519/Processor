@@ -1325,8 +1325,8 @@ __metadata:
   linkType: hard
 
 "discord.js@npm:dev":
-  version: 13.0.0-dev.676118a.1625486570
-  resolution: "discord.js@npm:13.0.0-dev.676118a.1625486570"
+  version: 13.0.0-dev.755c180.1625659372
+  resolution: "discord.js@npm:13.0.0-dev.755c180.1625659372"
   dependencies:
     "@discordjs/builders": ^0.2.0
     "@discordjs/collection": ^0.1.6
@@ -1337,7 +1337,7 @@ __metadata:
     discord-api-types: ^0.19.0-next.f393ba520d7d6d2aacaca7b3ca5d355fab614f6e
     node-fetch: ^2.6.1
     ws: ^7.5.1
-  checksum: 829ba4efca7b4053aa8ec67c9c7f7f3c9106c25989d3b9f13e089277c8a01ab7c727e8a636262447a6a0dcde2ffc8bf25ab28a2d86fe991d99974de1399fe02c
+  checksum: a8e81f997cba0143b0b218acbea79b29acb718b1993e930f45d8fc45869d196f51f87ea34a1abf303d060a4ba73d1d9a7b46bc797b279e1eb783a2235fb1c016
   languageName: node
   linkType: hard
 
