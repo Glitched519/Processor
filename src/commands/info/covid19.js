@@ -23,12 +23,12 @@ module.exports = class Author extends BaseCommand {
                 .addField('Critical Condition', covidStats.critical.toLocaleString(), true)
                 .addField('Tested', covidStats.tests.toLocaleString(), true)
                 .setFooter(new Date().toLocaleTimeString())
-            return message.channel.send({ embeds: [globalCovidEmbed] })
+            return message.reply({ embeds: [globalCovidEmbed] })
         }
         else {
             const covidStats = await covid.countries({ country: args[0] })
             const errorMessage = "Country not found or doesn't have any cases"
-            if (covidStats.message == errorMessage) return message.channel.send(errorMessage)
+            if (covidStats.message == errorMessage) return message.reply(errorMessage)
 
             let covidEmbed = new MessageEmbed()
                 .setTitle(`COVID-19 Stats (${args[0]})`)
@@ -41,7 +41,7 @@ module.exports = class Author extends BaseCommand {
                 .addField('Tested', covidStats.tests.toLocaleString(), true)
                 .setFooter(new Date().toLocaleTimeString())
 
-            message.channel.send({ embeds: [covidEmbed] })
+            message.reply({ embeds: [covidEmbed] })
         }
     }
 }

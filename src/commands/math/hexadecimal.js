@@ -6,6 +6,6 @@ module.exports = class Hexadecimal extends BaseCommand {
     }
 
     async run(client, message, args) {
-        message.channel.send({ content: '`' + Number(args[0]).toString(16).toUpperCase() + '`' })
+        message.reply({ content: '`' + Number(args[0]).toString(16).toUpperCase() + '`' })
     }
 }

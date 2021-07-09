@@ -26,6 +26,6 @@ module.exports = class Avatar extends BaseCommand {
             .addField(`CPU Cores`, os.cpus().length.toString(), true)
             .addField(`Memory Usage`, `${Math.round(process.memoryUsage().heapUsed / 1024 / 1024) + 'MB'}/${Math.round(require('os').totalmem() / 1000000000) + 'GB'}`, true)
 
-        return message.channel.send({ embeds: [infoEmbed] })
+        return message.reply({ embeds: [infoEmbed] })
     }
 }

@@ -20,9 +20,9 @@ module.exports = class Pat extends BaseCommand {
                 .setColor(`RANDOM`)
                 .setImage(response.data.link)
             if (!args[0]) patEmbed.setDescription(`**<@!${message.author.id}> pats himself?**`)
-            return message.channel.send({ embeds: [patEmbed] })
+            return message.reply({ embeds: [patEmbed] })
         }).catch(() => {
-            return message.channel.send({ content: ":x: Unfortunately, something went wrong with the API, and you could not pat your love :cry:." })
+            return message.reply({ content: ":x: Unfortunately, something went wrong with the API, and you could not pat your love :cry:." })
         })
     }
 }

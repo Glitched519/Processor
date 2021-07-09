@@ -13,18 +13,18 @@ module.exports = class Console extends BaseCommand {
 
         exec(args.join(' '), { 'shell': 'pwsh.exe' }, (error, stdout, stderr) => {
             if (error) {
-                return message.channel.send({ content: `\`\`\`powershell\n${error.message}\n\`\`\`` })
+                return message.reply({ content: `\`\`\`powershell\n${error.message}\n\`\`\`` })
                     .then(msg => {
                         msg.delete({ timeout: 5000 })
                     })
             }
             if (stderr) {
-                return message.channel.send({ content: `\`\`\`powershell\n${stderr}\n\`\`\`` })
+                return message.reply({ content: `\`\`\`powershell\n${stderr}\n\`\`\`` })
                     .then(msg => {
                         msg.delete({ timeout: 5000 })
                     })
             }
-            return message.channel.send({ content: `\`\`\`powershell\n${stdout}\n\`\`\`` })
+            return message.reply({ content: `\`\`\`powershell\n${stdout}\n\`\`\`` })
                 .then(msg => {
                     return xDelete(message, msg)
                 })

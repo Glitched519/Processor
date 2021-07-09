@@ -9,6 +9,6 @@ module.exports = class Gay extends BaseCommand {
         const mentionedMember = message.mentions.members.first() || message.author
         let link = `https://some-random-api.ml/canvas/gay/?avatar=https://cdn.discordapp.com/avatars/${mentionedMember.id}/${mentionedMember.avatar || mentionedMember.user.avatar}.png`
 
-        message.channel.send({ content: link })
+        message.reply({ content: link })
     }
 }

@@ -12,19 +12,19 @@ module.exports = class Ban extends BaseCommand {
         const mentionedUser = await message.client.users.fetch(userID).catch(() => null)
 
         if (!message.member.permissions.has('BAN_MEMBERS')) {
-            return message.channel.send({ content: 'You need the `Ban Members` permission to ban a member.' })
+            return message.reply({ content: 'You need the `Ban Members` permission to ban a member.' })
         }
         if (!message.guild.me.permissions.has('BAN_MEMBERS')) {
-            return message.channel.send({ content: 'I need the `Ban Members` permission to ban a member.' })
+            return message.reply({ content: 'I need the `Ban Members` permission to ban a member.' })
         }
         if (!mentionedUser) {
-            return message.channel.send({ content: 'You need to mention a member you want to ban.' })
+            return message.reply({ content: 'You need to mention a member you want to ban.' })
         }
 
         const allBans = await message.guild.fetchBans()
 
         if (allBans.get(mentionedUser.id)) {
-            return message.channel.send({ content: 'This member has already been banned.' })
+            return message.reply({ content: 'This member has already been banned.' })
         }
 
         const mentionedMember = message.guild.members.cache.get(mentionedUser.id)
@@ -35,10 +35,10 @@ module.exports = class Ban extends BaseCommand {
             const botPosition = message.guild.me.roles.highest.position
 
             if (memberPosition <= mentionedPosition) {
-                return message.channel.send({ content: 'Cannot ban this member as their role is higher or equal to yours.' })
+                return message.reply({ content: 'Cannot ban this member as their role is higher or equal to yours.' })
             }
             else if (botPosition <= mentionedPosition) {
-                return message.channel.send({ content: 'Cannot ban this member as their role is higher or equal to mine.' })
+                return message.reply({ content: 'Cannot ban this member as their role is higher or equal to mine.' })
             }
         }
 
@@ -50,6 +50,6 @@ module.exports = class Ban extends BaseCommand {
         let banEmbed = new MessageEmbed()
             .setDescription(`Banned ${mentionedUser} ${reason ? `for **${reason}**` : ''}`)
             .setColor('DARK_RED')
-        message.channel.send({ embeds: [banEmbed] })
+        message.reply({ embeds: [banEmbed] })
     }
 }

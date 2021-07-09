@@ -12,7 +12,7 @@ module.exports = class Warnings extends BaseCommand {
         let cannotCheckWarnings = new MessageEmbed()
             .setDescription(`That member is a bot. I cannot check their warnings.`)
             .setColor('AQUA')
-        if (mentionedMember.user.bot) return message.channel.send({ embeds: [cannotCheckWarnings] })
+        if (mentionedMember.user.bot) return message.reply({ embeds: [cannotCheckWarnings] })
 
         const warnDoc = await warnSchema.findOne({
             guildId: message.guild.id,
@@ -20,7 +20,7 @@ module.exports = class Warnings extends BaseCommand {
         }).catch(err => console.log(err))
 
         if (!warnDoc || !warnDoc.warnings.length) {
-            return message.channel.send({ content: `${mentionedMember} has a clean slate!` })
+            return message.reply({ content: `${mentionedMember} has a clean slate!` })
         }
 
         const data = []
@@ -40,6 +40,6 @@ module.exports = class Warnings extends BaseCommand {
             description: data.join('\n'),
         }
 
-        message.channel.send({ embeds: [profileEmbed] })
+        message.reply({ embeds: [profileEmbed] })
     }
 }

@@ -15,16 +15,16 @@ module.exports = class Mute extends BaseCommand {
         let muteRole = message.guild.roles.cache.find(r => r.name == 'Muted')
 
         if (!message.member.permissions.has('MANAGE_ROLES')) {
-            return message.channel.send('You need the `Manage Roles` permission to mute a member.')
+            return message.reply('You need the `Manage Roles` permission to mute a member.')
         }
         if (!message.guild.me.permissions.has(['MANAGE_ROLES', 'MANAGE_CHANNELS'])) {
-            return message.channel.send('I need the `Manage Roles` and `Manage Channels` permissions to mute a member.')
+            return message.reply('I need the `Manage Roles` and `Manage Channels` permissions to mute a member.')
         }
         if (!mentionedMember) {
-            return message.channel.send('You need to mention a member you want to mute.')
+            return message.reply('You need to mention a member you want to mute.')
         }
         if (!msRegex.test(args[1])) {
-            return message.channel.send('Invalid mute time.')
+            return message.reply('Invalid mute time.')
         }
         if (!muteRole) {
             muteRole = await message.guild.roles.create({
@@ -33,18 +33,18 @@ module.exports = class Mute extends BaseCommand {
                     color: 'RED',
                 }
             }).catch(err => {
-                return message.channel.send("Failed to create muted role: " + err)
+                return message.reply("Failed to create muted role: " + err)
             })
         }
 
         if (mentionedMember.roles.highest.position >= message.guild.me.roles.highest.position) {
-            return message.channel.send('Cannot mute this member as their roles are higher or equal to mine.')
+            return message.reply('Cannot mute this member as their roles are higher or equal to mine.')
         }
         if (muteRole.position >= message.guild.me.roles.highest.position) {
-            return message.channel.send('Cannot muted this member as the `Muted` role is higher than mine.')
+            return message.reply('Cannot muted this member as the `Muted` role is higher than mine.')
         }
         if (ms(msRegex.exec(args[1])[1]) > 2592000000) {
-            return message.channel.send("You can't mute a member for more than a month.")
+            return message.reply("You can't mute a member for more than a month.")
         }
 
         const isMuted = await muteSchema.findOne({
@@ -53,7 +53,7 @@ module.exports = class Mute extends BaseCommand {
         })
 
         if (isMuted) {
-            return message.channel.send('This member is already muted.')
+            return message.reply('This member is already muted.')
         }
 
         for (const channel of message.guild.channels.cache) {
@@ -86,6 +86,6 @@ module.exports = class Mute extends BaseCommand {
             .setDescription(`Muted ${mentionedMember} for **${msRegex.exec(args[1])[1]}** ${reason ? `for **${reason}**` : ''}`)
             .setColor('GREY')
 
-        message.channel.send({ embeds: [muteEmbed] })
+        message.reply({ embeds: [muteEmbed] })
     }
 }

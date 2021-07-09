@@ -11,7 +11,7 @@ module.exports = class Phone extends BaseCommand {
     }
 
     async run(client, message, args) {
-        message.channel.send({ content: `**Please wait... If it takes too long, check your spelling and try again.${emojis.loading}**\nNot sure what phone to search? Try OnePlus 8.` })
+        message.reply({ content: `**Please wait... If it takes too long, check your spelling and try again.${emojis.loading}**\nNot sure what phone to search? Try OnePlus 8.` })
         fetch(`http://localhost:8888/gsmarena/search/phone/${args.join('%20')}`)
             .then(res => res.json())
             .then(json => {
@@ -40,7 +40,7 @@ module.exports = class Phone extends BaseCommand {
                                     .addField('Model', json2.spec_detail[12].specs[1].value, true)
                                     .addField('Network Tech', json2.spec_detail[0].specs[0].value, true)
 
-                                message.channel.send({ embeds: [phoneEmbed] })
+                                message.reply({ embeds: [phoneEmbed] })
                             })
                     }
                 }

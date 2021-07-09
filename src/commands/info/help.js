@@ -250,31 +250,31 @@ module.exports = class Help extends BaseCommand {
         }
         switch (args[0]) {
             case "setup":
-                return message.channel.send({ embeds: [setupEmbed] })
+                return message.reply({ embeds: [setupEmbed] })
             case "mod":
-                return message.channel.send({ embeds: [modEmbed] })
+                return message.reply({ embeds: [modEmbed] })
             case "animal":
-                return message.channel.send({ embeds: [animalEmbed] })
+                return message.reply({ embeds: [animalEmbed] })
             case "clash":
-                return message.channel.send({ embeds: [clashEmbed] })
+                return message.reply({ embeds: [clashEmbed] })
             case "cute":
-                return message.channel.send({ embeds: [cuteEmbed] })
+                return message.reply({ embeds: [cuteEmbed] })
             case "math":
-                return message.channel.send({ embeds: [mathEmbed] })
+                return message.reply({ embeds: [mathEmbed] })
             case "info":
-                return message.channel.send({ embeds: [infoEmbed] })
+                return message.reply({ embeds: [infoEmbed] })
             case "search":
-                return message.channel.send({ embeds: [searchEmbed] })
+                return message.reply({ embeds: [searchEmbed] })
             case "other":
-                return message.channel.send({ embeds: [otherEmbed] })
+                return message.reply({ embeds: [otherEmbed] })
         }
 
         if (!message.guild.me.permissions.has(["READ_MESSAGE_HISTORY", "ADD_REACTIONS"])) {
-            message.channel.send({ content: `:grey_question: If you wish to use reactions to navigate the help menu, please make make the following permissions are enabled:\n**Read Message History\nAdd Reactions**\nUsage: ${PREFIX}help \`[topic]\`` })
-            return message.channel.send({ embeds: [helpFallbackEmbed] })
+            message.reply({ content: `:grey_question: If you wish to use reactions to navigate the help menu, please make make the following permissions are enabled:\n**Read Message History\nAdd Reactions**\nUsage: ${PREFIX}help \`[topic]\`` })
+            return message.reply({ embeds: [helpFallbackEmbed] })
         }
         helpEmbed.setFooter(`Page ${page} of ${maxPages}`, `${message.author.displayAvatarURL()}`)
-        message.channel.send({ embeds: [helpEmbed] }).then(msg => {
+        message.reply({ embeds: [helpEmbed] }).then(msg => {
             changePage(msg)
         })
     }

@@ -18,7 +18,7 @@ module.exports = class Eval extends BaseCommand {
                 color: `RANDOM`,
                 description: `\`\`\`js\n${inspect(evaled, { depth: 0 })}\`\`\``,
             }
-            message.channel.send({ embeds: [evalEmbed] })
+            message.reply({ embeds: [evalEmbed] })
         }
         catch (err) {
             let errEmbed = {
@@ -26,7 +26,7 @@ module.exports = class Eval extends BaseCommand {
                 color: '#f08324',
                 description: `\`\`\`js\n${err}\`\`\``,
             }
-            message.channel.send({ embeds: [errEmbed] })
+            message.reply({ embeds: [errEmbed] })
         }
     }
 }

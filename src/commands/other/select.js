@@ -37,6 +37,6 @@ module.exports = class Select extends BaseCommand {
             .setURL("https://processorbot.xyz/")
             .setDescription("Selections! What do they do?")
 
-        await message.channel.send({ content: "Hi there!", embeds: [embed], components: [row] })
+        await message.reply({ content: "Hi there!", embeds: [embed], components: [row] })
     }
 }

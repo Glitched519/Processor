@@ -38,6 +38,6 @@ module.exports = class Button extends BaseCommand {
             .setURL("https://processorbot.xyz/")
             .setDescription("Buttons! What do they do?")
 
-        await message.channel.send({ content: "Hi there!", embeds: [embed], components: [row] })
+        await message.reply({ content: "Hi there!", embeds: [embed], components: [row] })
     }
 }

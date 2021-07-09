@@ -10,13 +10,13 @@ module.exports = class Nickname extends BaseCommand {
         const mentionedMember = message.mentions.members.first() || message.guild.members.cache.get(args[0])
 
         if (!message.member.permissions.has('MANAGE_NICKNAMES')) {
-            return message.channel.send({ content: 'You need the `Manage Nicknames` permission to change the nickname a member.' })
+            return message.reply({ content: 'You need the `Manage Nicknames` permission to change the nickname a member.' })
         }
         if (!message.guild.me.permissions.has('MANAGE_NICKNAMES')) {
-            return message.channel.send({ content: 'I need the `Manage Nicknames` permission to change the nickname of a member.' })
+            return message.reply({ content: 'I need the `Manage Nicknames` permission to change the nickname of a member.' })
         }
         if (!mentionedMember) {
-            return message.channel.send({ content: 'You need to mention a member whose nickname you want to change.' })
+            return message.reply({ content: 'You need to mention a member whose nickname you want to change.' })
         }
 
         const mentionedPosition = mentionedMember.roles.highest.position
@@ -24,10 +24,10 @@ module.exports = class Nickname extends BaseCommand {
         const botPosition = message.guild.me.roles.highest.position
 
         if (memberPosition <= mentionedPosition) {
-            return message.channel.send({ content: 'Cannot change their nickname as their role is higher than or equal to yours.' })
+            return message.reply({ content: 'Cannot change their nickname as their role is higher than or equal to yours.' })
         }
         else if (botPosition <= mentionedPosition) {
-            return message.channel.send({ content: 'Cannot their nickname as their role is higher than or equal to mine.' })
+            return message.reply({ content: 'Cannot their nickname as their role is higher than or equal to mine.' })
         }
 
         args.shift()
@@ -41,6 +41,6 @@ module.exports = class Nickname extends BaseCommand {
             .setDescription(`${mentionedMember}'s nickname has been ${nickname == '' ? `reset.` : `changed to **${nickname}**.`}`)
             .setColor('GREEN')
 
-        message.channel.send({ embeds: [nicknameEmbed] })
+        message.reply({ embeds: [nicknameEmbed] })
     }
 }

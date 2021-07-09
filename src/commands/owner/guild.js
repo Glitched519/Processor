@@ -16,7 +16,7 @@ module.exports = class Guild extends BaseCommand {
         client.guilds.cache.forEach(guild => {
             guildEmbed.addField(`${guild.name}`, `${guild.memberCount} members`, true)
         })
-        message.channel.send({embeds: [guildEmbed]})
+        message.reply({embeds: [guildEmbed]})
         .then(msg => {
             xDelete(message, msg)
         })

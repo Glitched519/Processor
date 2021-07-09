@@ -9,6 +9,6 @@ module.exports = class Wasted extends BaseCommand {
         const mentionedMember = message.mentions.members.first() || message.author
         let link = `https://some-random-api.ml/canvas/wasted/?avatar=https://cdn.discordapp.com/avatars/${mentionedMember.id}/${mentionedMember.avatar || mentionedMember.user.avatar}.png`
 
-        message.channel.send({ content: link })
+        message.reply({ content: link })
     }
 }

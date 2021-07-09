@@ -25,16 +25,16 @@ module.exports = class SearchPlayer extends BaseCommand {
             }
         }
 
-        if (!args[0]) return message.reply({ content: "You need to mention player tag. Ex: `#RRY9Q2V` or `#280LYG8G9`.", allowedMentions: { repliedUser: false } })
+        if (!args[0]) return message.reply({ content: "You need to mention player tag. Ex: `#RRY9Q2V` or `#280LYG8G9`." })
 
         if (args[0].includes('#')) {
             args[0] = args[0].slice(1)
-            if (args[0].length > 9 || args[0].length < 7) return message.reply({ content: "Invalid player tag. Tag ID must be 7 or 8 characters in length. Ex: `#RRY9Q2V` or `#280LYG8G9`.", allowedMentions: { repliedUser: false } })
-            message.reply({ content: "https://www.clashofstats.com/players/" + args[0].toUpperCase(), allowedMentions: { repliedUser: false } })
+            if (args[0].length > 9 || args[0].length < 7) return message.reply({ content: "Invalid player tag. Tag ID must be 7 or 8 characters in length. Ex: `#RRY9Q2V` or `#280LYG8G9`." })
+            message.reply({ content: "https://www.clashofstats.com/players/" + args[0].toUpperCase() })
         }
         else {
-            if (args[0].length > 8 || args[0].length < 6) return message.reply({ content: "Invalid player tag. Tag ID must be 7 or 8 characters in length. Ex: `#RRY9Q2V` or `#280LYG8G9`.", allowedMentions: { repliedUser: false } })
-            message.reply({ content: "https://www.clashofstats.com/players/" + args[0].toUpperCase(), allowedMentions: { repliedUser: false } })
+            if (args[0].length > 8 || args[0].length < 6) return message.reply({ content: "Invalid player tag. Tag ID must be 7 or 8 characters in length. Ex: `#RRY9Q2V` or `#280LYG8G9`." })
+            message.reply({ content: "https://www.clashofstats.com/players/" + args[0].toUpperCase() })
         }
     }
 }

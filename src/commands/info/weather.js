@@ -15,7 +15,7 @@ module.exports = class Prefix extends BaseCommand {
                 let notFoundEmbed = new MessageEmbed()
                     .setDescription('Location not found.')
                     .setColor('RED')
-                if (base.cod == '404') return message.channel.send({ embeds: [notFoundEmbed] })
+                if (base.cod == '404') return message.reply({ embeds: [notFoundEmbed] })
                 let weather = base.weather[0]
                 let main = base.main
                 let sunrise = new Date(base.sys.sunrise * 1000).toLocaleTimeString()
@@ -37,7 +37,7 @@ module.exports = class Prefix extends BaseCommand {
                     .setThumbnail(`https://openweathermap.org/img/wn/${weather.icon}@2x.png`)
                     .setTimestamp()
                     .setFooter(`From openweathermap.org`, `https://openweathermap.org/img/wn/02d@2x.png`)
-                return message.channel.send({ embeds: [weatherEmbed] })
+                return message.reply({ embeds: [weatherEmbed] })
             })
     }
 }

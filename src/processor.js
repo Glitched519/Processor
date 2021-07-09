@@ -19,13 +19,15 @@ const nonPrivilegedIntents = [
     'GUILD_MESSAGE_TYPING',
     'DIRECT_MESSAGES',
     'DIRECT_MESSAGE_REACTIONS',
-    'DIRECT_MESSAGE_TYPING']
-
+    'DIRECT_MESSAGE_TYPING'
+]
 
 const client = new Client({
     intents: nonPrivilegedIntents,
+    restTimeOffset: 0,
+    disableMentions: 'everyone',
     allowedMentions: {
-        repliedUser: true,
+        repliedUser: false,
     }
     // partials: ['MESSAGE', 'CHANNEL', 'REACTION', 'GUILD_MEMBER', 'USER']
 });
@@ -36,6 +38,7 @@ const client = new Client({
     client.commands = new Map()
     client.events = new Map()
     client.snipes = new Map()
+    client.cooldowns = new Map()
     client.prefix = config.prefix
     await registerCommands(client, '../commands').then(() => console.log("Registering Commands..."))
     await registerEvents(client, '../events').then(() => console.log("Registering Events..."))
@@ -50,7 +53,6 @@ const client = new Client({
 
     console.log("Guilds: %d", client.guilds.cache.size)
 
-    console.log('Awaiting Ready Event...')
     client.emit("ready")
 })()
 

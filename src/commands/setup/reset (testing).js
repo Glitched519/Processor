@@ -12,10 +12,10 @@ module.exports = class Reset extends BaseCommand {
 
     async run(client, message) {
         if (!message.member.permissions.has("MANAGE_GUILD")) {
-            return message.channel.send({ content: 'You need the `Manage Server` permission to reset the server settings.' })
+            return message.reply({ content: 'You need the `Manage Server` permission to reset the server settings.' })
         }
 
-        message.channel.send({ content: ":warning: Are you sure you want to reset the server configuration?" })
+        message.reply({ content: ":warning: Are you sure you want to reset the server configuration?" })
             .then(async msg => {
                 msg.react('788157429106868235')
                     .then(msg.react('788157446178340915'))
@@ -36,14 +36,14 @@ module.exports = class Reset extends BaseCommand {
                                         _id: guildId
                                     })
                                 })
-                                message.channel.send({ content: `Configuration reset.` })
+                                message.reply({ content: `Configuration reset.` })
                                 break
                             case 'no':
-                                return message.channel.send({ content: 'Reset Cancelled.' })
+                                return message.reply({ content: 'Reset Cancelled.' })
                         }
                     })
                     .catch(() => {
-                        return message.channel.send({ content: `Timed out after 20 seconds.` })
+                        return message.reply({ content: `Timed out after 20 seconds.` })
                     })
             })
     }

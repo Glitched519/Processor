@@ -25,6 +25,6 @@ module.exports = class Wikipedia extends BaseCommand {
             }
         }
 
-        message.channel.send({ content: "https://www.wikiwand.com/en/" + words })
+        message.reply({ content: "https://www.wikiwand.com/en/" + words })
     }
 }

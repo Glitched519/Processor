@@ -824,6 +824,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"chainsaw@npm:>=0.0.7 <0.1":
+  version: 0.0.9
+  resolution: "chainsaw@npm:0.0.9"
+  dependencies:
+    traverse: ">=0.3.0 <0.4"
+  checksum: d35858c678dfa32eae451da8dea6683cf3e71ca9149ab06f513bf9a63ccc8a721030256abd5c16fed3b42d0a33ec3db6eafc0520270fc5c45af337d1243bbe73
+  languageName: node
+  linkType: hard
+
 "chalk@npm:3.0.0, chalk@npm:~3.0.0":
   version: 3.0.0
   resolution: "chalk@npm:3.0.0"
@@ -1325,8 +1334,8 @@ __metadata:
   linkType: hard
 
 "discord.js@npm:dev":
-  version: 13.0.0-dev.755c180.1625659372
-  resolution: "discord.js@npm:13.0.0-dev.755c180.1625659372"
+  version: 13.0.0-dev.d6c43a5.1625832172
+  resolution: "discord.js@npm:13.0.0-dev.d6c43a5.1625832172"
   dependencies:
     "@discordjs/builders": ^0.2.0
     "@discordjs/collection": ^0.1.6
@@ -1337,7 +1346,7 @@ __metadata:
     discord-api-types: ^0.19.0-next.f393ba520d7d6d2aacaca7b3ca5d355fab614f6e
     node-fetch: ^2.6.1
     ws: ^7.5.1
-  checksum: a8e81f997cba0143b0b218acbea79b29acb718b1993e930f45d8fc45869d196f51f87ea34a1abf303d060a4ba73d1d9a7b46bc797b279e1eb783a2235fb1c016
+  checksum: 33f122c3a59066af4373ab479500e7e472801d2deddbfe9c59c2cdd8aa4e0e18cf410fb194413efba6b6b817837be272c8071c03be1d2361ab814f977b82ea57
   languageName: node
   linkType: hard
 
@@ -2262,6 +2271,15 @@ fsevents@~2.3.1:
   dependencies:
     function-bind: ^1.1.1
   checksum: c686e15300d41364486c099a9259d9c418022c294244843dcd712c4c286ff839d4f23a25413baa28c4d2c1e828afc2aaab70f685400b391533980223c71fa1ca
+  languageName: node
+  linkType: hard
+
+"hashish@npm:>=0.0.2 <0.1":
+  version: 0.0.4
+  resolution: "hashish@npm:0.0.4"
+  dependencies:
+    traverse: ">=0.2.4"
+  checksum: a4050113656e67a9c62e29682d709889964a0fbfadfd2d4f7d8d74a07d29aab223cff494f406f2ceaa46540fdc4c69f0baecf8b079f284f4922e9293780fc178
   languageName: node
   linkType: hard
 
@@ -3746,6 +3764,7 @@ fsevents@~2.3.1:
     node-superfetch: ^0.2.3
     novelcovid: ^3.0.2
     pm2: ^5.1.0
+    remove: ^0.1.5
     request: ^2.88.2
     restify: ^8.5.1
     restify-cors-middleware: ^1.1.1
@@ -3962,6 +3981,15 @@ fsevents@~2.3.1:
   version: 3.2.0
   resolution: "regexpp@npm:3.2.0"
   checksum: 91aaccadd046fc1b60477df4f44bb69d61aeca81082f2ebf879a32ff25cd7bcb7067fcd69eb9a0987ca0a3e8e2d837b2737e80961c14a504a912bed4c51c8e3e
+  languageName: node
+  linkType: hard
+
+"remove@npm:^0.1.5":
+  version: 0.1.5
+  resolution: "remove@npm:0.1.5"
+  dependencies:
+    seq: ">= 0.3.5"
+  checksum: f8b9451dbe21f898ab16f8ca2896beb9d2fbd2a1d3d7a598a6f51ced3d5fcf7692ca256477ad8b358ecd5a612a134cb3d53008ea281c4a2820ce352a845dcbd2
   languageName: node
   linkType: hard
 
@@ -4293,6 +4321,16 @@ resolve@^1.12.0:
     range-parser: ~1.2.0
     statuses: ~1.4.0
   checksum: 0b3b98fd0d933687bafb45552bb9798aa030475c1c7e8a0da1cc97fd92b2dff7b728b41721405335b23d86d31c73300716d3c803075e3e92117f16e9eca84824
+  languageName: node
+  linkType: hard
+
+"seq@npm:>= 0.3.5":
+  version: 0.3.5
+  resolution: "seq@npm:0.3.5"
+  dependencies:
+    chainsaw: ">=0.0.7 <0.1"
+    hashish: ">=0.0.2 <0.1"
+  checksum: e02a3e5a28e5aa15920e42ccfe89d96d8647f4227589df163309099a62940c81aeb45a57ca7a4b9ddb12139b203e2bc084739141168f989d0ddcde7245e7eb46
   languageName: node
   linkType: hard
 
@@ -4778,6 +4816,20 @@ resolve@^1.12.0:
     psl: ^1.1.28
     punycode: ^2.1.1
   checksum: bf5d6fac5ce0bebc5876cb9b9a79d3d9ea21c9e4099f3d3e64701d6ba170a052cb88cece6737ec2473bac4f0a4f6c75d46ec17985be8587c6bbdd38d91625cb4
+  languageName: node
+  linkType: hard
+
+"traverse@npm:>=0.2.4":
+  version: 0.6.6
+  resolution: "traverse@npm:0.6.6"
+  checksum: f2bfaae69246bc1b630ad51d44be0a2a953be1650f754c299e5a05e4f00e4b493aa6c37a98410f9c2c902a21bef7f1ab10a9cdb9b9e8ee8813e1a9e95074dafd
+  languageName: node
+  linkType: hard
+
+"traverse@npm:>=0.3.0 <0.4":
+  version: 0.3.9
+  resolution: "traverse@npm:0.3.9"
+  checksum: f2f99aa18539e8a1420b41456ad931bd5c2c8091bb993416b4ae9d234edc82052dac5d61cb422b2053101f67e804a1bdf022bff7436b7fa4ac518a7aff6f7cc3
   languageName: node
   linkType: hard
 

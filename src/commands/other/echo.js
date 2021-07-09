@@ -40,7 +40,7 @@ module.exports = class Echo extends BaseCommand {
         else {
             used.set(message.author.id, Date.now() + 1000 * timeInSeconds)
             setTimeout(() => used.delete(message.author.id), 1000 * timeInSeconds)
-            message.channel.send({ content: args.join(' ') })
+            message.reply({ content: args.join(' ') })
         }
 
     }

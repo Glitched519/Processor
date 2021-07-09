@@ -34,6 +34,6 @@ module.exports = class Roll extends BaseCommand {
             title: ':game_die: You rolled a ' + diceNum,
             timestamp: new Date()
         }
-        message.channel.send({ embeds: [rollEmbed] })
+        message.reply({ embeds: [rollEmbed] })
     }
 }

@@ -44,7 +44,7 @@ module.exports = class Image extends BaseCommand {
         axios.request(options).then(function (response) {
             let randomIndex = Math.floor(Math.random() * size)
             let image = response.data.value[randomIndex].url
-            message.channel.send(image)
+            message.reply(image)
         }).catch(function (error) {
             console.error(error)
         })

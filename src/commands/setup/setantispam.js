@@ -9,7 +9,7 @@ module.exports = class SetAntiSpam extends BaseCommand {
 
     async run(client, message) {
         if (!message.member.permissions.has("MANAGE_GUILD")) {
-            return message.channel.send({ content: 'You need the `Manage Server` permission to set an antispam channel.' })
+            return message.reply({ content: 'You need the `Manage Server` permission to set an antispam channel.' })
         }
         // eslint-disable-next-line no-unused-vars
         await mongo().then(async mongoose => {
@@ -26,7 +26,7 @@ module.exports = class SetAntiSpam extends BaseCommand {
                 upsert: true
             })
 
-            message.channel.send({ content: `${antiSpamChannel} now disallows any incoming spam messages from other members.` })
+            message.reply({ content: `${antiSpamChannel} now disallows any incoming spam messages from other members.` })
         })
     }
 }

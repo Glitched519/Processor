@@ -23,7 +23,7 @@ module.exports = (client) => {
             const isOurInvite = await isInvite(guild, code)
             if (!isOurInvite) {
                 await message.delete()
-                await message.channel.send({ content: "you are not allowed to send external invite links here." })
+                await message.reply({ content: "you are not allowed to send external invite links here." })
             }
         }
     })

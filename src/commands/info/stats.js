@@ -10,7 +10,7 @@ module.exports = class Stats extends BaseCommand {
     async run(client, message, args) {
         const statArgs = args.length
         if (statArgs >= 2) {
-            message.channel.send({ content: `Incorrect usage: ${PREFIX}stats | ${PREFIX}stats <user_id> | ${PREFIX}stats @mention` })
+            message.reply({ content: `Incorrect usage: ${PREFIX}stats | ${PREFIX}stats <user_id> | ${PREFIX}stats @mention` })
         }
         else if (statArgs === 1) {
             const member = message.mentions.members.first() || message.guild.members.cache.get(args[0])
@@ -45,10 +45,10 @@ module.exports = class Stats extends BaseCommand {
                         },
                     ]
                 }
-                message.channel.send({ embeds: statEmbed })
+                message.reply({ embeds: statEmbed })
             }
             else {
-                message.channel.send({ content: `No member with ID ${args[0]}` })
+                message.reply({ content: `No member with ID ${args[0]}` })
             }
         }
         else {
@@ -95,7 +95,7 @@ module.exports = class Stats extends BaseCommand {
                     },
                 ]
             }
-            message.channel.send({ embeds: [statEmbed] })
+            message.reply({ embeds: [statEmbed] })
         }
     }
 }

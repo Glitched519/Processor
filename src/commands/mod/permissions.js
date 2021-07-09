@@ -10,7 +10,7 @@ module.exports = class Permissions extends BaseCommand {
 
     async run(client, message) {
         if (!message.member.permissions.has(['MANAGE_MESSAGES'])) {
-            return message.channel.send({ content: ":x: **You need the `Manage Messages` permission to view my permissions.**" })
+            return message.reply({ content: ":x: **You need the `Manage Messages` permission to view my permissions.**" })
         }
         const permissions = [
             'Create Instant Invite',
@@ -61,7 +61,7 @@ module.exports = class Permissions extends BaseCommand {
         })
         permEmbed.setDescription(props)
 
-        if (me.permissions.has('EMBED_LINKS')) message.channel.send({ embeds: [permEmbed] }).then(msg => {
+        if (me.permissions.has('EMBED_LINKS')) message.reply({ embeds: [permEmbed] }).then(msg => {
             return xDelete(message, msg)
         })
 

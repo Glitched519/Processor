@@ -10,7 +10,7 @@ module.exports = class Joke extends BaseCommand {
         fetch('https://official-joke-api.appspot.com/random_joke')
             .then(res => res.json())
             .then(json => {
-                message.channel.send({ content: `${json.setup}\n||${json.punchline}||` })
+                message.reply({ content: `${json.setup}\n||${json.punchline}||` })
             })
     }
 }

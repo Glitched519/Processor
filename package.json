@@ -1,6 +1,6 @@
 {
     "name": "processor",
-    "version": "8.1.0",
+    "version": "9.0.0",
     "description": "An EPIC Verified bot for Discord!",
     "repository": "https://github.com/Glitched519/Processor",
     "main": "shard.js",
@@ -31,6 +31,7 @@
         "node-superfetch": "^0.2.3",
         "novelcovid": "^3.0.2",
         "pm2": "^5.1.0",
+        "remove": "^0.1.5",
         "request": "^2.88.2",
         "restify": "^8.5.1",
         "restify-cors-middleware": "^1.1.1",

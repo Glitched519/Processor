@@ -20,9 +20,9 @@ module.exports = class AnimalImage extends BaseCommand {
             let animalEmbed = new MessageEmbed()
                 .setColor(`RANDOM`)
                 .setImage(response.data.image)
-            return message.channel.send({ embeds: [animalEmbed] })
+            return message.reply({ embeds: [animalEmbed] })
         }).catch(() => {
-            return message.reply({ content: ":x: Sorry, we don't have any images for that animal.", allowedMentions: { repliedUser: false } })
+            return message.reply({ content: ":x: Sorry, we don't have any images for that animal." })
         })
     }
 }

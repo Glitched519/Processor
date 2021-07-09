@@ -9,13 +9,13 @@ module.exports = class Kick extends BaseCommand {
     async run(client, message, args) {
         const mentionedMember = message.mentions.members.first() || message.guild.members.cache.get(args[0])
         if (!message.member.permissions.has('KICK_MEMBERS')) {
-            return message.channel.send({ content: 'You need the `Kick Members` permission to kick a member.' })
+            return message.reply({ content: 'You need the `Kick Members` permission to kick a member.' })
         }
         if (!message.guild.me.permissions.has('KICK_MEMBERS')) {
-            return message.channel.send({ content: 'I need the `Kick Members` permission to kick a member.' })
+            return message.reply({ content: 'I need the `Kick Members` permission to kick a member.' })
         }
         if (!mentionedMember) {
-            return message.channel.send({ content: 'You need to mention a member you want to kick.' })
+            return message.reply({ content: 'You need to mention a member you want to kick.' })
         }
 
         const mentionedPosition = mentionedMember.roles.highest.position
@@ -23,10 +23,10 @@ module.exports = class Kick extends BaseCommand {
         const botPosition = message.guild.me.roles.highest.position
 
         if (memberPosition <= mentionedPosition) {
-            return message.channel.send({ content: 'Cannot kick this member as their role is higher or equal to yours.' })
+            return message.reply({ content: 'Cannot kick this member as their role is higher or equal to yours.' })
         }
         else if (botPosition <= mentionedPosition) {
-            return message.channel.send({ content: 'Cannot kick this member as their role is higher or equal to mine.' })
+            return message.reply({ content: 'Cannot kick this member as their role is higher or equal to mine.' })
         }
 
         args.shift()
@@ -37,10 +37,10 @@ module.exports = class Kick extends BaseCommand {
             let kickEmbed = new MessageEmbed()
                 .setDescription(`Kicked ${mentionedMember} ${reason ? `for **${reason}**` : ''}`)
                 .setColor('ORANGE')
-            message.channel.send({ embeds: [kickEmbed] })
+            message.reply({ embeds: [kickEmbed] })
         }
         catch (err) {
-            message.channel.send({ content: 'Failed to kick this member: ' + err })
+            message.reply({ content: 'Failed to kick this member: ' + err })
         }
     }
 }

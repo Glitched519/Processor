@@ -13,6 +13,6 @@ module.exports = class Github extends BaseCommand {
             .setThumbnail('https://www.sferalabs.cc/wp-content/uploads/github-logo-white.png')
             .setDescription(':arrow_right: [GitHub Link!](https://github.com/Glitched519/Processor) :arrow_left:')
 
-        message.channel.send({ embeds: [codeEmbed] })
+        message.reply({ embeds: [codeEmbed] })
     }
 }

@@ -13,6 +13,6 @@ module.exports = class Support extends BaseCommand {
             .setThumbnail(client.user.displayAvatarURL())
             .setDescription(':arrow_right: [Support Server!](https://discord.gg/UNmdd8V) :arrow_left:')
 
-        message.channel.send({ embeds: [inviteEmbed] })
+        message.reply({ embeds: [inviteEmbed] })
     }
 }

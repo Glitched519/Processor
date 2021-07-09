@@ -99,9 +99,9 @@ module.exports = class BaseLayout extends BaseCommand {
                 baseEmbed.image.url = "https://cocwiki.net/wp-content/uploads/2019/06/bh9-builder-hall-9-layout.jpg"
                 break
             default:
-                return message.channel.send("Invalid town hall or builder hall level. Ex: `th10` or `bh7`.")
+                return message.reply({ content: "Invalid town hall or builder hall level. Ex: `th10` or `bh7`." })
         }
 
-        message.reply({ embeds: [baseEmbed], allowedMentions: { repliedUser: false } })
+        message.reply({ embeds: [baseEmbed] })
     }
 }

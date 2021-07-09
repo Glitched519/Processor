@@ -22,10 +22,10 @@ module.exports = class Meme extends BaseCommand {
                 .setColor(`RANDOM`)
                 .setFooter(`👍 ${meme.ups} | 💬 ${meme.num_comments}`)
 
-            message.channel.send({ embeds: [memeEmbed] })
+            message.reply({ embeds: [memeEmbed] })
         }).catch(err => {
             console.log(err)
-            return message.channel.send({ content: ":x: Unfortunately, something went wrong with the API, and your meme could not be loaded." })
+            return message.reply({ content: ":x: Unfortunately, something went wrong with the API, and your meme could not be loaded." })
         })
     }
 }

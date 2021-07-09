@@ -38,10 +38,10 @@ module.exports = class Search extends BaseCommand {
             .setDescription(`Could not find search results for **${query}**.`)
             .setColor('RED')
 
-        if (!query) return message.channel.send({ content: "Please enter a search query." })
+        if (!query) return message.reply({ content: "Please enter a search query." })
 
         let href = await search(query)
-        if (!href) return message.channel.send({ embeds: [errorEmbed] })
+        if (!href) return message.reply({ embeds: [errorEmbed] })
 
         const searchEmbed = new MessageEmbed()
             .setTitle(href.title)
@@ -59,13 +59,13 @@ module.exports = class Search extends BaseCommand {
                 q: query
             })
             if (!body || !body.items) {
-                return message.channel.send({ embeds: [errorEmbed] })
+                return message.reply({ embeds: [errorEmbed] })
             } else {
                 return body.items[Math.floor(Math.random() * 10)]
             }
         }
         if (href.title !== undefined) {
-            return message.channel.send({ embeds: [searchEmbed] })
+            return message.reply({ embeds: [searchEmbed] })
         }
     }
 }

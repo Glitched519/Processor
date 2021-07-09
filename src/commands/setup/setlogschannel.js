@@ -10,7 +10,7 @@ module.exports = class SetLogsChannel extends BaseCommand {
 
     async run(client, message) {
         if (!message.member.permissions.has("MANAGE_GUILD")) {
-            return message.channel.send({ content: 'You need the `Manage Server` permission to set or change the logging channel.' })
+            return message.reply({ content: 'You need the `Manage Server` permission to set or change the logging channel.' })
         }
         const antiSpamChannel = message.mentions.channels.first() || message.channel
 
@@ -27,7 +27,7 @@ module.exports = class SetLogsChannel extends BaseCommand {
                 upsert: true
             })
 
-            message.channel.send({ content: `the log channel is now ${logChannel}` })
+            message.reply({ content: `the log channel is now ${logChannel}` })
         })
     }
 }
