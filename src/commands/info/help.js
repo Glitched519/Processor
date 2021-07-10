@@ -3,15 +3,16 @@ const fs = require('fs')
 const path = require('path')
 const { prefix: globalPrefix } = require('../../config.json')
 const commandPrefixSchema = require('../../schemas/command-prefix-schema')
-const { MessageEmbed } = require('discord.js')
+const { MessageEmbed, MessageActionRow, MessageButton } = require('discord.js')
 const BaseCommand = require('../../utils/structures/BaseCommand')
 
 module.exports = class Help extends BaseCommand {
     constructor() {
-        super('help', 'info', [])
+        super('help', 'info', ['h'])
     }
 
     async run(client, message, args) {
+
         let page = 1
         let maxPages = 10
 
@@ -83,11 +84,6 @@ module.exports = class Help extends BaseCommand {
             }
         }
         const PREFIX = guildPrefixes[message.guild.id] || globalPrefix
-
-        let helpClosed = new MessageEmbed()
-            .setColor('ORANGE')
-            .setTitle(`Help Closed`)
-            .setDescription('Deleting this embed in 5 seconds...')
 
         let helpFallbackEmbed = new MessageEmbed()
             .setColor(`RANDOM`)
@@ -173,81 +169,41 @@ module.exports = class Help extends BaseCommand {
 
         let allEmbeds = [helpEmbed, setupEmbed, modEmbed, animalEmbed, clashEmbed, cuteEmbed, mathEmbed, infoEmbed, searchEmbed, otherEmbed]
 
+        const helpRow = new MessageActionRow()
+            .addComponents(
+                new MessageButton()
+                    .setLabel("Home")
+                    .setCustomId("Home")
+                    .setStyle("PRIMARY"),
+                new MessageButton()
+                    .setLabel("Prev")
+                    .setCustomId("Prev")
+                    .setStyle("SUCCESS"),
+                new MessageButton()
+                    .setLabel("Next")
+                    .setCustomId("Next")
+                    .setStyle("SUCCESS"),
+                new MessageButton()
+                    .setLabel("End")
+                    .setCustomId("End")
+                    .setStyle("PRIMARY"),
+                new MessageButton()
+                    .setLabel("Close")
+                    .setCustomId("CloseHelp")
+                    .setStyle("DANGER"),
+            )
+
         function gotoPage(msg, page) {
             for (let i = 0; i < maxPages + 1; i++) {
                 switch (page) {
                     case i:
                         allEmbeds[i - 1].setFooter(`Page ${page} of ${maxPages}`, `${message.author.displayAvatarURL()}`)
-                        msg.edit({ embeds: [allEmbeds[i - 1]] })
+                        msg.edit({ embeds: [allEmbeds[i - 1]], components: [helpRow] })
                         break
                 }
             }
-            changePage(msg)
         }
 
-        function changePage(msg) {
-            msg.react('⏮')
-                .then(msg.react('◀'))
-                .then(msg.react('💠'))
-                .then(msg.react('▶'))
-                .then(msg.react('⏭'))
-                .then(msg.react('788157446178340915'))
-
-
-            const filter = (reaction, user) => {
-                return ['⏮', '◀', '💠', '▶', '⏭', 'no'].includes(reaction.emoji.name) && user.id === message.author.id
-            }
-            msg.awaitReactions(filter, { max: 1, time: 300000, errors: ['time'] })
-                .then(collected => {
-                    const reaction = collected.first()
-                    console.log(reaction)
-                    switch (reaction.emoji.name) {
-                        case '⏮':
-                            page = 1
-                            gotoPage(msg, 1)
-                            break
-                        case '◀':
-                            if (page <= 1) {
-                                page = 1
-                            }
-                            else {
-                                page--
-                            }
-                            gotoPage(msg, page)
-                            break
-                        case '💠':
-                            if (page == Math.round(maxPages / 2)) {
-                                page = Math.round(maxPages / 2)
-                            }
-                            else {
-                                page = Math.round(maxPages / 2)
-                            }
-                            gotoPage(msg, page)
-                            break
-                        case '▶':
-                            if (page >= maxPages) {
-                                page = maxPages
-                            }
-                            else {
-                                page++
-                            }
-                            gotoPage(msg, page)
-                            break
-                        case '⏭':
-                            page = maxPages
-                            gotoPage(msg, maxPages)
-                            break
-                        case 'no':
-                            return msg.edit(helpClosed)
-                                .then(close => {
-                                    close.delete({ timeout: 5000 })
-                                })
-                    }
-                })
-                .catch(() => {
-                    return msg.delete()
-                })
-        }
         switch (args[0]) {
             case "setup":
                 return message.reply({ embeds: [setupEmbed] })
@@ -274,8 +230,33 @@ module.exports = class Help extends BaseCommand {
             return message.reply({ embeds: [helpFallbackEmbed] })
         }
         helpEmbed.setFooter(`Page ${page} of ${maxPages}`, `${message.author.displayAvatarURL()}`)
-        message.reply({ embeds: [helpEmbed] }).then(msg => {
-            changePage(msg)
+        message.reply({ embeds: [helpEmbed], components: [helpRow] }).then(msg => {
+            client.on('interactionCreate', interaction => {
+                switch (interaction.customId) {
+                    case "Home":
+                        page = 1
+                        break
+                    case "Prev":
+                        page <= 1 ? page = 1 : page--
+                        break
+                    case "Next":
+                        page >= maxPages ? page = maxPages : page++
+                        break
+                    case "End":
+                        page = maxPages
+                        break
+                    case "CloseHelp":
+                        return msg.delete()
+                    default:
+                        page = 1
+                        break
+                }
+                interaction.defer().then(() => {
+                    interaction.deleteReply()
+                })
+
+                gotoPage(msg, page)
+            })
         })
     }
 }

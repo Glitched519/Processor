@@ -33,6 +33,8 @@ module.exports = class MessageCreate extends BaseEvent {
         .split(/\s+/)
       const command = client.commands.get(cmdName.toLowerCase())
 
+      if(!command) return
+
       // Check if user is in cooldown
       if (!client.cooldowns.has(command.name)) {
         client.cooldowns.set(command.name, new Map())
