@@ -1,4 +1,4 @@
-const { MessageEmbed } = require('discord.js')
+const { MessageEmbed, MessageActionRow, MessageButton } = require('discord.js')
 const BaseCommand = require('../../utils/structures/BaseCommand')
 
 module.exports = class Vote extends BaseCommand {
@@ -11,13 +11,28 @@ module.exports = class Vote extends BaseCommand {
             .setTitle("Upvote Processor!")
             .setColor(`#42C0FB`)
             .setDescription('Voting for Processor will give you the ability to see the beta development and other vote-only perks!')
-            .setThumbnail('https://petridish.pw/engine/img/pvp-up.png')
-            .addField('top.gg', `[Vote on top.gg!](https://top.gg/bot/689678745782714464/vote)`)
-            .addField('discord.boats', `[Vote on discord.boats!](https://discord.boats/bot/689678745782714464)`)
-            .addField('discordbotlist.com', `[Vote on DBL!](https://discordbotlist.com/bots/processor/upvote)`)
-            .addField('botsfordiscord.com', `[Vote on botsfordiscord.com!](https://botsfordiscord.com/bot/689678745782714464/vote)`)
             .setFooter(`Thanks for all the support!`, message.author.displayAvatarURL())
 
-        message.reply({ embeds: [voteEmbed] })
+        const voteRow = new MessageActionRow()
+            .addComponents(
+                new MessageButton()
+                    .setLabel("top.gg")
+                    .setURL(`https://top.gg/bot/${client.user.id}/vote`)
+                    .setStyle("LINK"),
+                new MessageButton()
+                    .setLabel("botsfordiscord.com")
+                    .setURL(`https://botsfordiscord.com/bot/${client.user.id}/vote`)
+                    .setStyle("LINK"),
+                new MessageButton()
+                    .setLabel("discord.boats")
+                    .setURL(`https://discord.boats/bot/${client.user.id}`)
+                    .setStyle("LINK"),
+                new MessageButton()
+                    .setLabel("discordbotlist.com")
+                    .setURL(`https://discord.ly/processor`)
+                    .setStyle("LINK"),
+            )
+
+        message.reply({ embeds: [voteEmbed], components: [voteRow] })
     }
 }
