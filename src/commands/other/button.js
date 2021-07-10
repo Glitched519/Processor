@@ -13,15 +13,15 @@ module.exports = class Button extends BaseCommand {
                     .setLabel("Blurple")
                     .setCustomId("Blurple")
                     .setStyle("PRIMARY"),
-                    new MessageButton()
+                new MessageButton()
                     .setLabel("Grey")
                     .setCustomId("Grey")
                     .setStyle("SECONDARY"),
-                    new MessageButton()
+                new MessageButton()
                     .setLabel("Green")
                     .setCustomId("Green")
                     .setStyle("SUCCESS"),
-                    new MessageButton()
+                new MessageButton()
                     .setLabel("Red")
                     .setCustomId("Red")
                     .setStyle("DANGER"),
