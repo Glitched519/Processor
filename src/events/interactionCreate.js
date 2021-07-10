@@ -19,7 +19,7 @@ module.exports = class InteractionCreate extends BaseEvent {
                 interaction.reply({ content: "Red", ephemeral: true })
                 break
             default:
-                console.log(interaction.customId)
+                return
         }
     }
 }
