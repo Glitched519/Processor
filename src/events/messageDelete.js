@@ -8,12 +8,7 @@ module.exports = class MessageDelete extends BaseEvent {
     }
     async run(client, message) {
         if (message.author.bot) return
-        client.snipes.set(message.channel.id, {
-            content: message.content,
-            author: message.author.tag,
-            member: message.member,
-            image: message.attachments.first() ? message.attachments.first().proxyURL : null
-        })
+
         const logChannelQuery = await logSchema.findOne({ _id: message.guild.id })
         if (logChannelQuery == null) return
         const logChannel = logChannelQuery.channel

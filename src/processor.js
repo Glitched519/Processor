@@ -32,7 +32,6 @@ const client = new Client({
     console.log('Configuring Client Settings...')
     client.commands = new Map()
     client.events = new Map()
-    client.snipes = new Map()
     client.cooldowns = new Map()
     client.prefix = config.prefix
     await registerCommands(client, '../commands').then(() => console.log("Registering Commands..."))
