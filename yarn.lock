@@ -1334,8 +1334,8 @@ __metadata:
   linkType: hard
 
 "discord.js@npm:dev":
-  version: 13.0.0-dev.d6c43a5.1625875428
-  resolution: "discord.js@npm:13.0.0-dev.d6c43a5.1625875428"
+  version: 13.0.0-dev.4206e35.1626307444
+  resolution: "discord.js@npm:13.0.0-dev.4206e35.1626307444"
   dependencies:
     "@discordjs/builders": ^0.2.0
     "@discordjs/collection": ^0.1.6
@@ -1346,7 +1346,7 @@ __metadata:
     discord-api-types: ^0.19.0-next.f393ba520d7d6d2aacaca7b3ca5d355fab614f6e
     node-fetch: ^2.6.1
     ws: ^7.5.1
-  checksum: 3037b5de727a7bf78aab13c9722bb9268f2c0de467a6cd8408e638c9dc0aeb4e1e74ff82001d2b6db8d69ae05d2aef7be78a38e56837b6593b4b7dbc7bde93dd
+  checksum: 5436d5fd8bf2c1c2abd4d3dfebe2dd98f8d6ca4848f247e0405aa81e3ad17174eb202475385a92db14af7fe3e8b9d03d0fd923de5b3437ace00515c5c7504096
   languageName: node
   linkType: hard
 
@@ -5097,8 +5097,8 @@ resolve@^1.12.0:
   linkType: hard
 
 "ws@npm:^7.5.1":
-  version: 7.5.2
-  resolution: "ws@npm:7.5.2"
+  version: 7.5.3
+  resolution: "ws@npm:7.5.3"
   peerDependencies:
     bufferutil: ^4.0.1
     utf-8-validate: ^5.0.2
@@ -5107,7 +5107,7 @@ resolve@^1.12.0:
       optional: true
     utf-8-validate:
       optional: true
-  checksum: 45eccd77921681f3cae0d646813b5c6aad40e11f90a57e7070a5ceed1ff27629d23034cb223bf77cc6de41a8a2591faa2635558bb5ba9e280edccbc088655770
+  checksum: 77ce9a21297a3a2a7a312f17bd7b98c14df11c151db12f1df814393c0e9c11e94592fc4b5b26e6d3da9de5006cbdb4bdfed0a7a2fb165fc5010d43af07b50d1c
   languageName: node
   linkType: hard
 

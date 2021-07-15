@@ -1,5 +1,4 @@
 const { MessageEmbed } = require('discord.js')
-const { xDelete } = require('../../features/xdelete')
 const BaseCommand = require('../../utils/structures/BaseCommand')
 
 module.exports = class Guild extends BaseCommand {
@@ -18,7 +17,7 @@ module.exports = class Guild extends BaseCommand {
         })
         message.reply({embeds: [guildEmbed]})
         .then(msg => {
-            xDelete(message, msg)
+            close(message, msg)
         })
     }
 }

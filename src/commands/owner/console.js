@@ -1,5 +1,4 @@
 const { exec } = require("child_process")
-const { xDelete } = require('../../features/xdelete')
 const BaseCommand = require('../../utils/structures/BaseCommand')
 
 module.exports = class Console extends BaseCommand {
@@ -13,23 +12,19 @@ module.exports = class Console extends BaseCommand {
 
         exec(args.join(' '), { 'shell': 'pwsh.exe' }, (error, stdout, stderr) => {
             if (error) {
-                return message.reply({ content: `\`\`\`powershell\n${error.message}\n\`\`\`` })
+                message.reply({ content: `\`\`\`powershell\n${error.message}\n\`\`\`` })
                     .then(msg => {
-                        msg.delete({ timeout: 5000 })
+                        client.setTimeout(() => msg.delete(), 4000)
                     })
             }
             if (stderr) {
-                return message.reply({ content: `\`\`\`powershell\n${stderr}\n\`\`\`` })
+                message.reply({ content: `\`\`\`powershell\n${stderr}\n\`\`\`` })
                     .then(msg => {
-                        msg.delete({ timeout: 5000 })
+                        client.setTimeout(() => msg.delete(), 4000)
                     })
             }
-            return message.reply({ content: `\`\`\`powershell\n${stdout}\n\`\`\`` })
-                .then(msg => {
-                    return xDelete(message, msg)
-                })
+            message.reply({ content: `\`\`\`powershell\n${stdout}\n\`\`\`` })
         })
-
     }
 }
 

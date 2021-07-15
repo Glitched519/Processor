@@ -1,6 +1,5 @@
 const { MessageEmbed } = require("discord.js")
 const emojis = require('../../emojis.json')
-const { xDelete } = require('../../features/xdelete')
 const BaseCommand = require('../../utils/structures/BaseCommand')
 
 module.exports = class Permissions extends BaseCommand {
@@ -61,9 +60,7 @@ module.exports = class Permissions extends BaseCommand {
         })
         permEmbed.setDescription(props)
 
-        if (me.permissions.has('EMBED_LINKS')) message.reply({ embeds: [permEmbed] }).then(msg => {
-            return xDelete(message, msg)
-        })
+        if (me.permissions.has('EMBED_LINKS')) message.reply({ embeds: [permEmbed] })
 
     }
 }

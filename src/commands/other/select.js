@@ -10,7 +10,7 @@ module.exports = class Select extends BaseCommand {
         const row = new MessageActionRow()
             .addComponents(
                 new MessageSelectMenu()
-                    .setCustomID('select')
+                    .setCustomId('select')
                     .setPlaceholder('Nothing selected')
                     .addOptions([
                         {

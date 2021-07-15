@@ -60,7 +60,7 @@ module.exports = class MessageCreate extends BaseEvent {
             command.run(client, message, cmdArgs)
           }
           catch (err) {
-            console.error(err);
+            console.error(err)
             message.reply({ content: `Unfortunately, there was an error upon executing this command` })
           }
         }
