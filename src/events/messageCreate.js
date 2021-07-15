@@ -14,6 +14,11 @@ module.exports = class MessageCreate extends BaseEvent {
     if (!message.guild) return
     if (message.author.bot) return
 
+    if (!message.guild.me.permissions.has("READ_MESSAGE_HISTORY")) {
+      message.channel.send({ content: "Please enable the `Read Message History` permission so that I can run properly. See below.\n" })
+      return message.channel.send({ content: "https://cdn.discordapp.com/attachments/688229874649137188/865342658242019368/Screenshot_20210715_172209.png" })
+    }
+
     // eslint-disable-next-line no-unused-vars
     for (const guild of client.guilds.cache) {
       const result = await commandPrefixSchema.findOne({ _id: message.guild.id })
@@ -33,7 +38,7 @@ module.exports = class MessageCreate extends BaseEvent {
         .split(/\s+/)
       const command = client.commands.get(cmdName.toLowerCase())
 
-      if(!command) return
+      if (!command) return
 
       // Check if user is in cooldown
       if (!client.cooldowns.has(command.name)) {
@@ -47,39 +52,43 @@ module.exports = class MessageCreate extends BaseEvent {
       if (timestamps.has(message.author.id)) {
         const expirationTime = timestamps.get(message.author.id) + cooldownAmount
 
-          if (now < expirationTime) {
-            // If user is in cooldown
-            const timeLeft = (expirationTime - now) / 1000
-            return message.reply(`please wait ${timeLeft.toFixed(1)} more second(s) before reusing the \`${command.name}\` command.`)
-          }
-        } else {
-          timestamps.set(message.author.id, now)
-          setTimeout(() => timestamps.delete(message.author.id), cooldownAmount)
-          // Execute command
-          try {
-            command.run(client, message, cmdArgs)
-          }
-          catch (err) {
-            console.error(err)
-            message.reply({ content: `Unfortunately, there was an error upon executing this command` })
-          }
+        if (now < expirationTime) {
+          // If user is in cooldown
+          const timeLeft = (expirationTime - now) / 1000
+          return message.reply(`wait ${timeLeft.toFixed(1)} more second(s) before using \`${command.name}\` again.`)
+            .then(msg => {
+              client.setTimeout(() => msg.delete(), timeLeft.toFixed(1) * 1000)
+            })
+
         }
-
-        // if (command) {
-
-        // }
+      } else {
+        timestamps.set(message.author.id, now)
+        setTimeout(() => timestamps.delete(message.author.id), cooldownAmount)
+        // Execute command
+        try {
+          command.run(client, message, cmdArgs)
+        }
+        catch (err) {
+          console.error(err)
+          message.reply({ content: `Unfortunately, there was an error upon executing this command` })
+        }
       }
 
+      // if (command) {
 
-      const antiSpamChannelQuery = await antiSpamSchema.findOne({
-        guildId: message.guild.id,
-        channelId: message.channel.id,
-      })
-      if (antiSpamChannelQuery == null) return
-      let antiSpamChannel = antiSpamChannelQuery.channelId
-      if (message.channel.id == antiSpamChannel) {
-        client.emit('checkMessage', message) // This runs the filter on any message bot receives in any guilds.
-      }
+      // }
     }
 
+
+    const antiSpamChannelQuery = await antiSpamSchema.findOne({
+      guildId: message.guild.id,
+      channelId: message.channel.id,
+    })
+    if (antiSpamChannelQuery == null) return
+    let antiSpamChannel = antiSpamChannelQuery.channelId
+    if (message.channel.id == antiSpamChannel) {
+      client.emit('checkMessage', message) // This runs the filter on any message bot receives in any guilds.
+    }
   }
+
+}
