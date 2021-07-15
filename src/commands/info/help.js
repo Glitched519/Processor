@@ -6,6 +6,64 @@ const commandPrefixSchema = require('../../schemas/command-prefix-schema')
 const { MessageEmbed, MessageActionRow, MessageButton } = require('discord.js')
 const BaseCommand = require('../../utils/structures/BaseCommand')
 
+let setupCmds = []
+let modCmds = []
+let mathCmds = []
+let animalCmds = []
+let clashCmds = []
+let cuteCmds = []
+let infoCmds = []
+let searchCmds = []
+let otherCmds = []
+
+let setupCmdNames = fs.readdirSync(path.join(__dirname, '../setup'))
+let modCmdNames = fs.readdirSync(path.join(__dirname, '../mod'))
+let mathCmdNames = fs.readdirSync(path.join(__dirname, '../math'))
+let animalCmdNames = fs.readdirSync(path.join(__dirname, '../animal'))
+let clashCmdNames = fs.readdirSync(path.join(__dirname, '../clash'))
+let cuteCmdNames = fs.readdirSync(path.join(__dirname, '../cute'))
+let infoCmdNames = fs.readdirSync(path.join(__dirname, '../info'))
+let searchCmdNames = fs.readdirSync(path.join(__dirname, '../search'))
+let otherCmdNames = fs.readdirSync(path.join(__dirname, '../other'))
+
+setupCmdNames.forEach(cmd => {
+    cmd = cmd.slice(0, cmd.indexOf('.js'))
+    setupCmds.push(cmd)
+})
+modCmdNames.forEach(cmd => {
+    cmd = cmd.slice(0, cmd.indexOf('.js'))
+    modCmds.push(cmd)
+})
+mathCmdNames.forEach(cmd => {
+    cmd = cmd.slice(0, cmd.indexOf('.js'))
+    mathCmds.push(cmd)
+})
+animalCmdNames.forEach(cmd => {
+    cmd = cmd.slice(0, cmd.indexOf('.js'))
+    animalCmds.push(cmd)
+})
+clashCmdNames.forEach(cmd => {
+    cmd = cmd.slice(0, cmd.indexOf('.js'))
+    clashCmds.push(cmd)
+})
+cuteCmdNames.forEach(cmd => {
+    cmd = cmd.slice(0, cmd.indexOf('.js'))
+    cuteCmds.push(cmd)
+})
+infoCmdNames.forEach(cmd => {
+    cmd = cmd.slice(0, cmd.indexOf('.js'))
+    infoCmds.push(cmd)
+})
+searchCmdNames.forEach(cmd => {
+    cmd = cmd.slice(0, cmd.indexOf('.js'))
+    searchCmds.push(cmd)
+})
+otherCmdNames.forEach(cmd => {
+    cmd = cmd.slice(0, cmd.indexOf('.js'))
+    otherCmds.push(cmd)
+})
+
+
 module.exports = class Help extends BaseCommand {
     constructor() {
         super('help', 'info', ['h'])
@@ -14,64 +72,6 @@ module.exports = class Help extends BaseCommand {
     async run(client, message, args) {
 
         let page = 1
-        let maxPages = 10
-
-        let setupCmds = []
-        let modCmds = []
-        let mathCmds = []
-        let animalCmds = []
-        let clashCmds = []
-        let cuteCmds = []
-        let infoCmds = []
-        let searchCmds = []
-        let otherCmds = []
-
-        let setupCmdNames = fs.readdirSync(path.join(__dirname, '../setup'))
-        let modCmdNames = fs.readdirSync(path.join(__dirname, '../mod'))
-        let mathCmdNames = fs.readdirSync(path.join(__dirname, '../math'))
-        let animalCmdNames = fs.readdirSync(path.join(__dirname, '../animal'))
-        let clashCmdNames = fs.readdirSync(path.join(__dirname, '../clash'))
-        let cuteCmdNames = fs.readdirSync(path.join(__dirname, '../cute'))
-        let infoCmdNames = fs.readdirSync(path.join(__dirname, '../info'))
-        let searchCmdNames = fs.readdirSync(path.join(__dirname, '../search'))
-        let otherCmdNames = fs.readdirSync(path.join(__dirname, '../other'))
-
-        setupCmdNames.forEach(cmd => {
-            cmd = cmd.slice(0, cmd.indexOf('.js'))
-            setupCmds.push(cmd)
-        })
-        modCmdNames.forEach(cmd => {
-            cmd = cmd.slice(0, cmd.indexOf('.js'))
-            modCmds.push(cmd)
-        })
-        mathCmdNames.forEach(cmd => {
-            cmd = cmd.slice(0, cmd.indexOf('.js'))
-            mathCmds.push(cmd)
-        })
-        animalCmdNames.forEach(cmd => {
-            cmd = cmd.slice(0, cmd.indexOf('.js'))
-            animalCmds.push(cmd)
-        })
-        clashCmdNames.forEach(cmd => {
-            cmd = cmd.slice(0, cmd.indexOf('.js'))
-            clashCmds.push(cmd)
-        })
-        cuteCmdNames.forEach(cmd => {
-            cmd = cmd.slice(0, cmd.indexOf('.js'))
-            cuteCmds.push(cmd)
-        })
-        infoCmdNames.forEach(cmd => {
-            cmd = cmd.slice(0, cmd.indexOf('.js'))
-            infoCmds.push(cmd)
-        })
-        searchCmdNames.forEach(cmd => {
-            cmd = cmd.slice(0, cmd.indexOf('.js'))
-            searchCmds.push(cmd)
-        })
-        otherCmdNames.forEach(cmd => {
-            cmd = cmd.slice(0, cmd.indexOf('.js'))
-            otherCmds.push(cmd)
-        })
 
         // eslint-disable-next-line no-unused-vars
         for (const guild of client.guilds.cache) {
@@ -84,20 +84,6 @@ module.exports = class Help extends BaseCommand {
             }
         }
         const PREFIX = guildPrefixes[message.guild.id] || globalPrefix
-
-        let helpFallbackEmbed = new MessageEmbed()
-            .setColor(`RANDOM`)
-            .setTitle('Need some help?')
-            .setDescription(`Prefix is **${PREFIX}** as in **${PREFIX}help**.`)
-            .addField(':wrench: Setup  `setup`', 'Configure the bot in your server.\n`Manage Server` permission is required.')
-            .addField(':shield: Moderation  `mod`', 'Manages server members.')
-            .addField(':cat: Animal  `animal`', 'Learn about animals.')
-            .addField(':crossed_swords: Clash  `clash`', 'Look up Clash of Clans related things.')
-            .addField(':blue_heart: Cute  `cute`', 'Adore a member.')
-            .addField(':1234: Math  `math`', 'Play with numbers.')
-            .addField(':information_source: Info  `info`', 'Get information about a user or the server.')
-            .addField(':mag_right: Search  `search`', 'Search some cool stuff from the bot!')
-            .addField(':o: Other  `other`', 'Play with other commands.')
 
         let helpEmbed = new MessageEmbed()
             .setColor(`RANDOM`)
@@ -168,6 +154,7 @@ module.exports = class Help extends BaseCommand {
             .setDescription(`\`${otherCmds.join('\n')}\``)
 
         let allEmbeds = [helpEmbed, setupEmbed, modEmbed, animalEmbed, clashEmbed, cuteEmbed, mathEmbed, infoEmbed, searchEmbed, otherEmbed]
+        let maxPages = allEmbeds.length
 
         const helpRow = new MessageActionRow()
             .addComponents(
@@ -225,10 +212,6 @@ module.exports = class Help extends BaseCommand {
                 return message.reply({ embeds: [otherEmbed] })
         }
 
-        if (!message.guild.me.permissions.has(["READ_MESSAGE_HISTORY", "ADD_REACTIONS"])) {
-            message.reply({ content: `:grey_question: If you wish to use reactions to navigate the help menu, please make make the following permissions are enabled:\n**Read Message History\nAdd Reactions**\nUsage: ${PREFIX}help \`[topic]\`` })
-            return message.reply({ embeds: [helpFallbackEmbed] })
-        }
         helpEmbed.setFooter(`Page ${page} of ${maxPages}`, `${message.author.displayAvatarURL()}`)
         message.reply({ embeds: [helpEmbed], components: [helpRow] }).then(msg => {
             client.on('interactionCreate', interaction => {
