@@ -16,8 +16,5 @@ module.exports = class Guild extends BaseCommand {
             guildEmbed.addField(`${guild.name}`, `${guild.memberCount} members`, true)
         })
         message.reply({embeds: [guildEmbed]})
-        .then(msg => {
-            close(message, msg)
-        })
     }
 }

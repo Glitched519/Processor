@@ -22,7 +22,7 @@ module.exports = class AnimalFact extends BaseCommand {
                 .setDescription(response.data.fact)
             return message.reply({ embeds: [factEmbed] })
         }).catch(() => {
-            return message.reply({ content: ":x: Sorry, we don't have any facts for that animal."})
+            return message.reply({ content: ":x: Sorry, we don't have any facts for that animal." })
         })
     }
 }
