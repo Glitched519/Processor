@@ -1,10 +1,11 @@
-
-const { Client } = require('discord.js')
+const { Client, MessageEmbed, MessageActionRow, MessageButton } = require('discord.js')
 const { registerCommands, registerEvents } = require('./utils/registry')
 const config = require('./config.json')
-const Topgg = require("@top-gg/sdk")
-
-const api = new Topgg.Api(config["topgg-token"])
+const { Webhook } = require('@top-gg/sdk')
+const express = require("express")
+const { AutoPoster } = require('topgg-autoposter')
+const wh = new Webhook(config['webhook-pass'])
+const app = express()
 
 const nonPrivilegedIntents = [
     'GUILDS',
@@ -28,6 +29,7 @@ const client = new Client({
 });
 
 (async () => {
+    const ap = AutoPoster(config['topgg-token'], client)
     await client.login(config.token).then(() => console.log('Logging In...'))
     console.log('Configuring Client Settings...')
     client.commands = new Map()
@@ -37,15 +39,28 @@ const client = new Client({
     await registerCommands(client, '../commands').then(() => console.log("Registering Commands..."))
     await registerEvents(client, '../events').then(() => console.log("Registering Events..."))
 
-    setInterval(() => {
-        api.postStats({
-            serverCount: client.guilds.cache.size,
-            shardCount: client.options.shardCount
-        })
-    }, 1800000) // update every 30 minutes
-    console.log("Started Posting Bot Stats on top.gg.")
+    app.post('/webhook', wh.listener((vote) => {
+        const botVoteEmbed = new MessageEmbed()
+            .setTitle("Someone just voted!")
+            .setColor('BLURPLE')
+            .setDescription(`<@!${vote.user}> just voted!`)
+            .setFooter(`Thanks for all your support!`)
+        const voteRow = new MessageActionRow()
+            .addComponents(
+                new MessageButton()
+                    .setLabel("Vote")
+                    .setURL("https://top.gg/bot/689678745782714464/vote")
+                    .setStyle("LINK"),
+            )
 
-    console.log("Guilds: %d", client.guilds.cache.size)
+        client.channels.cache.get('782680889628557382').send({ embeds: [botVoteEmbed], components: [voteRow] })
+    }))
+
+    app.listen(3000)
+
+    ap.on('posted', () => {
+        console.log(`Posted stats to Top.gg!`)
+    })
 
     client.emit("ready")
 })()
