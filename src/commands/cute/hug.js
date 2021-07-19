@@ -1,17 +1,17 @@
 const axios = require("axios").default
-const { MessageEmbed } = require('discord.js')
-const BaseCommand = require('../../utils/structures/BaseCommand')
+const { MessageEmbed } = require("discord.js")
+const BaseCommand = require("../../utils/structures/BaseCommand")
 
 module.exports = class Hug extends BaseCommand {
     constructor() {
-        super('hug', 'cute', [])
+        super("hug", "cute", [])
     }
 
     async run(client, message, args) {
 
         const options = {
-            method: 'GET',
-            url: 'https://some-random-api.ml/animu/hug',
+            method: "GET",
+            url: "https://some-random-api.ml/animu/hug",
         }
 
         axios.request(options).then(response => {

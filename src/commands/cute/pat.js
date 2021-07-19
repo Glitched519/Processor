@@ -1,17 +1,17 @@
 const axios = require("axios").default
-const { MessageEmbed } = require('discord.js')
-const BaseCommand = require('../../utils/structures/BaseCommand')
+const { MessageEmbed } = require("discord.js")
+const BaseCommand = require("../../utils/structures/BaseCommand")
 
 module.exports = class Pat extends BaseCommand {
     constructor() {
-        super('pat', 'cute', [])
+        super("pat", "cute", [])
     }
 
     async run(client, message, args) {
 
         const options = {
-            method: 'GET',
-            url: 'https://some-random-api.ml/animu/pat',
+            method: "GET",
+            url: "https://some-random-api.ml/animu/pat",
         }
 
         axios.request(options).then(response => {

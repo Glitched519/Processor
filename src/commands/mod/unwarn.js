@@ -1,25 +1,25 @@
-const { MessageEmbed } = require('discord.js')
-const warnSchema = require('../../schemas/warn-schema')
-const BaseCommand = require('../../utils/structures/BaseCommand')
+const { MessageEmbed } = require("discord.js")
+const warnSchema = require("../../schemas/warn-schema")
+const BaseCommand = require("../../utils/structures/BaseCommand")
 
 module.exports = class Unwarn extends BaseCommand {
     constructor() {
-        super('unwarn', 'mod', ['unw', 'uw'])
+        super("unwarn", "mod", ["unw", "uw"])
     }
 
     async run(client, message, args) {
         const mentionedMember = message.mentions.members.first() || message.guild.members.cache.get(args[0])
         let cannotUnwarnEmbed = new MessageEmbed()
             .setDescription(`That member is a bot. I cannot unwarn them.`)
-            .setColor('AQUA')
+            .setColor("AQUA")
         if (mentionedMember.user.bot) return message.reply({ embeds: [cannotUnwarnEmbed] })
 
-        if (!message.member.permissions.has('MANAGE_MESSAGES')) {
-            return message.reply({ content: 'You need to `Message Messages` permission to unwarn a member.' })
+        if (!message.member.permissions.has("MANAGE_MESSAGES")) {
+            return message.reply({ content: "You need to `Message Messages` permission to unwarn a member." })
         }
 
         if (!mentionedMember) {
-            return message.reply({ content: 'You need to mention a member you want to warn' })
+            return message.reply({ content: "You need to mention a member you want to warn" })
         }
 
         const mentionedPosition = mentionedMember.roles.highest.position
@@ -29,7 +29,7 @@ module.exports = class Unwarn extends BaseCommand {
             return message.reply({ content: "You can't unwarn this member as their role is higher than or equal to yours." })
         }
 
-        const reason = args.slice(2).join(' ')
+        const reason = args.slice(2).join(" ")
 
         const warnDoc = await warnSchema.findOne({
             guildId: message.guild.id,
@@ -43,15 +43,15 @@ module.exports = class Unwarn extends BaseCommand {
         const warningId = parseInt(args[1])
 
         if (warningId < 0 || warningId > warnDoc.warnings.length) {
-            return message.reply({ content: 'Invalid warning ID.' })
+            return message.reply({ content: "Invalid warning ID." })
         }
 
         warnDoc.warnings.splice(warningId - 1, warningId !== 1 ? warningId - 1 : 1)
         await warnDoc.save().catch(err => console.log(err))
 
         let unwarnEmbed = new MessageEmbed()
-            .setDescription(`Unwarned ${mentionedMember} ${reason ? `for **${reason}**` : ''}`)
-            .setColor('DARK_GOLD')
+            .setDescription(`Unwarned ${mentionedMember} ${reason ? `for **${reason}**` : ""}`)
+            .setColor("DARK_GOLD")
 
         message.reply({ embeds: [unwarnEmbed] })
     }

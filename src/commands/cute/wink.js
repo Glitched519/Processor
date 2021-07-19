@@ -1,17 +1,17 @@
 const axios = require("axios").default
-const { MessageEmbed } = require('discord.js')
-const BaseCommand = require('../../utils/structures/BaseCommand')
+const { MessageEmbed } = require("discord.js")
+const BaseCommand = require("../../utils/structures/BaseCommand")
 
 module.exports = class Wink extends BaseCommand {
     constructor() {
-        super('wink', 'cute', [])
+        super("wink", "cute", [])
     }
 
     async run(client, message, args) {
 
         const options = {
-            method: 'GET',
-            url: 'https://some-random-api.ml/animu/wink',
+            method: "GET",
+            url: "https://some-random-api.ml/animu/wink",
         }
 
         axios.request(options).then(response => {

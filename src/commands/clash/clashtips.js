@@ -1,9 +1,9 @@
-const { MessageEmbed } = require('discord.js')
-const BaseCommand = require('../../utils/structures/BaseCommand')
+const { MessageEmbed } = require("discord.js")
+const BaseCommand = require("../../utils/structures/BaseCommand")
 
 module.exports = class ClashTips extends BaseCommand {
     constructor() {
-        super('clashtips', 'clash', ['tip', 'clashtip', 'tips', 'clashtips'])
+        super("clashtips", "clash", ["tip", "clashtip", "tips", "clashtips"])
     }
 
     async run(client, message, args) {
@@ -164,7 +164,7 @@ module.exports = class ClashTips extends BaseCommand {
                 .setColor(`RANDOM`)
                 .setTitle(`Clash of Clans Tip #${index}`)
                 .setDescription(tips[index - 1])
-                .setThumbnail('https://vignette.wikia.nocookie.net/clashofclans/images/6/61/Villager_info.png/revision/latest/scale-to-width-down/340?cb=20200622145823')
+                .setThumbnail("https://vignette.wikia.nocookie.net/clashofclans/images/6/61/Villager_info.png/revision/latest/scale-to-width-down/340?cb=20200622145823")
                 .setTimestamp()
             message.reply({ embeds: [tipEmbed] })
         } else {
@@ -172,7 +172,7 @@ module.exports = class ClashTips extends BaseCommand {
                 .setColor(`RANDOM`)
                 .setTitle(`Clash of Clans Tip #${randomTipIndex + 1}`)
                 .setDescription(tips[randomTipIndex])
-                .setThumbnail('https://vignette.wikia.nocookie.net/clashofclans/images/6/61/Villager_info.png/revision/latest/scale-to-width-down/340?cb=20200622145823')
+                .setThumbnail("https://vignette.wikia.nocookie.net/clashofclans/images/6/61/Villager_info.png/revision/latest/scale-to-width-down/340?cb=20200622145823")
                 .setTimestamp()
 
             message.reply({ embeds: [tipEmbed] })

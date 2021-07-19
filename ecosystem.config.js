@@ -1,7 +1,7 @@
 module.exports = {
   apps: [{
-    name: 'processor',
-    script: './src/processor.js',
+    name: "processor",
+    script: "./src/processor.js",
     watch: ".",
     time: true,
   }

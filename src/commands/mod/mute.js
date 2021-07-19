@@ -1,36 +1,36 @@
-const { MessageEmbed } = require('discord.js')
-const ms = require('ms')
-const muteSchema = require('../../schemas/mute-schema')
-const BaseCommand = require('../../utils/structures/BaseCommand')
+const { MessageEmbed } = require("discord.js")
+const ms = require("ms")
+const muteSchema = require("../../schemas/mute-schema")
+const BaseCommand = require("../../utils/structures/BaseCommand")
 
 module.exports = class Mute extends BaseCommand {
     constructor() {
-        super('mute', 'mod', ['m', 'shut'])
+        super("mute", "mod", ["m", "shut"])
     }
 
     async run(client, message, args) {
         const mentionedMember = message.mentions.members.first() || message.guild.members.cache.get(args[0])
 
         const msRegex = RegExp(/(\d+(s|m|h|d|w))/)
-        let muteRole = message.guild.roles.cache.find(r => r.name == 'Muted')
+        let muteRole = message.guild.roles.cache.find(r => r.name == "Muted")
 
-        if (!message.member.permissions.has('MANAGE_ROLES')) {
-            return message.reply('You need the `Manage Roles` permission to mute a member.')
+        if (!message.member.permissions.has("MANAGE_ROLES")) {
+            return message.reply("You need the `Manage Roles` permission to mute a member.")
         }
-        if (!message.guild.me.permissions.has(['MANAGE_ROLES', 'MANAGE_CHANNELS'])) {
-            return message.reply('I need the `Manage Roles` and `Manage Channels` permissions to mute a member.')
+        if (!message.guild.me.permissions.has(["MANAGE_ROLES", "MANAGE_CHANNELS"])) {
+            return message.reply("I need the `Manage Roles` and `Manage Channels` permissions to mute a member.")
         }
         if (!mentionedMember) {
-            return message.reply('You need to mention a member you want to mute.')
+            return message.reply("You need to mention a member you want to mute.")
         }
         if (!msRegex.test(args[1])) {
-            return message.reply('Invalid mute time.')
+            return message.reply("Invalid mute time.")
         }
         if (!muteRole) {
             muteRole = await message.guild.roles.create({
                 data: {
-                    name: 'Muted',
-                    color: 'RED',
+                    name: "Muted",
+                    color: "RED",
                 }
             }).catch(err => {
                 return message.reply("Failed to create muted role: " + err)
@@ -38,10 +38,10 @@ module.exports = class Mute extends BaseCommand {
         }
 
         if (mentionedMember.roles.highest.position >= message.guild.me.roles.highest.position) {
-            return message.reply('Cannot mute this member as their roles are higher or equal to mine.')
+            return message.reply("Cannot mute this member as their roles are higher or equal to mine.")
         }
         if (muteRole.position >= message.guild.me.roles.highest.position) {
-            return message.reply('Cannot muted this member as the `Muted` role is higher than mine.')
+            return message.reply("Cannot muted this member as the `Muted` role is higher than mine.")
         }
         if (ms(msRegex.exec(args[1])[1]) > 2592000000) {
             return message.reply("You can't mute a member for more than a month.")
@@ -53,7 +53,7 @@ module.exports = class Mute extends BaseCommand {
         })
 
         if (isMuted) {
-            return message.reply('This member is already muted.')
+            return message.reply("This member is already muted.")
         }
 
         for (const channel of message.guild.channels.cache) {
@@ -63,7 +63,7 @@ module.exports = class Mute extends BaseCommand {
             }).catch(err => console.log(err))
         }
 
-        const noEveryone = mentionedMember.roles.cache.filter(r => r.name !== '@everyone')
+        const noEveryone = mentionedMember.roles.cache.filter(r => r.name !== "@everyone")
 
         await mentionedMember.roles.add(muteRole.id).catch(err => console.log(err))
 
@@ -80,11 +80,11 @@ module.exports = class Mute extends BaseCommand {
 
         await muteDoc.save().catch(err => console.log(err))
 
-        const reason = args.slice(2).join(' ')
+        const reason = args.slice(2).join(" ")
 
         let muteEmbed = new MessageEmbed()
-            .setDescription(`Muted ${mentionedMember} for **${msRegex.exec(args[1])[1]}** ${reason ? `for **${reason}**` : ''}`)
-            .setColor('GREY')
+            .setDescription(`Muted ${mentionedMember} for **${msRegex.exec(args[1])[1]}** ${reason ? `for **${reason}**` : ""}`)
+            .setColor("GREY")
 
         message.reply({ embeds: [muteEmbed] })
     }

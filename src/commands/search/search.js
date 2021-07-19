@@ -1,26 +1,26 @@
-const fs = require('fs')
-const path = require('path')
+const fs = require("fs")
+const path = require("path")
 const request = require("node-superfetch")
-const config = require('../../config.json')
-const BaseCommand = require('../../utils/structures/BaseCommand')
-const { MessageEmbed } = require('discord.js')
+const config = require("../../config.json")
+const BaseCommand = require("../../utils/structures/BaseCommand")
+const { MessageEmbed } = require("discord.js")
 
 
 
 module.exports = class Search extends BaseCommand {
     constructor() {
-        super('search', 'search', [])
+        super("search", "search", [])
     }
 
     async run(client, message, args) {
-        let googleKey = config['google-search-api-key']
-        let csx = 'a81fbd269d9776933' // Search engine ID
+        let googleKey = config["google-search-api-key"]
+        let csx = "a81fbd269d9776933" // Search engine ID
         let query = args.join(" ")
 
-        let bannedWords = fs.readFileSync(path.join(__dirname, '../../events/bannedwords.txt')).toString().split("\r\n")
-        let bannedPhrases = fs.readFileSync(path.join(__dirname, '../../events/bannedphrases.txt')).toString().split("\r\n")
+        let bannedWords = fs.readFileSync(path.join(__dirname, "../../events/bannedwords.txt")).toString().split("\r\n")
+        let bannedPhrases = fs.readFileSync(path.join(__dirname, "../../events/bannedphrases.txt")).toString().split("\r\n")
         let msg = message.content.toLowerCase()
-        let wordsOnlyMsg = msg.replace(/[.?!#$%^&*,-_+=]/g, ' ')
+        let wordsOnlyMsg = msg.replace(/[.?!#$%^&*,-_+=]/g, " ")
         let words = wordsOnlyMsg.split(/\s+/)
 
         // Checks if parameter is an nsfw term. Blocks command in non-nsfw channels.
@@ -36,7 +36,7 @@ module.exports = class Search extends BaseCommand {
 
         const errorEmbed = new MessageEmbed()
             .setDescription(`Could not find search results for **${query}**.`)
-            .setColor('RED')
+            .setColor("RED")
 
         if (!query) return message.reply({ content: "Please enter a search query." })
 
@@ -55,7 +55,7 @@ module.exports = class Search extends BaseCommand {
             const { body } = await request.get("https://www.googleapis.com/customsearch/v1").query({
                 key: googleKey,
                 cx: csx,
-                safe: 'off',
+                safe: "off",
                 q: query
             })
             if (!body || !body.items) {

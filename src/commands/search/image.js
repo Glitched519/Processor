@@ -1,21 +1,21 @@
-const fs = require('fs')
-const path = require('path')
+const fs = require("fs")
+const path = require("path")
 const axios = require("axios").default
-const config = require('../../config.json')
-const BaseCommand = require('../../utils/structures/BaseCommand')
+const config = require("../../config.json")
+const BaseCommand = require("../../utils/structures/BaseCommand")
 
 
 
 module.exports = class Image extends BaseCommand {
     constructor() {
-        super('image', 'search', ['img'])
+        super("image", "search", ["img"])
     }
 
     async run(client, message, args) {
-        let bannedWords = fs.readFileSync(path.join(__dirname, '../../events/bannedwords.txt')).toString().split("\r\n")
-        let bannedPhrases = fs.readFileSync(path.join(__dirname, '../../events/bannedphrases.txt')).toString().split("\r\n")
+        let bannedWords = fs.readFileSync(path.join(__dirname, "../../events/bannedwords.txt")).toString().split("\r\n")
+        let bannedPhrases = fs.readFileSync(path.join(__dirname, "../../events/bannedphrases.txt")).toString().split("\r\n")
         let msg = message.content.toLowerCase()
-        let wordsOnlyMsg = msg.replace(/[.?!#$%^&*,-_+=]/g, ' ')
+        let wordsOnlyMsg = msg.replace(/[.?!#$%^&*,-_+=]/g, " ")
         let words = wordsOnlyMsg.split(/\s+/)
 
         // Checks if parameter is an nsfw term. Blocks command in non-nsfw channels.
@@ -32,12 +32,12 @@ module.exports = class Image extends BaseCommand {
         let size = 10
 
         const options = {
-          method: 'GET',
-          url: 'https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/Search/ImageSearchAPI',
-          params: {q: args.join(' '), pageSize: size, autoCorrect: 'true'},
+          method: "GET",
+          url: "https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/Search/ImageSearchAPI",
+          params: {q: args.join(" "), pageSize: size, autoCorrect: "true"},
           headers: {
-            'x-rapidapi-key': config['x-rapid-api-key'],
-            'x-rapidapi-host': 'contextualwebsearch-websearch-v1.p.rapidapi.com'
+            "x-rapidapi-key": config["x-rapid-api-key"],
+            "x-rapidapi-host": "contextualwebsearch-websearch-v1.p.rapidapi.com"
           }
         }
         

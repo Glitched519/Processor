@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+const mongoose = require("mongoose")
 
 const muteSchema = mongoose.Schema({
     guildId: String,
@@ -7,4 +7,4 @@ const muteSchema = mongoose.Schema({
     memberRoles: Array,
 })
 
-module.exports = mongoose.model('mutes', muteSchema)
+module.exports = mongoose.model("mutes", muteSchema)

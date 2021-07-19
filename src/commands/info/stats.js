@@ -1,10 +1,10 @@
-const config = require('../../config.json')
+const config = require("../../config.json")
 const PREFIX = config.prefix
-const BaseCommand = require('../../utils/structures/BaseCommand')
+const BaseCommand = require("../../utils/structures/BaseCommand")
 
 module.exports = class Stats extends BaseCommand {
     constructor() {
-        super('stats', 'info', [])
+        super("stats", "info", [])
     }
 
     async run(client, message, args) {
@@ -24,23 +24,23 @@ module.exports = class Stats extends BaseCommand {
                     },
                     fields: [
                         {
-                            name: 'Created On',
+                            name: "Created On",
                             value: member.user.createdAt.toLocaleString(),
                         },
                         {
-                            name: 'Joined On',
+                            name: "Joined On",
                             value: member.joinedAt.toLocaleString(),
                         },
                         {
-                            name: 'Voice Channel',
-                            value: member.voice.channel ? member.voice.channel.name + ` (${member.voice.channel.id})` : 'None',
+                            name: "Voice Channel",
+                            value: member.voice.channel ? member.voice.channel.name + ` (${member.voice.channel.id})` : "None",
                         },
                         {
-                            name: 'Nickname',
+                            name: "Nickname",
                             value: member.displayName,
                         },
                         {
-                            name: 'Presence',
+                            name: "Presence",
                             value: member.presence.status,
                         },
                     ]
@@ -67,30 +67,30 @@ module.exports = class Stats extends BaseCommand {
                 },
                 fields: [
                     {
-                        name: 'Created On',
+                        name: "Created On",
                         value: guild.createdAt.toLocaleString(),
                     },
                     {
-                        name: 'Server Owner',
+                        name: "Server Owner",
                         value: `<@!${guild.ownerId}>`,
                     },
                     {
-                        name: 'Total Members',
+                        name: "Total Members",
                         value: guild.memberCount.toString(),
                         inline: true,
                     },
                     {
-                        name: 'Total Channels',
+                        name: "Total Channels",
                         value: guild.channels.cache.size.toString(),
                         inline: true,
                     },
                     {
-                        name: 'Total Text Channels',
-                        value: guild.channels.cache.filter(ch => ch.type === 'text').size.toString(),
+                        name: "Total Text Channels",
+                        value: guild.channels.cache.filter(ch => ch.type === "text").size.toString(),
                     },
                     {
-                        name: 'Total Voice Channels',
-                        value: guild.channels.cache.filter(ch => ch.type === 'voice').size.toString(),
+                        name: "Total Voice Channels",
+                        value: guild.channels.cache.filter(ch => ch.type === "voice").size.toString(),
                         inline: true,
                     },
                 ]

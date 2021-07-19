@@ -14,12 +14,12 @@ module.exports = (client) => {
         })
     }
 
-    client.on('message', async (message) => {
+    client.on("message", async (message) => {
         const { guild, content } = message
 
-        const code = content.split('discord.gg/')[1]
+        const code = content.split("discord.gg/")[1]
 
-        if (content.includes('discord.gg/')) {
+        if (content.includes("discord.gg/")) {
             const isOurInvite = await isInvite(guild, code)
             if (!isOurInvite) {
                 await message.delete()

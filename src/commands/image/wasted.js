@@ -1,8 +1,8 @@
-const BaseCommand = require('../../utils/structures/BaseCommand')
+const BaseCommand = require("../../utils/structures/BaseCommand")
 
 module.exports = class Wasted extends BaseCommand {
     constructor() {
-        super('wasted', 'image', [])
+        super("wasted", "image", [])
     }
 
     async run(client, message) {

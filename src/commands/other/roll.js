@@ -1,14 +1,14 @@
-const BaseCommand = require('../../utils/structures/BaseCommand')
+const BaseCommand = require("../../utils/structures/BaseCommand")
 
 module.exports = class Roll extends BaseCommand {
     constructor() {
-        super('roll', 'other', ['dice', 'rolldice'])
+        super("roll", "other", ["dice", "rolldice"])
     }
 
     async run(client, message) {
         const rollDice = Math.floor(Math.random() * 6) + 1
-        let nums = [':one:', ':two:', ':three:', ':four:', ':five:', ':six:']
-        let diceNum = ''
+        let nums = [":one:", ":two:", ":three:", ":four:", ":five:", ":six:"]
+        let diceNum = ""
         switch (rollDice) {
             case 1:
                 diceNum = nums[0]
@@ -31,7 +31,7 @@ module.exports = class Roll extends BaseCommand {
         }
         let rollEmbed = {
             color: `RANDOM`,
-            title: ':game_die: You rolled a ' + diceNum,
+            title: ":game_die: You rolled a " + diceNum,
             timestamp: new Date()
         }
         message.reply({ embeds: [rollEmbed] })

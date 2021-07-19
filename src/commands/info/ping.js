@@ -1,9 +1,9 @@
-const BaseCommand = require('../../utils/structures/BaseCommand')
-const emojis = require('../../emojis.json')
+const BaseCommand = require("../../utils/structures/BaseCommand")
+const emojis = require("../../emojis.json")
 
 module.exports = class Ping extends BaseCommand {
     constructor() {
-        super('ping', 'info', ['alive'])
+        super("ping", "info", ["alive"])
     }
 
     async run(client, message) {

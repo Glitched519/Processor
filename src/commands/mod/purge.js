@@ -1,9 +1,9 @@
-const BaseCommand = require('../../utils/structures/BaseCommand')
-const { MessageEmbed } = require('discord.js')
+const BaseCommand = require("../../utils/structures/BaseCommand")
+const { MessageEmbed } = require("discord.js")
 
 module.exports = class Purge extends BaseCommand {
     constructor() {
-        super('purge', 'mod', ['clear', 'clean', 'delete', 'del'])
+        super("purge", "mod", ["clear", "clean", "delete", "del"])
     }
 
     async run(client, message, args) {
@@ -13,7 +13,7 @@ module.exports = class Purge extends BaseCommand {
                     client.setTimeout(() => msg.delete(), 4000)
                 })
         }
-        if (!message.member.permissions.has(['MANAGE_MESSAGES'])) {
+        if (!message.member.permissions.has(["MANAGE_MESSAGES"])) {
             return message.reply({ content: ":x: **You need the `Manage Messages` permission to delete messages.**" })
                 .then(msg => {
                     client.setTimeout(() => msg.delete(), 4000)
@@ -21,7 +21,7 @@ module.exports = class Purge extends BaseCommand {
         }
 
         if (isNaN(args[0]) || parseInt(args[0]) <= 0 || parseInt(args[0]) > 100) {
-            return message.reply({ content: 'You can only delete between 1 and 100 messages at once.' })
+            return message.reply({ content: "You can only delete between 1 and 100 messages at once." })
                 .then(msg => {
                     client.setTimeout(() => msg.delete(), 4000)
                 })
@@ -29,7 +29,7 @@ module.exports = class Purge extends BaseCommand {
 
         let deleteAmount = parseInt(args[0])
         let deleteEmbed = new MessageEmbed()
-            .setColor('GREEN')
+            .setColor("GREEN")
             .setDescription(`I have cleared ${deleteAmount} message(s).`)
 
 

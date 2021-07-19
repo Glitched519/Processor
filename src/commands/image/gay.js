@@ -1,8 +1,8 @@
-const BaseCommand = require('../../utils/structures/BaseCommand')
+const BaseCommand = require("../../utils/structures/BaseCommand")
 
 module.exports = class Gay extends BaseCommand {
     constructor() {
-        super('gay', 'image', [])
+        super("gay", "image", [])
     }
 
     async run(client, message) {

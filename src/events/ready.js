@@ -1,19 +1,19 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
-const BaseEvent = require('../utils/structures/BaseEvent')
-const os = require('os')
-const fs = require('fs')
-const config = require('../config.json')
-const { MessageEmbed } = require('discord.js')
-const antispam = require('better-discord-antispam')
-// const antiAd = require('../features/anti-ad')
-const mongo = require('../features/mongo')
-const muteSchema = require('../schemas/mute-schema')
-const guildId = '687138260014858260'
+const BaseEvent = require("../utils/structures/BaseEvent")
+const os = require("os")
+const fs = require("fs")
+const config = require("../config.json")
+const { MessageEmbed } = require("discord.js")
+const antispam = require("better-discord-antispam")
+// const antiAd = require("../features/anti-ad")
+const mongo = require("../features/mongo")
+const muteSchema = require("../schemas/mute-schema")
+const guildId = "687138260014858260"
 
 module.exports = class Ready extends BaseEvent {
     constructor() {
-        super('ready')
+        super("ready")
     }
     async run(client) {
 
@@ -28,11 +28,11 @@ module.exports = class Ready extends BaseEvent {
             muteMessage: "was muted for spamming.", // Message sent after member X was punished(muted).
             maxDuplicatesWarning: 7,// When people are spamming the same message, this will trigger when member X sent over 7+ messages.
             maxDuplicatesMute: 10, // The limit where member X get muted after sending too many messages(10+).
-            ignoredRoles: ["Admin", "Owner"], // The members with this role(or roles) will be ignored if they have it. Suggest to not add this to any random guys. Also it's case sensitive.
+            ignoredRoles: ["Admin", "Owner"], // The members with this role(or roles) will be ignored if they have it. Suggest to not add this to any random guys. Also it"s case sensitive.
             ignoredMembers: ["Isopropyl#9371"], // These members are directly affected and they do not require to have the role above. Good for undercover pranks.
             mutedRole: "Muted", // Here you put the name of the role that should not let people write/speak or anything else in your server. If there is no role set, by default, the module will attempt to create the role for you & set it correctly for every channel in your server. It will be named "muted".
             timeMuted: 1000 * 600, // This is how much time member X will be muted. if not set, default would be 10 min.
-            logChannel: "antispam-logs" // This is the channel where every report about spamming goes to. If it's not set up, it will attempt to create the channel.
+            logChannel: "antispam-logs" // This is the channel where every report about spamming goes to. If it"s not set up, it will attempt to create the channel.
         })
 
         setInterval(async () => {
@@ -45,10 +45,10 @@ module.exports = class Ready extends BaseEvent {
                     if (Date.now() >= Number(muteDoc.length)) {
                         const guild = client.guilds.cache.get(muteDoc.guildId)
                         const member = guild ? guild.members.cache.get(muteDoc.memberId) : null
-                        const muteRole = guild ? guild.roles.cache.find(r => r.name == 'Muted') : null
+                        const muteRole = guild ? guild.roles.cache.find(r => r.name == "Muted") : null
 
                         if (member) {
-                            await member.roles.remove(muteRole ? muteRole.id : '').catch(err => console.log(err))
+                            await member.roles.remove(muteRole ? muteRole.id : "").catch(err => console.log(err))
 
                             for (const role of muteDoc.memberRoles) {
                                 await member.roles.add(role).catch(err => console.log(err))
@@ -68,7 +68,7 @@ module.exports = class Ready extends BaseEvent {
                 `Isopropyl#3066 and Frash#4113`,
             ]
             const status = statuses[Math.floor(Math.random() * statuses.length)]
-            client.user.setActivity(status, { type: 'WATCHING' })
+            client.user.setActivity(status, { type: "WATCHING" })
         }, 15000)
         fs.readFile("./src/events/.post", "utf-8", (err, data) => {
             if (err) { console.log(err) }
@@ -89,8 +89,8 @@ module.exports = class Ready extends BaseEvent {
 
         await getApp(guildId).commands.post({
             data: {
-                name: 'ping',
-                description: 'A simple ping pong command',
+                name: "ping",
+                description: "A simple ping pong command",
             },
         })
 
@@ -98,28 +98,28 @@ module.exports = class Ready extends BaseEvent {
 
         await getApp(guildId).commands.post({
             data: {
-                name: 'embed',
-                description: 'Displays an embed',
+                name: "embed",
+                description: "Displays an embed",
                 options: [
                     {
-                        name: 'name',
-                        description: 'Your name',
+                        name: "name",
+                        description: "Your name",
                         required: true,
                         type: 3 // string
                     },
                     {
-                        name: 'age',
-                        description: 'Your age',
+                        name: "age",
+                        description: "Your age",
                         required: false,
                         type: 4 // integer
                     }
                 ]
             }
         })
-        await getApp(guildId).commands('793286444990726150').delete()
-        await getApp(guildId).commands('793286446583775262').delete()
+        await getApp(guildId).commands("793286444990726150").delete()
+        await getApp(guildId).commands("793286446583775262").delete()
 
-        client.ws.on('INTERACTION_CREATE', async (interaction) => {
+        client.ws.on("INTERACTION_CREATE", async (interaction) => {
             const { name, options } = interaction.data
 
             const command = name.toLowerCase()
@@ -134,12 +134,12 @@ module.exports = class Ready extends BaseEvent {
             }
 
 
-            if (command === 'ping') {
-                reply(interaction, 'pong')
+            if (command === "ping") {
+                reply(interaction, "pong")
 
-            } else if (command === 'embed') {
+            } else if (command === "embed") {
                 const embed = new MessageEmbed()
-                    .setTitle('Example Embed')
+                    .setTitle("Example Embed")
 
                 for (const arg of args) {
                     const value = args[arg]
@@ -153,7 +153,7 @@ module.exports = class Ready extends BaseEvent {
                 content: response,
             }
 
-            if (typeof response === 'object') {
+            if (typeof response === "object") {
                 data = await createAPIMessage(interaction, response)
             }
 

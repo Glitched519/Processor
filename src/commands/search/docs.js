@@ -1,14 +1,14 @@
-const axios = require('axios')
-const BaseCommand = require('../../utils/structures/BaseCommand')
+const axios = require("axios")
+const BaseCommand = require("../../utils/structures/BaseCommand")
 
 module.exports = class Docs extends BaseCommand {
     constructor() {
-        super('docs', 'search', ['djs'])
+        super("docs", "search", ["djs"])
     }
 
     async run(client, message, args) {
         if (!args.length) return
-        const uri = `https://djsdocs.sorta.moe/v2/embed?src=stable&q=${encodeURIComponent(args.join(' '))}`
+        const uri = `https://djsdocs.sorta.moe/v2/embed?src=stable&q=${encodeURIComponent(args.join(" "))}`
 
         axios
             .get(uri)
@@ -19,7 +19,7 @@ module.exports = class Docs extends BaseCommand {
                     message.reply({ embeds: [data] })
                 }
                 else {
-                    message.reply({ content: ':x: Could not find that documentation.' })
+                    message.reply({ content: ":x: Could not find that documentation." })
                 }
             })
             .catch(err => {

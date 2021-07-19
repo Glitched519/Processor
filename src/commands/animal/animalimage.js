@@ -1,10 +1,10 @@
 const axios = require("axios").default
-const { MessageEmbed } = require('discord.js')
-const BaseCommand = require('../../utils/structures/BaseCommand')
+const { MessageEmbed } = require("discord.js")
+const BaseCommand = require("../../utils/structures/BaseCommand")
 
 module.exports = class AnimalImage extends BaseCommand {
     constructor() {
-        super('animalimage', 'animal', ['animal'])
+        super("animalimage", "animal", ["animal"])
     }
 
     async run(client, message, args) {
@@ -12,8 +12,8 @@ module.exports = class AnimalImage extends BaseCommand {
         if (!args[0]) return
 
         const options = {
-            method: 'GET',
-            url: `https://some-random-api.ml/animal/${args.join(' ')}`,
+            method: "GET",
+            url: `https://some-random-api.ml/animal/${args.join(" ")}`,
         }
 
         axios.request(options).then(response => {

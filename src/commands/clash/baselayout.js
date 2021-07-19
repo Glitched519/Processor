@@ -1,17 +1,17 @@
-const { MessageEmbed } = require('discord.js')
-const BaseCommand = require('../../utils/structures/BaseCommand')
+const { MessageEmbed } = require("discord.js")
+const BaseCommand = require("../../utils/structures/BaseCommand")
 
 module.exports = class BaseLayout extends BaseCommand {
     constructor() {
-        super('baselayout', 'clash', ['base', 'layout'])
+        super("baselayout", "clash", ["base", "layout"])
     }
 
     async run(client, message, args) {
         let baseEmbed = new MessageEmbed()
-            .setTitle('Base Layout for ')
+            .setTitle("Base Layout for ")
             .setColor(`RANDOM`)
-            .setDescription('[Layout Analysis Video]')
-            .setImage('')
+            .setDescription("[Layout Analysis Video]")
+            .setImage("")
             .setTimestamp()
         switch (args[0]) {
             case "th5":

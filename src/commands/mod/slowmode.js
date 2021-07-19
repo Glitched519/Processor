@@ -1,16 +1,16 @@
-const { MessageEmbed } = require('discord.js')
-const BaseCommand = require('../../utils/structures/BaseCommand')
+const { MessageEmbed } = require("discord.js")
+const BaseCommand = require("../../utils/structures/BaseCommand")
 
 module.exports = class Slowmode extends BaseCommand {
     constructor() {
-        super('slowmode', 'mod', ['slow'])
+        super("slowmode", "mod", ["slow"])
     }
 
     async run(client, message, args) {
-        if (!message.guild.me.permissions.has('MANAGE_CHANNELS')) {
+        if (!message.guild.me.permissions.has("MANAGE_CHANNELS")) {
             return message.reply({ content: ":x: **I need the `Manage Channels` permission to change the slowmode.**" })
         }
-        if (!message.member.permissions.has(['MANAGE_CHANNELS'])) {
+        if (!message.member.permissions.has(["MANAGE_CHANNELS"])) {
             return message.reply({ content: ":x: **You need the `Manage Channels` permission to change the slowmode.**" })
         }
         if (!args[0]) {

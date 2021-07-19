@@ -1,8 +1,8 @@
-const BaseEvent = require('../utils/structures/BaseEvent')
+const BaseEvent = require("../utils/structures/BaseEvent")
 
 module.exports = class InteractionCreate extends BaseEvent {
     constructor() {
-        super('interactionCreate')
+        super("interactionCreate")
     }
     async run(client, interaction) {
         switch (interaction.customId) {

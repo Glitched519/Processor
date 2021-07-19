@@ -1,30 +1,30 @@
 const userReg = RegExp(/<@!?(\d+)>/)
-const { MessageEmbed } = require('discord.js')
-const BaseCommand = require('../../utils/structures/BaseCommand')
+const { MessageEmbed } = require("discord.js")
+const BaseCommand = require("../../utils/structures/BaseCommand")
 
 module.exports = class Ban extends BaseCommand {
     constructor() {
-        super('ban', 'mod', ['b'])
+        super("ban", "mod", ["b"])
     }
 
     async run(client, message, args) {
         const userID = userReg.test(args[0]) ? userReg.exec(args[0])[1] : args[0]
         const mentionedUser = await message.client.users.fetch(userID).catch(() => null)
 
-        if (!message.member.permissions.has('BAN_MEMBERS')) {
-            return message.reply({ content: 'You need the `Ban Members` permission to ban a member.' })
+        if (!message.member.permissions.has("BAN_MEMBERS")) {
+            return message.reply({ content: "You need the `Ban Members` permission to ban a member." })
         }
-        if (!message.guild.me.permissions.has('BAN_MEMBERS')) {
-            return message.reply({ content: 'I need the `Ban Members` permission to ban a member.' })
+        if (!message.guild.me.permissions.has("BAN_MEMBERS")) {
+            return message.reply({ content: "I need the `Ban Members` permission to ban a member." })
         }
         if (!mentionedUser) {
-            return message.reply({ content: 'You need to mention a member you want to ban.' })
+            return message.reply({ content: "You need to mention a member you want to ban." })
         }
 
         const allBans = await message.guild.fetchBans()
 
         if (allBans.get(mentionedUser.id)) {
-            return message.reply({ content: 'This member has already been banned.' })
+            return message.reply({ content: "This member has already been banned." })
         }
 
         const mentionedMember = message.guild.members.cache.get(mentionedUser.id)
@@ -35,21 +35,21 @@ module.exports = class Ban extends BaseCommand {
             const botPosition = message.guild.me.roles.highest.position
 
             if (memberPosition <= mentionedPosition) {
-                return message.reply({ content: 'Cannot ban this member as their role is higher or equal to yours.' })
+                return message.reply({ content: "Cannot ban this member as their role is higher or equal to yours." })
             }
             else if (botPosition <= mentionedPosition) {
-                return message.reply({ content: 'Cannot ban this member as their role is higher or equal to mine.' })
+                return message.reply({ content: "Cannot ban this member as their role is higher or equal to mine." })
             }
         }
 
         args.shift()
-        const reason = args.join(' ')
+        const reason = args.join(" ")
 
         message.guild.members.ban(mentionedUser.id, { reason: reason })
 
         let banEmbed = new MessageEmbed()
-            .setDescription(`Banned ${mentionedUser} ${reason ? `for **${reason}**` : ''}`)
-            .setColor('DARK_RED')
+            .setDescription(`Banned ${mentionedUser} ${reason ? `for **${reason}**` : ""}`)
+            .setColor("DARK_RED")
         message.reply({ embeds: [banEmbed] })
     }
 }

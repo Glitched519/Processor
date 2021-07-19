@@ -1,10 +1,10 @@
 const guildPrefixes = {}
-const fs = require('fs')
-const path = require('path')
-const { prefix: globalPrefix } = require('../../config.json')
-const commandPrefixSchema = require('../../schemas/command-prefix-schema')
-const { MessageEmbed, MessageActionRow, MessageButton } = require('discord.js')
-const BaseCommand = require('../../utils/structures/BaseCommand')
+const fs = require("fs")
+const path = require("path")
+const { prefix: globalPrefix } = require("../../config.json")
+const commandPrefixSchema = require("../../schemas/command-prefix-schema")
+const { MessageEmbed, MessageActionRow, MessageButton } = require("discord.js")
+const BaseCommand = require("../../utils/structures/BaseCommand")
 
 let setupCmds = []
 let modCmds = []
@@ -16,57 +16,57 @@ let infoCmds = []
 let searchCmds = []
 let otherCmds = []
 
-let setupCmdNames = fs.readdirSync(path.join(__dirname, '../setup'))
-let modCmdNames = fs.readdirSync(path.join(__dirname, '../mod'))
-let mathCmdNames = fs.readdirSync(path.join(__dirname, '../math'))
-let animalCmdNames = fs.readdirSync(path.join(__dirname, '../animal'))
-let clashCmdNames = fs.readdirSync(path.join(__dirname, '../clash'))
-let cuteCmdNames = fs.readdirSync(path.join(__dirname, '../cute'))
-let infoCmdNames = fs.readdirSync(path.join(__dirname, '../info'))
-let searchCmdNames = fs.readdirSync(path.join(__dirname, '../search'))
-let otherCmdNames = fs.readdirSync(path.join(__dirname, '../other'))
+let setupCmdNames = fs.readdirSync(path.join(__dirname, "../setup"))
+let modCmdNames = fs.readdirSync(path.join(__dirname, "../mod"))
+let mathCmdNames = fs.readdirSync(path.join(__dirname, "../math"))
+let animalCmdNames = fs.readdirSync(path.join(__dirname, "../animal"))
+let clashCmdNames = fs.readdirSync(path.join(__dirname, "../clash"))
+let cuteCmdNames = fs.readdirSync(path.join(__dirname, "../cute"))
+let infoCmdNames = fs.readdirSync(path.join(__dirname, "../info"))
+let searchCmdNames = fs.readdirSync(path.join(__dirname, "../search"))
+let otherCmdNames = fs.readdirSync(path.join(__dirname, "../other"))
 
 setupCmdNames.forEach(cmd => {
-    cmd = cmd.slice(0, cmd.indexOf('.js'))
+    cmd = cmd.slice(0, cmd.indexOf(".js"))
     setupCmds.push(cmd)
 })
 modCmdNames.forEach(cmd => {
-    cmd = cmd.slice(0, cmd.indexOf('.js'))
+    cmd = cmd.slice(0, cmd.indexOf(".js"))
     modCmds.push(cmd)
 })
 mathCmdNames.forEach(cmd => {
-    cmd = cmd.slice(0, cmd.indexOf('.js'))
+    cmd = cmd.slice(0, cmd.indexOf(".js"))
     mathCmds.push(cmd)
 })
 animalCmdNames.forEach(cmd => {
-    cmd = cmd.slice(0, cmd.indexOf('.js'))
+    cmd = cmd.slice(0, cmd.indexOf(".js"))
     animalCmds.push(cmd)
 })
 clashCmdNames.forEach(cmd => {
-    cmd = cmd.slice(0, cmd.indexOf('.js'))
+    cmd = cmd.slice(0, cmd.indexOf(".js"))
     clashCmds.push(cmd)
 })
 cuteCmdNames.forEach(cmd => {
-    cmd = cmd.slice(0, cmd.indexOf('.js'))
+    cmd = cmd.slice(0, cmd.indexOf(".js"))
     cuteCmds.push(cmd)
 })
 infoCmdNames.forEach(cmd => {
-    cmd = cmd.slice(0, cmd.indexOf('.js'))
+    cmd = cmd.slice(0, cmd.indexOf(".js"))
     infoCmds.push(cmd)
 })
 searchCmdNames.forEach(cmd => {
-    cmd = cmd.slice(0, cmd.indexOf('.js'))
+    cmd = cmd.slice(0, cmd.indexOf(".js"))
     searchCmds.push(cmd)
 })
 otherCmdNames.forEach(cmd => {
-    cmd = cmd.slice(0, cmd.indexOf('.js'))
+    cmd = cmd.slice(0, cmd.indexOf(".js"))
     otherCmds.push(cmd)
 })
 
 
 module.exports = class Help extends BaseCommand {
     constructor() {
-        super('help', 'info', ['h'])
+        super("help", "info", ["h"])
     }
 
     async run(client, message, args) {
@@ -87,71 +87,71 @@ module.exports = class Help extends BaseCommand {
 
         let helpEmbed = new MessageEmbed()
             .setColor(`RANDOM`)
-            .setTitle('Need some help?')
+            .setTitle("Need some help?")
             .setDescription(`Prefix is **${PREFIX}** as in **${PREFIX}help**.`)
-            .addField(':wrench: Setup', 'Configure the bot in your server.\n`Manage Server` permission is required.')
-            .addField(':shield: Moderation', 'Manages server members.')
-            .addField(':cat: Animal', 'Learn about animals.')
-            .addField(':crossed_swords: Clash', 'Look up Clash of Clans related things.')
-            .addField(':blue_heart: Cute', 'Adore a member.')
-            .addField(':1234: Math', 'Play with numbers.')
-            .addField(':information_source: Info', 'Get information about a user or the server.')
-            .addField(':mag_right: Search', 'Search some cool stuff from the bot!')
-            .addField(':o: Other', 'Play with other commands.')
+            .addField(":wrench: Setup", "Configure the bot in your server.\n`Manage Server` permission is required.")
+            .addField(":shield: Moderation", "Manages server members.")
+            .addField(":cat: Animal", "Learn about animals.")
+            .addField(":crossed_swords: Clash", "Look up Clash of Clans related things.")
+            .addField(":blue_heart: Cute", "Adore a member.")
+            .addField(":1234: Math", "Play with numbers.")
+            .addField(":information_source: Info", "Get information about a user or the server.")
+            .addField(":mag_right: Search", "Search some cool stuff from the bot!")
+            .addField(":o: Other", "Play with other commands.")
 
         let setupEmbed = new MessageEmbed()
             .setColor(`RANDOM`)
-            .setTitle('Setup Commands')
-            .setURL('https://processorbot.xyz/commands/')
-            .setDescription(`\`${setupCmds.join('\n')}\``)
+            .setTitle("Setup Commands")
+            .setURL("https://processorbot.xyz/commands/")
+            .setDescription(`\`${setupCmds.join("\n")}\``)
 
         let modEmbed = new MessageEmbed()
             .setColor(`RANDOM`)
-            .setTitle('Moderation Commands')
-            .setURL('https://processorbot.xyz/commands/')
-            .setDescription(`\`${modCmds.join('\n')}\``)
+            .setTitle("Moderation Commands")
+            .setURL("https://processorbot.xyz/commands/")
+            .setDescription(`\`${modCmds.join("\n")}\``)
 
         let mathEmbed = new MessageEmbed()
             .setColor(`RANDOM`)
-            .setTitle('Math Commands')
-            .setURL('https://processorbot.xyz/commands/')
-            .setDescription(`\`${mathCmds.join('\n')}\``)
+            .setTitle("Math Commands")
+            .setURL("https://processorbot.xyz/commands/")
+            .setDescription(`\`${mathCmds.join("\n")}\``)
 
         let animalEmbed = new MessageEmbed()
             .setColor(`RANDOM`)
-            .setTitle('Animal Commands')
-            .setURL('https://processorbot.xyz/commands/')
-            .setDescription(`\`${animalCmds.join('\n')}\``)
+            .setTitle("Animal Commands")
+            .setURL("https://processorbot.xyz/commands/")
+            .setDescription(`\`${animalCmds.join("\n")}\``)
 
         let clashEmbed = new MessageEmbed()
             .setColor(`RANDOM`)
-            .setTitle('Clash Commands')
-            .setURL('https://processorbot.xyz/commands/')
-            .setDescription(`\`${clashCmds.join('\n')}\``)
+            .setTitle("Clash Commands")
+            .setURL("https://processorbot.xyz/commands/")
+            .setDescription(`\`${clashCmds.join("\n")}\``)
 
         let cuteEmbed = new MessageEmbed()
             .setColor(`RANDOM`)
-            .setTitle('Cute Commands')
-            .setURL('https://processorbot.xyz/commands/')
-            .setDescription(`\`${cuteCmds.join('\n')}\``)
+            .setTitle("Cute Commands")
+            .setURL("https://processorbot.xyz/commands/")
+            .setDescription(`\`${cuteCmds.join("\n")}\``)
 
         let infoEmbed = new MessageEmbed()
             .setColor(`RANDOM`)
-            .setTitle('Info Commands')
-            .setURL('https://processorbot.xyz/commands/')
-            .setDescription(`\`${infoCmds.join('\n')}\``)
+            .setTitle("Info Commands")
+            .setURL("https://processorbot.xyz/commands/")
+            .setDescription(`\`${infoCmds.join("\n")}\``)
 
         let searchEmbed = new MessageEmbed()
             .setColor(`RANDOM`)
-            .setTitle('Search Commands')
-            .setURL('https://processorbot.xyz/commands/')
-            .setDescription(`\`${searchCmds.join('\n')}\``)
+            .setTitle("Search Commands")
+            .setURL("https://processorbot.xyz/commands/")
+            .setDescription(`\`${searchCmds.join("\n")}\``)
 
         let otherEmbed = new MessageEmbed()
             .setColor(`RANDOM`)
-            .setTitle('Other Commands')
-            .setURL('https://processorbot.xyz/commands/')
-            .setDescription(`\`${otherCmds.join('\n')}\``)
+            .setTitle("Other Commands")
+            .setURL("https://processorbot.xyz/commands/")
+            .setDescription(`\`${otherCmds.join("\n")}\``)
 
         let allEmbeds = [helpEmbed, setupEmbed, modEmbed, animalEmbed, clashEmbed, cuteEmbed, mathEmbed, infoEmbed, searchEmbed, otherEmbed]
         let maxPages = allEmbeds.length
@@ -214,7 +214,7 @@ module.exports = class Help extends BaseCommand {
 
         helpEmbed.setFooter(`Page ${page} of ${maxPages}`, `${message.author.displayAvatarURL()}`)
         message.reply({ embeds: [helpEmbed], components: [helpRow] }).then(msg => {
-            client.on('interactionCreate', interaction => {
+            client.on("interactionCreate", interaction => {
                 switch (interaction.customId) {
                     case "Home":
                         page = 1

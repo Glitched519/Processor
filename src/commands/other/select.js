@@ -10,23 +10,23 @@ module.exports = class Select extends BaseCommand {
         const row = new MessageActionRow()
             .addComponents(
                 new MessageSelectMenu()
-                    .setCustomId('select')
-                    .setPlaceholder('Nothing selected')
+                    .setCustomId("select")
+                    .setPlaceholder("Nothing selected")
                     .addOptions([
                         {
-                            label: 'Select me',
-                            description: 'This is a description',
-                            value: 'first_option',
+                            label: "Select me",
+                            description: "This is a description",
+                            value: "first_option",
                         },
                         {
-                            label: 'You can select me too',
-                            description: 'This is also a description',
-                            value: 'second_option',
+                            label: "You can select me too",
+                            description: "This is also a description",
+                            value: "second_option",
                         },
                         {
-                            label: 'me too',
-                            description: 'This is also another description',
-                            value: 'third_option',
+                            label: "me too",
+                            description: "This is also another description",
+                            value: "third_option",
                         },
                     ]),
             )

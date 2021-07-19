@@ -1,13 +1,13 @@
 const guildPrefixes = {}
-const { prefix: globalPrefix } = require('../config.json')
-const commandPrefixSchema = require('../schemas/command-prefix-schema')
-const logSchema = require('../schemas//logs-schema')
-const BaseEvent = require('../utils/structures/BaseEvent')
-const { MessageEmbed } = require('discord.js')
+const { prefix: globalPrefix } = require("../config.json")
+const commandPrefixSchema = require("../schemas/command-prefix-schema")
+const logSchema = require("../schemas//logs-schema")
+const BaseEvent = require("../utils/structures/BaseEvent")
+const { MessageEmbed } = require("discord.js")
 
 module.exports = class MessageUpdate extends BaseEvent {
     constructor() {
-        super('messageUpdate')
+        super("messageUpdate")
     }
     async run(client, oldMessage, newMessage) {
         if (oldMessage.author.bot) return
@@ -80,7 +80,7 @@ module.exports = class MessageUpdate extends BaseEvent {
         let editedEmbed = new MessageEmbed()
             .setTitle(`Message Edited by ${oldMessage.author.tag}`)
             .setDescription(`**Channel:** <#${oldMessage.channel.id}>\n**Old Message:** ${oldMessage.content}\n**New Message:** ${newMessage.content}\n[**Jump to Message**](https://canary.discord.com/channels/${newMessage.guild.id}/${newMessage.channel.id}/${newMessage.id})`)
-            .setColor('YELLOW')
+            .setColor("YELLOW")
             .setFooter(new Date().toLocaleTimeString())
 
         destination.send({ embeds: [editedEmbed] })

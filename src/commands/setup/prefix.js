@@ -1,15 +1,15 @@
-const commandPrefixSchema = require('../../schemas/command-prefix-schema')
-const mongo = require('../../features/mongo')
-const BaseCommand = require('../../utils/structures/BaseCommand')
+const commandPrefixSchema = require("../../schemas/command-prefix-schema")
+const mongo = require("../../features/mongo")
+const BaseCommand = require("../../utils/structures/BaseCommand")
 
 module.exports = class Prefix extends BaseCommand {
     constructor() {
-        super('prefix', 'setup', [])
+        super("prefix", "setup", [])
     }
 
     async run(client, message, args) {
         if (!message.member.permissions.has("MANAGE_GUILD")) {
-            return message.reply({ content: 'You need the `Manage Server` permission to change my prefix.' })
+            return message.reply({ content: "You need the `Manage Server` permission to change my prefix." })
         }
         if (!args[0]) {
             return message.reply(`you need to state the prefix to change to.`)

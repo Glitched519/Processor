@@ -1,15 +1,15 @@
-const axios = require('axios').default
-const { MessageEmbed } = require('discord.js')
-const BaseCommand = require('../../utils/structures/BaseCommand')
+const axios = require("axios").default
+const { MessageEmbed } = require("discord.js")
+const BaseCommand = require("../../utils/structures/BaseCommand")
 
 module.exports = class Meme extends BaseCommand {
     constructor() {
-        super('meme', 'other', ['haha', 'funny', 'lol'])
+        super("meme", "other", ["haha", "funny", "lol"])
     }
 
     async run(client, message) {
         const options = {
-            method: 'GET',
+            method: "GET",
             url: `https://reddit.com/r/dankmemes/random/.json`,
         }
 

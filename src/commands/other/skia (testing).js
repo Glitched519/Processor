@@ -1,9 +1,9 @@
-const { Canvas } = require('skia-canvas')
-const BaseCommand = require('../../utils/structures/BaseCommand')
+const { Canvas } = require("skia-canvas")
+const BaseCommand = require("../../utils/structures/BaseCommand")
 
 module.exports = class Skia extends BaseCommand {
     constructor() {
-        super('skia', 'other', [])
+        super("skia", "other", [])
     }
 
     async run(client, message) {
@@ -14,7 +14,7 @@ module.exports = class Skia extends BaseCommand {
             { width, height } = canvas
 
         // draw a sea of blurred dots filling the canvas
-        ctx.filter = 'blur(12px) hue-rotate(20deg)'
+        ctx.filter = "blur(12px) hue-rotate(20deg)"
         for (let i = 0; i < 800; i++) {
             ctx.fillStyle = `hsl(${rand(40)}deg, 80%, 50%)`
             ctx.beginPath()
@@ -23,16 +23,16 @@ module.exports = class Skia extends BaseCommand {
         }
 
         // mask all of the dots that don't overlap with the text
-        ctx.filter = 'none'
-        ctx.globalCompositeOperation = 'destination-in'
-        ctx.font = 'italic 480px Times, DejaVu Serif'
-        ctx.textAlign = 'center'
-        ctx.textBaseline = 'top'
-        ctx.fillText('¶', width / 2, 0)
+        ctx.filter = "none"
+        ctx.globalCompositeOperation = "destination-in"
+        ctx.font = "italic 480px Times, DejaVu Serif"
+        ctx.textAlign = "center"
+        ctx.textBaseline = "top"
+        ctx.fillText("¶", width / 2, 0)
 
         // draw a background behind the clipped text
-        ctx.globalCompositeOperation = 'destination-over'
-        ctx.fillStyle = '#182927'
+        ctx.globalCompositeOperation = "destination-over"
+        ctx.fillStyle = "#182927"
         ctx.fillRect(0, 0, width, height)
 
         // save the graphic...

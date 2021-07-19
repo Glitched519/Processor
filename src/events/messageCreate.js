@@ -1,12 +1,12 @@
 const guildPrefixes = {}
-const { prefix: globalPrefix } = require('../config.json')
-const commandPrefixSchema = require('../schemas/command-prefix-schema')
-const antiSpamSchema = require('../schemas/antispam-schema')
-const BaseEvent = require('../utils/structures/BaseEvent')
+const { prefix: globalPrefix } = require("../config.json")
+const commandPrefixSchema = require("../schemas/command-prefix-schema")
+const antiSpamSchema = require("../schemas/antispam-schema")
+const BaseEvent = require("../utils/structures/BaseEvent")
 
 module.exports = class MessageCreate extends BaseEvent {
   constructor() {
-    super('messageCreate')
+    super("messageCreate")
   }
 
   async run(client, message) {
@@ -87,7 +87,7 @@ module.exports = class MessageCreate extends BaseEvent {
     if (antiSpamChannelQuery == null) return
     let antiSpamChannel = antiSpamChannelQuery.channelId
     if (message.channel.id == antiSpamChannel) {
-      client.emit('checkMessage', message) // This runs the filter on any message bot receives in any guilds.
+      client.emit("checkMessage", message) // This runs the filter on any message bot receives in any guilds.
     }
   }
 
