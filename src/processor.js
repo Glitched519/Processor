@@ -10,7 +10,6 @@ const app = express()
 const nonPrivilegedIntents = [
     "GUILDS",
     "GUILD_BANS",
-    "GUILD_EMOJIS",
     "GUILD_INTEGRATIONS",
     "GUILD_WEBHOOKS",
     "GUILD_INVITES",
