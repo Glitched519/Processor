@@ -1,24 +1,24 @@
-const config = require("../../config.json")
-const PREFIX = config.prefix
-const BaseCommand = require("../../utils/structures/BaseCommand")
+const config = require("../../config.json");
+const PREFIX = config.prefix;
+const BaseCommand = require("../../utils/structures/BaseCommand");
 
 module.exports = class Stats extends BaseCommand {
     constructor() {
-        super("stats", "info", [])
+        super("stats", "info", []);
     }
 
     async run(client, message, args) {
-        const statArgs = args.length
+        const statArgs = args.length;
         if (statArgs >= 2) {
-            message.reply({ content: `Incorrect usage: ${PREFIX}stats | ${PREFIX}stats <user_id> | ${PREFIX}stats @mention` })
+            message.reply({ content: `Incorrect usage: ${PREFIX}stats | ${PREFIX}stats <user_id> | ${PREFIX}stats @mention` });
         }
         else if (statArgs === 1) {
-            const member = message.mentions.members.first() || message.guild.members.cache.get(args[0])
+            const member = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
             if (member) {
                 const statEmbed = {
                     title: `${member.user.tag} (${member.user.id})`,
                     description: `**Roles:** ${member.roles.cache.map(role => role.toString())}`,
-                    color: `RANDOM`,
+                    color: "RANDOM",
                     thumbnail: {
                         url: member.user.displayAvatarURL({ dynamic: true })
                     },
@@ -44,24 +44,24 @@ module.exports = class Stats extends BaseCommand {
                             value: member.presence.status,
                         },
                     ]
-                }
-                message.reply({ embeds: statEmbed })
+                };
+                message.reply({ embeds: statEmbed });
             }
             else {
-                message.reply({ content: `No member with ID ${args[0]}` })
+                message.reply({ content: `No member with ID ${args[0]}` });
             }
         }
         else {
-            const roleMap = []
-            const { guild } = message
+            const roleMap = [];
+            const { guild } = message;
             for (let i = 0; i < 20; i++) {
-                roleMap.push(guild.roles.cache.map(role => role.toString())[i])
+                roleMap.push(guild.roles.cache.map(role => role.toString())[i]);
             }
-            roleMap.shift()
+            roleMap.shift();
             const statEmbed = {
                 title: `${guild.name} (${guild.id})`,
                 description: `**Top 20 Roles:** ${roleMap}`,
-                color: `RANDOM`,
+                color: "RANDOM",
                 thumbnail: {
                     url: guild.iconURL({ dynamic: true })
                 },
@@ -94,8 +94,8 @@ module.exports = class Stats extends BaseCommand {
                         inline: true,
                     },
                 ]
-            }
-            message.reply({ embeds: [statEmbed] })
+            };
+            message.reply({ embeds: [statEmbed] });
         }
     }
-}
+};

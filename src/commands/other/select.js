@@ -1,9 +1,9 @@
-const BaseCommand = require("../../utils/structures/BaseCommand")
-const { MessageSelectMenu, MessageEmbed, MessageActionRow } = require("discord.js")
+const BaseCommand = require("../../utils/structures/BaseCommand");
+const { MessageSelectMenu, MessageEmbed, MessageActionRow } = require("discord.js");
 
 module.exports = class Select extends BaseCommand {
     constructor() {
-        super("select", "other", ["sel"])
+        super("select", "other", ["sel"]);
     }
 
     async run(client, message) {
@@ -29,14 +29,14 @@ module.exports = class Select extends BaseCommand {
                             value: "third_option",
                         },
                     ]),
-            )
+            );
 
         const embed = new MessageEmbed()
             .setColor("#0099ff")
             .setTitle("Oh Look!")
             .setURL("https://processorbot.xyz/")
-            .setDescription("Selections! What do they do?")
+            .setDescription("Selections! What do they do?");
 
-        await message.reply({ content: "Hi there!", embeds: [embed], components: [row] })
+        await message.reply({ content: "Hi there!", embeds: [embed], components: [row] });
     }
-}
+};

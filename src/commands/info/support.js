@@ -1,9 +1,9 @@
-const { MessageEmbed } = require("discord.js")
-const BaseCommand = require("../../utils/structures/BaseCommand")
+const { MessageEmbed } = require("discord.js");
+const BaseCommand = require("../../utils/structures/BaseCommand");
 
 module.exports = class Support extends BaseCommand {
     constructor() {
-        super("support", "info", [])
+        super("support", "info", []);
     }
 
     async run(client, message) {
@@ -11,8 +11,8 @@ module.exports = class Support extends BaseCommand {
             .setTitle("Need Some Help? Join My Support Server!")
             .setColor("#FF77DD")
             .setThumbnail(client.user.displayAvatarURL())
-            .setDescription(":arrow_right: [Support Server!](https://discord.gg/UNmdd8V) :arrow_left:")
+            .setDescription(":arrow_right: [Support Server!](https://discord.gg/UNmdd8V) :arrow_left:");
 
-        message.reply({ embeds: [inviteEmbed] })
+        message.reply({ embeds: [inviteEmbed] });
     }
-}
+};

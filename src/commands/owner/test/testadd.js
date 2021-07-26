@@ -1,13 +1,13 @@
-const BaseCommand = require("../../../utils/structures/BaseCommand")
+const BaseCommand = require("../../../utils/structures/BaseCommand");
 
 module.exports = class TestAdd extends BaseCommand {
     constructor() {
-        super("testadd", "setup", [])
+        super("testadd", "setup", []);
     }
 
     async run(client, message) {
-        if (message.author.id !== "749985510889619576") return
+        if (message.author.id !== "749985510889619576") return;
 
-        client.emit("guildCreate", message.guild)
+        client.emit("guildCreate", message.guild);
     }
-}
+};

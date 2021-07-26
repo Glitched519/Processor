@@ -1,15 +1,15 @@
-const covid = require("novelcovid")
-const { MessageEmbed } = require("discord.js")
-const BaseCommand = require("../../utils/structures/BaseCommand")
+const covid = require("novelcovid");
+const { MessageEmbed } = require("discord.js");
+const BaseCommand = require("../../utils/structures/BaseCommand");
 
 module.exports = class Author extends BaseCommand {
     constructor() {
-        super("covid19", "info", ["covid", "cov"])
+        super("covid19", "info", ["covid", "cov"]);
     }
 
     async run(client, message, args) {
         if (!args[0]) {
-            const covidStats = await covid.all()
+            const covidStats = await covid.all();
             let globalCovidEmbed = new MessageEmbed()
                 .setTitle("COVID-19 Stats (Worldwide)")
                 .setColor("RED")
@@ -22,13 +22,13 @@ module.exports = class Author extends BaseCommand {
                 .addField("Current Infections", covidStats.active.toLocaleString(), true)
                 .addField("Critical Condition", covidStats.critical.toLocaleString(), true)
                 .addField("Tested", covidStats.tests.toLocaleString(), true)
-                .setFooter(new Date().toLocaleTimeString())
-            return message.reply({ embeds: [globalCovidEmbed] })
+                .setFooter(new Date().toLocaleTimeString());
+            return message.reply({ embeds: [globalCovidEmbed] });
         }
         else {
-            const covidStats = await covid.countries({ country: args[0] })
-            const errorMessage = "Country not found or doesn't have any cases"
-            if (covidStats.message == errorMessage) return message.reply(errorMessage)
+            const covidStats = await covid.countries({ country: args[0] });
+            const errorMessage = "Country not found or doesn't have any cases";
+            if (covidStats.message == errorMessage) return message.reply(errorMessage);
 
             let covidEmbed = new MessageEmbed()
                 .setTitle(`COVID-19 Stats (${args[0]})`)
@@ -39,9 +39,9 @@ module.exports = class Author extends BaseCommand {
                 .addField("Current Infections", covidStats.active.toLocaleString(), true)
                 .addField("Critical Condition", covidStats.critical.toLocaleString(), true)
                 .addField("Tested", covidStats.tests.toLocaleString(), true)
-                .setFooter(new Date().toLocaleTimeString())
+                .setFooter(new Date().toLocaleTimeString());
 
-            message.reply({ embeds: [covidEmbed] })
+            message.reply({ embeds: [covidEmbed] });
         }
     }
-}
+};

@@ -1,39 +1,39 @@
-const BaseCommand = require("../../utils/structures/BaseCommand")
+const BaseCommand = require("../../utils/structures/BaseCommand");
 
 module.exports = class Roll extends BaseCommand {
     constructor() {
-        super("roll", "other", ["dice", "rolldice"])
+        super("roll", "other", ["dice", "rolldice"]);
     }
 
     async run(client, message) {
-        const rollDice = Math.floor(Math.random() * 6) + 1
-        let nums = [":one:", ":two:", ":three:", ":four:", ":five:", ":six:"]
-        let diceNum = ""
+        const rollDice = Math.floor(Math.random() * 6) + 1;
+        let nums = [":one:", ":two:", ":three:", ":four:", ":five:", ":six:"];
+        let diceNum = "";
         switch (rollDice) {
             case 1:
-                diceNum = nums[0]
-                break
+                diceNum = nums[0];
+                break;
             case 2:
-                diceNum = nums[1]
-                break
+                diceNum = nums[1];
+                break;
             case 3:
-                diceNum = nums[2]
-                break
+                diceNum = nums[2];
+                break;
             case 4:
-                diceNum = nums[3]
-                break
+                diceNum = nums[3];
+                break;
             case 5:
-                diceNum = nums[4]
-                break
+                diceNum = nums[4];
+                break;
             case 6:
-                diceNum = nums[5]
-                break
+                diceNum = nums[5];
+                break;
         }
         let rollEmbed = {
-            color: `RANDOM`,
+            color: "RANDOM",
             title: ":game_die: You rolled a " + diceNum,
             timestamp: new Date()
-        }
-        message.reply({ embeds: [rollEmbed] })
+        };
+        message.reply({ embeds: [rollEmbed] });
     }
-}
+};

@@ -1,9 +1,9 @@
-const { MessageEmbed } = require("discord.js")
-const BaseCommand = require("../../utils/structures/BaseCommand")
+const { MessageEmbed } = require("discord.js");
+const BaseCommand = require("../../utils/structures/BaseCommand");
 
 module.exports = class ClashTips extends BaseCommand {
     constructor() {
-        super("clashtips", "clash", ["tip", "clashtip", "tips", "clashtips"])
+        super("clashtips", "clash", ["tip", "clashtip", "tips", "clashtips"]);
     }
 
     async run(client, message, args) {
@@ -156,26 +156,26 @@ module.exports = class ClashTips extends BaseCommand {
             "Win more Trophies to increase your Versus Battle rewards!",
             "Win 3 Versus Battles a day to get a big loot bonus.",
             "Having trouble winning Versus Battles? Watch replays and try to improve your defense!"
-        ]
-        const randomTipIndex = Math.floor(Math.random() * tips.length)
-        let index = parseInt(args[0])
+        ];
+        const randomTipIndex = Math.floor(Math.random() * tips.length);
+        let index = parseInt(args[0]);
         if (index >= 1 && index <= tips.length) {
             let tipEmbed = new MessageEmbed()
-                .setColor(`RANDOM`)
+                .setColor("RANDOM")
                 .setTitle(`Clash of Clans Tip #${index}`)
                 .setDescription(tips[index - 1])
                 .setThumbnail("https://vignette.wikia.nocookie.net/clashofclans/images/6/61/Villager_info.png/revision/latest/scale-to-width-down/340?cb=20200622145823")
-                .setTimestamp()
-            message.reply({ embeds: [tipEmbed] })
+                .setTimestamp();
+            message.reply({ embeds: [tipEmbed] });
         } else {
             let tipEmbed = new MessageEmbed()
-                .setColor(`RANDOM`)
+                .setColor("RANDOM")
                 .setTitle(`Clash of Clans Tip #${randomTipIndex + 1}`)
                 .setDescription(tips[randomTipIndex])
                 .setThumbnail("https://vignette.wikia.nocookie.net/clashofclans/images/6/61/Villager_info.png/revision/latest/scale-to-width-down/340?cb=20200622145823")
-                .setTimestamp()
+                .setTimestamp();
 
-            message.reply({ embeds: [tipEmbed] })
+            message.reply({ embeds: [tipEmbed] });
         }
     }
-}
+};
