@@ -65,7 +65,7 @@ module.exports = class MessageCreate extends BaseEvent {
                     const timeLeft = (expirationTime - now) / 1000;
                     return message.reply(`wait ${timeLeft.toFixed(1)} more second(s) before using \`${command.name}\` again.`)
                         .then(msg => {
-                            client.setTimeout(() => msg.delete(), timeLeft.toFixed(1) * 1000);
+                            setTimeout(() => msg.delete(), timeLeft.toFixed(1) * 1000);
                         });
 
                 }

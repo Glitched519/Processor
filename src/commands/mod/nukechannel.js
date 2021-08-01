@@ -9,13 +9,13 @@ module.exports = class Nukechannel extends BaseCommand {
         if (!message.guild.me.permissions.has("MANAGE_CHANNELS")) {
             return message.reply({ content: ":x: **I need the `Manage Channels` permission to nuke this channel.**" })
                 .then(msg => {
-                    client.setTimeout(() => msg.delete(), 4000);
+                    setTimeout(() => msg.delete(), 4000);
                 });
         }
         if (!message.member.permissions.has("MANAGE_CHANNELS")) {
             return message.reply({ content: ":x: **You need the `Manage Channels` permission to nuke this channel.**" })
                 .then(msg => {
-                    client.setTimeout(() => msg.delete(), 4000);
+                    setTimeout(() => msg.delete(), 4000);
                 });
         }
         try {

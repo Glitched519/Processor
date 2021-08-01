@@ -14,13 +14,13 @@ module.exports = class Console extends BaseCommand {
             if (error) {
                 return message.reply({ content: `\`\`\`powershell\n${error.message}\n\`\`\`` })
                     .then(msg => {
-                        client.setTimeout(() => msg.delete(), 4000);
+                        setTimeout(() => msg.delete(), 4000);
                     });
             }
             if (stderr) {
                 return message.reply({ content: `\`\`\`powershell\n${stderr}\n\`\`\`` })
                     .then(msg => {
-                        client.setTimeout(() => msg.delete(), 4000);
+                        setTimeout(() => msg.delete(), 4000);
                     });
             }
             message.reply({ content: `\`\`\`powershell\n${stdout}\n\`\`\`` });
