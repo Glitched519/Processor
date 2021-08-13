@@ -48,16 +48,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@discordjs/builders@npm:^0.4.0":
-  version: 0.4.0
-  resolution: "@discordjs/builders@npm:0.4.0"
+"@discordjs/builders@npm:^0.5.0":
+  version: 0.5.0
+  resolution: "@discordjs/builders@npm:0.5.0"
   dependencies:
     "@sindresorhus/is": ^4.0.1
     discord-api-types: ^0.22.0
     ow: ^0.27.0
     ts-mixer: ^6.0.0
     tslib: ^2.3.0
-  checksum: 7c8fa8d70f50e3b1a0c43086b230c4d0f502f92cc9745a16fa77924baa2557ef26a6699e061e4abf2c0353436ae6380a7dcd5292b145ea8588dc74daaca0d113
+  checksum: c1bbe7ff8956b0e255d115d484909866e5d0f3e0a88a56bb021388ebe993189a909df0be37f613142b86f3ef12767505ef3129d4d2a33633e85432efe048fdbb
   languageName: node
   linkType: hard
 
@@ -312,13 +312,6 @@ __metadata:
   version: 16.4.3
   resolution: "@types/node@npm:16.4.3"
   checksum: 03195d10ef927ed0879500f002969fba75e6616714a53d91fe82dfdf4e0cd15228bf5c3a426d5447ed84b4947f2c07b40c317eddcbd2126552cc24bc88da7adc
-  languageName: node
-  linkType: hard
-
-"@types/node@npm:14.x || 15.x":
-  version: 15.14.3
-  resolution: "@types/node@npm:15.14.3"
-  checksum: 928f0e4660c1d06798b9a3d802df08272e616642526dba6906afcbb55398c15c238ff7c47759485496464ca4acac6bb47bc279b13719ec4cf17dcd0057609d85
   languageName: node
   linkType: hard
 
@@ -886,13 +879,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chalk@npm:^4.0.0, chalk@npm:^4.1.1":
+"chalk@npm:^4.0.0":
   version: 4.1.1
   resolution: "chalk@npm:4.1.1"
   dependencies:
     ansi-styles: ^4.1.0
     supports-color: ^7.1.0
   checksum: 445c12db7aeed0046500a1e4184d31209a77d165654c885a789c41c8598a6a95bd2392180987cac572c967b93a2a730dda778bb7f87fa06ca63fd8592f8cc59f
+  languageName: node
+  linkType: hard
+
+"chalk@npm:^4.1.2":
+  version: 4.1.2
+  resolution: "chalk@npm:4.1.2"
+  dependencies:
+    ansi-styles: ^4.1.0
+    supports-color: ^7.1.0
+  checksum: e3901b97d953991712bf0b941d586175be7ca5da56a97d25187e07453c6b26cae0ac8d9c7aa9e87e7c5c986fff870771b3a8e2705b3becda868829e2e12c2a65
   languageName: node
   linkType: hard
 
@@ -1348,11 +1351,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"discord.js@npm:^13.0.1":
-  version: 13.0.1
-  resolution: "discord.js@npm:13.0.1"
+"discord.js@npm:^13.1.0":
+  version: 13.1.0
+  resolution: "discord.js@npm:13.1.0"
   dependencies:
-    "@discordjs/builders": ^0.4.0
+    "@discordjs/builders": ^0.5.0
     "@discordjs/collection": ^0.2.1
     "@discordjs/form-data": ^3.0.1
     "@sapphire/async-queue": ^1.1.4
@@ -1360,7 +1363,7 @@ __metadata:
     discord-api-types: ^0.22.0
     node-fetch: ^2.6.1
     ws: ^7.5.1
-  checksum: 795f0750a7d4a53930bfb8afd306b599dea867ae54a80806dc0a6385fd8c0921dd21539aeb7713bad8a9c2eb630b99a8a3bb5ab31a4f4d11a5404d8986bdbcd4
+  checksum: ac128382e82f8843d5d5102fe895e83491da8e85f750c84647982ad482c89a21784e8c946f2ebab055f0fe0bb035105d6c2e22a23030270850c32a5c466f4aef
   languageName: node
   linkType: hard
 
@@ -1628,23 +1631,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-import-resolver-node@npm:^0.3.4":
-  version: 0.3.4
-  resolution: "eslint-import-resolver-node@npm:0.3.4"
+"eslint-import-resolver-node@npm:^0.3.5":
+  version: 0.3.5
+  resolution: "eslint-import-resolver-node@npm:0.3.5"
   dependencies:
-    debug: ^2.6.9
-    resolve: ^1.13.1
-  checksum: 825e34e662c988ece8229e6956a95f12d2fa19265b429e3e3db14e58bfe72e270c999cda0cfc690793ed6e6a3e49ffa8df0e0a8842d668a1f0f7de5ae1aa36f9
+    debug: ^3.2.7
+    resolve: ^1.20.0
+  checksum: 4ea679b68449a9bf33a150e1031f7cafb5fdbbf7a1687f291680d083b9a357d18a9dd00a6e61e14dbfa29fc1601831b5ff538ff5a364e75c1535362f315a6f71
   languageName: node
   linkType: hard
 
-"eslint-module-utils@npm:^2.6.1":
-  version: 2.6.1
-  resolution: "eslint-module-utils@npm:2.6.1"
+"eslint-module-utils@npm:^2.6.2":
+  version: 2.6.2
+  resolution: "eslint-module-utils@npm:2.6.2"
   dependencies:
     debug: ^3.2.7
     pkg-dir: ^2.0.0
-  checksum: 3de93ecfd7a0b803a2cd91afd5cbb32dca559f58c22e92f95ec4700ff75e008035587ee032b9196d6565fbd73f799992122a8dc8ea0b979c07229b51735a8bed
+  checksum: ca81aa3678c7103b1159b8467c6f4b68dc4ca2a69c1d7e60d19676125bad4b533703be30bb1787911545396242e0fc883ba04621144862cbce383c06f13b742e
   languageName: node
   linkType: hard
 
@@ -1660,16 +1663,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-import@npm:^2.23.4":
-  version: 2.23.4
-  resolution: "eslint-plugin-import@npm:2.23.4"
+"eslint-plugin-import@npm:^2.24.0":
+  version: 2.24.0
+  resolution: "eslint-plugin-import@npm:2.24.0"
   dependencies:
     array-includes: ^3.1.3
     array.prototype.flat: ^1.2.4
     debug: ^2.6.9
     doctrine: ^2.1.0
-    eslint-import-resolver-node: ^0.3.4
-    eslint-module-utils: ^2.6.1
+    eslint-import-resolver-node: ^0.3.5
+    eslint-module-utils: ^2.6.2
     find-up: ^2.0.0
     has: ^1.0.3
     is-core-module: ^2.4.0
@@ -1681,7 +1684,7 @@ __metadata:
     tsconfig-paths: ^3.9.0
   peerDependencies:
     eslint: ^2 || ^3 || ^4 || ^5 || ^6 || ^7.2.0
-  checksum: d15a470088381cb14821480f35fe23258f6365d704ea9fc724b87e1ccf9eb45f4bb048ff033784af0cacff368ae1542c2b1dfbe6cd4dbec7138f8f6dca090a57
+  checksum: 32fa4d6b0de9c8b5998bb2a8727fc7335653d5a75f33128d0d746a8d9cd129d84ba78f5449722cd1e49cb37f4803e03dc005a6d77c1697fc01c247624da9519c
   languageName: node
   linkType: hard
 
@@ -1743,9 +1746,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint@npm:^7.31.0":
-  version: 7.31.0
-  resolution: "eslint@npm:7.31.0"
+"eslint@npm:^7.32.0":
+  version: 7.32.0
+  resolution: "eslint@npm:7.32.0"
   dependencies:
     "@babel/code-frame": 7.12.11
     "@eslint/eslintrc": ^0.4.3
@@ -1789,7 +1792,7 @@ __metadata:
     v8-compile-cache: ^2.0.3
   bin:
     eslint: bin/eslint.js
-  checksum: 38c000372bfafc3715da2d2b6db2a75d4b3b95ac2c20696d774185aa5b6118065a37d0a1292eaa91292e07f86d53a0993cf9bfb838a7a9b935524a125e21af98
+  checksum: e25f9159d3b6b7e826b190ebb38accf3ec1513e1811bd7df2e8de83313370d266b8b6a571491a9f092d254fc53b2c5cde14dd2196cf046e22970ef037a4c7f3d
   languageName: node
   linkType: hard
 
@@ -3377,9 +3380,9 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"mongodb@npm:3.6.10":
-  version: 3.6.10
-  resolution: "mongodb@npm:3.6.10"
+"mongodb@npm:3.6.11":
+  version: 3.6.11
+  resolution: "mongodb@npm:3.6.11"
   dependencies:
     bl: ^2.2.1
     bson: ^1.1.4
@@ -3403,7 +3406,7 @@ fsevents@~2.3.2:
       optional: true
     snappy:
       optional: true
-  checksum: 259930dd39103e2d325124c4d2f02f53bf7c191c95925513e6b26857d6ad48afece4f021615e0e04afb4d7096c1bb6a7836c0c0c17ee1b482d4f59701527288a
+  checksum: 2d13e576f37657a8f48bd527d99da3478648aa4ae26210a4331d45bff551de8a3d5342dcfb762bd9bda9a904efca169abda6d3c91d60d6baa6118f7452ffda90
   languageName: node
   linkType: hard
 
@@ -3416,24 +3419,24 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"mongoose@npm:5.13.3, mongoose@npm:^5.13.3":
-  version: 5.13.3
-  resolution: "mongoose@npm:5.13.3"
+"mongoose@npm:5.13.7, mongoose@npm:^5.13.7":
+  version: 5.13.7
+  resolution: "mongoose@npm:5.13.7"
   dependencies:
     "@types/mongodb": ^3.5.27
-    "@types/node": 14.x || 15.x
     bson: ^1.1.4
     kareem: 2.3.2
-    mongodb: 3.6.10
+    mongodb: 3.6.11
     mongoose-legacy-pluralize: 1.0.2
     mpath: 0.8.3
     mquery: 3.2.5
     ms: 2.1.2
+    optional-require: 1.0.x
     regexp-clone: 1.0.0
     safe-buffer: 5.2.1
     sift: 13.5.2
     sliced: 1.0.1
-  checksum: 3b77b9e6c6454429e681d19dcadb75f70dbac4d79c2eb1875ce45bb8f6d8100dc2c4ee5aa74c43d70ff19e2b61e1d381cafe0d396f1ae7a6c787525c7ccb7042
+  checksum: 9fcc6c478928ec151ca0c627bcb145f82e58d764caef1af2235bd9ac75488881ec345ac6f421f8bb45a057a928e9839f0cc38cde63094b1d57740dbdeba39076
   languageName: node
   linkType: hard
 
@@ -3749,6 +3752,13 @@ fsevents@~2.3.2:
   dependencies:
     wrappy: 1
   checksum: 57afc246536cf6494437f982b26475f22bee860f8b77ce8eb1543f42a8bffe04b2c66ddfea9a16cb25ccb80943f8ee4fc639367ef97b7a6a4f2672eb573963f5
+  languageName: node
+  linkType: hard
+
+"optional-require@npm:1.0.x":
+  version: 1.0.3
+  resolution: "optional-require@npm:1.0.3"
+  checksum: be8556c35b0f6f76ac3b34587f010ad8fc17f69d1afbd5198fb338c785ebbe8e3c96b5f5222a0853b2c8ab7bfe8127a4f4c795e8795d5656e31c8fd693780ba9
   languageName: node
   linkType: hard
 
@@ -4149,13 +4159,13 @@ fsevents@~2.3.2:
     better-discord-antispam: ^2.0.0
     bytes: ^3.1.0
     canvas: ^2.8.0
-    chalk: ^4.1.1
+    chalk: ^4.1.2
     cheerio: ^1.0.0-rc.10
     css-what: ^5.0.1
-    discord.js: ^13.0.1
-    eslint: ^7.31.0
+    discord.js: ^13.1.0
+    eslint: ^7.32.0
     eslint-config-standard: ^16.0.3
-    eslint-plugin-import: ^2.23.4
+    eslint-plugin-import: ^2.24.0
     eslint-plugin-node: ^11.1.0
     eslint-plugin-promise: ^5.1.0
     express: ^4.17.1
@@ -4164,7 +4174,7 @@ fsevents@~2.3.2:
     jpeg-js: ^0.4.3
     mathjs: ^9.4.4
     mixme: ^0.5.1
-    mongoose: ^5.13.3
+    mongoose: ^5.13.7
     ms: ^2.1.3
     node-forge: ^0.10.0
     node-superfetch: ^0.2.3
@@ -4175,7 +4185,7 @@ fsevents@~2.3.2:
     restify: ^8.5.1
     restify-cors-middleware: ^1.1.1
     skia-canvas: ^0.9.23
-    systeminformation: ^5.7.8
+    systeminformation: ^5.8.0
     topgg-autoposter: ^2.0.0
   languageName: unknown
   linkType: soft
@@ -4481,7 +4491,7 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"resolve@^1.10.0, resolve@^1.10.1, resolve@^1.12.0, resolve@^1.13.1, resolve@^1.20.0":
+"resolve@^1.10.0, resolve@^1.10.1, resolve@^1.12.0, resolve@^1.20.0":
   version: 1.20.0
   resolution: "resolve@npm:1.20.0"
   dependencies:
@@ -4491,7 +4501,7 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"resolve@patch:resolve@^1.10.0#builtin<compat/resolve>, resolve@patch:resolve@^1.10.1#builtin<compat/resolve>, resolve@patch:resolve@^1.12.0#builtin<compat/resolve>, resolve@patch:resolve@^1.13.1#builtin<compat/resolve>, resolve@patch:resolve@^1.20.0#builtin<compat/resolve>":
+"resolve@patch:resolve@^1.10.0#builtin<compat/resolve>, resolve@patch:resolve@^1.10.1#builtin<compat/resolve>, resolve@patch:resolve@^1.12.0#builtin<compat/resolve>, resolve@patch:resolve@^1.20.0#builtin<compat/resolve>":
   version: 1.20.0
   resolution: "resolve@patch:resolve@npm%3A1.20.0#builtin<compat/resolve>::version=1.20.0&hash=3388aa"
   dependencies:
@@ -5230,12 +5240,21 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"systeminformation@npm:^5.7, systeminformation@npm:^5.7.8":
+"systeminformation@npm:^5.7":
   version: 5.7.9
   resolution: "systeminformation@npm:5.7.9"
   bin:
     systeminformation: lib/cli.js
   checksum: 9eeff231f3de5496663a5102b86628d836b0a87246d13383f5c9a1e0f25b16e9d4a2bb69d09d86e4839f09f4349ecbf5d86c1033e06c358ab6c3e582617beb7b
+  languageName: node
+  linkType: hard
+
+"systeminformation@npm:^5.8.0":
+  version: 5.8.0
+  resolution: "systeminformation@npm:5.8.0"
+  bin:
+    systeminformation: lib/cli.js
+  checksum: 02bfbb30b1443777ca108873aeed4725356caeb8b7f8509662a14428071629f673d951abfb1c6d7327f563251867a5350814edd1c4f2cba4f6e4bcc8fa44d812
   languageName: node
   linkType: hard
 
