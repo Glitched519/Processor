@@ -39,12 +39,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.14.6":
-  version: 7.14.8
-  resolution: "@babel/runtime@npm:7.14.8"
+"@babel/runtime@npm:^7.15.4":
+  version: 7.15.4
+  resolution: "@babel/runtime@npm:7.15.4"
   dependencies:
     regenerator-runtime: ^0.13.4
-  checksum: ebadb3e013a26e0f62abea0da6f6f5d83c9566f0d900e65069885f93088066c64586076d15dcbe6e093c536f66cffc9e2e136ad5d8b3e66235af62f0051afa42
+  checksum: 64b6c250fd02a664f40835b7bfc3ec0b473d251bf4881b06b689b60662bf2ae17adc6fa32fb0e0de308de5d4bc383738c6030ad93d823066fb9fd7c18f552b56
   languageName: node
   linkType: hard
 
@@ -3150,11 +3150,11 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"mathjs@npm:^9.4.4":
-  version: 9.4.4
-  resolution: "mathjs@npm:9.4.4"
+"mathjs@npm:^9.4.5":
+  version: 9.4.5
+  resolution: "mathjs@npm:9.4.5"
   dependencies:
-    "@babel/runtime": ^7.14.6
+    "@babel/runtime": ^7.15.4
     complex.js: ^2.0.15
     decimal.js: ^10.3.1
     escape-latex: ^1.2.0
@@ -3165,7 +3165,7 @@ fsevents@~2.3.2:
     typed-function: ^2.0.0
   bin:
     mathjs: bin/cli.js
-  checksum: 998245e5d93299dd7aa39250c43281410e68f5bb582913ad2db27a3a96708590236fa1abfec0b6b2d17177155c75374f401e4118a8877905c14f3ce1d34b7639
+  checksum: 1349544b7b7a93e970e7dc300d32c9110a78c5f85f438e07eaf4c3acf43e5edaeb4ca6c4701b732a706708039c5bf7295939065f28920eb8a769748fa9015eb6
   languageName: node
   linkType: hard
 
@@ -3347,10 +3347,17 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"mixme@npm:^0.5.0, mixme@npm:^0.5.1":
+"mixme@npm:^0.5.0":
   version: 0.5.1
   resolution: "mixme@npm:0.5.1"
   checksum: 59333c48227808d71d2682baddb7f2d793aca1127f61e11471bb18035d7ac35160aa268da14a2dd37e88261c15075840eeb80f82ecf5ec1f82075418e44542cd
+  languageName: node
+  linkType: hard
+
+"mixme@npm:^0.5.2":
+  version: 0.5.2
+  resolution: "mixme@npm:0.5.2"
+  checksum: 894ed0fbed4257d671b055886bf98fb43ff56dda3bd442bfc79d65e25e50e169a51c710996cb8f9cbbcf8d8744ba1226c7be1c4377b3146135587656d85e5c05
   languageName: node
   linkType: hard
 
@@ -3422,9 +3429,9 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"mongoose@npm:^6.0.5":
-  version: 6.0.5
-  resolution: "mongoose@npm:6.0.5"
+"mongoose@npm:^6.0.6":
+  version: 6.0.6
+  resolution: "mongoose@npm:6.0.6"
   dependencies:
     bson: ^4.2.2
     kareem: 2.3.2
@@ -3435,7 +3442,7 @@ fsevents@~2.3.2:
     regexp-clone: 1.0.0
     sift: 13.5.2
     sliced: 1.0.1
-  checksum: 2b07d2899c711b306104e3019842fa09973e7989a759afc9622e336a7e780304e5d1e32fa876ec58740dc462e53f5e46773b32f05106ef8483b0ad9b49f46c0d
+  checksum: cd09d522c9a4b6fb3c2fcba132e05867397bd52624e723e7469aac46a03f3563c4e9a128e97d1dc30748f4f247663fabf8b44ec88e4f9148c2f002d5e8036d1e
   languageName: node
   linkType: hard
 
@@ -3478,10 +3485,17 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"ms@npm:^2.0.0, ms@npm:^2.1.1, ms@npm:^2.1.3":
+"ms@npm:^2.0.0, ms@npm:^2.1.1":
   version: 2.1.3
   resolution: "ms@npm:2.1.3"
   checksum: 6e721e648a544154d5de4c114b32f573d8027ca8ec505cf6c1105e505986d6ac46934a1256735aa0eece8eb2f5b2a1230503b2dddd3b100f9f016fd8a4f15f33
+  languageName: node
+  linkType: hard
+
+"ms@npm:^3.0.0-canary.1":
+  version: 3.0.0-canary.1
+  resolution: "ms@npm:3.0.0-canary.1"
+  checksum: d30aaaf94c8728d8456dea303eaa1a5d75de2dd1e16370803d839681749a5b0076a743f529aa744e56823fab58048721810dfa1ecb009a1a11ed62d47fbe3d1f
   languageName: node
   linkType: hard
 
@@ -4153,10 +4167,10 @@ fsevents@~2.3.2:
     humanize-duration: ^3.27.0
     ini: ^2.0.0
     jpeg-js: ^0.4.3
-    mathjs: ^9.4.4
-    mixme: ^0.5.1
-    mongoose: ^6.0.5
-    ms: ^2.1.3
+    mathjs: ^9.4.5
+    mixme: ^0.5.2
+    mongoose: ^6.0.6
+    ms: ^3.0.0-canary.1
     node-forge: ^0.10.0
     node-superfetch: ^0.2.3
     novelcovid: ^3.0.2
@@ -4166,7 +4180,7 @@ fsevents@~2.3.2:
     restify: ^8.5.1
     restify-cors-middleware: ^1.1.1
     skia-canvas: ^0.9.25
-    systeminformation: ^5.8.7
+    systeminformation: ^5.9.2
     topgg-autoposter: ^2.0.0
   languageName: unknown
   linkType: soft
@@ -5230,12 +5244,12 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"systeminformation@npm:^5.8.7":
-  version: 5.8.7
-  resolution: "systeminformation@npm:5.8.7"
+"systeminformation@npm:^5.9.2":
+  version: 5.9.2
+  resolution: "systeminformation@npm:5.9.2"
   bin:
     systeminformation: lib/cli.js
-  checksum: 55bcfcfc6a0ca4aacea6b0ddc30e6928df419a25edd301faf8b77e62bdf3cc0f421ac283a164e245275f72caad743a4b60f08bea55eb1763c6a9b43f8d126137
+  checksum: 0ac9f7797175eb695703efc5fa4aa16ceb3d943a9fe0ba4715498b04dd444e6da31844e648e3859f17a65aa4698ee2d28e5801c8af0941f84c39897b7698b341
   languageName: node
   linkType: hard
 
