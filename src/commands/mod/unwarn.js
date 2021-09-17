@@ -36,7 +36,7 @@ module.exports = class Unwarn extends BaseCommand {
             memberId: mentionedMember.id,
         }).catch(err => console.log(err));
 
-        if (!warnDoc || !warnDoc.warnings.length) {
+        if (!warnDoc || !warnDoc.warnings.length) { 
             return message.reply({ content: "This member has a clean slate!" });
         }
 

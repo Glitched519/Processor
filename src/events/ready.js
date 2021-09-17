@@ -62,7 +62,7 @@ module.exports = class Ready extends BaseEvent {
             const statuses = [
                 `${config.prefix}help`,
                 `using ${os.version()} @${Number.parseFloat(os.cpus()[0].speed / 1000).toPrecision(2)} GHz`,
-                "Isopropyl#9371 and Frash#4113",
+                "UltraSarker#8505",
             ];
             const status = statuses[Math.floor(Math.random() * statuses.length)];
             client.user.setActivity(status, { type: "WATCHING" });
