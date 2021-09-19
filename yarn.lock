@@ -4180,7 +4180,7 @@ fsevents@~2.3.2:
     restify: ^8.5.1
     restify-cors-middleware: ^1.1.1
     skia-canvas: ^0.9.25
-    systeminformation: ^5.9.2
+    systeminformation: ^5.9.3
     topgg-autoposter: ^2.0.0
   languageName: unknown
   linkType: soft
@@ -5244,12 +5244,12 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"systeminformation@npm:^5.9.2":
-  version: 5.9.2
-  resolution: "systeminformation@npm:5.9.2"
+"systeminformation@npm:^5.9.3":
+  version: 5.9.3
+  resolution: "systeminformation@npm:5.9.3"
   bin:
     systeminformation: lib/cli.js
-  checksum: 0ac9f7797175eb695703efc5fa4aa16ceb3d943a9fe0ba4715498b04dd444e6da31844e648e3859f17a65aa4698ee2d28e5801c8af0941f84c39897b7698b341
+  checksum: e908362d09e22302b47a4c96e2212b4ec046c365beff7a1c129cc7cb3b56dea0fca100b4ef988f870de480e296427ae19819033c51f3bb852f2e245e165883bb
   languageName: node
   linkType: hard
 

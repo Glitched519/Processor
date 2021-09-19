@@ -36,7 +36,7 @@
         "restify": "^8.5.1",
         "restify-cors-middleware": "^1.1.1",
         "skia-canvas": "^0.9.25",
-        "systeminformation": "^5.9.2",
+        "systeminformation": "^5.9.3",
         "topgg-autoposter": "^2.0.0"
     },
     "keywords": [],
