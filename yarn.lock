@@ -3150,9 +3150,9 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"mathjs@npm:^9.4.5":
-  version: 9.4.5
-  resolution: "mathjs@npm:9.4.5"
+"mathjs@npm:^9.5.0":
+  version: 9.5.0
+  resolution: "mathjs@npm:9.5.0"
   dependencies:
     "@babel/runtime": ^7.15.4
     complex.js: ^2.0.15
@@ -3165,7 +3165,7 @@ fsevents@~2.3.2:
     typed-function: ^2.0.0
   bin:
     mathjs: bin/cli.js
-  checksum: 1349544b7b7a93e970e7dc300d32c9110a78c5f85f438e07eaf4c3acf43e5edaeb4ca6c4701b732a706708039c5bf7295939065f28920eb8a769748fa9015eb6
+  checksum: a767acca878762e053c944c648a84489b77dc6a2d8e89e8497a54a8904180aea525e2d72a640632176044861772c70c8327f4498137b0f3cd2c8bbbe7ca3f9de
   languageName: node
   linkType: hard
 
@@ -3354,10 +3354,10 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"mixme@npm:^0.5.2":
-  version: 0.5.2
-  resolution: "mixme@npm:0.5.2"
-  checksum: 894ed0fbed4257d671b055886bf98fb43ff56dda3bd442bfc79d65e25e50e169a51c710996cb8f9cbbcf8d8744ba1226c7be1c4377b3146135587656d85e5c05
+"mixme@npm:^0.5.4":
+  version: 0.5.4
+  resolution: "mixme@npm:0.5.4"
+  checksum: 4c7c2b76f3b1c40307566a10066928af5d8c9bc019cf3bd8305e3f472228750c1dc4adcea104d51deeaa8ca698d423e3cb8aace62f5b95e93df960f6ad34ee6e
   languageName: node
   linkType: hard
 
@@ -3429,9 +3429,9 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"mongoose@npm:^6.0.6":
-  version: 6.0.6
-  resolution: "mongoose@npm:6.0.6"
+"mongoose@npm:^6.0.7":
+  version: 6.0.7
+  resolution: "mongoose@npm:6.0.7"
   dependencies:
     bson: ^4.2.2
     kareem: 2.3.2
@@ -3442,7 +3442,7 @@ fsevents@~2.3.2:
     regexp-clone: 1.0.0
     sift: 13.5.2
     sliced: 1.0.1
-  checksum: cd09d522c9a4b6fb3c2fcba132e05867397bd52624e723e7469aac46a03f3563c4e9a128e97d1dc30748f4f247663fabf8b44ec88e4f9148c2f002d5e8036d1e
+  checksum: ddf3545d256ed4545571cc1100a7735fbb96b349dc942ef73ae451b8fe45680b00bce8432cee5d7c7fe989d9a37204d19a3b650c518e2a27e16231f42ac93e57
   languageName: node
   linkType: hard
 
@@ -4078,9 +4078,9 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"pm2@npm:^5.1.1":
-  version: 5.1.1
-  resolution: "pm2@npm:5.1.1"
+"pm2@npm:^5.1.2":
+  version: 5.1.2
+  resolution: "pm2@npm:5.1.2"
   dependencies:
     "@pm2/agent": ~2.0.0
     "@pm2/io": ~5.0.0
@@ -4120,7 +4120,7 @@ fsevents@~2.3.2:
     pm2-dev: bin/pm2-dev
     pm2-docker: bin/pm2-docker
     pm2-runtime: bin/pm2-runtime
-  checksum: 1b7ae7bd14ad22100563fc7219a734462dcb340bf586b33931f9e0c6a8fb62cdef2dbac89f5a7b39f6255ebcffb02dc9eb4bfb937bb48c54dc08983c7a48452b
+  checksum: ac79ba092076fb0857bcfc1a6b1bb0d2e138a5424a988dea64ed1d24d0c2eaf711803bcf7807d152534730cf014cbb0bd33dcfb826c019fa3c04fd6705bf9edd
   languageName: node
   linkType: hard
 
@@ -4167,20 +4167,20 @@ fsevents@~2.3.2:
     humanize-duration: ^3.27.0
     ini: ^2.0.0
     jpeg-js: ^0.4.3
-    mathjs: ^9.4.5
-    mixme: ^0.5.2
-    mongoose: ^6.0.6
+    mathjs: ^9.5.0
+    mixme: ^0.5.4
+    mongoose: ^6.0.7
     ms: ^3.0.0-canary.1
     node-forge: ^0.10.0
     node-superfetch: ^0.2.3
     novelcovid: ^3.0.2
-    pm2: ^5.1.1
+    pm2: ^5.1.2
     remove: ^0.1.5
     request: ^2.88.2
     restify: ^8.5.1
     restify-cors-middleware: ^1.1.1
     skia-canvas: ^0.9.25
-    systeminformation: ^5.9.3
+    systeminformation: ^5.9.4
     topgg-autoposter: ^2.0.0
   languageName: unknown
   linkType: soft
@@ -5244,12 +5244,12 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"systeminformation@npm:^5.9.3":
-  version: 5.9.3
-  resolution: "systeminformation@npm:5.9.3"
+"systeminformation@npm:^5.9.4":
+  version: 5.9.4
+  resolution: "systeminformation@npm:5.9.4"
   bin:
     systeminformation: lib/cli.js
-  checksum: e908362d09e22302b47a4c96e2212b4ec046c365beff7a1c129cc7cb3b56dea0fca100b4ef988f870de480e296427ae19819033c51f3bb852f2e245e165883bb
+  checksum: d1e00b6042e2a38289fe7a08a8e1dcf8768a6849b7c072c309acdabadd05b92b816abbad93b901652607f4af12095342ed01443bee58ec745cbc4e67ff32d6c4
   languageName: node
   linkType: hard
 
