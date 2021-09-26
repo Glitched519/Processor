@@ -2,6 +2,19 @@
 
 [![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=Glitched519&show_icons=true&hide=issues,contribs&theme=radical)](https://github.com/Glitched519/Processor)
 
+This is the template for the config.json. Properties marked with `-OPT` are optional, but you will have to esclude the corresponding features if you choose to omit them.
+```json
+    "bot-token": "BOT-TOKEN",
+    "giphy-token": "GIPHY-TOKEN-OPT",
+    "topgg-token": "TOPGG-TOKEN-OPT",
+    "webhook-pass": "WEBHOOK-PASS-OPT",
+    "prefix": "!",
+    "mongo-path": "MONGO-PATH-OPT",
+    "weather-key": "WEATHER-KEY-OPT",
+    "google-search-api-key": "GOOGLE-SEARCH-API-KEY-OPT",
+    "x-rapid-api-key": "X-RAPID-API-KEY-OPT"
+```
+
 ---
 
 **Processor is a Discord bot developed by [Isopropyl#9371](https://dsc.bio/Isopropyl)** along with several other developers who devote their time to this project.
