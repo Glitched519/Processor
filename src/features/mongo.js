@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
-const { mongoPath } = require("../config.json");
+const config = require("../config.json");
 
 module.exports = async () => {
-    await mongoose.connect(mongoPath, {
+    await mongoose.connect(config["mongo-path"], {
         autoCreate: false,
         keepAlive: true,
         useNewUrlParser: true,

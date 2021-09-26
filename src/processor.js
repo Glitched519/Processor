@@ -10,11 +10,7 @@ const app = express();
 const nonPrivilegedIntents = [
     "GUILDS",
     "GUILD_BANS",
-    "GUILD_INTEGRATIONS",
-    "GUILD_WEBHOOKS",
-    "GUILD_INVITES",
     "GUILD_MESSAGES",
-    "GUILD_MESSAGE_REACTIONS",
 ];
 
 const client = new Client({
@@ -29,7 +25,7 @@ const client = new Client({
 
 (async () => {
     const ap = AutoPoster(config["topgg-token"], client);
-    await client.login(config.token).then(() => console.log("Logging In..."));
+    await client.login(config["bot-token"]).then(() => console.log("Logging In..."));
     console.log("Configuring Client Settings...");
     client.commands = new Map();
     client.events = new Map();
@@ -44,6 +40,11 @@ const client = new Client({
             .setColor("BLURPLE")
             .setDescription(`<@!${vote.user}> just voted!`)
             .setFooter("Thanks for all your support!");
+        const botTestVoteEmbed = new MessageEmbed()
+            .setTitle("Test Vote!")
+            .setColor("GREEN")
+            .setDescription(`<@!${vote.user}> just test voted!`)
+            .setFooter("Hey, voting works!");
         const voteRow = new MessageActionRow()
             .addComponents(
                 new MessageButton()
@@ -51,7 +52,8 @@ const client = new Client({
                     .setURL("https://top.gg/bot/689678745782714464/vote")
                     .setStyle("LINK"),
             );
-
+        vote.type === "test" ? 
+        client.channels.cache.get("782680889628557382").send({ embeds: [botTestVoteEmbed], components: [voteRow] }) :
         client.channels.cache.get("782680889628557382").send({ embeds: [botVoteEmbed], components: [voteRow] });
     }));
 

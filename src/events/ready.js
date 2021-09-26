@@ -27,7 +27,6 @@ module.exports = class Ready extends BaseEvent {
             maxDuplicatesWarning: 7,// When people are spamming the same message, this will trigger when member X sent over 7+ messages.
             maxDuplicatesMute: 10, // The limit where member X get muted after sending too many messages(10+).
             ignoredRoles: ["Admin", "Owner"], // The members with this role(or roles) will be ignored if they have it. Suggest to not add this to any random guys. Also it"s case sensitive.
-            ignoredMembers: ["Isopropyl#9371"], // These members are directly affected and they do not require to have the role above. Good for undercover pranks.
             mutedRole: "Muted", // Here you put the name of the role that should not let people write/speak or anything else in your server. If there is no role set, by default, the module will attempt to create the role for you & set it correctly for every channel in your server. It will be named "muted".
             timeMuted: 1000 * 600, // This is how much time member X will be muted. if not set, default would be 10 min.
             logChannel: "antispam-logs" // This is the channel where every report about spamming goes to. If it"s not set up, it will attempt to create the channel.
@@ -62,7 +61,6 @@ module.exports = class Ready extends BaseEvent {
             const statuses = [
                 `${config.prefix}help`,
                 `using ${os.version()} @${Number.parseFloat(os.cpus()[0].speed / 1000).toPrecision(2)} GHz`,
-                "UltraSarker#8505",
             ];
             const status = statuses[Math.floor(Math.random() * statuses.length)];
             client.user.setActivity(status, { type: "WATCHING" });
@@ -166,7 +164,7 @@ module.exports = class Ready extends BaseEvent {
 
         const createAPIMessage = async (interaction, content) => {
             const { data, files } = await discord.APIMessage.create(
-                client.channels.resolve(interactions.channel_id),
+                client.channels.resolve(interaction.channel_id),
                 content
             )
                 .resolveData()
