@@ -17,7 +17,7 @@ This is the template for the config.json. Please make it within the project. Pro
 
 ---
 
-**Processor is a Discord bot developed by [Isopropyl#9371](https://dsc.bio/Isopropyl)** along with several other developers who devote their time to this project.
+**Processor is a Discord bot developed by [UltraSarker](https://dsc.bio/Isopropyl)** along with several other developers who devote their time to this project.
 
 ---
 
