@@ -234,7 +234,7 @@ module.exports = class Help extends BaseCommand {
                         page = 1;
                         break;
                 }
-                interaction.defer().then(() => {
+                interaction.deferReply().then(() => {
                     interaction.deleteReply();
                 });
 
