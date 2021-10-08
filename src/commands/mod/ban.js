@@ -21,11 +21,11 @@ module.exports = class Ban extends BaseCommand {
             return message.reply({ content: "You need to mention a member you want to ban." });
         }
 
-        const allBans = await message.guild.fetchBans();
+        // const allBans = await message.guild.fetch();
 
-        if (allBans.get(mentionedUser.id)) {
-            return message.reply({ content: "This member has already been banned." });
-        }
+        // if (allBans.get(mentionedUser.id)) {
+        //     return message.reply({ content: "This member has already been banned." });
+        // }
 
         const mentionedMember = message.guild.members.cache.get(mentionedUser.id);
 

@@ -7,6 +7,29 @@ module.exports = class Kick extends BaseCommand {
     }
 
     async run(client, message, args) {
+        // const target = message.mentions.members?.first || message.guild.members.cache.get(args[0]);
+        // if (!message.member.permissions.has("KICK_MEMBERS")) {
+        //     return message.reply({ content: "You need the `Kick Members` permission to kick a member." });
+        // }
+
+        // if (!message.guild.me.permissions.has("KICK_MEMBERS")) {
+        //     return message.reply({ content: "I need the `Kick Members` permission to kick a member." });
+        // }
+
+        // if (!target) {
+        //     return message.reply({ content: "Please tag someone to kick." });
+        // }
+
+        // if (!target.kickable) {
+        //     return message.reply({ content: "Cannot kick that user." });
+        // }
+
+        // args.shift();
+        // const reason = args.join(" ");
+
+        // target.kick(reason);
+
+        // return message.reply({ content: `You kicked <@${target.id}>` });
         const mentionedMember = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
         if (!message.member.permissions.has("KICK_MEMBERS")) {
             return message.reply({ content: "You need the `Kick Members` permission to kick a member." });
