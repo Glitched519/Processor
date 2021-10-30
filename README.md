@@ -6,12 +6,10 @@ This is the template for the config.json. Please make it within the project. Pro
 ```json
     "bot-token": "BOT-TOKEN",
     "giphy-token": "GIPHY-TOKEN-OPT",
-    "topgg-token": "TOPGG-TOKEN-OPT",
-    "webhook-pass": "WEBHOOK-PASS-OPT",
-    "prefix": "!",
-    "mongo-path": "MONGO-PATH-OPT",
-    "weather-key": "WEATHER-KEY-OPT",
     "google-search-api-key": "GOOGLE-SEARCH-API-KEY-OPT",
+    "mongo-path": "MONGO-PATH-OPT",
+    "prefix": "!",
+    "weather-key": "WEATHER-KEY-OPT",
     "x-rapid-api-key": "X-RAPID-API-KEY-OPT"
 ```
 

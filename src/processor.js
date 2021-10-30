@@ -1,12 +1,6 @@
-const { Client, MessageEmbed, MessageActionRow, MessageButton } = require("discord.js");
+const { Client } = require("discord.js");
 const { registerCommands, registerEvents } = require("./utils/registry");
 const config = require("./config.json");
-const { Webhook } = require("@top-gg/sdk");
-const express = require("express");
-const { AutoPoster } = require("topgg-autoposter");
-const wh = new Webhook(config["webhook-pass"]);
-const app = express();
-
 const nonPrivilegedIntents = [
     "GUILDS",
     "GUILD_BANS",
@@ -24,7 +18,6 @@ const client = new Client({
 });
 
 (async () => {
-    const ap = AutoPoster(config["topgg-token"], client);
     await client.login(config["bot-token"]).then(() => console.log("Logging In..."));
     console.log("Configuring Client Settings...");
     client.commands = new Map();
@@ -33,35 +26,6 @@ const client = new Client({
     client.prefix = config.prefix;
     await registerCommands(client, "../commands").then(() => console.log("Registering Commands..."));
     await registerEvents(client, "../events").then(() => console.log("Registering Events..."));
-
-    app.post("/webhook", wh.listener((vote) => {
-        const botVoteEmbed = new MessageEmbed()
-            .setTitle("Someone just voted!")
-            .setColor("BLURPLE")
-            .setDescription(`<@!${vote.user}> just voted!`)
-            .setFooter("Thanks for all your support!");
-        const botTestVoteEmbed = new MessageEmbed()
-            .setTitle("Test Vote!")
-            .setColor("GREEN")
-            .setDescription(`<@!${vote.user}> just test voted!`)
-            .setFooter("Hey, voting works!");
-        const voteRow = new MessageActionRow()
-            .addComponents(
-                new MessageButton()
-                    .setLabel("Vote")
-                    .setURL("https://top.gg/bot/689678745782714464/vote")
-                    .setStyle("LINK"),
-            );
-        vote.type === "test" ? 
-        client.channels.cache.get("782680889628557382").send({ embeds: [botTestVoteEmbed], components: [voteRow] }) :
-        client.channels.cache.get("782680889628557382").send({ embeds: [botVoteEmbed], components: [voteRow] });
-    }));
-
-    app.listen(3000);
-
-    ap.on("error", (err) => {
-        console.log(`Stats were not posted due to the following error: ${err}`);
-    });
 
     client.emit("ready");
 })();
