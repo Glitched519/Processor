@@ -16,8 +16,8 @@ module.exports = class Vote extends BaseCommand {
         const voteRow = new MessageActionRow()
             .addComponents(
                 new MessageButton()
-                    .setLabel("botsfordiscord.com")
-                    .setURL(`https://botsfordiscord.com/bot/${client.user.id}/vote`)
+                    .setLabel("discords.com/bots")
+                    .setURL(`https://discords.com/bots/bot/${client.user.id}/vote`)
                     .setStyle("LINK"),
                 new MessageButton()
                     .setLabel("discord.boats")

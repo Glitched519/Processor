@@ -7,6 +7,7 @@ module.exports = class GuildCreate extends BaseEvent {
         super("guildCreate");
     }
     async run(client, guild) {
+        if (guild == "901538946222293002" || guild == "901750805948932126") return;
         let destination = client.channels.cache.get("797849546612932668");
         const joinEmbed = new MessageEmbed()
             .setTitle(`${join} **${guild}** added ${client.user.tag}`)

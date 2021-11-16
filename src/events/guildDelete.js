@@ -7,6 +7,7 @@ module.exports = class GuildDelete extends BaseEvent {
         super("guildDelete");
     }
     async run(client, guild) {
+        if (guild == "901538946222293002" || guild == "901750805948932126") return;
         let destination = client.channels.cache.get("797849546612932668");
         const leaveEmbed = new MessageEmbed()
             .setTitle(`${leave} **${guild}** removed ${client.user.tag}`)
