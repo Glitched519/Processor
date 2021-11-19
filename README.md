@@ -41,7 +41,7 @@ Processor comes with several fun features that you and your members will appreci
 ---
 
 ## Image Examples
-![Help Command](https://cdn.discordapp.com/attachments/688229874649137188/845282948646174760/unknown.png)
+![Help Command](https://cdn.discordapp.com/attachments/688229874649137188/911081461585674260/unknown.png)
 
 ![Meme Command](https://cdn.discordapp.com/attachments/688229874649137188/845283547115159582/unknown.png)
 
