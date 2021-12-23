@@ -18,15 +18,18 @@ const client = new Client({
 });
 
 (async () => {
-    await client.login(config["bot-token"]).then(() => console.log("Logging In..."));
-    console.log("Configuring Client Settings...");
+    process.stdout.write("[#    ]\033[0G")
+    await client.login(config["bot-token"])
+    process.stdout.write("[##   ]\033[0G");
     client.commands = new Map();
     client.events = new Map();
     client.cooldowns = new Map();
     client.prefix = config.prefix;
-    await registerCommands(client, "../commands").then(() => console.log("Registering Commands..."));
-    await registerEvents(client, "../events").then(() => console.log("Registering Events..."));
-
+    process.stdout.write("[###  ]\033[0G");
+    await registerCommands(client, "../commands")
+    process.stdout.write("[#### ]\033[0G")
+    await registerEvents(client, "../events")
+    process.stdout.write("[#####]\033[0G")
     client.emit("ready");
 })();
 
