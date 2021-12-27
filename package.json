@@ -18,7 +18,7 @@
         "chalk": "^4.1.2",
         "cheerio": "^1.0.0-rc.10",
         "css-what": "^5.0.1",
-        "discord.js": "latest",
+        "discord.js": "13.4.0",
         "humanize-duration": "^3.27.0",
         "ini": "^2.0.0",
         "jpeg-js": "^0.4.3",
