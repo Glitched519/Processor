@@ -1,23 +1,44 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 const BaseEvent = require("../utils/structures/BaseEvent");
+const { REST } = require("@discordjs/rest");
+const { Routes } = require("discord-api-types/v9");
 const os = require("os");
 const fs = require("fs");
+const path = require("path");
 const config = require("../config.json");
 const { MessageEmbed } = require("discord.js");
 const antispam = require("better-discord-antispam");
 const mongo = require("../features/mongo");
 const muteSchema = require("../schemas/mute-schema");
+require("dotenv").config();
 const guildId = "687138260014858260";
 
 module.exports = class Ready extends BaseEvent {
     constructor() {
         super("ready");
     }
-    async run(client) {
+    async run(client, commands) {
 
         await mongo();
 
+        const eventFiles = fs.readdirSync(path.join(__dirname, "../events")).filter(file => file.endsWith(".js"));
+
+        const animalCmdFiles = fs.readdirSync(path.join(__dirname, "../slashcommands/animal")).filter(file => file.endsWith(".js"));
+        // const clashCmdFiles = fs.readdirSync(path.join(__dirname, "./slashcommands/clash")).filter(file => file.endsWith(".js"));
+        // const cuteCmdFiles = fs.readdirSync(path.join(__dirname, "./slashcommands/cute")).filter(file => file.endsWith(".js"));
+        // const imageCmdFiles = fs.readdirSync(path.join(__dirname, "./slashcommands/image")).filter(file => file.endsWith(".js"));
+        // const infoCmdFiles = fs.readdirSync(path.join(__dirname, "./slashcommands/info")).filter(file => file.endsWith(".js"));
+        // const mathCmdFiles = fs.readdirSync(path.join(__dirname, "./slashcommands/math")).filter(file => file.endsWith(".js"));
+        // const modCmdFiles = fs.readdirSync(path.join(__dirname, "./slashcommands/mod")).filter(file => file.endsWith(".js"));
+        // const otherCmdFiles = fs.readdirSync(path.join(__dirname, "./slashcommands/other")).filter(file => file.endsWith(".js"));
+        // const ownerCmdFiles = fs.readdirSync(path.join(__dirname, "./slashcommands/owner")).filter(file => file.endsWith(".js"));
+        // const searchCmdFiles = fs.readdirSync(path.join(__dirname, "./slashcommands/search")).filter(file => file.endsWith(".js"));
+        // const setupCmdFiles = fs.readdirSync(path.join(__dirname, "./slashcommands/setup")).filter(file => file.endsWith(".js"));
+
+        const cmdFiles = [animalCmdFiles/*, clashCmdFiles, cuteCmdFiles, imageCmdFiles, infoCmdFiles, mathCmdFiles, modCmdFiles, otherCmdFiles, ownerCmdFiles, searchCmdFiles, setupCmdFiles*/];
+        const dirs = ["animal"/*, "clash", "cute", "image", "info", "math", "mod", "other", "owner", "search", "setup"*/];
+        // console.log(commands);
         antispam(client, {
             limitUntilWarn: 4, // The amount of messages allowed to send within the interval(time) before getting a warn.
             limitUntilMuted: 6, // The amount of messages allowed to send within the interval(time) before getting a muted.
@@ -72,107 +93,47 @@ module.exports = class Ready extends BaseEvent {
             console.log(data);
         });
 
-        const getApp = () => {
-            const app = client.api.applications(client.user.id);
-            if (guildId) {
-                app.guilds(guildId);
-            }
-            return app;
-        };
+        const slashcommands = [];
 
-
-        // Slash Commands
-        const commands = await getApp(guildId).commands.get();
-
-        await getApp(guildId).commands.post({
-            data: {
-                name: "ping",
-                description: "A simple ping pong command",
-            },
-        });
-
-        await getApp(guildId).commands();
-
-        await getApp(guildId).commands.post({
-            data: {
-                name: "embed",
-                description: "Displays an embed",
-                options: [
-                    {
-                        name: "name",
-                        description: "Your name",
-                        required: true,
-                        type: 3 // string
-                    },
-                    {
-                        name: "age",
-                        description: "Your age",
-                        required: false,
-                        type: 4 // integer
-                    }
-                ]
-            }
-        });
-        await getApp(guildId).commands("793286444990726150").delete();
-        await getApp(guildId).commands("793286446583775262").delete();
-
-        client.ws.on("INTERACTION_CREATE", async (interaction) => {
-            const { name, options } = interaction.data;
-
-            const command = name.toLowerCase();
-
-            const args = {};
-
-            if (options) {
-                for (const option of options) {
-                    const { name, value } = option;
-                    args[name] = value;
-                }
-            }
-
-
-            if (command === "ping") {
-                reply(interaction, "pong");
-
-            } else if (command === "embed") {
-                const embed = new MessageEmbed()
-                    .setTitle("Example Embed");
-
-                for (const arg of args) {
-                    const value = args[arg];
-                    embed.addField(arg, value);
-                }
-            }
-        });
-
-        const reply = async (interaction, response) => {
-            let data = {
-                content: response,
-            };
-
-            if (typeof response === "object") {
-                data = await createAPIMessage(interaction, response);
-            }
-
-            client.api.interactions(interaction.id, interaction.token).callback.post({
-                data: {
-                    type: 4,
-                    data,
-                }
+        for (let i = 0; i < cmdFiles.length; i++) {
+            cmdFiles[i].forEach(file => {
+                const cmd = require(`../slashcommands/${dirs[i]}/${file}`);
+                console.log(cmd.data)
+                slashcommands.push(cmd.data);
+                client.slashcommands.set(cmd.data.name, cmd);
+                console.log(slashcommands);
             });
-        };
+        }
 
-        const createAPIMessage = async (interaction, content) => {
-            const { data, files } = await discord.APIMessage.create(
-                client.channels.resolve(interaction.channel_id),
-                content
-            )
-                .resolveData()
-                .resolveFiles();
+        for (const file of eventFiles) {
+            const event = require(`../events/${file}`);
+            // event.once ?
+            // client.once(event.name, (...args) => event.run(...args, commands)) :
+            client.on(event.name, (...args) => event.run(...args, slashcommands));
+        }
 
-            return { ...data, files };
-        };
+        const CLIENT_ID = client.user.id;
 
-        await client.api.applications(client.user.id);
+        const rest = new REST({
+            version: "9"
+        }).setToken(config["bot-token"]);
+
+        (async () => {
+            try {
+                if (process.env.NODE_ENV === "production") {
+                    await rest.put(Routes.applicationCommands(CLIENT_ID), {
+                        body: slashcommands
+                    });
+                    console.log("Successfully registered commands globally.");
+                } else {
+                    await rest.put(Routes.applicationGuildCommands(CLIENT_ID, guildId), {
+                        body: slashcommands
+                    });
+                    console.log("Successfully registered commands locally.");
+                }
+            } catch (err) {
+                if (err) console.error(err);
+            }
+        })();
     }
 };

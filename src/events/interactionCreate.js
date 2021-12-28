@@ -5,21 +5,20 @@ module.exports = class InteractionCreate extends BaseEvent {
         super("interactionCreate");
     }
     async run(client, interaction) {
-        switch (interaction.customId) {
-            case "Blurple":
-                interaction.reply({ content: "Blurple", ephemeral: true });
-                break;
-            case "Grey":
-                interaction.reply({ content: "Grey", ephemeral: true });
-                break;
-            case "Green":
-                interaction.reply({ content: "Green", ephemeral: true });
-                break;
-            case "Red":
-                interaction.reply({ content: "Red", ephemeral: true });
-                break;
-            default:
-                return;
+
+        const command = interaction.client.slashcommands.get(interaction.commandName);
+    
+        if (!command) return;
+    
+        try {
+            await command.run(interaction.client, interaction);
+        } catch (err) {
+            if (err) console.error(err);
+    
+            await interaction.reply({ 
+                content: "An error occurred while executing this command.",
+                ephemeral: true
+            });
         }
     }
 };

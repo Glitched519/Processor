@@ -10,6 +10,7 @@
     "author": "Partha Sarker",
     "license": "GPLv3",
     "dependencies": {
+        "@discordjs/rest": "^0.2.0-canary.0",
         "ansi-regex": "^6.0.1",
         "axios": "^0.24.0",
         "better-discord-antispam": "^2.0.0",
@@ -19,6 +20,7 @@
         "cheerio": "^1.0.0-rc.10",
         "css-what": "^5.0.1",
         "discord.js": "13.4.0",
+        "dotenv": "^10.0.0",
         "humanize-duration": "^3.27.0",
         "ini": "^2.0.0",
         "jpeg-js": "^0.4.3",

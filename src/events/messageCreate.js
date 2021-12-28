@@ -10,7 +10,7 @@ module.exports = class MessageCreate extends BaseEvent {
     }
 
     async run(client, message) {
-
+        // console.log(message.content);
         if (!message.guild) return;
         if (message.author.bot) return;
 

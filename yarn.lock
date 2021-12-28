@@ -34,10 +34,32 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@discordjs/collection@npm:^0.3.2":
+  version: 0.3.2
+  resolution: "@discordjs/collection@npm:0.3.2"
+  checksum: 77def13598fce0f33cdd1e45e0e57b4452a1fa348e30d7d3a3b5a56409def4c4785462828b163aea83d659b93412d5dc18c22c85eff499dfc11c24011e8b18e6
+  languageName: node
+  linkType: hard
+
 "@discordjs/collection@npm:^0.4.0":
   version: 0.4.0
   resolution: "@discordjs/collection@npm:0.4.0"
   checksum: fa8fc4246921f3230eb6c5d6d4dc0caf9dd659fcc903175944edf4fb0a9ed9913fdf164733d3f1e644ef469bc79b0d38a526ee620b92169cb40e79b40b0c716b
+  languageName: node
+  linkType: hard
+
+"@discordjs/rest@npm:^0.2.0-canary.0":
+  version: 0.2.0-canary.0
+  resolution: "@discordjs/rest@npm:0.2.0-canary.0"
+  dependencies:
+    "@discordjs/collection": ^0.3.2
+    "@sapphire/async-queue": ^1.1.9
+    "@sapphire/snowflake": ^3.0.0
+    discord-api-types: ^0.25.2
+    form-data: ^4.0.0
+    node-fetch: ^2.6.5
+    tslib: ^2.3.1
+  checksum: 915c0e61b225c887519091629b92adebeb74ce6f675c60f7e37df1be0815d037643def215ddc6a8549d31e908fbe1d6b200f51e4b2da0d8c9447003fd1c6ced3
   languageName: node
   linkType: hard
 
@@ -234,6 +256,13 @@ __metadata:
   version: 1.1.9
   resolution: "@sapphire/async-queue@npm:1.1.9"
   checksum: 8a4cb79e01948ee9f99f47e9fdfdfd509353d267f9e18bb8fe8e813b5d45f1fb6de08297b4557eb9a76b95bea59abaab67819175238068cc4cbc808d1d183e9d
+  languageName: node
+  linkType: hard
+
+"@sapphire/snowflake@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "@sapphire/snowflake@npm:3.0.0"
+  checksum: 1b5aa886f2f4372984f7b04b4fc5c14b9088dc291a5012a9e9f97d46dd590d4a6fa080e15d58d42aa7dc4ec51ed6bcaadac925f4613d8070d4fc32c7dc874115
   languageName: node
   linkType: hard
 
@@ -1288,6 +1317,13 @@ __metadata:
     domelementtype: ^2.2.0
     domhandler: ^4.2.0
   checksum: abf7434315283e9aadc2a24bac0e00eab07ae4313b40cc239f89d84d7315ebdfd2fb1b5bf750a96bc1b4403d7237c7b2ebf60459be394d625ead4ca89b934391
+  languageName: node
+  linkType: hard
+
+"dotenv@npm:^10.0.0":
+  version: 10.0.0
+  resolution: "dotenv@npm:10.0.0"
+  checksum: f412c5fe8c24fbe313d302d2500e247ba8a1946492db405a4de4d30dd0eb186a88a43f13c958c5a7de303938949c4231c56994f97d05c4bc1f22478d631b4005
   languageName: node
   linkType: hard
 
@@ -3805,6 +3841,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "processor@workspace:."
   dependencies:
+    "@discordjs/rest": ^0.2.0-canary.0
     ansi-regex: ^6.0.1
     axios: ^0.24.0
     better-discord-antispam: ^2.0.0
@@ -3814,6 +3851,7 @@ __metadata:
     cheerio: ^1.0.0-rc.10
     css-what: ^5.0.1
     discord.js: 13.4.0
+    dotenv: ^10.0.0
     eslint: ^8.2.0
     eslint-config-standard: ^16.0.3
     eslint-plugin-import: ^2.25.3
