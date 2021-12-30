@@ -25,20 +25,19 @@ module.exports = class Ready extends BaseEvent {
         const eventFiles = fs.readdirSync(path.join(__dirname, "../events")).filter(file => file.endsWith(".js"));
 
         const animalCmdFiles = fs.readdirSync(path.join(__dirname, "../slashcommands/animal")).filter(file => file.endsWith(".js"));
-        // const clashCmdFiles = fs.readdirSync(path.join(__dirname, "./slashcommands/clash")).filter(file => file.endsWith(".js"));
-        // const cuteCmdFiles = fs.readdirSync(path.join(__dirname, "./slashcommands/cute")).filter(file => file.endsWith(".js"));
-        // const imageCmdFiles = fs.readdirSync(path.join(__dirname, "./slashcommands/image")).filter(file => file.endsWith(".js"));
-        // const infoCmdFiles = fs.readdirSync(path.join(__dirname, "./slashcommands/info")).filter(file => file.endsWith(".js"));
-        // const mathCmdFiles = fs.readdirSync(path.join(__dirname, "./slashcommands/math")).filter(file => file.endsWith(".js"));
-        // const modCmdFiles = fs.readdirSync(path.join(__dirname, "./slashcommands/mod")).filter(file => file.endsWith(".js"));
-        // const otherCmdFiles = fs.readdirSync(path.join(__dirname, "./slashcommands/other")).filter(file => file.endsWith(".js"));
-        // const ownerCmdFiles = fs.readdirSync(path.join(__dirname, "./slashcommands/owner")).filter(file => file.endsWith(".js"));
-        // const searchCmdFiles = fs.readdirSync(path.join(__dirname, "./slashcommands/search")).filter(file => file.endsWith(".js"));
-        // const setupCmdFiles = fs.readdirSync(path.join(__dirname, "./slashcommands/setup")).filter(file => file.endsWith(".js"));
+        const clashCmdFiles = fs.readdirSync(path.join(__dirname, "../slashcommands/clash")).filter(file => file.endsWith(".js"));
+        const cuteCmdFiles = fs.readdirSync(path.join(__dirname, "../slashcommands/cute")).filter(file => file.endsWith(".js"));
+        const imageCmdFiles = fs.readdirSync(path.join(__dirname, "../slashcommands/image")).filter(file => file.endsWith(".js"));
+        const infoCmdFiles = fs.readdirSync(path.join(__dirname, "../slashcommands/info")).filter(file => file.endsWith(".js"));
+        const mathCmdFiles = fs.readdirSync(path.join(__dirname, "../slashcommands/math")).filter(file => file.endsWith(".js"));
+        const modCmdFiles = fs.readdirSync(path.join(__dirname, "../slashcommands/mod")).filter(file => file.endsWith(".js"));
+        const otherCmdFiles = fs.readdirSync(path.join(__dirname, "../slashcommands/other")).filter(file => file.endsWith(".js"));
+        const ownerCmdFiles = fs.readdirSync(path.join(__dirname, "../slashcommands/owner")).filter(file => file.endsWith(".js"));
+        const searchCmdFiles = fs.readdirSync(path.join(__dirname, "../slashcommands/search")).filter(file => file.endsWith(".js"));
+        const setupCmdFiles = fs.readdirSync(path.join(__dirname, "../slashcommands/setup")).filter(file => file.endsWith(".js"));
 
-        const cmdFiles = [animalCmdFiles/*, clashCmdFiles, cuteCmdFiles, imageCmdFiles, infoCmdFiles, mathCmdFiles, modCmdFiles, otherCmdFiles, ownerCmdFiles, searchCmdFiles, setupCmdFiles*/];
-        const dirs = ["animal"/*, "clash", "cute", "image", "info", "math", "mod", "other", "owner", "search", "setup"*/];
-        // console.log(commands);
+        const cmdFiles = [animalCmdFiles, clashCmdFiles, cuteCmdFiles, imageCmdFiles, infoCmdFiles, mathCmdFiles, modCmdFiles, otherCmdFiles, ownerCmdFiles, searchCmdFiles, setupCmdFiles];
+        const dirs = ["animal", "clash", "cute", "image", "info", "math", "mod", "other", "owner", "search", "setup"];
         antispam(client, {
             limitUntilWarn: 4, // The amount of messages allowed to send within the interval(time) before getting a warn.
             limitUntilMuted: 6, // The amount of messages allowed to send within the interval(time) before getting a muted.
@@ -98,10 +97,8 @@ module.exports = class Ready extends BaseEvent {
         for (let i = 0; i < cmdFiles.length; i++) {
             cmdFiles[i].forEach(file => {
                 const cmd = require(`../slashcommands/${dirs[i]}/${file}`);
-                console.log(cmd.data)
                 slashcommands.push(cmd.data);
                 client.slashcommands.set(cmd.data.name, cmd);
-                console.log(slashcommands);
             });
         }
 

@@ -1,8 +1,6 @@
 const { Client } = require("discord.js");
 const { registerCommands, registerEvents } = require("./utils/registry");
 const config = require("./config.json");
-const fs = require("fs");
-const path = require("path");
 const nonPrivilegedIntents = [
     "GUILDS",
     "GUILD_BANS",
