@@ -19,7 +19,7 @@ module.exports = class MessageDelete extends BaseEvent {
             .setTitle(`Message Deleted from ${message.author.tag}`)
             .setDescription(`**Channel:** <#${message.channel.id}>\n**Content:** ${message.content}`)
             .setColor("RED")
-            .setFooter(new Date().toLocaleTimeString());
+            .setFooter(new Date());
 
         destination.send({ embeds: [deletedEmbed] });
     }
