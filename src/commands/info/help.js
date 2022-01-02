@@ -10,7 +10,6 @@ let setupCmds = [];
 let modCmds = [];
 let mathCmds = [];
 let animalCmds = [];
-let clashCmds = [];
 let cuteCmds = [];
 let infoCmds = [];
 let searchCmds = [];
@@ -20,7 +19,6 @@ let setupCmdNames = fs.readdirSync(path.join(__dirname, "../setup"));
 let modCmdNames = fs.readdirSync(path.join(__dirname, "../mod"));
 let mathCmdNames = fs.readdirSync(path.join(__dirname, "../math"));
 let animalCmdNames = fs.readdirSync(path.join(__dirname, "../animal"));
-let clashCmdNames = fs.readdirSync(path.join(__dirname, "../clash"));
 let cuteCmdNames = fs.readdirSync(path.join(__dirname, "../cute"));
 let infoCmdNames = fs.readdirSync(path.join(__dirname, "../info"));
 let searchCmdNames = fs.readdirSync(path.join(__dirname, "../search"));
@@ -41,10 +39,6 @@ mathCmdNames.forEach(cmd => {
 animalCmdNames.forEach(cmd => {
     cmd = cmd.slice(0, cmd.indexOf(".js"));
     animalCmds.push(cmd);
-});
-clashCmdNames.forEach(cmd => {
-    cmd = cmd.slice(0, cmd.indexOf(".js"));
-    clashCmds.push(cmd);
 });
 cuteCmdNames.forEach(cmd => {
     cmd = cmd.slice(0, cmd.indexOf(".js"));
@@ -92,7 +86,6 @@ module.exports = class Help extends BaseCommand {
             .addField(":wrench: Setup", "Configure the bot in your server.\n`Manage Server` permission is required.")
             .addField(":shield: Moderation", "Manages server members.")
             .addField(":cat: Animal", "Learn about animals.")
-            .addField(":crossed_swords: Clash", "Look up Clash of Clans related things.")
             .addField(":blue_heart: Cute", "Adore a member.")
             .addField(":1234: Math", "Play with numbers.")
             .addField(":information_source: Info", "Get information about a user or the server.")
@@ -123,12 +116,6 @@ module.exports = class Help extends BaseCommand {
             .setURL("https://processorbot.xyz/commands/")
             .setDescription(`\`${animalCmds.join("\n")}\``);
 
-        let clashEmbed = new MessageEmbed()
-            .setColor("RANDOM")
-            .setTitle("Clash Commands")
-            .setURL("https://processorbot.xyz/commands/")
-            .setDescription(`\`${clashCmds.join("\n")}\``);
-
         let cuteEmbed = new MessageEmbed()
             .setColor("RANDOM")
             .setTitle("Cute Commands")
@@ -153,7 +140,7 @@ module.exports = class Help extends BaseCommand {
             .setURL("https://processorbot.xyz/commands/")
             .setDescription(`\`${otherCmds.join("\n")}\``);
 
-        let allEmbeds = [helpEmbed, setupEmbed, modEmbed, animalEmbed, clashEmbed, cuteEmbed, mathEmbed, infoEmbed, searchEmbed, otherEmbed];
+        let allEmbeds = [helpEmbed, setupEmbed, modEmbed, animalEmbed, cuteEmbed, mathEmbed, infoEmbed, searchEmbed, otherEmbed];
         let maxPages = allEmbeds.length;
 
         const helpRow = new MessageActionRow()
@@ -198,8 +185,6 @@ module.exports = class Help extends BaseCommand {
                 return message.reply({ embeds: [modEmbed] });
             case "animal":
                 return message.reply({ embeds: [animalEmbed] });
-            case "clash":
-                return message.reply({ embeds: [clashEmbed] });
             case "cute":
                 return message.reply({ embeds: [cuteEmbed] });
             case "math":
