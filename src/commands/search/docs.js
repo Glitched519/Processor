@@ -23,7 +23,7 @@ module.exports = class Docs extends BaseCommand {
                 }
             })
             .catch(err => {
-                console.log(err);
+                console.error(err);
             });
     }
 };

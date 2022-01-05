@@ -17,7 +17,7 @@ module.exports = class MessageDeleteBulk extends BaseEvent {
             .setTitle(`${messages.size - 1} Messages Deleted`)
             .setDescription(`**Channel:** <#${messages.first().channel.id}>`)
             .setColor("DARK_RED")
-            .setFooter(new Date());
+            .setTimestamp();
 
         destination.send({ embeds: [deletedEmbed] });
     }

@@ -46,7 +46,7 @@ module.exports = class Search extends BaseCommand {
         const searchEmbed = new MessageEmbed()
             .setTitle(href.title)
             .setDescription(href.snippet)
-            .setImage(href.pagemap ? href.pagemap.cse_thumbnail[0].src : null) // Sometimes, the thumbnail might be unavailable in variant site. Return it to null.
+            .setImage(href.pagemap ? href.pagemap.cse_thumbnail[0]?.src : null) // Sometimes, the thumbnail might be unavailable in variant site. Return it to null.
             .setURL(href.link)
             .setColor("RANDOM")
             .setFooter("Powered by Google", "https://www.freepngimg.com/thumb/google/67060-play-photos-search-google-account-png-file-hd.png");

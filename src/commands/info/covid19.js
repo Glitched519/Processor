@@ -22,7 +22,7 @@ module.exports = class Author extends BaseCommand {
                 .addField("Current Infections", covidStats.active.toLocaleString(), true)
                 .addField("Critical Condition", covidStats.critical.toLocaleString(), true)
                 .addField("Tested", covidStats.tests.toLocaleString(), true)
-                .setFooter(new Date());
+                .setTimestamp();
             return message.reply({ embeds: [globalCovidEmbed] });
         }
         else {
@@ -38,8 +38,7 @@ module.exports = class Author extends BaseCommand {
                 .addField("Recovered", covidStats.recovered.toLocaleString(), true)
                 .addField("Current Infections", covidStats.active.toLocaleString(), true)
                 .addField("Critical Condition", covidStats.critical.toLocaleString(), true)
-                .addField("Tested", covidStats.tests.toLocaleString(), true)
-                .setFooter(new Date());
+                .addField("Tested", covidStats.tests.toLocaleString(), true);
 
             message.reply({ embeds: [covidEmbed] });
         }
