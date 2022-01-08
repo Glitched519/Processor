@@ -11,7 +11,13 @@ module.exports = class Phone extends BaseCommand {
     }
 
     async run(client, message, args) {
-        message.reply({ content: `**Please wait... If it takes too long, check your spelling and try again.${emojis.loading}**\nNot sure what phone to search? Try OnePlus 8.` });
+        message.reply({
+            embeds: [
+                new MessageEmbed()
+                    .setDescription(`${emojis.loading} **One second... If it takes too long, check your spelling and try again.**\nNot sure what phone to search? Try \`OnePlus 9\``)
+                    .setColor("GREYPLE")
+            ]
+        });
         fetch(`http://localhost:8888/gsmarena/search/phone/${args.join("%20")}`)
             .then(res => res.json())
             .then(json => {
