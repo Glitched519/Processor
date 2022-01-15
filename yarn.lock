@@ -1275,9 +1275,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"discord.js@npm:^13.5.1":
-  version: 13.5.1
-  resolution: "discord.js@npm:13.5.1"
+"discord.js@npm:^13.6.0":
+  version: 13.6.0
+  resolution: "discord.js@npm:13.6.0"
   dependencies:
     "@discordjs/builders": ^0.11.0
     "@discordjs/collection": ^0.4.0
@@ -1288,7 +1288,7 @@ __metadata:
     form-data: ^4.0.0
     node-fetch: ^2.6.1
     ws: ^8.4.0
-  checksum: bb38d2675688838b183ce7f273ac322b10b8eec9d38b44397334b5a9277efcfd25b04ef9393dcd805b00945690abc1960bc849181c53f40580729f7542df10b5
+  checksum: 59c1297fbebf9b25c90ea125808bc9177c134fd7c481f82ace636ab88cfdc90bc6ec777c844d375d26231fc1664a67e80a1aad2aed484b808e4cd7d55cc1d9e3
   languageName: node
   linkType: hard
 
@@ -3860,7 +3860,7 @@ __metadata:
     chalk: ^5.0.0
     cheerio: ^1.0.0-rc.10
     css-what: ^6.0.1
-    discord.js: ^13.5.1
+    discord.js: ^13.6.0
     dotenv: ^10.0.0
     eslint: ^8.6.0
     eslint-config-standard: ^16.0.3
