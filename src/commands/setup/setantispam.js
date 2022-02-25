@@ -4,7 +4,7 @@ const BaseCommand = require("../../utils/structures/BaseCommand");
 
 module.exports = class SetAntiSpam extends BaseCommand {
     constructor() {
-        super("antispam", "setup", ["nospam"]);
+        super("setantispam", "setup", ["nospam"]);
     }
 
     async run(client, message) {

@@ -2,6 +2,7 @@ const { MessageEmbed } = require("discord.js");
 const ms = require("ms");
 const muteSchema = require("../../schemas/mute-schema");
 const BaseCommand = require("../../utils/structures/BaseCommand");
+const logSchema = require("../../schemas/logs-schema");
 
 module.exports = class Mute extends BaseCommand {
     constructor() {
@@ -55,12 +56,12 @@ module.exports = class Mute extends BaseCommand {
             return message.reply({ content: "This member is already muted." });
         }
 
-        for (const channel of message.guild.channels.cache) {
-            channel[1].updateOverwrite(muteRole, {
-                SEND_MESSAGES: false,
-                CONNECT: false,
-            }).catch(err => console.log(err));
-        }
+        // for (const channel of message.guild.channels.cache) {
+        //     channel[1].updateOverwrite(muteRole, {
+        //         SEND_MESSAGES: false,
+        //         CONNECT: false,
+        //     }).catch(err => console.log(err));
+        // }
 
         const noEveryone = mentionedMember.roles.cache.filter(r => r.name !== "@everyone");
 
@@ -86,5 +87,22 @@ module.exports = class Mute extends BaseCommand {
             .setColor("GREY");
 
         message.reply({ embeds: [muteEmbed] });
+
+        let muteLogEmbed = new MessageEmbed()
+        .setTitle("Member Muted")
+        .setDescription(`${mentionedMember} muted since <t:${Math.floor(Date.now() / 1000)}:R>`)
+        .setColor("DARK_BLUE")
+        .addField("Muted by", `<@${message.author.id}>`)
+        .addField("Reason", reason ? reason : "No reason given.")
+        .addField("Expiration", `<t:${Math.floor(Date.now() / 1000 + ms(msRegex.exec(args[1])[1]) / 1000)}:R>`)
+        .setTimestamp();
+
+        const logChannelQuery = await logSchema.findOne({ _id: message.guild.id });
+        if (logChannelQuery == null) return;
+        const logChannel = logChannelQuery.channel;
+        let destination = client.channels.cache.get(logChannel.toString());
+        if (!destination) return;
+
+        destination.send({ embeds: [muteLogEmbed] });
     }
 };
