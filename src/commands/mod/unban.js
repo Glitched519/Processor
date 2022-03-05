@@ -38,7 +38,6 @@ module.exports = class Unban extends BaseCommand {
         .setTitle("Member Unbanned")
         .setDescription(`${mentionedUser} unbanned since <t:${Math.floor(Date.now() / 1000)}:R>`)
         .setColor("DARK_BLUE")
-        .addField("Member", `<@${mentionedUser.id}>`)
         .addField("Unbanned by", `<@${message.author.id}>`)
         .addField("Reason", reason ? reason : "No reason given.")
         .setTimestamp();

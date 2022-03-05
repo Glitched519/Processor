@@ -24,18 +24,18 @@ module.exports = {
         const reason = interaction.options.getString("reason");
 
         if (!interaction.memberPermissions.has("BAN_MEMBERS")) {
-            return interaction.reply({ content: "You need the `Ban Members` permission to unban a member.", ephemeral: true });
+            return await interaction.reply({ content: "You need the `Ban Members` permission to unban a member.", ephemeral: true });
         }
 
         if (!interaction.guild.me.permissions.has("BAN_MEMBERS")) {
-            return interaction.reply({ content: "I need the `Ban Members` permission to unban a member." });
+            return await interaction.reply({ content: "I need the `Ban Members` permission to unban a member." });
         }
 
-        interaction.guild.members.unban(user, { reason: reason });
+        await interaction.guild.members.unban(user, { reason: reason });
 
         let unbanEmbed = new MessageEmbed()
             .setDescription(`Unbanned ${user} ${reason ? `for **${reason}**` : ""}`)
             .setColor("DARK_GREEN");
-        interaction.reply({ embeds: [unbanEmbed] });
+        await interaction.reply({ embeds: [unbanEmbed] });
     }
 };

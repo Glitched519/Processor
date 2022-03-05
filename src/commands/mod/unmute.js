@@ -1,5 +1,6 @@
 const { MessageEmbed } = require("discord.js");
 const muteSchema = require("../../schemas/mute-schema");
+const logSchema = require("../../schemas/logs-schema");
 const BaseCommand = require("../../utils/structures/BaseCommand");
 
 module.exports = class Unmute extends BaseCommand {
@@ -54,10 +55,35 @@ module.exports = class Unmute extends BaseCommand {
 
         await muteDoc.deleteOne();
 
-        let muteDocEmbed = new MessageEmbed()
+        let unmuteDocEmbed = new MessageEmbed()
             .setDescription(`Unmuted ${mentionedMember} ${reason ? `for **${reason}**` : ""}`)
-            .setColor("LUMINOUS_VIVID_PINK");
+            .setColor("LUMINOUS_VIVID_PINK")
+            .setTimestamp();
 
-        message.reply({ embeds: [muteDocEmbed] });
+        let unmuteDMEmbed = new MessageEmbed()
+            .setTitle(`You have been unmuted in ${message.guild.name}`)
+            .addField("Reason", reason ? reason : "No reason given.")
+            .setColor("LUMINOUS_VIVID_PINK")
+            .setTimestamp();
+    
+            mentionedMember.send({ embeds: [unmuteDMEmbed] }).catch(() => message.reply("They have been unmuted. But since their DMs are off, I cannot DM them."));
+
+        message.reply({ embeds: [unmuteDocEmbed] });
+
+        let unmuteLogEmbed = new MessageEmbed()
+        .setTitle("Member Unmuted")
+        .setDescription(`${mentionedMember} unmuted since <t:${Math.floor(Date.now() / 1000)}:R>`)
+        .setColor("LUMINOUS_VIVID_PINK")
+        .addField("Unmuted by", `<@${message.author.id}>`)
+        .addField("Reason", reason ? reason : "No reason given.")
+        .setTimestamp();
+
+        const logChannelQuery = await logSchema.findOne({ _id: message.guild.id });
+        if (logChannelQuery == null) return;
+        const logChannel = logChannelQuery.channel;
+        let destination = client.channels.cache.get(logChannel.toString());
+        if (!destination) return;
+
+        destination.send({ embeds: [unmuteLogEmbed] });
     }
 };

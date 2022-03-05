@@ -56,13 +56,6 @@ module.exports = class Mute extends BaseCommand {
             return message.reply({ content: "This member is already muted." });
         }
 
-        // for (const channel of message.guild.channels.cache) {
-        //     channel[1].updateOverwrite(muteRole, {
-        //         SEND_MESSAGES: false,
-        //         CONNECT: false,
-        //     }).catch(err => console.log(err));
-        // }
-
         const noEveryone = mentionedMember.roles.cache.filter(r => r.name !== "@everyone");
 
         await mentionedMember.roles.add(muteRole.id).catch(err => console.log(err));
@@ -84,9 +77,19 @@ module.exports = class Mute extends BaseCommand {
 
         let muteEmbed = new MessageEmbed()
             .setDescription(`Muted ${mentionedMember} for **${msRegex.exec(args[1])[1]}** ${reason ? `for **${reason}**` : ""}`)
-            .setColor("GREY");
+            .setColor("GREY")
+            .setTimestamp();
 
         message.reply({ embeds: [muteEmbed] });
+
+        let muteDMEmbed = new MessageEmbed()
+        .setTitle(`You have been muted in ${message.guild.name}`)
+        .addField("Reason", reason ? reason : "No reason given.")
+        .addField("Expiration", `<t:${Math.floor(Date.now() / 1000 + ms(msRegex.exec(args[1])[1]) / 1000)}:R>`)
+        .setColor("DARK_BLUE")
+        .setTimestamp();
+
+        mentionedMember.send({ embeds: [muteDMEmbed] }).catch(() => message.reply("They have been muted. But since their DMs are off, I cannot DM them."));
 
         let muteLogEmbed = new MessageEmbed()
         .setTitle("Member Muted")

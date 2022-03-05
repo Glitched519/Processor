@@ -69,7 +69,7 @@ module.exports = {
             case "calculate":
                 try {
                     let ans = math.evaluate(expression);
-                    interaction.reply({
+                    await interaction.reply({
                         embeds: [
                             new MessageEmbed()
                                 .setTitle("Calculated")

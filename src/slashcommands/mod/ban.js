@@ -24,18 +24,18 @@ module.exports = {
         const reason = interaction.options.getString("reason");
 
         if (!interaction.memberPermissions.has("BAN_MEMBERS")) {
-            return interaction.reply({ content: "You need the `Ban Members` permission to ban a member.", ephemeral: true });
+            return await interaction.reply({ content: "You need the `Ban Members` permission to ban a member.", ephemeral: true });
         }
 
         if (!interaction.guild.me.permissions.has("BAN_MEMBERS")) {
-            return interaction.reply({ content: "I need the `Ban Members` permission to ban a member." });
+            return await interaction.reply({ content: "I need the `Ban Members` permission to ban a member." });
         }
 
-        interaction.guild.members.ban(user.id, { reason: reason });
+        await interaction.guild.members.ban(user.id, { reason: reason });
 
         let banEmbed = new MessageEmbed()
             .setDescription(`Banned ${user} ${reason ? `for **${reason}**` : ""}`)
             .setColor("DARK_RED");
-        interaction.reply({ embeds: [banEmbed] });
+        await interaction.reply({ embeds: [banEmbed] });
     }
 };

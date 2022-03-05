@@ -62,6 +62,6 @@ module.exports = {
         });
         permEmbed.setDescription(props);
 
-        if (me.permissions.has("EMBED_LINKS")) interaction.reply({ embeds: [permEmbed], ephemeral: true });
+        if (me.permissions.has("EMBED_LINKS")) await interaction.reply({ embeds: [permEmbed], ephemeral: true });
     }
 };

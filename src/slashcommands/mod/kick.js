@@ -24,18 +24,18 @@ module.exports = {
         const reason = interaction.options.getString("reason");
 
         if (!interaction.memberPermissions.has("KICK_MEMBERS")) {
-            return interaction.reply({ content: "You need the `Kick Members` permission to kick a member.", ephemeral: true });
+            return await interaction.reply({ content: "You need the `Kick Members` permission to kick a member.", ephemeral: true });
         }
 
         if (!interaction.guild.me.permissions.has("KICK_MEMBERS")) {
-            return interaction.reply({ content: "I need the `Kick Members` permission to kick a member." });
+            return await interaction.reply({ content: "I need the `Kick Members` permission to kick a member." });
         }
 
-        interaction.guild.members.kick(user.id, { reason: reason });
+        await interaction.guild.members.kick(user.id, { reason: reason });
 
         let kickEmbed = new MessageEmbed()
             .setDescription(`Kicked ${user} ${reason ? `for **${reason}**` : ""}`)
             .setColor("RED");
-        interaction.reply({ embeds: [kickEmbed] });
+        await interaction.reply({ embeds: [kickEmbed] });
     }
 };

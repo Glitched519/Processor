@@ -16,7 +16,7 @@ module.exports = {
     },
     async run(client, interaction) {
         const input = interaction.options.getString("input");
-        if (interaction.user.id !== "749985510889619576") return interaction.reply({
+        if (interaction.user.id !== "749985510889619576") return await interaction.reply({
             embeds: [
                 new MessageEmbed()
                     .setTitle("Not Allowed")

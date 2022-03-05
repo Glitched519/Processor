@@ -17,20 +17,20 @@ module.exports = {
         const amount = interaction.options.getInteger("amount");
 
         if (!interaction.memberPermissions.has("MANAGE_MESSAGES")) {
-            return interaction.reply({ content: "You need the `Manage Messages` permission to delete messages.", ephemeral: true });
+            return await interaction.reply({ content: "You need the `Manage Messages` permission to delete messages.", ephemeral: true });
         }
 
         if (!interaction.guild.me.permissions.has("MANAGE_MESSAGES")) {
-            return interaction.reply({ content: "I need the `Manage Messages` permission to delete messages." });
+            return await interaction.reply({ content: "I need the `Manage Messages` permission to delete messages." });
         }
 
         if (isNaN(amount) || parseInt(amount) <= 0 || parseInt(amount) > 100) {
-            return interaction.reply({ content: "You can only delete between 1 and 100 messages at once.", ephemeral: true });
+            return await interaction.reply({ content: "You can only delete between 1 and 100 messages at once.", ephemeral: true });
         }
 
-        interaction.channel.bulkDelete(amount, true);
+        await interaction.channel.bulkDelete(amount, true);
 
-        interaction.reply({
+        await interaction.reply({
             embeds: [
                 new MessageEmbed()
                     .setColor("GREEN")

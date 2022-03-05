@@ -16,7 +16,7 @@ module.exports = {
     },
     async run(client, interaction) {
         const input = interaction.options.getString("input");
-        if (interaction.user.id !== "749985510889619576") return interaction.reply({
+        if (interaction.user.id !== "749985510889619576") return await interaction.reply({
             embeds: [
                 new MessageEmbed()
                     .setTitle("Not Allowed")
@@ -33,7 +33,7 @@ module.exports = {
                 .setDescription(`\`\`\`js\n${inspect(evaled, { depth: 0 })}\`\`\``)
                 .setTimestamp();
 
-            interaction.reply({ embeds: [evalEmbed], ephemeral: true });
+            await interaction.reply({ embeds: [evalEmbed], ephemeral: true });
         }
         catch (err) {
             let errEmbed = new MessageEmbed()
@@ -42,7 +42,7 @@ module.exports = {
                 .setDescription(`\`\`\`js\n${err}\`\`\``)
                 .setTimestamp();
 
-            interaction.reply({ embeds: [errEmbed], ephemeral: true });
+            await interaction.reply({ embeds: [errEmbed], ephemeral: true });
         }
     }
 };

@@ -66,7 +66,7 @@ module.exports = {
 
         switch (subCmd) {
             case "avatar":
-                interaction.reply({
+                await interaction.reply({
                     embeds: [
                         new MessageEmbed()
                             .setImage(`https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`)
@@ -76,7 +76,7 @@ module.exports = {
                 break;
             case "comment":
                 text = text.replace(/ /g, "%20");
-                interaction.reply({
+                await interaction.reply({
                     embeds: [
                         new MessageEmbed()
                             .setImage(`https://some-random-api.ml/canvas/youtube-comment?avatar=https://cdn.discordapp.com/avatars/${interaction.user.id}/${interaction.user.avatar}&comment=${text}&username=${interaction.user.username}`)
@@ -85,7 +85,7 @@ module.exports = {
                 });
                 break;
             default:
-                interaction.reply({
+                await interaction.reply({
                     embeds: [
                         new MessageEmbed()
                             .setImage(`https://some-random-api.ml/canvas/${subCmd}/?avatar=https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`)

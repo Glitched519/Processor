@@ -149,7 +149,7 @@ module.exports = {
                 q: query
             });
             if (!body || !body.items) {
-                return interaction.reply({ embeds: [errorEmbed] });
+                return await interaction.reply({ embeds: [errorEmbed] });
             } else {
                 return body.items[Math.floor(Math.random() * 10)];
             }
@@ -210,11 +210,11 @@ module.exports = {
             case "gif":
                 if (!interaction.channel.nsfw) {
                     for (let i = 0; i < bannedWords.length; i++) {
-                        if (words.includes(bannedWords[i])) return interaction.reply({ content: `This query is NSFW (${bannedWords[i]}). Please visit an NSFW channel to view this GIF.` });
+                        if (words.includes(bannedWords[i])) return await interaction.reply({ content: `This query is NSFW (${bannedWords[i]}). Please visit an NSFW channel to view this GIF.` });
                     }
 
                     for (let j = 0; j < bannedPhrases.length; j++) {
-                        if (msg.includes(bannedPhrases[j])) return interaction.reply({ content: `This query is NSFW (${bannedWords[j]}). Please visit an NSFW channel to view this GIF.` });
+                        if (msg.includes(bannedPhrases[j])) return await interaction.reply({ content: `This query is NSFW (${bannedWords[j]}). Please visit an NSFW channel to view this GIF.` });
                     }
                 }
 
@@ -251,7 +251,7 @@ module.exports = {
                     });
                 break;
             case "phone":
-                interaction.reply({
+                await interaction.reply({
                     embeds: [
                         new MessageEmbed()
                             .setDescription(`${emojis.loading} **One second... If it takes too long, check your spelling and try again.**\nNot sure what phone to search? Try \`OnePlus 9\``)
@@ -296,11 +296,11 @@ module.exports = {
             case "google":
                 if (!interaction.channel.nsfw) {
                     for (let i = 0; i < bannedWords.length; i++) {
-                        if (words.includes(bannedWords[i])) return interaction.reply({ content: `This query is NSFW (${bannedWords[i]}). Please visit an NSFW channel to view the results.` });
+                        if (words.includes(bannedWords[i])) return await interaction.reply({ content: `This query is NSFW (${bannedWords[i]}). Please visit an NSFW channel to view the results.` });
                     }
 
                     for (let j = 0; j < bannedPhrases.length; j++) {
-                        if (msg.includes(bannedPhrases[j])) return interaction.reply({ content: `This query is NSFW (${bannedWords[j]}). Please visit an NSFW channel to view the results.` });
+                        if (msg.includes(bannedPhrases[j])) return await interaction.reply({ content: `This query is NSFW (${bannedWords[j]}). Please visit an NSFW channel to view the results.` });
                     }
                 }
 
@@ -313,26 +313,24 @@ module.exports = {
                     .setURL(href.link)
                     .setColor("RANDOM");
 
-                if (!href) return interaction.reply({ embeds: [errorEmbed], ephemeral: true });
+                if (!href) return await interaction.reply({ embeds: [errorEmbed], ephemeral: true });
 
-                if (href.title !== undefined) {
-                    return interaction.reply({ embeds: [searchEmbed] });
-                }
-
+                if (href.title !== undefined) return await interaction.reply({ embeds: [searchEmbed] });
+                
                 break;
             case "wikipedia":
                 words = query.replace(/ /g, "_");
                 if (!interaction.channel.nsfw) {
                     for (let i = 0; i < bannedWords.length; i++) {
-                        if (words.includes(bannedWords[i])) return interaction.reply({ content: `This query is NSFW (${bannedWords[i]}). Please visit an NSFW channel to view the article.` });
+                        if (words.includes(bannedWords[i])) return await interaction.reply({ content: `This query is NSFW (${bannedWords[i]}). Please visit an NSFW channel to view the article.` });
                     }
 
                     for (let j = 0; j < bannedPhrases.length; j++) {
-                        if (msg.includes(bannedPhrases[j])) return interaction.reply({ content: `This query is NSFW (${bannedWords[j]}). Please visit an NSFW channel to view the article.` });
+                        if (msg.includes(bannedPhrases[j])) return await interaction.reply({ content: `This query is NSFW (${bannedWords[j]}). Please visit an NSFW channel to view the article.` });
                     }
                 }
 
-                interaction.reply({ content: `https://www.wikiwand.com/en/${words}` });
+                await interaction.reply({ content: `https://www.wikiwand.com/en/${words}` });
                 break;
         }
     }

@@ -6,7 +6,7 @@ module.exports = {
         "description": "View guilds (owner only)",
     },
     async run(client, interaction) {
-        if (interaction.user.id !== "749985510889619576") return interaction.reply({
+        if (interaction.user.id !== "749985510889619576") return await interaction.reply({
             embeds: [
                 new MessageEmbed()
                     .setTitle("Not Allowed")
@@ -22,6 +22,6 @@ module.exports = {
         client.guilds.cache.forEach(guild => {
             guildEmbed.addField(`${guild.name}`, `${guild.memberCount} members`, true);
         });
-        interaction.reply({ embeds: [guildEmbed], ephemeral: true });
+        await interaction.reply({ embeds: [guildEmbed], ephemeral: true });
     }
 };
