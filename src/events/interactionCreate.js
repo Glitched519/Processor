@@ -13,12 +13,15 @@ module.exports = class InteractionCreate extends BaseEvent {
         try {
             await command.run(interaction.client, interaction);
         } catch (err) {
-            if (err) console.error(err);
+            if (err)  {
+                console.log(err);
+                await interaction.editReply({ 
+                    content: err,
+                    ephemeral: true
+                });
+            }
     
-            await interaction.reply({ 
-                content: "An error occurred while executing this command.",
-                ephemeral: true
-            });
+
         }
     }
 };
