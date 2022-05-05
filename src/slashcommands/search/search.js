@@ -32,7 +32,7 @@ module.exports = {
                     {
                         "type": 3,
                         "name": "query",
-                        "description": "Query for giphy.com",
+                        "description": "Query for https://giphy.com",
                         "required": true
                     }
                 ]
@@ -45,7 +45,7 @@ module.exports = {
                     {
                         "type": 3,
                         "name": "query",
-                        "description": "Query for gsmarena.com",
+                        "description": "Query for https://gsmarena.com",
                         "required": true
                     }
                 ]
@@ -58,7 +58,7 @@ module.exports = {
                     {
                         "type": 3,
                         "name": "query",
-                        "description": "Query for google.com",
+                        "description": "Query for https://google.com",
                         "required": true
                     }
                 ]
@@ -71,7 +71,7 @@ module.exports = {
                     {
                         "type": 3,
                         "name": "query",
-                        "description": "Query for wikipedia.org",
+                        "description": "Query for https://wikipedia.org",
                         "required": true
                     }
                 ]
@@ -138,8 +138,17 @@ module.exports = {
         let words = wordsOnlyMsg.split(/\s+/);
 
         const errorEmbed = new MessageEmbed()
-        .setDescription(`No search results found for **${query}**`)
-        .setColor("YELLOW");
+            .setDescription(`No search results found for **${query}**`)
+            .setColor("YELLOW");
+
+        let href = await search(query);
+
+        const searchEmbed = new MessageEmbed()
+            .setTitle(href.title)
+            .setDescription(href.snippet)
+            .setImage(href.pagemap ? href.pagemap.cse_thumbnail[0]?.src : null) // Sometimes, the thumbnail might be unavailable in variant site. Return it to null.
+            .setURL(href.link)
+            .setColor("RANDOM");
 
         async function search(query) {
             const { body } = await request.get("https://www.googleapis.com/customsearch/v1").query({
@@ -304,19 +313,10 @@ module.exports = {
                     }
                 }
 
-                let href = await search(query);
-
-                const searchEmbed = new MessageEmbed()
-                    .setTitle(href.title)
-                    .setDescription(href.snippet)
-                    .setImage(href.pagemap ? href.pagemap.cse_thumbnail[0]?.src : null) // Sometimes, the thumbnail might be unavailable in variant site. Return it to null.
-                    .setURL(href.link)
-                    .setColor("RANDOM");
-
                 if (!href) return await interaction.reply({ embeds: [errorEmbed], ephemeral: true });
 
                 if (href.title !== undefined) return await interaction.reply({ embeds: [searchEmbed] });
-                
+
                 break;
             case "wikipedia":
                 words = query.replace(/ /g, "_");
