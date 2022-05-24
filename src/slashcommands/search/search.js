@@ -13,19 +13,6 @@ module.exports = {
         "options": [
             {
                 "type": 1,
-                "name": "docs",
-                "description": "Search in latest discord.js docs",
-                "options": [
-                    {
-                        "type": 3,
-                        "name": "query",
-                        "description": "Query for discord.js docs",
-                        "required": true
-                    }
-                ]
-            },
-            {
-                "type": 1,
                 "name": "gif",
                 "description": "Search for a GIF",
                 "options": [
@@ -137,33 +124,6 @@ module.exports = {
         let wordsOnlyMsg = msg.replace(/[.?!#$%^&*,-_+=]/g, " ");
         let words = wordsOnlyMsg.split(/\s+/);
 
-        const errorEmbed = new MessageEmbed()
-            .setDescription(`No search results found for **${query}**`)
-            .setColor("YELLOW");
-
-        let href = await search(query);
-
-        const searchEmbed = new MessageEmbed()
-            .setTitle(href.title)
-            .setDescription(href.snippet)
-            .setImage(href.pagemap ? href.pagemap.cse_thumbnail[0]?.src : null) // Sometimes, the thumbnail might be unavailable in variant site. Return it to null.
-            .setURL(href.link)
-            .setColor("RANDOM");
-
-        async function search(query) {
-            const { body } = await request.get("https://www.googleapis.com/customsearch/v1").query({
-                key: googleKey,
-                cx: csx,
-                safe: "off",
-                q: query
-            });
-            if (!body || !body.items) {
-                return await interaction.reply({ embeds: [errorEmbed] });
-            } else {
-                return body.items[Math.floor(Math.random() * 10)];
-            }
-        }
-
         switch (subCmd) {
             case "processor":
                 fetch("https://browser.geekbench.com/processor-benchmarks.json")
@@ -197,24 +157,6 @@ module.exports = {
                             , ephemeral: true
                         });
                     }).catch(err => console.log(err));
-                break;
-            case "docs":
-                fetch(`https://djsdocs.sorta.moe/v2/embed?src=stable&q=${query}`)
-                    .then(res => res.json())
-                    .then(embed => {
-                        if (embed && !embed.error) {
-                            interaction.reply({ embeds: [embed] });
-                        }
-                        else {
-                            interaction.reply({
-                                embeds: [
-                                    new MessageEmbed()
-                                        .setDescription("Documentation not found")
-                                        .setColor("YELLOW")
-                                ], ephemeral: true
-                            });
-                        }
-                    });
                 break;
             case "gif":
                 if (!interaction.channel.nsfw) {
@@ -313,11 +255,38 @@ module.exports = {
                     }
                 }
 
-                if (!href) return await interaction.reply({ embeds: [errorEmbed], ephemeral: true });
+                const errorEmbed = new MessageEmbed()
+                .setDescription(`No search results found for **${query}**`)
+                .setColor("YELLOW");
+    
+            let href = await search(query);
 
-                if (href.title !== undefined) return await interaction.reply({ embeds: [searchEmbed] });
+            if (!href) return await interaction.reply({ embeds: [errorEmbed], ephemeral: true });
+    
+            const searchEmbed = new MessageEmbed()
+                .setTitle(href.title)
+                .setDescription(href.snippet)
+                .setImage(href.pagemap ? href.pagemap.cse_thumbnail[0]?.src : null) // Sometimes, the thumbnail might be unavailable in variant site. Return it to null.
+                .setURL(href.link)
+                .setColor("RANDOM");
+    
+            async function search(query) {
+                const { body } = await request.get("https://www.googleapis.com/customsearch/v1").query({
+                    key: googleKey,
+                    cx: csx,
+                    safe: "off",
+                    q: query
+                });
+                if (!body || !body.items) {
+                    return await interaction.reply({ embeds: [errorEmbed] });
+                } else {
+                    return body.items[Math.floor(Math.random() * 10)];
+                }
+            }
 
-                break;
+            if (href.title !== undefined) return await interaction.reply({ embeds: [searchEmbed] });
+
+            break;
             case "wikipedia":
                 words = query.replace(/ /g, "_");
                 if (!interaction.channel.nsfw) {
