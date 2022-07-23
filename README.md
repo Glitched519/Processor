@@ -46,3 +46,8 @@ Processor comes with several fun features that you and your members will appreci
 ![Meme Command](https://cdn.discordapp.com/attachments/688229874649137188/845283547115159582/unknown.png)
 
 ![Changeable Prefix](https://cdn.discordapp.com/attachments/688229874649137188/845284082971967508/unknown.png)
+
+## To-do
+---
+- Complete converting remaining commands to slash commands
+- Test on discord.js v14 if possible, on a fork (obviously)
