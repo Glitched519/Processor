@@ -111,7 +111,7 @@ module.exports = class Ready extends BaseEvent {
         const CLIENT_ID = client.user.id;
 
         const rest = new REST({
-            version: "9"
+            version: "10"
         }).setToken(config["bot-token"]);
 
         (async () => {
@@ -128,7 +128,7 @@ module.exports = class Ready extends BaseEvent {
                     console.log("Successfully registered commands locally.");
                 }
             } catch (err) {
-                if (err) console.error(err);
+                console.error(err);
             }
         })();
     }
