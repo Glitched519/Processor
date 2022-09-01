@@ -16,7 +16,7 @@
     "better-discord-antispam": "^2.0.0",
     "canvas": "^2.9.3",
     "cheerio": "^1.0.0-rc.12",
-    "discord.js": "^13.10.3",
+    "discord.js": "^14.3.0",
     "dotenv": "^16.0.2",
     "humanize-duration": "^3.27.3",
     "mathjs": "^11.1.0",
