@@ -1,101 +1,105 @@
-const config = require("../../config.json");
-const PREFIX = config.prefix;
-const BaseCommand = require("../../utils/structures/BaseCommand");
+const { EmbedBuilder, ActionRowBuilder, ButtonBuilder } = require("discord.js");
+const os = require("os");
 
-module.exports = class Stats extends BaseCommand {
-    constructor() {
-        super("stats", "info", []);
-    }
-
-    async run(client, message, args) {
-        const statArgs = args.length;
-        if (statArgs >= 2) {
-            message.reply({ content: `Incorrect usage: ${PREFIX}stats | ${PREFIX}stats <user_id> | ${PREFIX}stats @mention` });
-        }
-        else if (statArgs === 1) {
-            const member = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
-            if (member) {
-                const statEmbed = {
-                    title: `${member.user.tag} (${member.user.id})`,
-                    description: `**Roles:** ${member.roles.cache.map(role => role.toString())}`,
-                    color: "RANDOM",
-                    thumbnail: {
-                        url: member.user.displayAvatarURL({ dynamic: true })
-                    },
-                    fields: [
-                        {
-                            name: "Created On",
-                            value: member.user.createdAt.toLocaleString(),
-                        },
-                        {
-                            name: "Joined On",
-                            value: member.joinedAt.toLocaleString(),
-                        },
-                        {
-                            name: "Voice Channel",
-                            value: member.voice.channel ? member.voice.channel.name + ` (${member.voice.channel.id})` : "None",
-                        },
-                        {
-                            name: "Nickname",
-                            value: member.displayName,
-                        },
-                        {
-                            name: "Presence",
-                            value: member.presence.status,
-                        },
-                    ]
-                };
-                message.reply({ embeds: statEmbed });
-            }
-            else {
-                message.reply({ content: `No member with ID ${args[0]}` });
-            }
-        }
-        else {
-            const roleMap = [];
-            const { guild } = message;
-            for (let i = 0; i < 20; i++) {
-                roleMap.push(guild.roles.cache.map(role => role.toString())[i]);
-            }
-            roleMap.shift();
-            const statEmbed = {
-                title: `${guild.name} (${guild.id})`,
-                description: `**Top 20 Roles:** ${roleMap}`,
-                color: "RANDOM",
-                thumbnail: {
-                    url: guild.iconURL({ dynamic: true })
-                },
-                fields: [
+module.exports = {
+    data: {
+        name: "stats",
+        description: "Displays relevant statistics.",
+        options: [
+            {
+                type: 1,
+                name: "bot",
+                description: "Displays stats about Processor."
+            },
+            {
+                type: 1,
+                name: "server",
+                description: "Displays stats about this server."
+            },
+            {
+                type: 1,
+                name: "user",
+                description: "Displays stats about selected user.",
+                options: [
                     {
-                        name: "Created On",
-                        value: guild.createdAt.toLocaleString(),
-                    },
-                    {
-                        name: "Server Owner",
-                        value: `<@!${guild.ownerId}>`,
-                    },
-                    {
-                        name: "Total Members",
-                        value: guild.memberCount.toString(),
-                        inline: true,
-                    },
-                    {
-                        name: "Total Channels",
-                        value: guild.channels.cache.size.toString(),
-                        inline: true,
-                    },
-                    {
-                        name: "Total Text Channels",
-                        value: guild.channels.cache.filter(ch => ch.type === "text").size.toString(),
-                    },
-                    {
-                        name: "Total Voice Channels",
-                        value: guild.channels.cache.filter(ch => ch.type === "voice").size.toString(),
-                        inline: true,
-                    },
+                        type: 6,
+                        name: "user",
+                        description: "Target user",
+                        required: true
+                    }
                 ]
-            };
-            message.reply({ embeds: [statEmbed] });
+            }
+        ]
+    },
+    async run(client, interaction) {
+        const initTime = Date.now();
+        const subCmd = interaction.options._subcommand;
+        const uptime = `<t:${Math.floor(Date.now() / 1000 - process.uptime())}:R>`;
+        let version = require("../../../package.json").version;
+        let djsVersion = require("../../../package.json").dependencies["discord.js"];
+        const user = interaction.options.getUser("user");
+        let infoEmbed;
+        let row;
+
+        switch (subCmd) {
+            case "bot":
+                infoEmbed = new EmbedBuilder()
+                    .setColor("DarkButNotBlack")
+                    .setTitle("My Stats")
+                    .addFields([
+                        { name: "Name", value: client.user.username, inline: true },
+                        { name: "Up Since", value: uptime, inline: true },
+                        { name: "Version", value: version, inlinestats: true },
+                        { name: "Library", value: client.user.username, inline: true },
+                        { name: "CPU Cores", value: os.cpus().length.toString(), inline: true },
+                        { name: "Memory Usage", value: `${Math.round(process.memoryUsage().heapUsed / 1024 / 1024) + "MB"}`, inline: true },
+                    ])
+                    .setFooter({ text: `⏱️ ${Date.now() - initTime} ms` });
+
+                row = new ActionRowBuilder()
+                    .addComponents(
+                        new ButtonBuilder()
+                            .setLabel("Website")
+                            .setStyle("Link")
+                            .setURL("https://processorbot.xyz/"),
+                        new ButtonBuilder()
+                            .setLabel("Discord")
+                            .setStyle("Link")
+                            .setURL("https://discord.gg/UNmdd8V"),
+                        new ButtonBuilder()
+                            .setLabel("GitHub")
+                            .setStyle("Link")
+                            .setURL("https://github.com/Glitched519/Processor"),
+                    );
+                break;
+
+            case "server":
+                infoEmbed = new EmbedBuilder()
+                    .setColor("DarkButNotBlack")
+                    .setTitle(`${interaction.guild.name}'s Stats`)
+                    .addFields([
+                        { name: "ID", value: interaction.guild.id, inline: true },
+                        { name: "All Members", value: interaction.guild.memberCount.toString(), inline: true },
+
+                    ]);
+                row = null;
+                break;
+
+            case "user":
+                infoEmbed = new EmbedBuilder()
+                    .setThumbnail(`https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`)
+                    .setColor("DarkButNotBlack")
+                    .setTitle(`${user.username}#${interaction.user.discriminator}'s Stats`)
+                    .addFields([
+                        { name: "ID", value: user.id, inline: true },
+                        { name: "Bot", value: `${user.bot ? "✅" : "❌"}`, inline: true },
+                    ])
+                    .setFooter({ text: `⏱️ ${Date.now() - initTime} ms` });
+                row = null;
+                break;
         }
+        if (row === null)
+            return await interaction.reply({ embeds: [infoEmbed] });
+        return await interaction.reply({ embeds: [infoEmbed], components: [row] });
     }
 };

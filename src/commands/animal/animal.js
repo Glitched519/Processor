@@ -1,5 +1,5 @@
 const axios = require("axios").default;
-//const { MessageEmbed } = require("discord.js");
+//const { EmbedBuilder } = require("discord.js");
 
 module.exports = {
     data: {

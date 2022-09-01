@@ -7,7 +7,7 @@ const os = require("os");
 const fs = require("fs");
 const path = require("path");
 const config = require("../config.json");
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const antispam = require("better-discord-antispam");
 const mongo = require("../features/mongo");
 const muteSchema = require("../schemas/mute-schema");
@@ -24,16 +24,16 @@ module.exports = class Ready extends BaseEvent {
 
         const eventFiles = fs.readdirSync(path.join(__dirname, "../events")).filter(file => file.endsWith(".js"));
 
-        const animalCmdFiles = fs.readdirSync(path.join(__dirname, "../slashcommands/animal")).filter(file => file.endsWith(".js"));
-        const cuteCmdFiles = fs.readdirSync(path.join(__dirname, "../slashcommands/cute")).filter(file => file.endsWith(".js"));
-        const imageCmdFiles = fs.readdirSync(path.join(__dirname, "../slashcommands/image")).filter(file => file.endsWith(".js"));
-        const infoCmdFiles = fs.readdirSync(path.join(__dirname, "../slashcommands/info")).filter(file => file.endsWith(".js"));
-        const mathCmdFiles = fs.readdirSync(path.join(__dirname, "../slashcommands/math")).filter(file => file.endsWith(".js"));
-        const modCmdFiles = fs.readdirSync(path.join(__dirname, "../slashcommands/mod")).filter(file => file.endsWith(".js"));
-        const otherCmdFiles = fs.readdirSync(path.join(__dirname, "../slashcommands/other")).filter(file => file.endsWith(".js"));
-        const ownerCmdFiles = fs.readdirSync(path.join(__dirname, "../slashcommands/owner")).filter(file => file.endsWith(".js"));
-        const searchCmdFiles = fs.readdirSync(path.join(__dirname, "../slashcommands/search")).filter(file => file.endsWith(".js"));
-        const setupCmdFiles = fs.readdirSync(path.join(__dirname, "../slashcommands/setup")).filter(file => file.endsWith(".js"));
+        const animalCmdFiles = fs.readdirSync(path.join(__dirname, "../commands/animal")).filter(file => file.endsWith(".js"));
+        const cuteCmdFiles = fs.readdirSync(path.join(__dirname, "../commands/cute")).filter(file => file.endsWith(".js"));
+        const imageCmdFiles = fs.readdirSync(path.join(__dirname, "../commands/image")).filter(file => file.endsWith(".js"));
+        const infoCmdFiles = fs.readdirSync(path.join(__dirname, "../commands/info")).filter(file => file.endsWith(".js"));
+        const mathCmdFiles = fs.readdirSync(path.join(__dirname, "../commands/math")).filter(file => file.endsWith(".js"));
+        const modCmdFiles = fs.readdirSync(path.join(__dirname, "../commands/mod")).filter(file => file.endsWith(".js"));
+        const otherCmdFiles = fs.readdirSync(path.join(__dirname, "../commands/other")).filter(file => file.endsWith(".js"));
+        const ownerCmdFiles = fs.readdirSync(path.join(__dirname, "../commands/owner")).filter(file => file.endsWith(".js"));
+        const searchCmdFiles = fs.readdirSync(path.join(__dirname, "../commands/search")).filter(file => file.endsWith(".js"));
+        const setupCmdFiles = fs.readdirSync(path.join(__dirname, "../commands/setup")).filter(file => file.endsWith(".js"));
 
         const cmdFiles = [animalCmdFiles, cuteCmdFiles, imageCmdFiles, infoCmdFiles, mathCmdFiles, modCmdFiles, otherCmdFiles, ownerCmdFiles, searchCmdFiles, setupCmdFiles];
         const dirs = ["animal", "cute", "image", "info", "math", "mod", "other", "owner", "search", "setup"];
@@ -76,16 +76,9 @@ module.exports = class Ready extends BaseEvent {
             }
         }, 15000);
 
-        setInterval(() => {
-            const statuses = [
-                `${config.prefix}help`,
-                `using ${os.version()} @${Number.parseFloat(os.cpus()[0].speed / 1000).toPrecision(2)} GHz`,
-            ];
-            const status = statuses[Math.floor(Math.random() * statuses.length)];
-            client.user.setActivity(status, { type: "WATCHING" });
-        }, 15000);
+            client.user.setActivity("/help");
         fs.readFile("./src/events/.post", "utf-8", (err, data) => {
-            if (err) { 
+            if (err) {
                 console.log(err);
             }
             console.log(data);
@@ -95,7 +88,7 @@ module.exports = class Ready extends BaseEvent {
 
         for (let i = 0; i < cmdFiles.length; i++) {
             cmdFiles[i].forEach(file => {
-                const cmd = require(`../slashcommands/${dirs[i]}/${file}`);
+                const cmd = require(`../commands/${dirs[i]}/${file}`);
                 slashcommands.push(cmd.data);
                 client.slashcommands.set(cmd.data.name, cmd);
             });
@@ -103,9 +96,7 @@ module.exports = class Ready extends BaseEvent {
 
         for (const file of eventFiles) {
             const event = require(`../events/${file}`);
-            // event.once ?
-            // client.once(event.name, (...args) => event.run(...args, commands)) :
-            client.on(event.name, (...args) => event.run(...args, slashcommands));
+            client.on(event.name, (...args) => event.run(...args, commands));
         }
 
         const CLIENT_ID = client.user.id;
@@ -128,7 +119,7 @@ module.exports = class Ready extends BaseEvent {
                     console.log("Successfully registered commands locally.");
                 }
             } catch (err) {
-                console.error(err);
+                if (err) console.error(err);
             }
         })();
     }

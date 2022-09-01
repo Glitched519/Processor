@@ -8,7 +8,6 @@ This is the template for the config.json. Please make it within the project. Pro
     "giphy-token": "GIPHY-TOKEN-OPT",
     "google-search-api-key": "GOOGLE-SEARCH-API-KEY-OPT",
     "mongo-path": "MONGO-PATH-OPT",
-    "prefix": "!",
     "weather-key": "WEATHER-KEY-OPT",
     "x-rapid-api-key": "X-RAPID-API-KEY-OPT"
 ```
@@ -27,27 +26,25 @@ To add Processor to your discord server, you can click [this invite link.](https
 
 ## Getting Started
 
-The prefix for this bot is `pr.`. Type `pr.help` to list all the categories of commands. If you wish to change the prefix, you must first have `Manage Server` permissions, or be the person who invited Processor in the first place. If you want to change the prefix, do `pr.prefix {new prefix}`. If you forget what the prefix, just ping the bot `@Processor`. If you want a specific category of those commands, type `pr.help [categoryName]` for all the commands within the category. You will need to set up the correct permissions for the bot. For your convenience, you may give this bot `Administrator` privileges as it resolves all permission conflicts with the bot.
+The prefix for this bot is `/`. Yes, it's a slash (/), since slash commands are the future for Discord bots! Type `/help` to list all the categories of commands. You will need to set up the correct permissions for the bot. For your convenience, you may give this bot `Administrator` privileges as it resolves all permission conflicts with the bot.
 
 ---
 
 ## Top Features 
-Processor comes with several fun features that you and your members will appreciate. Here are the most common:
+Processor comes with several fun features that you and your members will appreciate. Here are a few:
 
 - `meme` Shows a random picture of a meme from Reddit.
-- `img [thing]` Shows a random picture of the thing specified, if given.
-- `stats [@member]` Shows the stats of the member, otherwise it shows stats of the server.
+- `image avatar [user]` Shows a random picture of the thing specified, if given.
+- `stats user [user]` Shows the stats of the member, otherwise it shows stats of the server.
 
 ---
 
 ## Image Examples
 ![Help Command](https://cdn.discordapp.com/attachments/688229874649137188/911081461585674260/unknown.png)
 
-![Meme Command](https://cdn.discordapp.com/attachments/688229874649137188/845283547115159582/unknown.png)
-
-![Changeable Prefix](https://cdn.discordapp.com/attachments/688229874649137188/845284082971967508/unknown.png)
+![Meme Command](https://cdn.discordapp.com/attachments/688229874649137188/1014722614490570752/unknown.png)
 
 ## To-do
 ---
-- Complete converting remaining commands to slash commands
-- Test on discord.js v14 if possible, on a fork (obviously)
+✅ Complete converting remaining commands to slash commands
+✅ Test on discord.js v14 if possible, on a fork (obviously)

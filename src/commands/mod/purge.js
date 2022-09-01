@@ -1,42 +1,43 @@
-const BaseCommand = require("../../utils/structures/BaseCommand");
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 
-module.exports = class Purge extends BaseCommand {
-    constructor() {
-        super("purge", "mod", ["clear", "clean", "delete", "del"]);
-    }
+module.exports = {
+    data: {
+        name: "purge",
+        description: "Delete a certain amount of messages within 14 days",
+        options: [
+            {
+                type: 4,
+                name: "amount",
+                description: "Amount of messages to delete",
+                required: true
+            }
+        ]
+    },
+    async run(client, interaction) {
+        const initTime = Date.now();
+        const amount = interaction.options.getInteger("amount");
 
-    async run(client, message, args) {
-        if (!message.guild.me.permissions.has("MANAGE_MESSAGES")) {
-            return message.reply({ content: ":x: **I need the `Manage Messages` permission to delete messages.**" })
-                .then(msg => {
-                    setTimeout(() => msg.delete(), 4000);
-                });
-        }
-        if (!message.member.permissions.has(["MANAGE_MESSAGES"])) {
-            return message.reply({ content: ":x: **You need the `Manage Messages` permission to delete messages.**" })
-                .then(msg => {
-                    setTimeout(() => msg.delete(), 4000);
-                });
-        }
-
-        if (isNaN(args[0]) || parseInt(args[0]) <= 0 || parseInt(args[0]) > 100) {
-            return message.reply({ content: "You can only delete between 1 and 100 messages at once." })
-                .then(msg => {
-                    setTimeout(() => msg.delete(), 4000);
-                });
+        if (!interaction.memberPermissions.has("MANAGE_MESSAGES")) {
+            return await interaction.reply({ content: "You need the `Manage Messages` permission to delete messages.", ephemeral: true });
         }
 
-        let deleteAmount = parseInt(args[0]);
-        let deleteEmbed = new MessageEmbed()
-            .setColor("GREEN")
-            .setDescription(`I have cleared ${deleteAmount} message(s).`);
+        // if (!interaction.guild.me.permissions.has("MANAGE_MESSAGES")) {
+        //     return await interaction.reply({ content: "I need the `Manage Messages` permission to delete messages." });
+        // }
 
+        if (isNaN(amount) || parseInt(amount) <= 0 || parseInt(amount) > 100) {
+            return await interaction.reply({ content: "You can only delete between 1 and 100 messages at once.", ephemeral: true });
+        }
 
-        deleteAmount == 100 ? message.channel.bulkDelete(deleteAmount, true) : message.channel.bulkDelete(deleteAmount + 1, true);
-        message.reply({ embeds: [deleteEmbed] })
-            .then(msg => {
-                setTimeout(() => msg.delete(), 4000);
-            });
+        await interaction.channel.bulkDelete(amount, true);
+
+        await interaction.reply({
+            embeds: [
+                new EmbedBuilder()
+                    .setColor("Green")
+                    .setDescription(`I have cleared ${amount} message(s).`)
+                    .setFooter({ text: `⏱️ ${Date.now() - initTime} ms` })
+            ], ephemeral: true
+        });
     }
 };

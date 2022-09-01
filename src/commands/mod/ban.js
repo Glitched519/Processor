@@ -1,79 +1,51 @@
-const userReg = RegExp(/<@!?(\d+)>/);
-const logSchema = require("../../schemas/logs-schema");
-const { MessageEmbed } = require("discord.js");
-const BaseCommand = require("../../utils/structures/BaseCommand");
+const { EmbedBuilder, PermissionsBitField } = require("discord.js");
 
-module.exports = class Ban extends BaseCommand {
-    constructor() {
-        super("ban", "mod", ["b"]);
-    }
-
-    async run(client, message, args) {
-        const userID = userReg.test(args[0]) ? userReg.exec(args[0])[1] : args[0];
-        const mentionedUser = await message.client.users.fetch(userID).catch(() => null);
-
-        if (!message.member.permissions.has("BAN_MEMBERS")) {
-            return message.reply({ content: "You need the `Ban Members` permission to ban a member." });
-        }
-        if (!message.guild.me.permissions.has("BAN_MEMBERS")) {
-            return message.reply({ content: "I need the `Ban Members` permission to ban a member." });
-        }
-        if (!mentionedUser) {
-            return message.reply({ content: "You need to mention a member you want to ban." });
-        }
-
-        const mentionedMember = message.guild.members.cache.get(mentionedUser.id);
-
-        if (mentionedMember == null) {
-            return message.reply("Member does not exist, or was previously banned.");
-        }
-
-        if (mentionedMember) {
-            const mentionedPosition = mentionedMember.roles.highest.position;
-            const memberPosition = message.member.roles.highest.position;
-            const botPosition = message.guild.me.roles.highest.position;
-
-            if (memberPosition <= mentionedPosition) {
-                return message.reply({ content: "Cannot ban this member as their role is higher or equal to yours." });
+module.exports = {
+    data: {
+        name: "ban",
+        description: "Ban a user",
+        options: [
+            {
+                type: 6,
+                name: "user",
+                description: "Selected user",
+                required: true,
+            },
+            {
+                type: 3,
+                name: "reason",
+                description: "Reason for ban",
+                required: true
             }
-            else if (botPosition <= mentionedPosition) {
-                return message.reply({ content: "Cannot ban this member as their role is higher or equal to mine." });
-            }
+        ]
+    },
+    async run(client, interaction) {
+        const initTime = Date.now();
+        const user = interaction.options.getUser("user");
+        const reason = interaction.options.getString("reason");
+// 
+        console.log(interaction.member.permissions.has("BAN_MEMBERS"));
+        const me = interaction.guild.members.cache.get(client.user.id);
+        console.log(me.permissions.has);
+
+        if (!interaction.member.permissions.has("BAN_MEMBERS")) {
+            return await interaction.reply({ content: "You need the `Ban Members` permission to ban a member.", ephemeral: true });
         }
 
-        args.shift();
-        const reason = args.join(" ");
+        // if (!me.permissions.has("BAN_MEMBERS")) {
+        //     return await interaction.reply({ content: "I need the `Ban Members` permission to ban a member." });
+        // }
 
-        let banDMEmbed = new MessageEmbed()
-        .setTitle(`You have been banned from ${message.guild.name}`)
-        .addField("Reason", reason ? reason : "No reason given.")
-        .setColor("DARK_RED")
-        .setTimestamp();
+        if (me.roles.highest.rawPosition <= interaction.member.roles.highest.rawPosition) {
+            return await interaction.reply({ content: "Cannot ban. The member you are trying to ban has a role, whose rank is higher than mine.", ephemeral: true  });
+        }
 
-        mentionedMember.send({ embeds: [banDMEmbed] }).catch(() => message.reply("They have been banned. But since their DMs are off, I cannot DM them."));
+        await interaction.guild.members.ban(user.id, { reason: reason });
 
-        message.guild.members.ban(mentionedUser.id, { reason: reason }).catch(() => message.reply("They have been banned. But since their DMs are off, I cannot DM them."));
-
-        let banEmbed = new MessageEmbed()
-            .setDescription(`Banned ${mentionedUser} ${reason ? `for **${reason}**` : ""}`)
-            .setColor("DARK_RED")
-            .setTimestamp();
-        message.reply({ embeds: [banEmbed] });
-
-        const logChannelQuery = await logSchema.findOne({ _id: message.guild.id });
-        if (logChannelQuery == null) return;
-        const logChannel = logChannelQuery.channel;
-        let destination = client.channels.cache.get(logChannel.toString());
-        if (!destination) return;
-
-        let banLogEmbed = new MessageEmbed()
-            .setTitle("Member Banned Permanently")
-            .setDescription(`${mentionedMember} banned since <t:${Math.floor(Date.now() / 1000)}:R>`)
-            .setColor("DARK_RED")
-            .addField("Banned by", `<@${message.author.id}>`)
-            .addField("Reason", reason ? reason : "No reason given.")
-            .setTimestamp();
-
-        destination.send({ embeds: [banLogEmbed] });
+        let banEmbed = new EmbedBuilder()
+            .setDescription(`Banned ${user} ${reason ? `for **${reason}**` : ""}`)
+            .setColor("DarkRed")
+            .setFooter({ text: `⏱️ ${Date.now() - initTime} ms` });
+        await interaction.reply({ embeds: [banEmbed] });
     }
 };

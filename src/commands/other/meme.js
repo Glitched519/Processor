@@ -1,31 +1,31 @@
 const axios = require("axios").default;
-const { MessageEmbed } = require("discord.js");
-const BaseCommand = require("../../utils/structures/BaseCommand");
+const { EmbedBuilder } = require("discord.js");
 
-module.exports = class Meme extends BaseCommand {
-    constructor() {
-        super("meme", "other", ["haha", "funny", "lol"]);
-    }
-
-    async run(client, message) {
+module.exports = {
+    data: {
+        name: "meme",
+        description: "Shows a unique meme from r/memes"
+    },
+    async run(client, interaction) {
+        const initTime = Date.now();
         const options = {
             method: "GET",
-            url: "https://reddit.com/r/dankmemes/random/.json",
+            url: "https://reddit.com/r/memes/random/.json",
         };
 
         axios.request(options).then(response => {
             let meme = response.data[0].data.children[0].data;
-            let memeEmbed = new MessageEmbed()
+            let memeEmbed = new EmbedBuilder()
                 .setTitle(meme.title)
                 .setURL(`https://reddit.com${meme.permalink}`)
                 .setImage(meme.url)
-                .setColor("RANDOM")
-                .setFooter(`👍 ${meme.ups} | 💬 ${meme.num_comments}`);
+                .setColor("DarkButNotBlack")
+                .setFooter({ text: `👍 ${meme.ups} | 💬 ${meme.num_comments} | ⏱️ ${Date.now() - initTime} ms` });
 
-            message.reply({ embeds: [memeEmbed] });
+            interaction.reply({ embeds: [memeEmbed] });
         }).catch(err => {
             console.log(err);
-            return message.reply({ content: ":x: Unfortunately, something went wrong with the API, and your meme could not be loaded." });
+            return interaction.reply({ content: ":x: Unfortunately, something went wrong with the API, and your meme could not be loaded." });
         });
     }
 };

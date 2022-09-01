@@ -1,22 +1,15 @@
-const { Client } = require("discord.js");
+const { Client, GatewayIntentBits } = require("discord.js");
 const { registerCommands, registerEvents } = require("./utils/registry");
 const config = require("./config.json");
-const nonPrivilegedIntents = [
-    "GUILDS",
-    "GUILD_BANS",
-    "GUILD_MESSAGES",
-];
 
 const client = new Client({
-    intents: nonPrivilegedIntents,
+    intents: [GatewayIntentBits.Guilds],
     restTimeOffset: 0,
     disableMentions: "everyone",
     allowedMentions: {
         repliedUser: false,
     }
-    // partials: ["MESSAGE", "CHANNEL", "REACTION", "GUILD_MEMBER", "USER"]
 });
-
 
 (async () => {
 
@@ -29,7 +22,6 @@ const client = new Client({
 
     client.events = new Map();
     client.cooldowns = new Map();
-    client.prefix = config.prefix;
     process.stdout.write("[###  ]\033[0G");
     await registerCommands(client, "../commands");
     process.stdout.write("[#### ]\033[0G");
@@ -38,4 +30,3 @@ const client = new Client({
     
     client.emit("ready");
 })();
-

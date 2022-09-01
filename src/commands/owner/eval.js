@@ -1,32 +1,48 @@
 const { inspect } = require("util") ;
-const BaseCommand = require("../../utils/structures/BaseCommand");
+const { EmbedBuilder } = require("discord.js");
 
-module.exports = class Eval extends BaseCommand {
-    constructor() {
-        super("eval", "owner", ["e"]);
-    }
-
-    async run(client, message, args) {
-        if (args.length == 0) return;
-        if (message.author.id !== "749985510889619576") return;
-
+module.exports = {
+    data: {
+        name: "eval",
+        description: "Evaluate an expression (owner only)",
+        options: [
+            {
+                type: 3,
+                name: "input",
+                description: "Pass input into Node",
+                required: true
+            },
+        ]
+    },
+    async run(client, interaction) {
+        const initTime = Date.now();
+        const input = interaction.options.getString("input");
+        if (interaction.user.id !== "749985510889619576") return await interaction.reply({
+            embeds: [
+                new EmbedBuilder()
+                    .setTitle("Not Allowed")
+                    .setColor("Yellow")
+                    .setDescription("Only the owner can run this command.")
+            ], ephemeral: true
+        });
         try {
-            const evaled = eval(args.join(" "));
+            const evaled = eval(input);
 
-            let evalEmbed = {
-                title: "Evaluated",
-                color: "RANDOM",
-                description: `\`\`\`js\n${inspect(evaled, { depth: 0 })}\`\`\``,
-            };
-            message.reply({ embeds: [evalEmbed] });
+            let evalEmbed = new EmbedBuilder()
+                .setTitle("Evaluated")
+                .setColor("Green")
+                .setDescription(`\`\`\`js\n${inspect(evaled, { depth: 0 })}\`\`\``)
+                .setFooter({ text: `⏱️ ${Date.now() - initTime} ms` });
+
+            await interaction.reply({ embeds: [evalEmbed], ephemeral: true });
         }
         catch (err) {
-            let errEmbed = {
-                title: "Error",
-                color: "#f08324",
-                description: `\`\`\`js\n${err}\`\`\``,
-            };
-            message.reply({ embeds: [errEmbed] });
+            let errEmbed = new EmbedBuilder()
+                .setTitle("Error")
+                .setColor("Red")
+                .setDescription(`\`\`\`js\n${err}\`\`\``);
+
+            await interaction.reply({ embeds: [errEmbed], ephemeral: true });
         }
     }
 };

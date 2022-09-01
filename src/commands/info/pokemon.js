@@ -1,35 +1,54 @@
 const axios = require("axios").default;
-const { MessageEmbed } = require("discord.js");
-const BaseCommand = require("../../utils/structures/BaseCommand");
+const { EmbedBuilder } = require("discord.js");
 
-module.exports = class Pokemon extends BaseCommand {
-    constructor() {
-        super("pokemon", "info", ["poke"]);
-    }
-
-    async run(client, message, args) {
+module.exports = {
+    data: {
+        name: "pokemon",
+        description: "Shows the stats of a pokemon.",
+        options: [
+            {
+                type: 3,
+                name: "pokemon",
+                description: "Pokemon to look up.",
+                required: true
+            }
+        ]
+    },
+    async run(client, interaction) {
+        const initTime = Date.now();
+        const pokemon = interaction.options.getString("pokemon");
         const options = {
             method: "GET",
-            url: `https://some-random-api.ml/pokedex?pokemon=${args.join(" ")}`,
+            url: `https://some-random-api.ml/pokedex?pokemon=${pokemon}`,
         };
 
-        axios.request(options).then(response => {
+        await axios.request(options).then(response => {
             let res = response.data;
-            let pokemonEmbed = new MessageEmbed()
+            let pokemonEmbed = new EmbedBuilder()
                 .setTitle(`${res.name} (${res.id})`)
                 .setDescription(res.description)
-                .setColor("RANDOM")
+                .setColor("DarkButNotBlack")
                 .setThumbnail(res.sprites.animated)
-                .addField("HP", res.stats.hp, true)
-                .addField("Attack", res.stats.attack, true)
-                .addField("Defense", res.stats.defense, true)
-                .addField("Special Attack", res.stats.sp_atk, true)
-                .addField("Special Defense", res.stats.sp_def, true)
-                .addField("Speed", res.stats.speed, true);
+                .addFields([
+                    { name: "HP", value: res.stats.hp, inline: true },
+                    { name: "Attack", value: res.stats.attack, inline: true },
+                    { name: "Defense", value: res.stats.defense, inline: true },
+                    { name: "Special Attack", value: res.stats.sp_atk, inline: true },
+                    { name: "Special Defense", value: res.stats.sp_def, inline: true },
+                    { name: "Speed", value: res.stats.speed, inline: true },
+                ])
+                .setFooter({ text: `⏱️ ${Date.now() - initTime} ms` });
 
-            message.reply({ embeds: [pokemonEmbed] });
+
+            return interaction.reply({ embeds: [pokemonEmbed] });
         }).catch(() => {
-            return message.reply({ content: ":x: That is an invalid pokemon." });
+            return interaction.reply({
+                embeds: [
+                    new EmbedBuilder()
+                        .setColor("Red")
+                        .setDescription("Pokemon not found.")
+                ], ephemeral: true
+            });
         });
     }
 };

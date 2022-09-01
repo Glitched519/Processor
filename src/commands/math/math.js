@@ -1,65 +1,66 @@
 const { create, all } = require("mathjs");
 const math = create(all);
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 
 module.exports = {
     data: {
-        "name": "math",
-        "description": "calculate",
-        "options": [
+        name: "math",
+        description: "calculate",
+        options: [
             {
-                "type": 1,
-                "name": "calculate",
-                "description": "Calculate a math expression",
-                "options": [
+                type: 1,
+                name: "calculate",
+                description: "Calculate a math expression",
+                options: [
                     {
-                        "type": 3,
-                        "name": "expression",
-                        "description": "Expression to parse",
-                        "required": true
+                        type: 3,
+                        name: "expression",
+                        description: "Expression to parse",
+                        required: true
                     }
                 ]
             },
             {
-                "type": 1,
-                "name": "convert",
-                "description": "Convert a regular number into an n-based number",
-                "options": [
+                type: 1,
+                name: "convert",
+                description: "Convert a regular number into an n-based number",
+                options: [
                     {
-                        "type": 4,
-                        "name": "base",
-                        "description": "N-base",
-                        "choices": [
+                        type: 4,
+                        name: "base",
+                        description: "N-base",
+                        choices: [
                             {
-                                "name": "2",
-                                "value": 2
+                                name: "2",
+                                value: 2
                             },
                             {
-                                "name": "16",
-                                "value": 16
+                                name: "16",
+                                value: 16
                             },
                             {
-                                "name": "32",
-                                "value": 32
+                                name: "32",
+                                value: 32
                             },
                             {
-                                "name": "64",
-                                "value": 64
+                                name: "64",
+                                value: 64
                             }
                         ],
-                        "required": true
+                        required: true
                     },
                     {
-                        "type": 3,
-                        "name": "number",
-                        "description": "Number to convert",
-                        "required": true
+                        type: 3,
+                        name: "number",
+                        description: "Number to convert",
+                        required: true
                     }
                 ]
             }
         ]
     },
     async run(client, interaction) {
+        const initTime = Date.now();
         const subCmd = interaction.options._subcommand;
         const expression = interaction.options.getString("expression");
         const base = interaction.options.getInteger("base");
@@ -71,20 +72,22 @@ module.exports = {
                     let ans = math.evaluate(expression);
                     await interaction.reply({
                         embeds: [
-                            new MessageEmbed()
+                            new EmbedBuilder()
                                 .setTitle("Calculated")
                                 .setDescription("`" + math.format(ans, { precision: 16 }) + "`")
-                                .setColor("GREEN")
+                                .setColor("Green")
+                                .setFooter({ text: `⏱️ ${Date.now() - initTime} ms` })
                         ]
                     });
                 }
                 catch (err) {
                     interaction.reply({
                         embeds: [
-                            new MessageEmbed()
+                            new EmbedBuilder()
                                 .setTitle("Errored")
                                 .setDescription(`\`\`\`js\n${err}\`\`\``)
-                                .setColor("RED")
+                                .setColor("Red")
+                                .setFooter({ text: `⏱️ ${Date.now() - initTime} ms` })
                         ]
                     });
                 }
@@ -93,17 +96,19 @@ module.exports = {
                 if (base != 64) {
                     interaction.reply({
                         embeds: [
-                            new MessageEmbed()
+                            new EmbedBuilder()
                                 .setDescription("`" + Number(number).toString(base).toUpperCase() + "`")
-                                .setColor("RANDOM")
+                                .setColor("DarkButNotBlack")
+                                .setFooter({ text: `⏱️ ${Date.now() - initTime} ms` })
                         ]
                     });
                 } else {
                     interaction.reply({
                         embeds: [
-                            new MessageEmbed()
+                            new EmbedBuilder()
                                 .setDescription("`" + btoa(number).toUpperCase() + "`")
-                                .setColor("RANDOM")
+                                .setColor("DarkButNotBlack")
+                                .setFooter({ text: `⏱️ ${Date.now() - initTime} ms` })
                         ]
                     });
                 }
