@@ -3,7 +3,7 @@ const { registerCommands, registerEvents } = require("./utils/registry");
 const config = require("./config.json");
 
 const client = new Client({
-    intents: [GatewayIntentBits.Guilds],
+    intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages],
     restTimeOffset: 0,
     disableMentions: "everyone",
     allowedMentions: {
@@ -27,6 +27,6 @@ const client = new Client({
     process.stdout.write("[#### ]\033[0G");
     await registerEvents(client, "../events");
     process.stdout.write("[#####]\033[0G");
-    
+
     client.emit("ready");
 })();
