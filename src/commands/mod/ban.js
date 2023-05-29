@@ -1,51 +1,60 @@
-const { EmbedBuilder, PermissionsBitField } = require("discord.js");
+const { ApplicationCommandOptionType, PermissionFlagsBits } = require('discord.js');
 
 module.exports = {
-    data: {
-        name: "ban",
-        description: "Ban a user",
-        options: [
-            {
-                type: 6,
-                name: "user",
-                description: "Selected user",
-                required: true,
-            },
-            {
-                type: 3,
-                name: "reason",
-                description: "Reason for ban",
-                required: true
-            }
-        ]
+    callback: async (client, interaction) => {
+        const targetUserId = interaction.options.get('target-user').value;
+        const reason = interaction.options.get('reason')?.value;
+
+        await interaction.deferReply();
+
+        const targetUser = await interaction.guild.members.fetch(targetUserId);
+
+        if (!targetUser) {
+            await interaction.editReply("That user doesn't exist in this server.");
+            return;
+        }
+
+        if (targetUser.id === interaction.guild.ownerId) {
+            await interaction.editReply("You can't ban the server owner.");
+            return;
+        }
+
+        const targetUserRolePosition = targetUser.roles.highest.position; // Highest role of the target user
+        const requestUserRolePosition = interaction.member.roles.highest.position; // Highest role of the user running the command
+        const botRolePosition = interaction.guild.members.me.roles.highest.position; // Highest role of the bot
+
+        if (targetUserRolePosition >= requestUserRolePosition) {
+            await interaction.editReply("You can't ban that user because they have the same or higher role than you.");
+        }
+
+        if (targetUserRolePosition >= botRolePosition) {
+            await interaction.editReply("I can't ban that user because they have the same or higher role than me.");
+        }
+
+        // Ban the targetUser
+        try {
+            await targetUser.ban({ reason });
+            await interaction.editReply(`${targetUser} was banned ${reason ? `for **${reason}**` : ""}`)
+        } catch (error) {
+            console.error(`ERROR when banning: ${error}`);
+        }
     },
-    async run(client, interaction) {
-        const initTime = Date.now();
-        const user = interaction.options.getUser("user");
-        const reason = interaction.options.getString("reason");
-// 
-        console.log(interaction.member.permissions.has("BAN_MEMBERS"));
-        const me = interaction.guild.members.cache.get(client.user.id);
-        console.log(me.permissions.has);
 
-        if (!interaction.member.permissions.has("BAN_MEMBERS")) {
-            return await interaction.reply({ content: "You need the `Ban Members` permission to ban a member.", ephemeral: true });
+    name: 'ban',
+    description: 'Bans a member from this server.',
+    options: [
+        {
+            name: 'target-user',
+            description: 'The user you want to ban.',
+            type: ApplicationCommandOptionType.Mentionable,
+            required: true,
+        },
+        {
+            name: 'reason',
+            description: 'The reason you for the ban.',
+            type: ApplicationCommandOptionType.String,
         }
-
-        // if (!me.permissions.has("BAN_MEMBERS")) {
-        //     return await interaction.reply({ content: "I need the `Ban Members` permission to ban a member." });
-        // }
-
-        if (me.roles.highest.rawPosition <= interaction.member.roles.highest.rawPosition) {
-            return await interaction.reply({ content: "Cannot ban. The member you are trying to ban has a role, whose rank is higher than mine.", ephemeral: true  });
-        }
-
-        await interaction.guild.members.ban(user.id, { reason: reason });
-
-        let banEmbed = new EmbedBuilder()
-            .setDescription(`Banned ${user} ${reason ? `for **${reason}**` : ""}`)
-            .setColor("DarkRed")
-            .setFooter({ text: `⏱️ ${Date.now() - initTime} ms` });
-        await interaction.reply({ embeds: [banEmbed] });
-    }
-};
+    ],
+    permissionsRequired: [PermissionFlagsBits.BanMembers],
+    botPermissions: [PermissionFlagsBits.BanMembers],
+}

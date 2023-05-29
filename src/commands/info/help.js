@@ -1,11 +1,7 @@
 const { EmbedBuilder } = require("discord.js");
 
 module.exports = {
-    data: {
-        name: "help",
-        description: "Shows the help menu.",
-    },
-    async run(client, interaction) {
+    callback: async (client, interaction) => {
         const initTime = Date.now();
         await interaction.reply({
             embeds: [
@@ -13,8 +9,10 @@ module.exports = {
                     .setTitle("Here's some help")
                     .setDescription("**[Commands](https://processorbot.xyz/commands/)**")
                     .setColor("Gold")
-                    .setFooter({ text: `processorbot.xyz | ⏱️ ${Date.now() - initTime} ms` })
+                    .setFooter({ text: `processorbot.xyz | ⏱️ ${Date.now() - initTime + client.ws.ping} ms` })
             ], ephemeral: true
         });
-    }
-};
+    },
+    name: "help",
+    description: "Shows the help menu.",
+}

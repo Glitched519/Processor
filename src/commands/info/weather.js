@@ -3,19 +3,7 @@ const fetch = require("node-fetch");
 const APIKey = require("../../config.json")["weather-key"];
 
 module.exports = {
-    data: {
-        name: "weather",
-        description: "Displays weather info for a location.",
-        options: [
-            {
-                type: 3,
-                name: "location",
-                description: "Location",
-                required: true
-            }
-        ]
-    },
-    async run(client, interaction) {
+    callback: async (client, interaction) => {
         const initTime = Date.now();
         const location = interaction.options.getString("location");
         fetch(`https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${APIKey}&units=metric`)
@@ -46,8 +34,18 @@ module.exports = {
                         { name: "Wind Speed", value: `${base.wind.speed}m/s`, inline: true },
                     ])
                     .setThumbnail(`https://openweathermap.org/img/wn/${weather.icon}@2x.png`)
-                    .setFooter({ text: `⏱️ ${Date.now() - initTime} ms | ${new Date()}` });
+                    .setFooter({ text: `⏱️ ${Date.now() - initTime + client.ws.ping} ms | ${new Date()}` });
                 interaction.reply({ embeds: [weatherEmbed] });
             });
-    }
-};
+    },
+    name: "weather",
+    description: "Displays weather info for a location.",
+    options: [
+        {
+            type: 3,
+            name: "location",
+            description: "Location",
+            required: true
+        }
+    ]
+}

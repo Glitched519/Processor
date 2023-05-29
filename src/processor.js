@@ -1,32 +1,25 @@
-const { Client, GatewayIntentBits } = require("discord.js");
-const { registerCommands, registerEvents } = require("./utils/registry");
-const config = require("./config.json");
+const { Client, IntentsBitField } = require('discord.js');
+const config = require ('./config.json');
+const mongoose = require('mongoose');
+const eventHandler = require('./handlers/eventHandler');
 
 const client = new Client({
-    intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages],
-    restTimeOffset: 0,
-    disableMentions: "everyone",
-    allowedMentions: {
-        repliedUser: false,
-    }
+    intents: [
+        IntentsBitField.Flags.Guilds,
+        IntentsBitField.Flags.GuildMessages,
+    ]
 });
 
 (async () => {
-
-    process.stdout.write("[#    ]\033[0G");
-    await client.login(config["bot-token"]);
-    process.stdout.write("[##   ]\033[0G");
-
-    client.commands = new Map();
-    client.slashcommands = new Map();
-
-    client.events = new Map();
-    client.cooldowns = new Map();
-    process.stdout.write("[###  ]\033[0G");
-    await registerCommands(client, "../commands");
-    process.stdout.write("[#### ]\033[0G");
-    await registerEvents(client, "../events");
-    process.stdout.write("[#####]\033[0G");
-
-    client.emit("ready");
+    await mongoose.connect(config["mongo-path"], {
+        autoCreate: false,
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+    })
+    .catch((error) => {
+        console.error("Could not connect due to the following error: " + error);
+    })
+    eventHandler(client);
 })();
+
+client.login(config['bot-token']);

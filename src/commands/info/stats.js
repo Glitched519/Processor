@@ -2,36 +2,7 @@ const { EmbedBuilder, ActionRowBuilder, ButtonBuilder } = require("discord.js");
 const os = require("os");
 
 module.exports = {
-    data: {
-        name: "stats",
-        description: "Displays relevant statistics.",
-        options: [
-            {
-                type: 1,
-                name: "bot",
-                description: "Displays stats about Processor."
-            },
-            {
-                type: 1,
-                name: "server",
-                description: "Displays stats about this server."
-            },
-            {
-                type: 1,
-                name: "user",
-                description: "Displays stats about selected user.",
-                options: [
-                    {
-                        type: 6,
-                        name: "user",
-                        description: "Target user",
-                        required: true
-                    }
-                ]
-            }
-        ]
-    },
-    async run(client, interaction) {
+    callback: async (client, interaction) => {
         const initTime = Date.now();
         const subCmd = interaction.options._subcommand;
         const uptime = `<t:${Math.floor(Date.now() / 1000 - process.uptime())}:R>`;
@@ -50,11 +21,11 @@ module.exports = {
                         { name: "Name", value: client.user.username, inline: true },
                         { name: "Up Since", value: uptime, inline: true },
                         { name: "Version", value: version, inlinestats: true },
-                        { name: "Library", value: client.user.username, inline: true },
+                        { name: "Library", value: djsVersion, inline: true },
                         { name: "CPU Cores", value: os.cpus().length.toString(), inline: true },
                         { name: "Memory Usage", value: `${Math.round(process.memoryUsage().heapUsed / 1024 / 1024) + "MB"}`, inline: true },
                     ])
-                    .setFooter({ text: `⏱️ ${Date.now() - initTime} ms` });
+                    .setFooter({ text: `⏱️ ${Date.now() - initTime + client.ws.ping} ms` });
 
                 row = new ActionRowBuilder()
                     .addComponents(
@@ -94,12 +65,39 @@ module.exports = {
                         { name: "ID", value: user.id, inline: true },
                         { name: "Bot", value: `${user.bot ? "✅" : "❌"}`, inline: true },
                     ])
-                    .setFooter({ text: `⏱️ ${Date.now() - initTime} ms` });
+                    .setFooter({ text: `⏱️ ${Date.now() - initTime + client.ws.ping} ms` });
                 row = null;
                 break;
         }
         if (row === null)
             return await interaction.reply({ embeds: [infoEmbed] });
         return await interaction.reply({ embeds: [infoEmbed], components: [row] });
-    }
-};
+    },
+    name: "stats",
+    description: "Displays relevant statistics.",
+    options: [
+        {
+            type: 1,
+            name: "bot",
+            description: "Displays stats about Processor."
+        },
+        {
+            type: 1,
+            name: "server",
+            description: "Displays stats about this server."
+        },
+        {
+            type: 1,
+            name: "user",
+            description: "Displays stats about selected user.",
+            options: [
+                {
+                    type: 6,
+                    name: "user",
+                    description: "Target user",
+                    required: true
+                }
+            ]
+        }
+    ]
+}

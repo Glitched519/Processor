@@ -1,27 +1,23 @@
-const { EmbedBuilder, Colors } = require("discord.js");
+const { inspect } = require("util");
+const { EmbedBuilder } = require("discord.js");
 
 module.exports = {
-    data: {
-        name: "guilds",
-        description: "View guilds (owner only)",
-    },
-    async run(client, interaction) {
-        if (interaction.user.id !== "749985510889619576") return await interaction.reply({
-            embeds: [
-                new EmbedBuilder()
-                    .setTitle("Not Allowed")
-                    .setColor("Yellow")
-                    .setDescription("Only the owner can run this command.")
-            ], ephemeral: true
+    callback: async (client, interaction) => {
+        let totalMembers = 0;
+        client.guilds.cache.forEach(guild => {
+            totalMembers += guild.memberCount;
+            console.log(`${guild.name} with ${guild.memberCount} members`)
         });
         const guildEmbed = new EmbedBuilder()
             .setColor("DarkButNotBlack")
             .setTitle(`${client.guilds.cache.size} Servers`)
+            .setDescription(`${totalMembers} total members`)
             .setThumbnail(`https://cdn.discordapp.com/avatars/${client.user.id}/${client.user.avatar}`)
-            .setTimestamp();
-        client.guilds.cache.forEach(guild => {
-            guildEmbed.addFields([{ name: `${guild.name}`, value: `${guild.memberCount} members`, inline: true }]);
-        });
+
         await interaction.reply({ embeds: [guildEmbed], ephemeral: true });
-    }
-};
+    },
+    devOnly: true,
+    testOnly: true,
+    name: "guilds",
+    description: "View guilds (owner only)",
+}
