@@ -166,7 +166,7 @@ module.exports = {
         }
     },
     name: "search",
-    descriptzion: "Search for anything or something specific",
+    description: "Search for anything or something specific",
     options: [
         {
             type: 1,
